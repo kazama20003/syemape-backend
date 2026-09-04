@@ -251,22 +251,39 @@ export class BootstrapAdminService implements OnModuleInit {
     @Inject(USUARIO_REPOSITORY) private readonly usuarios: UsuarioRepository,
   ) {}
 
+  // Usuarios que deben existir siempre; se crean si faltan (idempotente).
+  // Las credenciales viven en variables de entorno, nunca en el codigo: el
+  // repositorio es publico. Sin password definido, ese usuario se omite.
+  private readonly semilla = [
+    {
+      email: process.env.ADMIN_EMAIL ?? 'admin@mape.com',
+      nombre: 'Administrador',
+      password: process.env.ADMIN_PASSWORD,
+    },
+    {
+      email: process.env.GERENCIA_EMAIL ?? 'gerencia@syemape.com',
+      nombre: 'Gerencia',
+      password: process.env.GERENCIA_PASSWORD,
+    },
+  ];
+
   async onModuleInit(): Promise<void> {
     try {
-      const total = await this.usuarios.contarTotal();
-      if (total > 0) return;
-      const email = process.env.ADMIN_EMAIL ?? 'admin@mape.com';
-      const password = process.env.ADMIN_PASSWORD ?? 'admin123';
-      await this.usuarios.crear({
-        email,
-        nombre: 'Administrador',
-        rol: RolUsuario.ADMINISTRADOR,
-        passwordHash: await bcrypt.hash(password, RONDAS_BCRYPT),
-        clienteId: null,
-        personalId: null,
-        usuarioCreacion: 'bootstrap',
-      });
-      this.logger.log(`Usuario administrador inicial creado: ${email}`);
+      for (const usuario of this.semilla) {
+        if (!usuario.password) continue;
+        const existente = await this.usuarios.findByEmail(usuario.email);
+        if (existente) continue;
+        await this.usuarios.crear({
+          email: usuario.email,
+          nombre: usuario.nombre,
+          rol: RolUsuario.ADMINISTRADOR,
+          passwordHash: await bcrypt.hash(usuario.password, RONDAS_BCRYPT),
+          clienteId: null,
+          personalId: null,
+          usuarioCreacion: 'bootstrap',
+        });
+        this.logger.log(`Usuario administrador creado: ${usuario.email}`);
+      }
     } catch (error) {
       // Sin BD disponible el arranque no debe caerse; el admin se creara en el
       // siguiente arranque con conexion.

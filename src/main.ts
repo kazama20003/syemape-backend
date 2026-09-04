@@ -5,17 +5,21 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module.js';
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter.js';
 
-const CORS_ORIGINS_DEFAULT = ['http://localhost:3000'];
+// En desarrollo se acepta cualquier puerto de localhost (el front cambia de
+// puerto segun que mas este corriendo). En despliegue, CORS_ORIGINS manda.
+const LOCALHOST = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 
-function obtenerCorsOrigins(): string[] {
+function obtenerCorsOrigins(): (string | RegExp)[] {
   const origins = process.env.CORS_ORIGINS;
   if (!origins) {
-    return CORS_ORIGINS_DEFAULT;
+    return [LOCALHOST];
   }
-  return origins
+  const lista: (string | RegExp)[] = origins
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);
+  lista.push(LOCALHOST);
+  return lista;
 }
 
 async function bootstrap() {
