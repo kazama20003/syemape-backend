@@ -1,0 +1,815 @@
+// Backend syemape (S&E MAPE) — dominio de transporte, supervision y manifiestos.
+// Convenciones: id Int autoincrement interno + publicId UUID v7 externo;
+// auditoria estadoRegistro + fechas/usuarios; @@map snake_case.
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ------------------------------- ENUMS -------------------------------
+
+// Borrado logico: nada se elimina fisicamente, se marca ANULADO.
+enum EstadoRegistro {
+  ACTIVO
+  ANULADO
+
+  @@map("estado_registro")
+}
+
+// Uso operativo del registro: ACTIVO = se usa, INACTIVO = no se usa. Es
+// independiente del borrado logico (estadoRegistro).
+enum EstadoActivo {
+  ACTIVO
+  INACTIVO
+
+  @@map("estado_activo")
+}
+
+// Accion registrada en el historial de auditoria.
+enum AccionAuditoria {
+  CREAR
+  ACTUALIZAR
+  ANULAR
+  CAMBIAR_ESTADO
+  REACTIVAR
+
+  @@map("accion_auditoria")
+}
+
+// Clasificacion de la unidad segun su porte/rol en el transporte.
+enum ClaseUnidad {
+  LIVIANO
+  PESADO
+  REMOLQUE
+  SEMIRREMOLQUE
+  OTRO
+
+  @@map("clase_unidad")
+}
+
+// Estado operativo del vehiculo (distinto del borrado logico).
+enum EstadoUnidad {
+  OPERATIVA
+  EN_MANTENIMIENTO
+  DE_BAJA
+
+  @@map("estado_unidad")
+}
+
+// Rol del personal dentro de una operacion de transporte.
+enum TipoPersonal {
+  CONDUCTOR
+  COPILOTO
+  SUPERVISOR
+  ESCOLTA
+}
+
+// Ciclo de vida del manifiesto de viaje.
+enum EstadoManifiesto {
+  BORRADOR
+  EMITIDO
+  EN_RUTA
+  CERRADO
+  ANULADO
+
+  @@map("estado_manifiesto")
+}
+
+// Tipo de ubicacion en el catalogo geografico.
+enum TipoUbicacion {
+  ORIGEN
+  DESTINO
+  BASE
+  PUESTO_CONTROL
+  SUCURSAL
+  GENERAL
+
+  @@map("tipo_ubicacion")
+}
+
+// Estado de la carga transportada.
+enum EstadoCarga {
+  VACIO
+  CARGADO
+
+  @@map("estado_carga")
+}
+
+// Nivel de combustible al iniciar el servicio.
+enum NivelCombustible {
+  FULL
+  TRES_CUARTOS
+  MEDIO
+  UN_CUARTO
+  POR_REGISTRAR
+
+  @@map("nivel_combustible")
+}
+
+// Condicion de viaticos del servicio.
+enum Viaticos {
+  SIN_VIATICOS
+  CON_VIATICOS
+  POR_REGISTRAR
+
+  @@map("viaticos")
+}
+
+// Unidad de medida de la carga/mercancia.
+enum UnidadMedida {
+  UNIDAD
+  KG
+  TONELADA
+  LITRO
+  CAJA
+  SACO
+  OTRO
+
+  @@map("unidad_medida")
+}
+
+// ------------------------------- CATALOGOS -------------------------------
+
+// Cliente al que se le presta el servicio (antes texto libre en el manifiesto).
+model Cliente {
+  id                         Int     @id @default(autoincrement())
+  publicId                   String  @unique @map("public_id") @db.Uuid
+  razonSocial                String  @map("razon_social")
+  // RUC/DNI: identidad tributaria, unica entre clientes activos.
+  tipoDocumento              String  @default("RUC") @map("tipo_documento")
+  numeroDocumento            String? @map("numero_documento")
+  numeroDocumentoNormalizado String? @map("numero_documento_normalizado")
+  // Cuenta/proyecto asociado (ej. CERRO VERDE, QUELLAVECO).
+  cuenta                     String?
+  direccion                  String?
+  contactoNombre             String? @map("contacto_nombre")
+  contactoTelefono           String? @map("contacto_telefono")
+  email                      String?
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiestos Manifiesto[]
+  usuarios    Usuario[]
+
+  @@index([razonSocial])
+  @@index([numeroDocumentoNormalizado])
+  @@map("cliente")
+}
+
+// Ubicacion geografica con coordenadas (origen, destino, base, puesto control).
+model Ubicacion {
+  id           Int           @id @default(autoincrement())
+  publicId     String        @unique @map("public_id") @db.Uuid
+  nombre       String
+  tipo         TipoUbicacion @default(GENERAL)
+  direccion    String?
+  referencia   String?
+  // Coordenadas geograficas. Latitud [-90, 90], longitud [-180, 180].
+  latitud      Decimal?      @db.Decimal(9, 6)
+  longitud     Decimal?      @db.Decimal(9, 6)
+  distrito     String?
+  provincia    String?
+  departamento String?
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiestosOrigen  Manifiesto[] @relation("UbicacionOrigen")
+  manifiestosDestino Manifiesto[] @relation("UbicacionDestino")
+  rutaPuntos         RutaPunto[]
+
+  @@index([nombre])
+  @@index([tipo])
+  @@map("ubicacion")
+}
+
+// Tipo de servicio prestado (supervision en ruta, traslado, alquiler...).
+model TipoServicio {
+  id          Int     @id @default(autoincrement())
+  publicId    String  @unique @map("public_id") @db.Uuid
+  // Codigo estable para referencia programatica (ej. SUPERVISION_EN_RUTA).
+  codigo      String  @unique
+  nombre      String
+  descripcion String?
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiestos Manifiesto[]
+
+  @@map("tipo_servicio")
+}
+
+// ------------------------------- MAESTROS -------------------------------
+
+// Unidad = vehiculo de la flota. Identidad de negocio: la placa (normalizada,
+// unica entre las unidades activas).
+model Unidad {
+  id                   Int          @id @default(autoincrement())
+  publicId             String       @unique @map("public_id") @db.Uuid
+  placa                String
+  placaNormalizada     String       @map("placa_normalizada")
+  clase                ClaseUnidad
+  // Tipo descriptivo del vehiculo (ej. CAMIONETA, CAMION, TRACTO).
+  tipoVehiculo         String?      @map("tipo_vehiculo")
+  categoriaVehicular   String?      @map("categoria_vehicular")
+  marca                String?
+  modelo               String?
+  anio                 Int?
+  anioFabricacion      Int?         @map("anio_fabricacion")
+  color                String?
+  numeroEjes           Int?         @map("numero_ejes")
+  numeroMotor          String?      @map("numero_motor")
+  numeroVin            String?      @map("numero_vin")
+  // Registro y vigencia MTC; materiales peligrosos (MATPEL).
+  registroMtc          String?      @map("registro_mtc")
+  mtcVigencia          DateTime?    @map("mtc_vigencia")
+  materialesPeligrosos String?      @map("materiales_peligrosos")
+  // Cuenta/proyecto y cliente asociado al vehiculo.
+  cuenta               String?
+  clienteAsociado      String?      @map("cliente_asociado")
+  // Capacidad de carga en toneladas.
+  capacidadCarga       Decimal?     @map("capacidad_carga") @db.Decimal(10, 2)
+  estadoUnidad         EstadoUnidad @default(OPERATIVA) @map("estado_unidad")
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiestos              Manifiesto[]               @relation("UnidadManifiesto")
+  manifiestosSegundaUnidad Manifiesto[]               @relation("SegundaUnidadManifiesto")
+  documentos               DocumentoUnidad[]
+  inspecciones             InspeccionPreoperacional[]
+
+  @@index([placaNormalizada])
+  @@map("unidad")
+}
+
+// Personal = conductores, tripulacion y supervisores. Identidad: documento.
+model Personal {
+  id                         Int          @id @default(autoincrement())
+  publicId                   String       @unique @map("public_id") @db.Uuid
+  tipoDocumento              String       @default("DNI") @map("tipo_documento")
+  numeroDocumento            String       @map("numero_documento")
+  numeroDocumentoNormalizado String       @map("numero_documento_normalizado")
+  nombres                    String
+  apellidos                  String
+  tipo                       TipoPersonal @default(CONDUCTOR)
+  // Apelativo/indicativo de radio del supervisor (ej. "COMANDO 1", "HALCON 4").
+  apelativo                  String?
+  telefono                   String?
+  licenciaConducir           String?      @map("licencia_conducir")
+  categoriaLicencia          String?      @map("categoria_licencia")
+  licenciaVencimiento        DateTime?    @map("licencia_vencimiento")
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiestosConducidos   Manifiesto[]               @relation("ConductorManifiesto")
+  manifiestosSupervisados Manifiesto[]               @relation("SupervisorManifiesto")
+  tripulaciones           ManifiestoTripulante[]
+  documentos              DocumentoPersonal[]
+  turnos                  TurnoSupervisor[]
+  usuario                 Usuario?
+  inspecciones            InspeccionPreoperacional[]
+
+  @@index([numeroDocumentoNormalizado])
+  @@map("personal")
+}
+
+// Ruta = trayecto reutilizable (origen -> destino) sobre el que se emiten
+// manifiestos.
+model Ruta {
+  id                    Int      @id @default(autoincrement())
+  publicId              String   @unique @map("public_id") @db.Uuid
+  nombre                String
+  origen                String
+  destino               String
+  distanciaKm           Decimal? @map("distancia_km") @db.Decimal(10, 2)
+  duracionEstimadaHoras Decimal? @map("duracion_estimada_horas") @db.Decimal(6, 2)
+  descripcion           String?
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiestos Manifiesto[]
+  puntos      RutaPunto[]
+
+  @@map("ruta")
+}
+
+// ------------------------------- MANIFIESTO -------------------------------
+
+// Manifiesto de viaje: documento central de una operacion. Agrega unidad,
+// conductor, supervisor, cliente, ubicaciones, tipo de servicio y las lineas
+// de carga/mercancia. Correlativo legible MAPE-#### (unico).
+model Manifiesto {
+  id                Int               @id @default(autoincrement())
+  publicId          String            @unique @map("public_id") @db.Uuid
+  numero            String            @unique
+  estado            EstadoManifiesto  @default(BORRADOR)
+  estadoSeguimiento EstadoSeguimiento @default(PENDIENTE) @map("estado_seguimiento")
+
+  // --- Datos del servicio ---
+  fechaServicio      DateTime          @map("fecha_servicio")
+  horaServicio       String?           @map("hora_servicio")
+  // Origen/destino como texto libre + referencia opcional al catalogo.
+  origen             String
+  destino            String
+  ubicacionOrigenId  Int?              @map("ubicacion_origen_id")
+  ubicacionDestinoId Int?              @map("ubicacion_destino_id")
+  tipoServicioId     Int?              @map("tipo_servicio_id")
+  clienteId          Int?              @map("cliente_id")
+  // Nombre del cliente tal como se escribio (si no hay catalogo).
+  clienteTexto       String?           @map("cliente_texto")
+  estadoCarga        EstadoCarga?      @map("estado_carga")
+  combustible        NivelCombustible? @default(POR_REGISTRAR)
+  viaticos           Viaticos?         @default(POR_REGISTRAR)
+
+  // --- Unidad / operador ---
+  unidadId        Int     @map("unidad_id")
+  segundaUnidadId Int?    @map("segunda_unidad_id")
+  segundaPlaca    String? @map("segunda_placa")
+  conductorId     Int     @map("conductor_id")
+  rutaId          Int?    @map("ruta_id")
+
+  // --- Supervision / control ---
+  supervisorId  Int?    @map("supervisor_id")
+  base          String?
+  puestoControl String? @map("puesto_control")
+
+  // --- Fechas de operacion ---
+  fechaLlegadaEstimada DateTime? @map("fecha_llegada_estimada")
+  fechaCierre          DateTime? @map("fecha_cierre")
+
+  observaciones String?
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  unidad           Unidad                     @relation("UnidadManifiesto", fields: [unidadId], references: [id])
+  segundaUnidad    Unidad?                    @relation("SegundaUnidadManifiesto", fields: [segundaUnidadId], references: [id])
+  conductor        Personal                   @relation("ConductorManifiesto", fields: [conductorId], references: [id])
+  supervisor       Personal?                  @relation("SupervisorManifiesto", fields: [supervisorId], references: [id])
+  cliente          Cliente?                   @relation(fields: [clienteId], references: [id])
+  tipoServicio     TipoServicio?              @relation(fields: [tipoServicioId], references: [id])
+  ruta             Ruta?                      @relation(fields: [rutaId], references: [id])
+  ubicacionOrigen  Ubicacion?                 @relation("UbicacionOrigen", fields: [ubicacionOrigenId], references: [id])
+  ubicacionDestino Ubicacion?                 @relation("UbicacionDestino", fields: [ubicacionDestinoId], references: [id])
+  cargas           ManifiestoCarga[]
+  tripulantes      ManifiestoTripulante[]
+  seguimientos     SeguimientoManifiesto[]
+  incidencias      Incidencia[]
+  inspecciones     InspeccionPreoperacional[]
+
+  @@index([unidadId])
+  @@index([conductorId])
+  @@index([clienteId])
+  @@index([estado])
+  @@map("manifiesto")
+}
+
+// Linea de carga / mercancia del manifiesto. El manifiesto MAPE usa una sola
+// linea, pero se modela como detalle para soportar varias mercancias.
+model ManifiestoCarga {
+  id             Int          @id @default(autoincrement())
+  manifiestoId   Int          @map("manifiesto_id")
+  descripcion    String
+  cantidad       Decimal?     @db.Decimal(12, 2)
+  unidadMedida   UnidadMedida @default(UNIDAD) @map("unidad_medida")
+  pesoKg         Decimal?     @map("peso_kg") @db.Decimal(12, 2)
+  piezas         Int?
+  embalaje       String?
+  valorDeclarado Decimal?     @map("valor_declarado") @db.Decimal(14, 2)
+
+  manifiesto Manifiesto @relation(fields: [manifiestoId], references: [id], onDelete: Cascade)
+
+  @@index([manifiestoId])
+  @@map("manifiesto_carga")
+}
+
+// Tripulacion acompañante del manifiesto (copiloto, escolta adicional). El
+// conductor principal va en Manifiesto.conductorId y el supervisor en
+// supervisorId; aqui el resto.
+model ManifiestoTripulante {
+  id           Int          @id @default(autoincrement())
+  manifiestoId Int          @map("manifiesto_id")
+  personalId   Int          @map("personal_id")
+  rol          TipoPersonal
+
+  manifiesto Manifiesto @relation(fields: [manifiestoId], references: [id], onDelete: Cascade)
+  personal   Personal   @relation(fields: [personalId], references: [id])
+
+  @@unique([manifiestoId, personalId])
+  @@map("manifiesto_tripulante")
+}
+
+// Historial de auditoria: registra cada creacion/cambio/anulacion de cualquier
+// entidad. `datos` guarda el snapshot JSON del estado tras la accion.
+model HistorialEvento {
+  id              Int             @id @default(autoincrement())
+  entidad         String
+  entidadId       Int             @map("entidad_id")
+  entidadPublicId String?         @map("entidad_public_id") @db.Uuid
+  accion          AccionAuditoria
+  datos           Json
+  usuario         String
+  fecha           DateTime        @default(now())
+
+  @@index([entidad, entidadId])
+  @@index([fecha])
+  @@map("historial_evento")
+}
+
+// ------------------------------- ENUMS (operacion) -------------------------------
+
+enum EstadoSeguimiento {
+  PENDIENTE
+  EN_RUTA
+  RETRASADO
+  DETENIDO
+  FINALIZADO
+
+  @@map("estado_seguimiento")
+}
+
+enum TipoCheckin {
+  SALIDA
+  PUNTO_CONTROL
+  UBICACION
+  INCIDENCIA
+  CIERRE
+
+  @@map("tipo_checkin")
+}
+
+enum TipoIncidencia {
+  ACCIDENTE
+  FALLA_MECANICA
+  BLOQUEO_VIA
+  EXCESO_VELOCIDAD
+  DESVIO_RUTA
+  RELEVO
+  OTRO
+
+  @@map("tipo_incidencia")
+}
+
+enum Criticidad {
+  BAJA
+  MEDIA
+  ALTA
+  CRITICA
+}
+
+enum EstadoIncidencia {
+  ABIERTA
+  EN_ATENCION
+  RESUELTA
+
+  @@map("estado_incidencia")
+}
+
+enum TipoEvidencia {
+  FOTO
+  VIDEO
+  DOCUMENTO
+
+  @@map("tipo_evidencia")
+}
+
+enum ResultadoInspeccion {
+  CONFORME
+  NO_CONFORME
+
+  @@map("resultado_inspeccion")
+}
+
+enum TipoTurno {
+  TURNO
+  DESCANSO
+
+  @@map("tipo_turno")
+}
+
+enum RolUsuario {
+  ADMINISTRADOR
+  OPERACIONES
+  SUPERVISOR
+  CONDUCTOR
+  CLIENTE
+
+  @@map("rol_usuario")
+}
+
+enum TipoAlerta {
+  LLEGADA_TARDE
+  UNIDAD_SIN_REGISTRO
+  DOCUMENTO_POR_VENCER
+  INCIDENCIA_CRITICA
+  MANIFIESTO_SIN_CERRAR
+
+  @@map("tipo_alerta")
+}
+
+// ------------------------------- PUNTOS DE CONTROL -------------------------------
+
+// Punto ordenado de una ruta (Base Arequipa -> Imata -> ... -> Cusco).
+model RutaPunto {
+  id                Int      @id @default(autoincrement())
+  publicId          String   @unique @map("public_id") @db.Uuid
+  rutaId            Int      @map("ruta_id")
+  orden             Int
+  nombre            String
+  ubicacionId       Int?     @map("ubicacion_id")
+  latitud           Decimal? @db.Decimal(9, 6)
+  longitud          Decimal? @db.Decimal(9, 6)
+  horaEstimada      String?  @map("hora_estimada")
+  toleranciaMinutos Int?     @map("tolerancia_minutos")
+  requiereEvidencia Boolean  @default(false) @map("requiere_evidencia")
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  ruta         Ruta                    @relation(fields: [rutaId], references: [id], onDelete: Cascade)
+  ubicacion    Ubicacion?              @relation(fields: [ubicacionId], references: [id])
+  seguimientos SeguimientoManifiesto[]
+
+  @@unique([rutaId, orden])
+  @@index([rutaId])
+  @@map("ruta_punto")
+}
+
+// ------------------------------- SEGUIMIENTO -------------------------------
+
+// Check-in del manifiesto: salida, paso por punto de control, ubicacion o cierre.
+model SeguimientoManifiesto {
+  id            Int                @id @default(autoincrement())
+  publicId      String             @unique @map("public_id") @db.Uuid
+  manifiestoId  Int                @map("manifiesto_id")
+  tipo          TipoCheckin
+  rutaPuntoId   Int?               @map("ruta_punto_id")
+  estado        EstadoSeguimiento?
+  fecha         DateTime           @default(now())
+  latitud       Decimal?           @db.Decimal(9, 6)
+  longitud      Decimal?           @db.Decimal(9, 6)
+  fotoUrl       String?            @map("foto_url")
+  observacion   String?
+  registradoPor String             @map("registrado_por")
+
+  manifiesto Manifiesto @relation(fields: [manifiestoId], references: [id], onDelete: Cascade)
+  rutaPunto  RutaPunto? @relation(fields: [rutaPuntoId], references: [id])
+
+  @@index([manifiestoId])
+  @@map("seguimiento_manifiesto")
+}
+
+// ------------------------------- INCIDENCIAS -------------------------------
+
+model Incidencia {
+  id              Int              @id @default(autoincrement())
+  publicId        String           @unique @map("public_id") @db.Uuid
+  manifiestoId    Int              @map("manifiesto_id")
+  tipo            TipoIncidencia
+  criticidad      Criticidad       @default(MEDIA)
+  estado          EstadoIncidencia @default(ABIERTA)
+  descripcion     String
+  latitud         Decimal?         @db.Decimal(9, 6)
+  longitud        Decimal?         @db.Decimal(9, 6)
+  responsable     String?
+  accionesTomadas String?          @map("acciones_tomadas")
+  reportadoPor    String           @map("reportado_por")
+  fechaReporte    DateTime         @default(now()) @map("fecha_reporte")
+  fechaResolucion DateTime?        @map("fecha_resolucion")
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  manifiesto Manifiesto            @relation(fields: [manifiestoId], references: [id], onDelete: Cascade)
+  evidencias EvidenciaIncidencia[]
+
+  @@index([manifiestoId])
+  @@index([estado])
+  @@map("incidencia")
+}
+
+model EvidenciaIncidencia {
+  id           Int           @id @default(autoincrement())
+  incidenciaId Int           @map("incidencia_id")
+  tipo         TipoEvidencia @default(FOTO)
+  url          String
+  descripcion  String?
+
+  incidencia Incidencia @relation(fields: [incidenciaId], references: [id], onDelete: Cascade)
+
+  @@index([incidenciaId])
+  @@map("evidencia_incidencia")
+}
+
+// ------------------------------- DOCUMENTOS -------------------------------
+
+// Documento de una unidad (SOAT, tarjeta de propiedad, revision tecnica, MTC...).
+model DocumentoUnidad {
+  id               Int       @id @default(autoincrement())
+  publicId         String    @unique @map("public_id") @db.Uuid
+  unidadId         Int       @map("unidad_id")
+  tipo             String
+  nombre           String
+  numero           String?
+  fechaEmision     DateTime? @map("fecha_emision")
+  fechaVencimiento DateTime? @map("fecha_vencimiento")
+  archivoUrl       String?   @map("archivo_url")
+  observacion      String?
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  unidad Unidad @relation(fields: [unidadId], references: [id], onDelete: Cascade)
+
+  @@index([unidadId])
+  @@index([fechaVencimiento])
+  @@map("documento_unidad")
+}
+
+// Documento de una persona (licencia, DNI, examen medico, SCTR, capacitacion...).
+model DocumentoPersonal {
+  id               Int       @id @default(autoincrement())
+  publicId         String    @unique @map("public_id") @db.Uuid
+  personalId       Int       @map("personal_id")
+  tipo             String
+  nombre           String
+  numero           String?
+  fechaEmision     DateTime? @map("fecha_emision")
+  fechaVencimiento DateTime? @map("fecha_vencimiento")
+  archivoUrl       String?   @map("archivo_url")
+  observacion      String?
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  personal Personal @relation(fields: [personalId], references: [id], onDelete: Cascade)
+
+  @@index([personalId])
+  @@index([fechaVencimiento])
+  @@map("documento_personal")
+}
+
+// ------------------------------- INSPECCION PREOPERACIONAL -------------------------------
+
+model InspeccionPreoperacional {
+  id                Int                 @id @default(autoincrement())
+  publicId          String              @unique @map("public_id") @db.Uuid
+  unidadId          Int                 @map("unidad_id")
+  conductorId       Int?                @map("conductor_id")
+  manifiestoId      Int?                @map("manifiesto_id")
+  fecha             DateTime            @default(now())
+  resultado         ResultadoInspeccion @default(CONFORME)
+  tieneFallaCritica Boolean             @default(false) @map("tiene_falla_critica")
+  observacion       String?
+  realizadaPor      String              @map("realizada_por")
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  unidad     Unidad           @relation(fields: [unidadId], references: [id])
+  conductor  Personal?        @relation(fields: [conductorId], references: [id])
+  manifiesto Manifiesto?      @relation(fields: [manifiestoId], references: [id])
+  items      InspeccionItem[]
+
+  @@index([unidadId])
+  @@map("inspeccion_preoperacional")
+}
+
+model InspeccionItem {
+  id           Int     @id @default(autoincrement())
+  inspeccionId Int     @map("inspeccion_id")
+  item         String
+  conforme     Boolean @default(true)
+  critico      Boolean @default(false)
+  observacion  String?
+
+  inspeccion InspeccionPreoperacional @relation(fields: [inspeccionId], references: [id], onDelete: Cascade)
+
+  @@index([inspeccionId])
+  @@map("inspeccion_item")
+}
+
+// ------------------------------- TURNOS DE SUPERVISOR -------------------------------
+
+model TurnoSupervisor {
+  id           Int       @id @default(autoincrement())
+  publicId     String    @unique @map("public_id") @db.Uuid
+  supervisorId Int       @map("supervisor_id")
+  tipo         TipoTurno @default(TURNO)
+  fechaInicio  DateTime  @map("fecha_inicio")
+  fechaFin     DateTime  @map("fecha_fin")
+  zona         String?
+  base         String?
+  observacion  String?
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  supervisor Personal @relation(fields: [supervisorId], references: [id])
+
+  @@index([supervisorId])
+  @@index([fechaInicio])
+  @@map("turno_supervisor")
+}
+
+// ------------------------------- USUARIOS / ROLES -------------------------------
+
+model Usuario {
+  id           Int        @id @default(autoincrement())
+  publicId     String     @unique @map("public_id") @db.Uuid
+  email        String     @unique
+  nombre       String
+  rol          RolUsuario @default(OPERACIONES)
+  passwordHash String     @map("password_hash")
+  clienteId    Int?       @map("cliente_id")
+  personalId   Int?       @unique @map("personal_id")
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  cliente  Cliente?  @relation(fields: [clienteId], references: [id])
+  personal Personal? @relation(fields: [personalId], references: [id])
+
+  @@index([rol])
+  @@map("usuario")
+}
+
+// ------------------------------- ALERTAS -------------------------------
+
+model Alerta {
+  id              Int        @id @default(autoincrement())
+  publicId        String     @unique @map("public_id") @db.Uuid
+  tipo            TipoAlerta
+  criticidad      Criticidad @default(MEDIA)
+  mensaje         String
+  entidad         String
+  entidadId       Int        @map("entidad_id")
+  manifiestoId    Int?       @map("manifiesto_id")
+  resuelta        Boolean    @default(false)
+  fechaGeneracion DateTime   @default(now()) @map("fecha_generacion")
+  fechaResolucion DateTime?  @map("fecha_resolucion")
+
+  @@index([resuelta])
+  @@index([tipo])
+  @@map("alerta")
+}

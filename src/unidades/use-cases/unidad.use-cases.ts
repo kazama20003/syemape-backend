@@ -1,0 +1,311 @@
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  DomainValidationError,
+  RecursoNoEncontradoError,
+} from '../../shared/errors/domain-validation.error.js';
+import { EstadoRegistro } from '../../shared/enums/estado-registro.enum.js';
+import { esEstadoActivo } from '../../shared/enums/estado-activo.enum.js';
+import {
+  construirPaginacion,
+  type RespuestaPaginadaDto,
+} from '../../shared/dto/respuesta.dto.js';
+import {
+  aEnteroPositivo,
+  aFechaOpcional,
+  aNumeroOpcional,
+  aTextoOpcional,
+} from '../../shared/dto/parseo.js';
+import {
+  UNIDAD_REPOSITORY,
+  type ActualizarUnidadData,
+  type CrearUnidadData,
+  type UnidadProps,
+  type UnidadRepository,
+} from '../domain/repositories/unidad.repository.js';
+import {
+  ClaseUnidad,
+  EstadoUnidad,
+  esClaseUnidad,
+  esEstadoUnidad,
+} from '../domain/value-objects/clase-unidad.enum.js';
+import { exigirPlaca, normalizarPlaca } from '../domain/value-objects/placa.vo.js';
+
+const PAGE_SIZE_POR_DEFECTO = 50;
+const PAGE_SIZE_MAXIMO = 200;
+const USUARIO_SISTEMA = 'sistema';
+
+function throwEstadoActivoInvalido(valor: unknown): never {
+  throw new DomainValidationError(
+    'El estadoActivo no es valido. Use ACTIVO o INACTIVO.',
+    'estadoActivo',
+    'INVALIDO',
+    valor,
+  );
+}
+
+
+export class RegistrarUnidadDto {
+  placa: string;
+  clase: string;
+  tipoVehiculo?: string;
+  categoriaVehicular?: string;
+  marca?: string;
+  modelo?: string;
+  anio?: number;
+  anioFabricacion?: number;
+  color?: string;
+  numeroEjes?: number;
+  numeroMotor?: string;
+  numeroVin?: string;
+  registroMtc?: string;
+  mtcVigencia?: string;
+  materialesPeligrosos?: string;
+  cuenta?: string;
+  clienteAsociado?: string;
+  capacidadCarga?: number;
+  estadoUnidad?: string;
+}
+
+export class ActualizarUnidadDto {
+  placa?: string;
+  clase?: string;
+  tipoVehiculo?: string;
+  categoriaVehicular?: string;
+  marca?: string;
+  modelo?: string;
+  anio?: number;
+  anioFabricacion?: number;
+  color?: string;
+  numeroEjes?: number;
+  numeroMotor?: string;
+  numeroVin?: string;
+  registroMtc?: string;
+  mtcVigencia?: string;
+  materialesPeligrosos?: string;
+  cuenta?: string;
+  clienteAsociado?: string;
+  capacidadCarga?: number;
+  estadoUnidad?: string;
+  estadoActivo?: string;
+}
+
+function exigirClase(valor: unknown): ClaseUnidad {
+  if (!esClaseUnidad(valor)) {
+    throw new DomainValidationError(
+      `La clase de unidad no es valida. Use una de: ${Object.values(ClaseUnidad).join(', ')}.`,
+      'clase',
+      'INVALIDO',
+      valor ?? null,
+    );
+  }
+  return valor;
+}
+
+function resolverEstado(valor: unknown, porDefecto: EstadoUnidad): EstadoUnidad {
+  if (valor === undefined || valor === null || valor === '') {
+    return porDefecto;
+  }
+  if (!esEstadoUnidad(valor)) {
+    throw new DomainValidationError(
+      `El estado de la unidad no es valido. Use una de: ${Object.values(EstadoUnidad).join(', ')}.`,
+      'estadoUnidad',
+      'INVALIDO',
+      valor,
+    );
+  }
+  return valor;
+}
+
+// Campos descriptivos compartidos por crear/actualizar. Cada uno se aplica solo
+// si venia en el DTO (para el PATCH parcial) — el llamador decide.
+function camposComunes(
+  dto: RegistrarUnidadDto | ActualizarUnidadDto,
+  parcial: boolean,
+): Partial<CrearUnidadData & ActualizarUnidadData> {
+  const val = <T>(clave: keyof (RegistrarUnidadDto & ActualizarUnidadDto), fn: () => T) =>
+    !parcial || (dto as Record<string, unknown>)[clave] !== undefined ? fn() : undefined;
+
+  return {
+    tipoVehiculo: val('tipoVehiculo', () => aTextoOpcional(dto.tipoVehiculo)),
+    categoriaVehicular: val('categoriaVehicular', () =>
+      aTextoOpcional(dto.categoriaVehicular),
+    ),
+    marca: val('marca', () => aTextoOpcional(dto.marca)),
+    modelo: val('modelo', () => aTextoOpcional(dto.modelo)),
+    anio: val('anio', () => aNumeroOpcional(dto.anio)),
+    anioFabricacion: val('anioFabricacion', () => aNumeroOpcional(dto.anioFabricacion)),
+    color: val('color', () => aTextoOpcional(dto.color)),
+    numeroEjes: val('numeroEjes', () => aNumeroOpcional(dto.numeroEjes)),
+    numeroMotor: val('numeroMotor', () => aTextoOpcional(dto.numeroMotor)),
+    numeroVin: val('numeroVin', () => aTextoOpcional(dto.numeroVin)),
+    registroMtc: val('registroMtc', () => aTextoOpcional(dto.registroMtc)),
+    mtcVigencia: val('mtcVigencia', () => aFechaOpcional(dto.mtcVigencia)),
+    materialesPeligrosos: val('materialesPeligrosos', () =>
+      aTextoOpcional(dto.materialesPeligrosos),
+    ),
+    cuenta: val('cuenta', () => aTextoOpcional(dto.cuenta)),
+    clienteAsociado: val('clienteAsociado', () => aTextoOpcional(dto.clienteAsociado)),
+    capacidadCarga: val('capacidadCarga', () => aNumeroOpcional(dto.capacidadCarga)),
+  };
+}
+
+@Injectable()
+export class RegistrarUnidadUseCase {
+  constructor(
+    @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+  ) {}
+
+  async execute(dto: RegistrarUnidadDto): Promise<UnidadProps> {
+    const placa = exigirPlaca(dto.placa);
+    const clase = exigirClase(dto.clase);
+    const estadoUnidad = resolverEstado(dto.estadoUnidad, EstadoUnidad.OPERATIVA);
+
+    const existente = await this.unidades.findByPlacaActiva(placa);
+    if (existente) {
+      throw new DomainValidationError(
+        `Ya existe una unidad activa con la placa "${dto.placa}".`,
+        'placa',
+        'DUPLICADO',
+        dto.placa,
+      );
+    }
+
+    return this.unidades.crear({
+      placa: dto.placa.trim(),
+      placaNormalizada: placa,
+      clase,
+      estadoUnidad,
+      usuarioCreacion: USUARIO_SISTEMA,
+      ...(camposComunes(dto, false) as Omit<
+        CrearUnidadData,
+        'placa' | 'placaNormalizada' | 'clase' | 'estadoUnidad' | 'usuarioCreacion'
+      >),
+    });
+  }
+}
+
+@Injectable()
+export class ListarUnidadesUseCase {
+  constructor(
+    @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+  ) {}
+
+  async execute(query: {
+    placa?: string;
+    clase?: string;
+    estadoUnidad?: string;
+    estadoRegistro?: string;
+    page?: string | number;
+    pageSize?: string | number;
+  }): Promise<RespuestaPaginadaDto<UnidadProps>> {
+    const page = aEnteroPositivo(query.page, 1);
+    const pageSize = Math.min(
+      PAGE_SIZE_MAXIMO,
+      aEnteroPositivo(query.pageSize, PAGE_SIZE_POR_DEFECTO),
+    );
+
+    const { datos, total } = await this.unidades.buscar({
+      placa: query.placa ? normalizarPlaca(query.placa) : undefined,
+      clase: esClaseUnidad(query.clase) ? query.clase : undefined,
+      estadoUnidad: esEstadoUnidad(query.estadoUnidad) ? query.estadoUnidad : undefined,
+      estadoRegistro:
+        query.estadoRegistro === 'TODOS' ? undefined : EstadoRegistro.ACTIVO,
+      page,
+      pageSize,
+    });
+
+    return { datos, paginacion: construirPaginacion(page, pageSize, total) };
+  }
+}
+
+@Injectable()
+export class ObtenerUnidadUseCase {
+  constructor(
+    @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+  ) {}
+
+  async execute(id: number): Promise<UnidadProps> {
+    const unidad = await this.unidades.findById(id);
+    if (!unidad) {
+      throw new RecursoNoEncontradoError(
+        'La unidad indicada no existe.',
+        'unidad',
+        id,
+      );
+    }
+    return unidad;
+  }
+}
+
+@Injectable()
+export class ActualizarUnidadUseCase {
+  constructor(
+    @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+  ) {}
+
+  async execute(id: number, dto: ActualizarUnidadDto): Promise<UnidadProps> {
+    const unidad = await this.unidades.findById(id);
+    if (!unidad) {
+      throw new RecursoNoEncontradoError(
+        'La unidad indicada no existe.',
+        'unidad',
+        id,
+      );
+    }
+
+    let placa: string | undefined;
+    let placaNormalizada: string | undefined;
+    if (dto.placa !== undefined) {
+      placaNormalizada = exigirPlaca(dto.placa);
+      placa = dto.placa.trim();
+      const otra = await this.unidades.findByPlacaActiva(placaNormalizada);
+      if (otra && otra.id !== id) {
+        throw new DomainValidationError(
+          `Ya existe otra unidad activa con la placa "${dto.placa}".`,
+          'placa',
+          'DUPLICADO',
+          dto.placa,
+        );
+      }
+    }
+
+    const data: ActualizarUnidadData = {
+      placa,
+      placaNormalizada,
+      clase: dto.clase !== undefined ? exigirClase(dto.clase) : undefined,
+      estadoUnidad:
+        dto.estadoUnidad !== undefined
+          ? resolverEstado(dto.estadoUnidad, unidad.estadoUnidad)
+          : undefined,
+      estadoActivo:
+        dto.estadoActivo === undefined
+          ? undefined
+          : esEstadoActivo(dto.estadoActivo)
+            ? dto.estadoActivo
+            : throwEstadoActivoInvalido(dto.estadoActivo),
+      usuarioModificacion: USUARIO_SISTEMA,
+      ...camposComunes(dto, true),
+    };
+
+    return this.unidades.actualizar(id, data);
+  }
+}
+
+@Injectable()
+export class AnularUnidadUseCase {
+  constructor(
+    @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+  ) {}
+
+  async execute(id: number): Promise<UnidadProps> {
+    const unidad = await this.unidades.findById(id);
+    if (!unidad) {
+      throw new RecursoNoEncontradoError(
+        'La unidad indicada no existe.',
+        'unidad',
+        id,
+      );
+    }
+    return this.unidades.anular(id, USUARIO_SISTEMA);
+  }
+}
