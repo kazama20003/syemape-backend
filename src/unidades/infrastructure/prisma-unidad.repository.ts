@@ -35,6 +35,9 @@ const SELECT = {
   cuenta: true,
   clienteAsociado: true,
   capacidadCarga: true,
+  tipoCombustible: true,
+  kilometraje: true,
+  fotos: true,
   estadoUnidad: true,
   estadoActivo: true,
   estadoRegistro: true,
@@ -61,6 +64,9 @@ interface FilaUnidad {
   cuenta: string | null;
   clienteAsociado: string | null;
   capacidadCarga: { toNumber(): number } | null;
+  tipoCombustible: string | null;
+  kilometraje: number | null;
+  fotos: string[];
   estadoUnidad: EstadoUnidad;
   estadoActivo: EstadoActivo;
   estadoRegistro: EstadoRegistro;
@@ -88,6 +94,9 @@ function aProps(fila: FilaUnidad): UnidadProps {
     cuenta: fila.cuenta,
     clienteAsociado: fila.clienteAsociado,
     capacidadCarga: fila.capacidadCarga?.toNumber() ?? null,
+    tipoCombustible: fila.tipoCombustible,
+    kilometraje: fila.kilometraje,
+    fotos: fila.fotos,
     estadoUnidad: fila.estadoUnidad,
     estadoActivo: fila.estadoActivo,
     estadoRegistro: fila.estadoRegistro,
@@ -116,6 +125,9 @@ function datosEscritura(
     cuenta: data.cuenta,
     clienteAsociado: data.clienteAsociado,
     capacidadCarga: data.capacidadCarga,
+    tipoCombustible: data.tipoCombustible,
+    kilometraje: data.kilometraje,
+    fotos: data.fotos,
     estadoUnidad: data.estadoUnidad,
   };
 }

@@ -249,6 +249,11 @@ model Unidad {
   clienteAsociado      String?      @map("cliente_asociado")
   // Capacidad de carga en toneladas.
   capacidadCarga       Decimal?     @map("capacidad_carga") @db.Decimal(10, 2)
+  // Datos pensados para la futura app de mantenimiento.
+  tipoCombustible      String?      @map("tipo_combustible")
+  kilometraje          Int?
+  // URLs de fotos de la unidad (frontal, lateral, interior, daños...).
+  fotos                String[]     @default([])
   estadoUnidad         EstadoUnidad @default(OPERATIVA) @map("estado_unidad")
 
   estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")

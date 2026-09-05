@@ -27,6 +27,9 @@ export interface UnidadProps {
   cuenta: string | null;
   clienteAsociado: string | null;
   capacidadCarga: number | null;
+  tipoCombustible: string | null;
+  kilometraje: number | null;
+  fotos: string[];
   estadoUnidad: EstadoUnidad;
   estadoActivo: EstadoActivo;
   estadoRegistro: EstadoRegistro;
@@ -52,6 +55,9 @@ export interface CrearUnidadData {
   cuenta: string | null;
   clienteAsociado: string | null;
   capacidadCarga: number | null;
+  tipoCombustible: string | null;
+  kilometraje: number | null;
+  fotos: string[];
   estadoUnidad: EstadoUnidad;
   usuarioCreacion: string;
 }
@@ -76,6 +82,9 @@ export interface ActualizarUnidadData {
   cuenta?: string | null;
   clienteAsociado?: string | null;
   capacidadCarga?: number | null;
+  tipoCombustible?: string | null;
+  kilometraje?: number | null;
+  fotos?: string[];
   estadoUnidad?: EstadoUnidad;
   estadoActivo?: EstadoActivo;
   usuarioModificacion: string;

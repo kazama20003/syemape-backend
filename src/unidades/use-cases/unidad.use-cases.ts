@@ -34,6 +34,16 @@ const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
 const USUARIO_SISTEMA = 'sistema';
 
+// Solo URLs http(s) no vacias; el maestro guarda referencias, no binarios.
+function limpiarFotos(fotos: unknown): string[] {
+  if (!Array.isArray(fotos)) return [];
+  return fotos
+    .filter((f): f is string => typeof f === 'string')
+    .map((f) => f.trim())
+    .filter((f) => /^https?:\/\//.test(f))
+    .slice(0, 20);
+}
+
 function throwEstadoActivoInvalido(valor: unknown): never {
   throw new DomainValidationError(
     'El estadoActivo no es valido. Use ACTIVO o INACTIVO.',
@@ -63,6 +73,9 @@ export class RegistrarUnidadDto {
   cuenta?: string;
   clienteAsociado?: string;
   capacidadCarga?: number;
+  tipoCombustible?: string;
+  kilometraje?: number;
+  fotos?: string[];
   estadoUnidad?: string;
 }
 
@@ -85,6 +98,9 @@ export class ActualizarUnidadDto {
   cuenta?: string;
   clienteAsociado?: string;
   capacidadCarga?: number;
+  tipoCombustible?: string;
+  kilometraje?: number;
+  fotos?: string[];
   estadoUnidad?: string;
   estadoActivo?: string;
 }
@@ -146,6 +162,9 @@ function camposComunes(
     cuenta: val('cuenta', () => aTextoOpcional(dto.cuenta)),
     clienteAsociado: val('clienteAsociado', () => aTextoOpcional(dto.clienteAsociado)),
     capacidadCarga: val('capacidadCarga', () => aNumeroOpcional(dto.capacidadCarga)),
+    tipoCombustible: val('tipoCombustible', () => aTextoOpcional(dto.tipoCombustible)),
+    kilometraje: val('kilometraje', () => aNumeroOpcional(dto.kilometraje)),
+    fotos: val('fotos', () => limpiarFotos(dto.fotos)),
   };
 }
 
