@@ -172,7 +172,7 @@ function datosEscritura(
     tipoCarroceria: data.tipoCarroceria,
     numeroSerieCarroceria: data.numeroSerieCarroceria,
     tipoCombustible: data.tipoCombustible,
-    kilometraje: data.kilometraje,
+    kilometraje: 'kilometraje' in data ? data.kilometraje : undefined,
     ultimoMantenimientoFecha: data.ultimoMantenimientoFecha,
     ultimoMantenimientoKilometraje: data.ultimoMantenimientoKilometraje,
     proximoMantenimientoFecha: data.proximoMantenimientoFecha,

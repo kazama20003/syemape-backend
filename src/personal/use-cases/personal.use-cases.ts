@@ -30,7 +30,6 @@ import {
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
-const USUARIO_SISTEMA = 'sistema';
 
 function throwEstadoActivoInvalido(valor: unknown): never {
   throw new DomainValidationError(
@@ -111,7 +110,7 @@ export class RegistrarPersonalUseCase {
     @Inject(PERSONAL_REPOSITORY) private readonly personal: PersonalRepository,
   ) {}
 
-  async execute(dto: RegistrarPersonalDto): Promise<PersonalProps> {
+  async execute(dto: RegistrarPersonalDto, actor: string): Promise<PersonalProps> {
     const documento = exigirDocumento(dto.numeroDocumento);
     const primerNombre = exigirTexto(dto.primerNombre, 'primerNombre');
     const segundoNombre = aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null;
@@ -145,7 +144,7 @@ export class RegistrarPersonalUseCase {
       licenciaConducir: aTextoOpcional(dto.licenciaConducir),
       categoriaLicencia: aTextoOpcional(dto.categoriaLicencia),
       licenciaVencimiento: aFechaOpcional(dto.licenciaVencimiento),
-      usuarioCreacion: USUARIO_SISTEMA,
+      usuarioCreacion: actor,
     });
   }
 }
@@ -207,7 +206,7 @@ export class ActualizarPersonalUseCase {
     @Inject(PERSONAL_REPOSITORY) private readonly personal: PersonalRepository,
   ) {}
 
-  async execute(id: number, dto: ActualizarPersonalDto): Promise<PersonalProps> {
+  async execute(id: number, dto: ActualizarPersonalDto, actor: string): Promise<PersonalProps> {
     const persona = await this.personal.findById(id);
     if (!persona) {
       throw new RecursoNoEncontradoError(
@@ -293,7 +292,7 @@ export class ActualizarPersonalUseCase {
           : esEstadoActivo(dto.estadoActivo)
             ? dto.estadoActivo
             : throwEstadoActivoInvalido(dto.estadoActivo),
-      usuarioModificacion: USUARIO_SISTEMA,
+      usuarioModificacion: actor,
     });
   }
 }
@@ -304,7 +303,7 @@ export class AnularPersonalUseCase {
     @Inject(PERSONAL_REPOSITORY) private readonly personal: PersonalRepository,
   ) {}
 
-  async execute(id: number): Promise<PersonalProps> {
+  async execute(id: number, actor: string): Promise<PersonalProps> {
     const persona = await this.personal.findById(id);
     if (!persona) {
       throw new RecursoNoEncontradoError(
@@ -313,6 +312,6 @@ export class AnularPersonalUseCase {
         id,
       );
     }
-    return this.personal.anular(id, USUARIO_SISTEMA);
+    return this.personal.anular(id, actor);
   }
 }

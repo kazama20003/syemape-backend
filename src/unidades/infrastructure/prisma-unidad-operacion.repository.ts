@@ -6,6 +6,7 @@ import { AccionAuditoria } from '../../shared/enums/accion-auditoria.enum.js';
 import { EstadoRegistro } from '../../shared/enums/estado-registro.enum.js';
 import { DomainValidationError } from '../../shared/errors/domain-validation.error.js';
 import { TipoActivo } from '../../activos/domain/value-objects/activo.enum.js';
+import { EstadoUnidad } from '../domain/value-objects/clase-unidad.enum.js';
 import {
   AsignacionGpsUnidadProps,
   LecturaKilometrajeUnidadProps,
@@ -65,6 +66,7 @@ export class PrismaUnidadOperacionRepository
                 id: data.unidadId,
                 estadoRegistro: EstadoRegistro.ACTIVO,
                 estadoActivo: 'ACTIVO',
+                estadoUnidad: EstadoUnidad.OPERATIVA,
               },
               select: { id: true },
             }),
@@ -72,6 +74,7 @@ export class PrismaUnidadOperacionRepository
               where: {
                 id: data.activoId,
                 tipo: TipoActivo.EQUIPO,
+                subtipo: { equals: 'GPS', mode: 'insensitive' },
                 estadoRegistro: EstadoRegistro.ACTIVO,
                 estadoOperativo: 'OPERATIVO',
               },
@@ -88,12 +91,12 @@ export class PrismaUnidadOperacionRepository
           ]);
         if (!unidad)
           throw new DomainValidationError(
-            'La unidad debe estar activa para asignar GPS.',
+            'La unidad debe estar activa y operativa para asignar GPS.',
             'unidadId',
           );
         if (!activo)
           throw new DomainValidationError(
-            'El activo GPS debe ser un equipo operativo y activo.',
+            'El activo GPS debe ser un equipo GPS operativo y activo.',
             'activoId',
           );
         if (asignacionUnidad)
@@ -140,10 +143,7 @@ export class PrismaUnidadOperacionRepository
     observacion: string | null | undefined;
     actor: string;
   }): Promise<AsignacionGpsUnidadProps | null> {
-    const actual = await this.prisma.asignacionGpsUnidad.findFirst({
-      where: { id: data.asignacionId, unidadId: data.unidadId, fechaFin: null },
-      select: { id: true, fechaInicio: true },
-    });
+    const actual = await this.prisma.asignacionGpsUnidad.findFirst({ where: { id: data.asignacionId, unidadId: data.unidadId, fechaFin: null }, select: { id: true, fechaInicio: true } });
     if (!actual) return null;
     if (data.fechaFin < actual.fechaInicio) {
       throw new DomainValidationError(
@@ -151,16 +151,17 @@ export class PrismaUnidadOperacionRepository
         'fechaFin',
       );
     }
-    const fila = await this.prisma.asignacionGpsUnidad.update({
-      where: { id: actual.id },
+    const liberada = await this.prisma.asignacionGpsUnidad.updateMany({
+      where: { id: actual.id, unidadId: data.unidadId, fechaFin: null },
       data: {
         fechaFin: data.fechaFin,
         observacion: data.observacion,
         usuarioModificacion: data.actor,
         fechaModificacion: new Date(),
       },
-      select: SELECT_GPS,
     });
+    if (!liberada.count) return null;
+    const fila = await this.prisma.asignacionGpsUnidad.findUniqueOrThrow({ where: { id: actual.id }, select: SELECT_GPS });
     await registrarHistorial(this.prisma, {
       entidad: 'asignacion_gps_unidad',
       entidadId: fila.id,
@@ -205,9 +206,12 @@ export class PrismaUnidadOperacionRepository
       async (tx) => {
         const unidad = await tx.unidad.findUnique({
           where: { id: data.unidadId },
-          select: { id: true, kilometraje: true },
+          select: { id: true, kilometraje: true, estadoRegistro: true, estadoActivo: true, estadoUnidad: true },
         });
         if (!unidad) return null;
+        if (unidad.estadoRegistro !== EstadoRegistro.ACTIVO || unidad.estadoActivo !== 'ACTIVO' || unidad.estadoUnidad !== EstadoUnidad.OPERATIVA) {
+          throw new DomainValidationError('La unidad debe estar ACTIVA y OPERATIVA para registrar kilometraje.', 'unidadId', 'UNIDAD_NO_OPERATIVA', data.unidadId);
+        }
         const ultima = await tx.lecturaKilometrajeUnidad.findFirst({
           where: { unidadId: data.unidadId },
           orderBy: [{ valor: 'desc' }, { id: 'desc' }],

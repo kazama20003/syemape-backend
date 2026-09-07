@@ -35,6 +35,7 @@ export class RegistrarActivoDto {
   codigo: string;
   nombre: string;
   tipo: string;
+  subtipo?: string;
   descripcion?: string;
   estadoOperativo?: string;
   fechaAdquisicion?: string;
@@ -50,6 +51,7 @@ export class ActualizarActivoDto {
   codigo?: string;
   nombre?: string;
   tipo?: string;
+  subtipo?: string;
   descripcion?: string;
   estadoOperativo?: string;
   fechaAdquisicion?: string;
@@ -182,6 +184,7 @@ export class RegistrarActivoUseCase {
       codigo,
       nombre: exigirTexto(dto.nombre, 'nombre'),
       tipo,
+      subtipo: aTextoOpcional(dto.subtipo),
       descripcion: aTextoOpcional(dto.descripcion),
       estadoOperativo: resolverEstado(
         dto.estadoOperativo,
@@ -306,6 +309,7 @@ export class ActualizarActivoUseCase {
           ? undefined
           : exigirTexto(dto.nombre, 'nombre'),
       tipo,
+      subtipo: dto.subtipo === undefined ? undefined : aTextoOpcional(dto.subtipo),
       descripcion:
         dto.descripcion === undefined
           ? undefined

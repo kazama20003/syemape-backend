@@ -50,6 +50,6 @@ export interface DocumentoRepository {
   findById(id: number): Promise<DocumentoProps | null>;
   listarPorPadre(padreId: number): Promise<DocumentoProps[]>;
   crear(data: CrearDocumentoData): Promise<DocumentoProps>;
-  actualizar(id: number, data: ActualizarDocumentoData): Promise<DocumentoProps>;
-  anular(id: number, usuarioModificacion: string): Promise<DocumentoProps>;
+  actualizar(padreId: number, id: number, data: ActualizarDocumentoData): Promise<DocumentoProps | null>;
+  anular(padreId: number, id: number, usuarioModificacion: string): Promise<DocumentoProps | null>;
 }

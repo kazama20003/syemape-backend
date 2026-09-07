@@ -2324,6 +2324,7 @@ export const ActivoScalarFieldEnum = {
   codigo: 'codigo',
   nombre: 'nombre',
   tipo: 'tipo',
+  subtipo: 'subtipo',
   descripcion: 'descripcion',
   estadoOperativo: 'estadoOperativo',
   fechaAdquisicion: 'fechaAdquisicion',

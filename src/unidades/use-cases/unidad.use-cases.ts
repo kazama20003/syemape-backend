@@ -55,6 +55,26 @@ function throwEstadoActivoInvalido(valor: unknown): never {
   );
 }
 
+function numeroNoNegativo(valor: unknown, campo: string, entero = false): number | null {
+  if (valor === undefined || valor === null || valor === '') return null;
+  const numero = aNumeroOpcional(valor);
+  if (numero === null || numero < 0 || (entero && !Number.isInteger(numero))) throw new DomainValidationError(`El campo "${campo}" debe ser ${entero ? 'un entero' : 'un numero'} no negativo.`, campo, 'INVALIDO', valor);
+  return numero;
+}
+
+function anioRazonable(valor: unknown, campo: string): number | null {
+  const anio = numeroNoNegativo(valor, campo, true);
+  if (anio !== null && (anio < 1900 || anio > new Date().getFullYear() + 1)) throw new DomainValidationError(`El campo "${campo}" debe estar entre 1900 y el proximo año.`, campo, 'INVALIDO', valor);
+  return anio;
+}
+
+function fechaValida(valor: unknown, campo: string): Date | null {
+  if (valor === undefined || valor === null || valor === '') return null;
+  const fecha = aFechaOpcional(valor);
+  if (!fecha) throw new DomainValidationError(`El campo "${campo}" contiene una fecha invalida.`, campo, 'INVALIDO', valor);
+  return fecha;
+}
+
 export class RegistrarUnidadDto {
   placa: string;
   clase: string;
@@ -117,7 +137,6 @@ export class ActualizarUnidadDto {
   tipoCarroceria?: string;
   numeroSerieCarroceria?: string;
   tipoCombustible?: string;
-  kilometraje?: number;
   ultimoMantenimientoFecha?: string;
   ultimoMantenimientoKilometraje?: number;
   proximoMantenimientoFecha?: string;
@@ -179,16 +198,16 @@ function camposComunes(
     ),
     marca: val('marca', () => aTextoOpcional(dto.marca)),
     modelo: val('modelo', () => aTextoOpcional(dto.modelo)),
-    anio: val('anio', () => aNumeroOpcional(dto.anio)),
+    anio: val('anio', () => anioRazonable(dto.anio, 'anio')),
     anioFabricacion: val('anioFabricacion', () =>
-      aNumeroOpcional(dto.anioFabricacion),
+      anioRazonable(dto.anioFabricacion, 'anioFabricacion'),
     ),
     color: val('color', () => aTextoOpcional(dto.color)),
-    numeroEjes: val('numeroEjes', () => aNumeroOpcional(dto.numeroEjes)),
+    numeroEjes: val('numeroEjes', () => numeroNoNegativo(dto.numeroEjes, 'numeroEjes', true)),
     numeroMotor: val('numeroMotor', () => aTextoOpcional(dto.numeroMotor)),
     numeroVin: val('numeroVin', () => aTextoOpcional(dto.numeroVin)),
     registroMtc: val('registroMtc', () => aTextoOpcional(dto.registroMtc)),
-    mtcVigencia: val('mtcVigencia', () => aFechaOpcional(dto.mtcVigencia)),
+    mtcVigencia: val('mtcVigencia', () => fechaValida(dto.mtcVigencia, 'mtcVigencia')),
     materialesPeligrosos: val('materialesPeligrosos', () =>
       aTextoOpcional(dto.materialesPeligrosos),
     ),
@@ -197,17 +216,17 @@ function camposComunes(
       aTextoOpcional(dto.clienteAsociado),
     ),
     capacidadCarga: val('capacidadCarga', () =>
-      aNumeroOpcional(dto.capacidadCarga),
+      numeroNoNegativo(dto.capacidadCarga, 'capacidadCarga'),
     ),
     pesoBrutoVehicular: val('pesoBrutoVehicular', () =>
-      aNumeroOpcional(dto.pesoBrutoVehicular),
+      numeroNoNegativo(dto.pesoBrutoVehicular, 'pesoBrutoVehicular'),
     ),
-    tara: val('tara', () => aNumeroOpcional(dto.tara)),
+    tara: val('tara', () => numeroNoNegativo(dto.tara, 'tara')),
     capacidadPasajeros: val('capacidadPasajeros', () =>
-      aNumeroOpcional(dto.capacidadPasajeros),
+      numeroNoNegativo(dto.capacidadPasajeros, 'capacidadPasajeros', true),
     ),
     volumenCarga: val('volumenCarga', () =>
-      aNumeroOpcional(dto.volumenCarga),
+      numeroNoNegativo(dto.volumenCarga, 'volumenCarga'),
     ),
     tipoCarroceria: val('tipoCarroceria', () =>
       aTextoOpcional(dto.tipoCarroceria),
@@ -218,24 +237,29 @@ function camposComunes(
     tipoCombustible: val('tipoCombustible', () =>
       aTextoOpcional(dto.tipoCombustible),
     ),
-    kilometraje: val('kilometraje', () => aNumeroOpcional(dto.kilometraje)),
     ultimoMantenimientoFecha: val('ultimoMantenimientoFecha', () =>
-      aFechaOpcional(dto.ultimoMantenimientoFecha),
+      fechaValida(dto.ultimoMantenimientoFecha, 'ultimoMantenimientoFecha'),
     ),
     ultimoMantenimientoKilometraje: val('ultimoMantenimientoKilometraje', () =>
-      aNumeroOpcional(dto.ultimoMantenimientoKilometraje),
+      numeroNoNegativo(dto.ultimoMantenimientoKilometraje, 'ultimoMantenimientoKilometraje', true),
     ),
     proximoMantenimientoFecha: val('proximoMantenimientoFecha', () =>
-      aFechaOpcional(dto.proximoMantenimientoFecha),
+      fechaValida(dto.proximoMantenimientoFecha, 'proximoMantenimientoFecha'),
     ),
     proximoMantenimientoKilometraje: val('proximoMantenimientoKilometraje', () =>
-      aNumeroOpcional(dto.proximoMantenimientoKilometraje),
+      numeroNoNegativo(dto.proximoMantenimientoKilometraje, 'proximoMantenimientoKilometraje', true),
     ),
     mantenimientoObservacion: val('mantenimientoObservacion', () =>
       aTextoOpcional(dto.mantenimientoObservacion),
     ),
     fotos: val('fotos', () => limpiarFotos(dto.fotos)),
   };
+}
+
+function validarMantenimiento(data: Pick<UnidadProps, 'kilometraje' | 'ultimoMantenimientoFecha' | 'ultimoMantenimientoKilometraje' | 'proximoMantenimientoFecha' | 'proximoMantenimientoKilometraje'>): void {
+  if (data.ultimoMantenimientoFecha && data.proximoMantenimientoFecha && data.ultimoMantenimientoFecha > data.proximoMantenimientoFecha) throw new DomainValidationError('El proximo mantenimiento no puede ser anterior al ultimo.', 'proximoMantenimientoFecha', 'ORDEN_INVALIDO');
+  const minimo = Math.max(data.kilometraje ?? 0, data.ultimoMantenimientoKilometraje ?? 0);
+  if (data.proximoMantenimientoKilometraje !== null && data.proximoMantenimientoKilometraje < minimo) throw new DomainValidationError('El proximo kilometraje de mantenimiento no puede ser menor al kilometraje actual o ultimo mantenimiento.', 'proximoMantenimientoKilometraje', 'MENOR_AL_ACTUAL');
 }
 
 @Injectable()
@@ -251,6 +275,7 @@ export class RegistrarUnidadUseCase {
       dto.estadoUnidad,
       EstadoUnidad.OPERATIVA,
     );
+    const kilometrajeInicial = numeroNoNegativo(dto.kilometraje, 'kilometraje', true);
 
     const existente = await this.unidades.findByPlacaActiva(placa);
     if (existente) {
@@ -262,20 +287,16 @@ export class RegistrarUnidadUseCase {
       );
     }
 
+    const comunes = camposComunes(dto, false) as Omit<CrearUnidadData, 'placa' | 'placaNormalizada' | 'clase' | 'estadoUnidad' | 'usuarioCreacion'>;
+    validarMantenimiento({ ...(comunes as UnidadProps), kilometraje: kilometrajeInicial });
     return this.unidades.crear({
       placa: dto.placa.trim(),
       placaNormalizada: placa,
       clase,
       estadoUnidad,
+      ...comunes,
+      kilometraje: kilometrajeInicial,
       usuarioCreacion: actor,
-      ...(camposComunes(dto, false) as Omit<
-        CrearUnidadData,
-        | 'placa'
-        | 'placaNormalizada'
-        | 'clase'
-        | 'estadoUnidad'
-        | 'usuarioCreacion'
-      >),
     });
   }
 }
@@ -388,6 +409,13 @@ export class ActualizarUnidadUseCase {
       usuarioModificacion: actor,
       ...camposComunes(dto, true),
     };
+    validarMantenimiento({
+      kilometraje: unidad.kilometraje,
+      ultimoMantenimientoFecha: data.ultimoMantenimientoFecha === undefined ? unidad.ultimoMantenimientoFecha : data.ultimoMantenimientoFecha,
+      ultimoMantenimientoKilometraje: data.ultimoMantenimientoKilometraje === undefined ? unidad.ultimoMantenimientoKilometraje : data.ultimoMantenimientoKilometraje,
+      proximoMantenimientoFecha: data.proximoMantenimientoFecha === undefined ? unidad.proximoMantenimientoFecha : data.proximoMantenimientoFecha,
+      proximoMantenimientoKilometraje: data.proximoMantenimientoKilometraje === undefined ? unidad.proximoMantenimientoKilometraje : data.proximoMantenimientoKilometraje,
+    });
 
     return this.unidades.actualizar(id, data);
   }
