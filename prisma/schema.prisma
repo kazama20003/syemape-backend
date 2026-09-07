@@ -353,6 +353,10 @@ model Personal {
   tipoDocumento              String       @default("DNI") @map("tipo_documento")
   numeroDocumento            String       @map("numero_documento")
   numeroDocumentoNormalizado String       @map("numero_documento_normalizado")
+  primerNombre               String       @map("primer_nombre")
+  segundoNombre              String?      @map("segundo_nombre")
+  primerApellido             String       @map("primer_apellido")
+  segundoApellido            String?      @map("segundo_apellido")
   nombres                    String
   apellidos                  String
   tipo                       TipoPersonal @default(CONDUCTOR)

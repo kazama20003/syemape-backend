@@ -45,8 +45,10 @@ function throwEstadoActivoInvalido(valor: unknown): never {
 export class RegistrarPersonalDto {
   tipoDocumento?: string;
   numeroDocumento: string;
-  nombres: string;
-  apellidos: string;
+  primerNombre: string;
+  segundoNombre?: string;
+  primerApellido: string;
+  segundoApellido?: string;
   tipo?: string;
   apelativo?: string;
   telefono?: string;
@@ -58,8 +60,10 @@ export class RegistrarPersonalDto {
 export class ActualizarPersonalDto {
   tipoDocumento?: string;
   numeroDocumento?: string;
-  nombres?: string;
-  apellidos?: string;
+  primerNombre?: string;
+  segundoNombre?: string;
+  primerApellido?: string;
+  segundoApellido?: string;
   tipo?: string;
   apelativo?: string;
   telefono?: string;
@@ -79,7 +83,11 @@ function exigirTexto(valor: unknown, campo: string): string {
       valor ?? null,
     );
   }
-  return texto;
+  return texto.replace(/\s+/g, ' ').toUpperCase();
+}
+
+function unirNombre(primer: string, segundo: string | null): string {
+  return [primer, segundo].filter(Boolean).join(' ');
 }
 
 function resolverTipo(valor: unknown, porDefecto: TipoPersonal): TipoPersonal {
@@ -105,8 +113,10 @@ export class RegistrarPersonalUseCase {
 
   async execute(dto: RegistrarPersonalDto): Promise<PersonalProps> {
     const documento = exigirDocumento(dto.numeroDocumento);
-    const nombres = exigirTexto(dto.nombres, 'nombres');
-    const apellidos = exigirTexto(dto.apellidos, 'apellidos');
+    const primerNombre = exigirTexto(dto.primerNombre, 'primerNombre');
+    const segundoNombre = aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null;
+    const primerApellido = exigirTexto(dto.primerApellido, 'primerApellido');
+    const segundoApellido = aTextoOpcional(dto.segundoApellido)?.toUpperCase() ?? null;
     const tipo = resolverTipo(dto.tipo, TipoPersonal.CONDUCTOR);
 
     const existente = await this.personal.findByDocumentoActivo(documento);
@@ -123,8 +133,12 @@ export class RegistrarPersonalUseCase {
       tipoDocumento: aTextoOpcional(dto.tipoDocumento) ?? 'DNI',
       numeroDocumento: dto.numeroDocumento.trim(),
       numeroDocumentoNormalizado: documento,
-      nombres,
-      apellidos,
+      primerNombre,
+      segundoNombre,
+      primerApellido,
+      segundoApellido,
+      nombres: unirNombre(primerNombre, segundoNombre),
+      apellidos: unirNombre(primerApellido, segundoApellido),
       tipo,
       apelativo: aTextoOpcional(dto.apelativo),
       telefono: aTextoOpcional(dto.telefono),
@@ -221,6 +235,28 @@ export class ActualizarPersonalUseCase {
       }
     }
 
+    const primerNombre =
+      dto.primerNombre === undefined
+        ? persona.primerNombre
+        : exigirTexto(dto.primerNombre, 'primerNombre');
+    const segundoNombre =
+      dto.segundoNombre === undefined
+        ? persona.segundoNombre
+        : aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null;
+    const primerApellido =
+      dto.primerApellido === undefined
+        ? persona.primerApellido
+        : exigirTexto(dto.primerApellido, 'primerApellido');
+    const segundoApellido =
+      dto.segundoApellido === undefined
+        ? persona.segundoApellido
+        : aTextoOpcional(dto.segundoApellido)?.toUpperCase() ?? null;
+    const actualizarNombre =
+      dto.primerNombre !== undefined ||
+      dto.segundoNombre !== undefined ||
+      dto.primerApellido !== undefined ||
+      dto.segundoApellido !== undefined;
+
     return this.personal.actualizar(id, {
       tipoDocumento:
         dto.tipoDocumento !== undefined
@@ -228,12 +264,12 @@ export class ActualizarPersonalUseCase {
           : undefined,
       numeroDocumento,
       numeroDocumentoNormalizado,
-      nombres:
-        dto.nombres !== undefined ? exigirTexto(dto.nombres, 'nombres') : undefined,
-      apellidos:
-        dto.apellidos !== undefined
-          ? exigirTexto(dto.apellidos, 'apellidos')
-          : undefined,
+      primerNombre: dto.primerNombre === undefined ? undefined : primerNombre,
+      segundoNombre: dto.segundoNombre === undefined ? undefined : segundoNombre,
+      primerApellido: dto.primerApellido === undefined ? undefined : primerApellido,
+      segundoApellido: dto.segundoApellido === undefined ? undefined : segundoApellido,
+      nombres: actualizarNombre ? unirNombre(primerNombre, segundoNombre) : undefined,
+      apellidos: actualizarNombre ? unirNombre(primerApellido, segundoApellido) : undefined,
       tipo: dto.tipo !== undefined ? resolverTipo(dto.tipo, persona.tipo) : undefined,
       apelativo:
         dto.apelativo !== undefined ? aTextoOpcional(dto.apelativo) : undefined,

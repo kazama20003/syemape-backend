@@ -40,6 +40,10 @@ export type PersonalMinAggregateOutputType = {
   tipoDocumento: string | null
   numeroDocumento: string | null
   numeroDocumentoNormalizado: string | null
+  primerNombre: string | null
+  segundoNombre: string | null
+  primerApellido: string | null
+  segundoApellido: string | null
   nombres: string | null
   apellidos: string | null
   tipo: $Enums.TipoPersonal | null
@@ -62,6 +66,10 @@ export type PersonalMaxAggregateOutputType = {
   tipoDocumento: string | null
   numeroDocumento: string | null
   numeroDocumentoNormalizado: string | null
+  primerNombre: string | null
+  segundoNombre: string | null
+  primerApellido: string | null
+  segundoApellido: string | null
   nombres: string | null
   apellidos: string | null
   tipo: $Enums.TipoPersonal | null
@@ -84,6 +92,10 @@ export type PersonalCountAggregateOutputType = {
   tipoDocumento: number
   numeroDocumento: number
   numeroDocumentoNormalizado: number
+  primerNombre: number
+  segundoNombre: number
+  primerApellido: number
+  segundoApellido: number
   nombres: number
   apellidos: number
   tipo: number
@@ -116,6 +128,10 @@ export type PersonalMinAggregateInputType = {
   tipoDocumento?: true
   numeroDocumento?: true
   numeroDocumentoNormalizado?: true
+  primerNombre?: true
+  segundoNombre?: true
+  primerApellido?: true
+  segundoApellido?: true
   nombres?: true
   apellidos?: true
   tipo?: true
@@ -138,6 +154,10 @@ export type PersonalMaxAggregateInputType = {
   tipoDocumento?: true
   numeroDocumento?: true
   numeroDocumentoNormalizado?: true
+  primerNombre?: true
+  segundoNombre?: true
+  primerApellido?: true
+  segundoApellido?: true
   nombres?: true
   apellidos?: true
   tipo?: true
@@ -160,6 +180,10 @@ export type PersonalCountAggregateInputType = {
   tipoDocumento?: true
   numeroDocumento?: true
   numeroDocumentoNormalizado?: true
+  primerNombre?: true
+  segundoNombre?: true
+  primerApellido?: true
+  segundoApellido?: true
   nombres?: true
   apellidos?: true
   tipo?: true
@@ -269,6 +293,10 @@ export type PersonalGroupByOutputType = {
   tipoDocumento: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre: string | null
+  primerApellido: string
+  segundoApellido: string | null
   nombres: string
   apellidos: string
   tipo: $Enums.TipoPersonal
@@ -314,6 +342,10 @@ export type PersonalWhereInput = {
   tipoDocumento?: Prisma.StringFilter<"Personal"> | string
   numeroDocumento?: Prisma.StringFilter<"Personal"> | string
   numeroDocumentoNormalizado?: Prisma.StringFilter<"Personal"> | string
+  primerNombre?: Prisma.StringFilter<"Personal"> | string
+  segundoNombre?: Prisma.StringNullableFilter<"Personal"> | string | null
+  primerApellido?: Prisma.StringFilter<"Personal"> | string
+  segundoApellido?: Prisma.StringNullableFilter<"Personal"> | string | null
   nombres?: Prisma.StringFilter<"Personal"> | string
   apellidos?: Prisma.StringFilter<"Personal"> | string
   tipo?: Prisma.EnumTipoPersonalFilter<"Personal"> | $Enums.TipoPersonal
@@ -344,6 +376,10 @@ export type PersonalOrderByWithRelationInput = {
   tipoDocumento?: Prisma.SortOrder
   numeroDocumento?: Prisma.SortOrder
   numeroDocumentoNormalizado?: Prisma.SortOrder
+  primerNombre?: Prisma.SortOrder
+  segundoNombre?: Prisma.SortOrderInput | Prisma.SortOrder
+  primerApellido?: Prisma.SortOrder
+  segundoApellido?: Prisma.SortOrderInput | Prisma.SortOrder
   nombres?: Prisma.SortOrder
   apellidos?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
@@ -377,6 +413,10 @@ export type PersonalWhereUniqueInput = Prisma.AtLeast<{
   tipoDocumento?: Prisma.StringFilter<"Personal"> | string
   numeroDocumento?: Prisma.StringFilter<"Personal"> | string
   numeroDocumentoNormalizado?: Prisma.StringFilter<"Personal"> | string
+  primerNombre?: Prisma.StringFilter<"Personal"> | string
+  segundoNombre?: Prisma.StringNullableFilter<"Personal"> | string | null
+  primerApellido?: Prisma.StringFilter<"Personal"> | string
+  segundoApellido?: Prisma.StringNullableFilter<"Personal"> | string | null
   nombres?: Prisma.StringFilter<"Personal"> | string
   apellidos?: Prisma.StringFilter<"Personal"> | string
   tipo?: Prisma.EnumTipoPersonalFilter<"Personal"> | $Enums.TipoPersonal
@@ -407,6 +447,10 @@ export type PersonalOrderByWithAggregationInput = {
   tipoDocumento?: Prisma.SortOrder
   numeroDocumento?: Prisma.SortOrder
   numeroDocumentoNormalizado?: Prisma.SortOrder
+  primerNombre?: Prisma.SortOrder
+  segundoNombre?: Prisma.SortOrderInput | Prisma.SortOrder
+  primerApellido?: Prisma.SortOrder
+  segundoApellido?: Prisma.SortOrderInput | Prisma.SortOrder
   nombres?: Prisma.SortOrder
   apellidos?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
@@ -437,6 +481,10 @@ export type PersonalScalarWhereWithAggregatesInput = {
   tipoDocumento?: Prisma.StringWithAggregatesFilter<"Personal"> | string
   numeroDocumento?: Prisma.StringWithAggregatesFilter<"Personal"> | string
   numeroDocumentoNormalizado?: Prisma.StringWithAggregatesFilter<"Personal"> | string
+  primerNombre?: Prisma.StringWithAggregatesFilter<"Personal"> | string
+  segundoNombre?: Prisma.StringNullableWithAggregatesFilter<"Personal"> | string | null
+  primerApellido?: Prisma.StringWithAggregatesFilter<"Personal"> | string
+  segundoApellido?: Prisma.StringNullableWithAggregatesFilter<"Personal"> | string | null
   nombres?: Prisma.StringWithAggregatesFilter<"Personal"> | string
   apellidos?: Prisma.StringWithAggregatesFilter<"Personal"> | string
   tipo?: Prisma.EnumTipoPersonalWithAggregatesFilter<"Personal"> | $Enums.TipoPersonal
@@ -458,6 +506,10 @@ export type PersonalCreateInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -488,6 +540,10 @@ export type PersonalUncheckedCreateInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -517,6 +573,10 @@ export type PersonalUpdateInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -547,6 +607,10 @@ export type PersonalUncheckedUpdateInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -577,6 +641,10 @@ export type PersonalCreateManyInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -598,6 +666,10 @@ export type PersonalUpdateManyMutationInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -620,6 +692,10 @@ export type PersonalUncheckedUpdateManyInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -647,6 +723,10 @@ export type PersonalCountOrderByAggregateInput = {
   tipoDocumento?: Prisma.SortOrder
   numeroDocumento?: Prisma.SortOrder
   numeroDocumentoNormalizado?: Prisma.SortOrder
+  primerNombre?: Prisma.SortOrder
+  segundoNombre?: Prisma.SortOrder
+  primerApellido?: Prisma.SortOrder
+  segundoApellido?: Prisma.SortOrder
   nombres?: Prisma.SortOrder
   apellidos?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
@@ -673,6 +753,10 @@ export type PersonalMaxOrderByAggregateInput = {
   tipoDocumento?: Prisma.SortOrder
   numeroDocumento?: Prisma.SortOrder
   numeroDocumentoNormalizado?: Prisma.SortOrder
+  primerNombre?: Prisma.SortOrder
+  segundoNombre?: Prisma.SortOrder
+  primerApellido?: Prisma.SortOrder
+  segundoApellido?: Prisma.SortOrder
   nombres?: Prisma.SortOrder
   apellidos?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
@@ -695,6 +779,10 @@ export type PersonalMinOrderByAggregateInput = {
   tipoDocumento?: Prisma.SortOrder
   numeroDocumento?: Prisma.SortOrder
   numeroDocumentoNormalizado?: Prisma.SortOrder
+  primerNombre?: Prisma.SortOrder
+  segundoNombre?: Prisma.SortOrder
+  primerApellido?: Prisma.SortOrder
+  segundoApellido?: Prisma.SortOrder
   nombres?: Prisma.SortOrder
   apellidos?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
@@ -849,6 +937,10 @@ export type PersonalCreateWithoutActivosResponsablesInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -878,6 +970,10 @@ export type PersonalUncheckedCreateWithoutActivosResponsablesInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -922,6 +1018,10 @@ export type PersonalUpdateWithoutActivosResponsablesInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -951,6 +1051,10 @@ export type PersonalUncheckedUpdateWithoutActivosResponsablesInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -979,6 +1083,10 @@ export type PersonalCreateWithoutManifiestosConducidosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1008,6 +1116,10 @@ export type PersonalUncheckedCreateWithoutManifiestosConducidosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1041,6 +1153,10 @@ export type PersonalCreateWithoutManifiestosSupervisadosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1070,6 +1186,10 @@ export type PersonalUncheckedCreateWithoutManifiestosSupervisadosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1114,6 +1234,10 @@ export type PersonalUpdateWithoutManifiestosConducidosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1143,6 +1267,10 @@ export type PersonalUncheckedUpdateWithoutManifiestosConducidosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1182,6 +1310,10 @@ export type PersonalUpdateWithoutManifiestosSupervisadosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1211,6 +1343,10 @@ export type PersonalUncheckedUpdateWithoutManifiestosSupervisadosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1239,6 +1375,10 @@ export type PersonalCreateWithoutTripulacionesInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1268,6 +1408,10 @@ export type PersonalUncheckedCreateWithoutTripulacionesInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1312,6 +1456,10 @@ export type PersonalUpdateWithoutTripulacionesInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1341,6 +1489,10 @@ export type PersonalUncheckedUpdateWithoutTripulacionesInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1369,6 +1521,10 @@ export type PersonalCreateWithoutDocumentosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1398,6 +1554,10 @@ export type PersonalUncheckedCreateWithoutDocumentosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1442,6 +1602,10 @@ export type PersonalUpdateWithoutDocumentosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1471,6 +1635,10 @@ export type PersonalUncheckedUpdateWithoutDocumentosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1499,6 +1667,10 @@ export type PersonalCreateWithoutInspeccionesInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1528,6 +1700,10 @@ export type PersonalUncheckedCreateWithoutInspeccionesInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1572,6 +1748,10 @@ export type PersonalUpdateWithoutInspeccionesInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1601,6 +1781,10 @@ export type PersonalUncheckedUpdateWithoutInspeccionesInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1629,6 +1813,10 @@ export type PersonalCreateWithoutTurnosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1658,6 +1846,10 @@ export type PersonalUncheckedCreateWithoutTurnosInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1702,6 +1894,10 @@ export type PersonalUpdateWithoutTurnosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1731,6 +1927,10 @@ export type PersonalUncheckedUpdateWithoutTurnosInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1759,6 +1959,10 @@ export type PersonalCreateWithoutUsuarioInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1788,6 +1992,10 @@ export type PersonalUncheckedCreateWithoutUsuarioInput = {
   tipoDocumento?: string
   numeroDocumento: string
   numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
   nombres: string
   apellidos: string
   tipo?: $Enums.TipoPersonal
@@ -1832,6 +2040,10 @@ export type PersonalUpdateWithoutUsuarioInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1861,6 +2073,10 @@ export type PersonalUncheckedUpdateWithoutUsuarioInput = {
   tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
   numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nombres?: Prisma.StringFieldUpdateOperationsInput | string
   apellidos?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
@@ -1975,6 +2191,10 @@ export type PersonalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   tipoDocumento?: boolean
   numeroDocumento?: boolean
   numeroDocumentoNormalizado?: boolean
+  primerNombre?: boolean
+  segundoNombre?: boolean
+  primerApellido?: boolean
+  segundoApellido?: boolean
   nombres?: boolean
   apellidos?: boolean
   tipo?: boolean
@@ -2006,6 +2226,10 @@ export type PersonalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   tipoDocumento?: boolean
   numeroDocumento?: boolean
   numeroDocumentoNormalizado?: boolean
+  primerNombre?: boolean
+  segundoNombre?: boolean
+  primerApellido?: boolean
+  segundoApellido?: boolean
   nombres?: boolean
   apellidos?: boolean
   tipo?: boolean
@@ -2028,6 +2252,10 @@ export type PersonalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   tipoDocumento?: boolean
   numeroDocumento?: boolean
   numeroDocumentoNormalizado?: boolean
+  primerNombre?: boolean
+  segundoNombre?: boolean
+  primerApellido?: boolean
+  segundoApellido?: boolean
   nombres?: boolean
   apellidos?: boolean
   tipo?: boolean
@@ -2050,6 +2278,10 @@ export type PersonalSelectScalar = {
   tipoDocumento?: boolean
   numeroDocumento?: boolean
   numeroDocumentoNormalizado?: boolean
+  primerNombre?: boolean
+  segundoNombre?: boolean
+  primerApellido?: boolean
+  segundoApellido?: boolean
   nombres?: boolean
   apellidos?: boolean
   tipo?: boolean
@@ -2066,7 +2298,7 @@ export type PersonalSelectScalar = {
   usuarioModificacion?: boolean
 }
 
-export type PersonalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "tipoDocumento" | "numeroDocumento" | "numeroDocumentoNormalizado" | "nombres" | "apellidos" | "tipo" | "apelativo" | "telefono" | "licenciaConducir" | "categoriaLicencia" | "licenciaVencimiento" | "estadoActivo" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["personal"]>
+export type PersonalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "tipoDocumento" | "numeroDocumento" | "numeroDocumentoNormalizado" | "primerNombre" | "segundoNombre" | "primerApellido" | "segundoApellido" | "nombres" | "apellidos" | "tipo" | "apelativo" | "telefono" | "licenciaConducir" | "categoriaLicencia" | "licenciaVencimiento" | "estadoActivo" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["personal"]>
 export type PersonalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manifiestosConducidos?: boolean | Prisma.Personal$manifiestosConducidosArgs<ExtArgs>
   manifiestosSupervisados?: boolean | Prisma.Personal$manifiestosSupervisadosArgs<ExtArgs>
@@ -2099,6 +2331,10 @@ export type $PersonalPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     tipoDocumento: string
     numeroDocumento: string
     numeroDocumentoNormalizado: string
+    primerNombre: string
+    segundoNombre: string | null
+    primerApellido: string
+    segundoApellido: string | null
     nombres: string
     apellidos: string
     tipo: $Enums.TipoPersonal
@@ -2549,6 +2785,10 @@ export interface PersonalFieldRefs {
   readonly tipoDocumento: Prisma.FieldRef<"Personal", 'String'>
   readonly numeroDocumento: Prisma.FieldRef<"Personal", 'String'>
   readonly numeroDocumentoNormalizado: Prisma.FieldRef<"Personal", 'String'>
+  readonly primerNombre: Prisma.FieldRef<"Personal", 'String'>
+  readonly segundoNombre: Prisma.FieldRef<"Personal", 'String'>
+  readonly primerApellido: Prisma.FieldRef<"Personal", 'String'>
+  readonly segundoApellido: Prisma.FieldRef<"Personal", 'String'>
   readonly nombres: Prisma.FieldRef<"Personal", 'String'>
   readonly apellidos: Prisma.FieldRef<"Personal", 'String'>
   readonly tipo: Prisma.FieldRef<"Personal", 'TipoPersonal'>

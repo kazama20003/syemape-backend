@@ -9,6 +9,10 @@ export interface PersonalProps {
   publicId: string;
   tipoDocumento: string;
   numeroDocumento: string;
+  primerNombre: string;
+  segundoNombre: string | null;
+  primerApellido: string;
+  segundoApellido: string | null;
   nombres: string;
   apellidos: string;
   tipo: TipoPersonal;
@@ -25,6 +29,10 @@ export interface CrearPersonalData {
   tipoDocumento: string;
   numeroDocumento: string;
   numeroDocumentoNormalizado: string;
+  primerNombre: string;
+  segundoNombre: string | null;
+  primerApellido: string;
+  segundoApellido: string | null;
   nombres: string;
   apellidos: string;
   tipo: TipoPersonal;
@@ -40,6 +48,10 @@ export interface ActualizarPersonalData {
   tipoDocumento?: string;
   numeroDocumento?: string;
   numeroDocumentoNormalizado?: string;
+  primerNombre?: string;
+  segundoNombre?: string | null;
+  primerApellido?: string;
+  segundoApellido?: string | null;
   nombres?: string;
   apellidos?: string;
   tipo?: TipoPersonal;
