@@ -54,8 +54,11 @@ export const ModelName = {
   Cliente: 'Cliente',
   Ubicacion: 'Ubicacion',
   TipoServicio: 'TipoServicio',
+  Activo: 'Activo',
   Unidad: 'Unidad',
   Personal: 'Personal',
+  AsignacionGpsUnidad: 'AsignacionGpsUnidad',
+  LecturaKilometrajeUnidad: 'LecturaKilometrajeUnidad',
   Ruta: 'Ruta',
   Manifiesto: 'Manifiesto',
   ManifiestoCarga: 'ManifiestoCarga',
@@ -153,9 +156,35 @@ export const TipoServicioScalarFieldEnum = {
 export type TipoServicioScalarFieldEnum = (typeof TipoServicioScalarFieldEnum)[keyof typeof TipoServicioScalarFieldEnum]
 
 
+export const ActivoScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  tipo: 'tipo',
+  descripcion: 'descripcion',
+  estadoOperativo: 'estadoOperativo',
+  fechaAdquisicion: 'fechaAdquisicion',
+  valorAdquisicion: 'valorAdquisicion',
+  vidaUtilMeses: 'vidaUtilMeses',
+  proveedor: 'proveedor',
+  numeroSerie: 'numeroSerie',
+  responsableId: 'responsableId',
+  ubicacionHabitualId: 'ubicacionHabitualId',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type ActivoScalarFieldEnum = (typeof ActivoScalarFieldEnum)[keyof typeof ActivoScalarFieldEnum]
+
+
 export const UnidadScalarFieldEnum = {
   id: 'id',
   publicId: 'publicId',
+  activoId: 'activoId',
   placa: 'placa',
   placaNormalizada: 'placaNormalizada',
   clase: 'clase',
@@ -175,8 +204,19 @@ export const UnidadScalarFieldEnum = {
   cuenta: 'cuenta',
   clienteAsociado: 'clienteAsociado',
   capacidadCarga: 'capacidadCarga',
+  pesoBrutoVehicular: 'pesoBrutoVehicular',
+  tara: 'tara',
+  capacidadPasajeros: 'capacidadPasajeros',
+  volumenCarga: 'volumenCarga',
+  tipoCarroceria: 'tipoCarroceria',
+  numeroSerieCarroceria: 'numeroSerieCarroceria',
   tipoCombustible: 'tipoCombustible',
   kilometraje: 'kilometraje',
+  ultimoMantenimientoFecha: 'ultimoMantenimientoFecha',
+  ultimoMantenimientoKilometraje: 'ultimoMantenimientoKilometraje',
+  proximoMantenimientoFecha: 'proximoMantenimientoFecha',
+  proximoMantenimientoKilometraje: 'proximoMantenimientoKilometraje',
+  mantenimientoObservacion: 'mantenimientoObservacion',
   fotos: 'fotos',
   estadoUnidad: 'estadoUnidad',
   estadoActivo: 'estadoActivo',
@@ -213,6 +253,38 @@ export const PersonalScalarFieldEnum = {
 } as const
 
 export type PersonalScalarFieldEnum = (typeof PersonalScalarFieldEnum)[keyof typeof PersonalScalarFieldEnum]
+
+
+export const AsignacionGpsUnidadScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  unidadId: 'unidadId',
+  activoId: 'activoId',
+  fechaInicio: 'fechaInicio',
+  fechaFin: 'fechaFin',
+  observacion: 'observacion',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type AsignacionGpsUnidadScalarFieldEnum = (typeof AsignacionGpsUnidadScalarFieldEnum)[keyof typeof AsignacionGpsUnidadScalarFieldEnum]
+
+
+export const LecturaKilometrajeUnidadScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  unidadId: 'unidadId',
+  valor: 'valor',
+  fecha: 'fecha',
+  fuente: 'fuente',
+  observacion: 'observacion',
+  registradoPor: 'registradoPor'
+} as const
+
+export type LecturaKilometrajeUnidadScalarFieldEnum = (typeof LecturaKilometrajeUnidadScalarFieldEnum)[keyof typeof LecturaKilometrajeUnidadScalarFieldEnum]
 
 
 export const RutaScalarFieldEnum = {

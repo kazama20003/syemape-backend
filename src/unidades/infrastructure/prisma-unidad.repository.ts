@@ -12,7 +12,14 @@ import {
   UnidadProps,
   UnidadRepository,
 } from '../domain/repositories/unidad.repository.js';
-import { ClaseUnidad, EstadoUnidad } from '../domain/value-objects/clase-unidad.enum.js';
+import {
+  ClaseUnidad,
+  EstadoUnidad,
+} from '../domain/value-objects/clase-unidad.enum.js';
+import {
+  EstadoOperativoActivo,
+  TipoActivo,
+} from '../../activos/domain/value-objects/activo.enum.js';
 
 const SELECT = {
   id: true,
@@ -35,8 +42,19 @@ const SELECT = {
   cuenta: true,
   clienteAsociado: true,
   capacidadCarga: true,
+  pesoBrutoVehicular: true,
+  tara: true,
+  capacidadPasajeros: true,
+  volumenCarga: true,
+  tipoCarroceria: true,
+  numeroSerieCarroceria: true,
   tipoCombustible: true,
   kilometraje: true,
+  ultimoMantenimientoFecha: true,
+  ultimoMantenimientoKilometraje: true,
+  proximoMantenimientoFecha: true,
+  proximoMantenimientoKilometraje: true,
+  mantenimientoObservacion: true,
   fotos: true,
   estadoUnidad: true,
   estadoActivo: true,
@@ -64,8 +82,19 @@ interface FilaUnidad {
   cuenta: string | null;
   clienteAsociado: string | null;
   capacidadCarga: { toNumber(): number } | null;
+  pesoBrutoVehicular: { toNumber(): number } | null;
+  tara: { toNumber(): number } | null;
+  capacidadPasajeros: number | null;
+  volumenCarga: { toNumber(): number } | null;
+  tipoCarroceria: string | null;
+  numeroSerieCarroceria: string | null;
   tipoCombustible: string | null;
   kilometraje: number | null;
+  ultimoMantenimientoFecha: Date | null;
+  ultimoMantenimientoKilometraje: number | null;
+  proximoMantenimientoFecha: Date | null;
+  proximoMantenimientoKilometraje: number | null;
+  mantenimientoObservacion: string | null;
   fotos: string[];
   estadoUnidad: EstadoUnidad;
   estadoActivo: EstadoActivo;
@@ -94,8 +123,19 @@ function aProps(fila: FilaUnidad): UnidadProps {
     cuenta: fila.cuenta,
     clienteAsociado: fila.clienteAsociado,
     capacidadCarga: fila.capacidadCarga?.toNumber() ?? null,
+    pesoBrutoVehicular: fila.pesoBrutoVehicular?.toNumber() ?? null,
+    tara: fila.tara?.toNumber() ?? null,
+    capacidadPasajeros: fila.capacidadPasajeros,
+    volumenCarga: fila.volumenCarga?.toNumber() ?? null,
+    tipoCarroceria: fila.tipoCarroceria,
+    numeroSerieCarroceria: fila.numeroSerieCarroceria,
     tipoCombustible: fila.tipoCombustible,
     kilometraje: fila.kilometraje,
+    ultimoMantenimientoFecha: fila.ultimoMantenimientoFecha,
+    ultimoMantenimientoKilometraje: fila.ultimoMantenimientoKilometraje,
+    proximoMantenimientoFecha: fila.proximoMantenimientoFecha,
+    proximoMantenimientoKilometraje: fila.proximoMantenimientoKilometraje,
+    mantenimientoObservacion: fila.mantenimientoObservacion,
     fotos: fila.fotos,
     estadoUnidad: fila.estadoUnidad,
     estadoActivo: fila.estadoActivo,
@@ -125,11 +165,33 @@ function datosEscritura(
     cuenta: data.cuenta,
     clienteAsociado: data.clienteAsociado,
     capacidadCarga: data.capacidadCarga,
+    pesoBrutoVehicular: data.pesoBrutoVehicular,
+    tara: data.tara,
+    capacidadPasajeros: data.capacidadPasajeros,
+    volumenCarga: data.volumenCarga,
+    tipoCarroceria: data.tipoCarroceria,
+    numeroSerieCarroceria: data.numeroSerieCarroceria,
     tipoCombustible: data.tipoCombustible,
     kilometraje: data.kilometraje,
+    ultimoMantenimientoFecha: data.ultimoMantenimientoFecha,
+    ultimoMantenimientoKilometraje: data.ultimoMantenimientoKilometraje,
+    proximoMantenimientoFecha: data.proximoMantenimientoFecha,
+    proximoMantenimientoKilometraje: data.proximoMantenimientoKilometraje,
+    mantenimientoObservacion: data.mantenimientoObservacion,
     fotos: data.fotos,
     estadoUnidad: data.estadoUnidad,
   };
+}
+
+function estadoOperativo(estado: EstadoUnidad): EstadoOperativoActivo {
+  switch (estado) {
+    case EstadoUnidad.EN_MANTENIMIENTO:
+      return EstadoOperativoActivo.EN_MANTENIMIENTO;
+    case EstadoUnidad.DE_BAJA:
+      return EstadoOperativoActivo.DE_BAJA;
+    default:
+      return EstadoOperativoActivo.OPERATIVO;
+  }
 }
 
 @Injectable()
@@ -137,7 +199,10 @@ export class PrismaUnidadRepository implements UnidadRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findById(id: number): Promise<UnidadProps | null> {
-    const row = await this.prisma.unidad.findUnique({ where: { id }, select: SELECT });
+    const row = await this.prisma.unidad.findUnique({
+      where: { id },
+      select: SELECT,
+    });
     return row ? aProps(row as FilaUnidad) : null;
   }
 
@@ -149,7 +214,9 @@ export class PrismaUnidadRepository implements UnidadRepository {
     return row ? aProps(row as FilaUnidad) : null;
   }
 
-  async findByPlacaActiva(placaNormalizada: string): Promise<UnidadProps | null> {
+  async findByPlacaActiva(
+    placaNormalizada: string,
+  ): Promise<UnidadProps | null> {
     const row = await this.prisma.unidad.findFirst({
       where: { placaNormalizada, estadoRegistro: EstadoRegistro.ACTIVO },
       select: SELECT,
@@ -166,6 +233,16 @@ export class PrismaUnidadRepository implements UnidadRepository {
         clase: data.clase,
         estadoUnidad: data.estadoUnidad,
         usuarioCreacion: data.usuarioCreacion,
+        activo: {
+          create: {
+            publicId: uuidv7(),
+            codigo: `UNIDAD-${data.placaNormalizada}`,
+            nombre: `Unidad ${data.placa}`,
+            tipo: TipoActivo.UNIDAD,
+            estadoOperativo: estadoOperativo(data.estadoUnidad),
+            usuarioCreacion: data.usuarioCreacion,
+          },
+        },
         ...datosEscritura(data),
       },
       select: SELECT,
@@ -181,7 +258,10 @@ export class PrismaUnidadRepository implements UnidadRepository {
     return aProps(row as FilaUnidad);
   }
 
-  async actualizar(id: number, data: ActualizarUnidadData): Promise<UnidadProps> {
+  async actualizar(
+    id: number,
+    data: ActualizarUnidadData,
+  ): Promise<UnidadProps> {
     const row = await this.prisma.unidad.update({
       where: { id },
       data: {
@@ -190,6 +270,22 @@ export class PrismaUnidadRepository implements UnidadRepository {
         estadoActivo: data.estadoActivo,
         usuarioModificacion: data.usuarioModificacion,
         fechaModificacion: new Date(),
+        activo: {
+          update: {
+            codigo:
+              data.placaNormalizada === undefined
+                ? undefined
+                : `UNIDAD-${data.placaNormalizada}`,
+            nombre:
+              data.placa === undefined ? undefined : `Unidad ${data.placa}`,
+            estadoOperativo:
+              data.estadoUnidad === undefined
+                ? undefined
+                : estadoOperativo(data.estadoUnidad),
+            usuarioModificacion: data.usuarioModificacion,
+            fechaModificacion: new Date(),
+          },
+        },
         ...datosEscritura(data),
       },
       select: SELECT,
@@ -212,6 +308,13 @@ export class PrismaUnidadRepository implements UnidadRepository {
         estadoRegistro: EstadoRegistro.ANULADO,
         usuarioModificacion,
         fechaModificacion: new Date(),
+        activo: {
+          update: {
+            estadoRegistro: EstadoRegistro.ANULADO,
+            usuarioModificacion,
+            fechaModificacion: new Date(),
+          },
+        },
       },
       select: SELECT,
     });

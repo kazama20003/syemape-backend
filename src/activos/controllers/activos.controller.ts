@@ -15,14 +15,14 @@ import type { RespuestaDto } from '../../shared/dto/respuesta.dto.js';
 import { RolUsuario } from '../../auth/domain/usuario.repository.js';
 import { Roles, type UsuarioJwt } from '../../auth/guards/jwt-auth.guard.js';
 import {
-  ActualizarUnidadDto,
-  ActualizarUnidadUseCase,
-  AnularUnidadUseCase,
-  ListarUnidadesUseCase,
-  ObtenerUnidadUseCase,
-  RegistrarUnidadDto,
-  RegistrarUnidadUseCase,
-} from '../use-cases/unidad.use-cases.js';
+  ActualizarActivoDto,
+  ActualizarActivoUseCase,
+  AnularActivoUseCase,
+  ListarActivosUseCase,
+  ObtenerActivoUseCase,
+  RegistrarActivoDto,
+  RegistrarActivoUseCase,
+} from '../use-cases/activo.use-cases.js';
 
 function actorDe(req: Request): string {
   return (
@@ -30,15 +30,14 @@ function actorDe(req: Request): string {
   );
 }
 
-// Maestro de unidades (vehiculos) de la flota.
-@Controller('unidades')
-export class UnidadesController {
+@Controller('activos')
+export class ActivosController {
   constructor(
-    private readonly registrar: RegistrarUnidadUseCase,
-    private readonly listar: ListarUnidadesUseCase,
-    private readonly obtener: ObtenerUnidadUseCase,
-    private readonly actualizar: ActualizarUnidadUseCase,
-    private readonly anular: AnularUnidadUseCase,
+    private readonly registrar: RegistrarActivoUseCase,
+    private readonly listar: ListarActivosUseCase,
+    private readonly obtener: ObtenerActivoUseCase,
+    private readonly actualizar: ActualizarActivoUseCase,
+    private readonly anular: AnularActivoUseCase,
   ) {}
 
   @Roles(
@@ -47,13 +46,16 @@ export class UnidadesController {
     RolUsuario.SUPERVISOR,
   )
   @Get()
-  async listarUnidades(
+  async listarActivos(
     @Query()
     query: {
-      placa?: string;
-      clase?: string;
-      estadoUnidad?: string;
+      codigo?: string;
+      texto?: string;
+      tipo?: string;
+      estadoOperativo?: string;
       estadoRegistro?: string;
+      responsableId?: string;
+      ubicacionHabitualId?: string;
       page?: string;
       pageSize?: string;
     },
@@ -67,7 +69,7 @@ export class UnidadesController {
     RolUsuario.SUPERVISOR,
   )
   @Get(':id')
-  async obtenerUnidad(
+  async obtenerActivo(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<RespuestaDto<unknown>> {
     return { datos: await this.obtener.execute(id) };
@@ -75,8 +77,8 @@ export class UnidadesController {
 
   @Roles(RolUsuario.ADMINISTRADOR, RolUsuario.OPERACIONES)
   @Post()
-  async registrarUnidad(
-    @Body() dto: RegistrarUnidadDto,
+  async registrarActivo(
+    @Body() dto: RegistrarActivoDto,
     @Req() req: Request,
   ): Promise<RespuestaDto<unknown>> {
     return { datos: await this.registrar.execute(dto, actorDe(req)) };
@@ -84,9 +86,9 @@ export class UnidadesController {
 
   @Roles(RolUsuario.ADMINISTRADOR, RolUsuario.OPERACIONES)
   @Patch(':id')
-  async actualizarUnidad(
+  async actualizarActivo(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: ActualizarUnidadDto,
+    @Body() dto: ActualizarActivoDto,
     @Req() req: Request,
   ): Promise<RespuestaDto<unknown>> {
     return { datos: await this.actualizar.execute(id, dto, actorDe(req)) };
@@ -94,7 +96,7 @@ export class UnidadesController {
 
   @Roles(RolUsuario.ADMINISTRADOR, RolUsuario.OPERACIONES)
   @Delete(':id')
-  async anularUnidad(
+  async anularActivo(
     @Param('id', ParseIntPipe) id: number,
     @Req() req: Request,
   ): Promise<RespuestaDto<unknown>> {

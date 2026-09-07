@@ -33,6 +33,11 @@ export type Ubicacion = Prisma.UbicacionModel
  */
 export type TipoServicio = Prisma.TipoServicioModel
 /**
+ * Model Activo
+ * 
+ */
+export type Activo = Prisma.ActivoModel
+/**
  * Model Unidad
  * 
  */
@@ -42,6 +47,16 @@ export type Unidad = Prisma.UnidadModel
  * 
  */
 export type Personal = Prisma.PersonalModel
+/**
+ * Model AsignacionGpsUnidad
+ * 
+ */
+export type AsignacionGpsUnidad = Prisma.AsignacionGpsUnidadModel
+/**
+ * Model LecturaKilometrajeUnidad
+ * 
+ */
+export type LecturaKilometrajeUnidad = Prisma.LecturaKilometrajeUnidadModel
 /**
  * Model Ruta
  * 

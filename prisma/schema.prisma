@@ -62,6 +62,27 @@ enum EstadoUnidad {
   @@map("estado_unidad")
 }
 
+// Clasificacion corporativa de los activos de MAPE.
+enum TipoActivo {
+  UNIDAD
+  EQUIPO
+  HERRAMIENTA
+  INFRAESTRUCTURA
+  OTRO
+
+  @@map("tipo_activo")
+}
+
+// Disponibilidad operativa del activo, independiente del borrado logico.
+enum EstadoOperativoActivo {
+  OPERATIVO
+  EN_MANTENIMIENTO
+  FUERA_DE_SERVICIO
+  DE_BAJA
+
+  @@map("estado_operativo_activo")
+}
+
 // Rol del personal dentro de una operacion de transporte.
 enum TipoPersonal {
   CONDUCTOR
@@ -192,6 +213,7 @@ model Ubicacion {
   manifiestosOrigen  Manifiesto[] @relation("UbicacionOrigen")
   manifiestosDestino Manifiesto[] @relation("UbicacionDestino")
   rutaPuntos         RutaPunto[]
+  activosHabituales  Activo[]     @relation("UbicacionHabitualActivo")
 
   @@index([nombre])
   @@index([tipo])
@@ -221,11 +243,49 @@ model TipoServicio {
 
 // ------------------------------- MAESTROS -------------------------------
 
+// Maestro corporativo de recursos fisicos de MAPE. Una unidad es un detalle
+// especializado y opcional de un activo de tipo UNIDAD.
+model Activo {
+  id               Int                    @id @default(autoincrement())
+  publicId         String                 @unique @map("public_id") @db.Uuid
+  codigo           String                 @unique
+  nombre           String
+  tipo             TipoActivo
+  descripcion      String?
+  estadoOperativo  EstadoOperativoActivo  @default(OPERATIVO) @map("estado_operativo")
+  fechaAdquisicion DateTime?              @map("fecha_adquisicion")
+  valorAdquisicion Decimal?               @map("valor_adquisicion") @db.Decimal(12, 2)
+  vidaUtilMeses   Int?                    @map("vida_util_meses")
+  proveedor       String?
+  numeroSerie     String?                 @map("numero_serie")
+  responsableId   Int?                    @map("responsable_id")
+  ubicacionHabitualId Int?                @map("ubicacion_habitual_id")
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  unidad             Unidad?
+  asignacionesGps    AsignacionGpsUnidad[]
+  responsable        Personal?  @relation("ResponsableActivo", fields: [responsableId], references: [id])
+  ubicacionHabitual  Ubicacion? @relation("UbicacionHabitualActivo", fields: [ubicacionHabitualId], references: [id])
+
+  @@index([nombre])
+  @@index([tipo])
+  @@index([estadoOperativo])
+  @@index([responsableId])
+  @@index([ubicacionHabitualId])
+  @@map("activo")
+}
+
 // Unidad = vehiculo de la flota. Identidad de negocio: la placa (normalizada,
 // unica entre las unidades activas).
 model Unidad {
   id                   Int          @id @default(autoincrement())
   publicId             String       @unique @map("public_id") @db.Uuid
+  activoId             Int          @unique @map("activo_id")
   placa                String
   placaNormalizada     String       @map("placa_normalizada")
   clase                ClaseUnidad
@@ -249,9 +309,20 @@ model Unidad {
   clienteAsociado      String?      @map("cliente_asociado")
   // Capacidad de carga en toneladas.
   capacidadCarga       Decimal?     @map("capacidad_carga") @db.Decimal(10, 2)
-  // Datos pensados para la futura app de mantenimiento.
+  pesoBrutoVehicular   Decimal?     @map("peso_bruto_vehicular") @db.Decimal(10, 2)
+  tara                 Decimal?     @db.Decimal(10, 2)
+  capacidadPasajeros   Int?         @map("capacidad_pasajeros")
+  volumenCarga         Decimal?     @map("volumen_carga") @db.Decimal(10, 2)
+  tipoCarroceria       String?      @map("tipo_carroceria")
+  numeroSerieCarroceria String?     @map("numero_serie_carroceria")
+  // Resumen de mantenimiento. El historial detallado vive en el sistema externo.
   tipoCombustible      String?      @map("tipo_combustible")
   kilometraje          Int?
+  ultimoMantenimientoFecha DateTime? @map("ultimo_mantenimiento_fecha")
+  ultimoMantenimientoKilometraje Int? @map("ultimo_mantenimiento_kilometraje")
+  proximoMantenimientoFecha DateTime? @map("proximo_mantenimiento_fecha")
+  proximoMantenimientoKilometraje Int? @map("proximo_mantenimiento_kilometraje")
+  mantenimientoObservacion String? @map("mantenimiento_observacion")
   // URLs de fotos de la unidad (frontal, lateral, interior, daños...).
   fotos                String[]     @default([])
   estadoUnidad         EstadoUnidad @default(OPERATIVA) @map("estado_unidad")
@@ -267,6 +338,9 @@ model Unidad {
   manifiestosSegundaUnidad Manifiesto[]               @relation("SegundaUnidadManifiesto")
   documentos               DocumentoUnidad[]
   inspecciones             InspeccionPreoperacional[]
+  asignacionesGps         AsignacionGpsUnidad[]
+  lecturasKilometraje     LecturaKilometrajeUnidad[]
+  activo                   Activo                      @relation(fields: [activoId], references: [id])
 
   @@index([placaNormalizada])
   @@map("unidad")
@@ -303,9 +377,49 @@ model Personal {
   turnos                  TurnoSupervisor[]
   usuario                 Usuario?
   inspecciones            InspeccionPreoperacional[]
+  activosResponsables     Activo[]                    @relation("ResponsableActivo")
 
   @@index([numeroDocumentoNormalizado])
   @@map("personal")
+}
+
+model AsignacionGpsUnidad {
+  id           Int       @id @default(autoincrement())
+  publicId     String    @unique @map("public_id") @db.Uuid
+  unidadId     Int       @map("unidad_id")
+  activoId     Int       @map("activo_id")
+  fechaInicio  DateTime  @default(now()) @map("fecha_inicio")
+  fechaFin     DateTime? @map("fecha_fin")
+  observacion  String?
+
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  unidad Unidad @relation(fields: [unidadId], references: [id], onDelete: Restrict)
+  activo Activo @relation(fields: [activoId], references: [id], onDelete: Restrict)
+
+  @@index([unidadId, fechaInicio])
+  @@index([activoId, fechaInicio])
+  @@map("asignacion_gps_unidad")
+}
+
+model LecturaKilometrajeUnidad {
+  id            Int      @id @default(autoincrement())
+  publicId      String   @unique @map("public_id") @db.Uuid
+  unidadId      Int      @map("unidad_id")
+  valor         Int
+  fecha         DateTime @default(now())
+  fuente        String?
+  observacion   String?
+  registradoPor String   @map("registrado_por")
+
+  unidad Unidad @relation(fields: [unidadId], references: [id], onDelete: Restrict)
+
+  @@index([unidadId, fecha])
+  @@map("lectura_kilometraje_unidad")
 }
 
 // Ruta = trayecto reutilizable (origen -> destino) sobre el que se emiten

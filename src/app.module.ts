@@ -12,6 +12,7 @@ import { HistorialModule } from './historial/historial.module.js';
 import { SeguimientoModule } from './seguimiento/seguimiento.module.js';
 import { IncidenciasModule } from './incidencias/incidencias.module.js';
 import { DocumentosModule } from './documentos/documentos.module.js';
+import { ActivosModule } from './activos/activos.module.js';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { DocumentosModule } from './documentos/documentos.module.js';
     SeguimientoModule,
     IncidenciasModule,
     DocumentosModule,
+    ActivosModule,
   ],
 })
 export class AppModule {}

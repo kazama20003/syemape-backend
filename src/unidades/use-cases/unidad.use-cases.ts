@@ -28,11 +28,13 @@ import {
   esClaseUnidad,
   esEstadoUnidad,
 } from '../domain/value-objects/clase-unidad.enum.js';
-import { exigirPlaca, normalizarPlaca } from '../domain/value-objects/placa.vo.js';
+import {
+  exigirPlaca,
+  normalizarPlaca,
+} from '../domain/value-objects/placa.vo.js';
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
-const USUARIO_SISTEMA = 'sistema';
 
 // Solo URLs http(s) no vacias; el maestro guarda referencias, no binarios.
 function limpiarFotos(fotos: unknown): string[] {
@@ -53,7 +55,6 @@ function throwEstadoActivoInvalido(valor: unknown): never {
   );
 }
 
-
 export class RegistrarUnidadDto {
   placa: string;
   clase: string;
@@ -73,8 +74,19 @@ export class RegistrarUnidadDto {
   cuenta?: string;
   clienteAsociado?: string;
   capacidadCarga?: number;
+  pesoBrutoVehicular?: number;
+  tara?: number;
+  capacidadPasajeros?: number;
+  volumenCarga?: number;
+  tipoCarroceria?: string;
+  numeroSerieCarroceria?: string;
   tipoCombustible?: string;
   kilometraje?: number;
+  ultimoMantenimientoFecha?: string;
+  ultimoMantenimientoKilometraje?: number;
+  proximoMantenimientoFecha?: string;
+  proximoMantenimientoKilometraje?: number;
+  mantenimientoObservacion?: string;
   fotos?: string[];
   estadoUnidad?: string;
 }
@@ -98,8 +110,19 @@ export class ActualizarUnidadDto {
   cuenta?: string;
   clienteAsociado?: string;
   capacidadCarga?: number;
+  pesoBrutoVehicular?: number;
+  tara?: number;
+  capacidadPasajeros?: number;
+  volumenCarga?: number;
+  tipoCarroceria?: string;
+  numeroSerieCarroceria?: string;
   tipoCombustible?: string;
   kilometraje?: number;
+  ultimoMantenimientoFecha?: string;
+  ultimoMantenimientoKilometraje?: number;
+  proximoMantenimientoFecha?: string;
+  proximoMantenimientoKilometraje?: number;
+  mantenimientoObservacion?: string;
   fotos?: string[];
   estadoUnidad?: string;
   estadoActivo?: string;
@@ -117,7 +140,10 @@ function exigirClase(valor: unknown): ClaseUnidad {
   return valor;
 }
 
-function resolverEstado(valor: unknown, porDefecto: EstadoUnidad): EstadoUnidad {
+function resolverEstado(
+  valor: unknown,
+  porDefecto: EstadoUnidad,
+): EstadoUnidad {
   if (valor === undefined || valor === null || valor === '') {
     return porDefecto;
   }
@@ -138,8 +164,13 @@ function camposComunes(
   dto: RegistrarUnidadDto | ActualizarUnidadDto,
   parcial: boolean,
 ): Partial<CrearUnidadData & ActualizarUnidadData> {
-  const val = <T>(clave: keyof (RegistrarUnidadDto & ActualizarUnidadDto), fn: () => T) =>
-    !parcial || (dto as Record<string, unknown>)[clave] !== undefined ? fn() : undefined;
+  const val = <T>(
+    clave: keyof (RegistrarUnidadDto & ActualizarUnidadDto),
+    fn: () => T,
+  ) =>
+    !parcial || (dto as Record<string, unknown>)[clave] !== undefined
+      ? fn()
+      : undefined;
 
   return {
     tipoVehiculo: val('tipoVehiculo', () => aTextoOpcional(dto.tipoVehiculo)),
@@ -149,7 +180,9 @@ function camposComunes(
     marca: val('marca', () => aTextoOpcional(dto.marca)),
     modelo: val('modelo', () => aTextoOpcional(dto.modelo)),
     anio: val('anio', () => aNumeroOpcional(dto.anio)),
-    anioFabricacion: val('anioFabricacion', () => aNumeroOpcional(dto.anioFabricacion)),
+    anioFabricacion: val('anioFabricacion', () =>
+      aNumeroOpcional(dto.anioFabricacion),
+    ),
     color: val('color', () => aTextoOpcional(dto.color)),
     numeroEjes: val('numeroEjes', () => aNumeroOpcional(dto.numeroEjes)),
     numeroMotor: val('numeroMotor', () => aTextoOpcional(dto.numeroMotor)),
@@ -160,10 +193,47 @@ function camposComunes(
       aTextoOpcional(dto.materialesPeligrosos),
     ),
     cuenta: val('cuenta', () => aTextoOpcional(dto.cuenta)),
-    clienteAsociado: val('clienteAsociado', () => aTextoOpcional(dto.clienteAsociado)),
-    capacidadCarga: val('capacidadCarga', () => aNumeroOpcional(dto.capacidadCarga)),
-    tipoCombustible: val('tipoCombustible', () => aTextoOpcional(dto.tipoCombustible)),
+    clienteAsociado: val('clienteAsociado', () =>
+      aTextoOpcional(dto.clienteAsociado),
+    ),
+    capacidadCarga: val('capacidadCarga', () =>
+      aNumeroOpcional(dto.capacidadCarga),
+    ),
+    pesoBrutoVehicular: val('pesoBrutoVehicular', () =>
+      aNumeroOpcional(dto.pesoBrutoVehicular),
+    ),
+    tara: val('tara', () => aNumeroOpcional(dto.tara)),
+    capacidadPasajeros: val('capacidadPasajeros', () =>
+      aNumeroOpcional(dto.capacidadPasajeros),
+    ),
+    volumenCarga: val('volumenCarga', () =>
+      aNumeroOpcional(dto.volumenCarga),
+    ),
+    tipoCarroceria: val('tipoCarroceria', () =>
+      aTextoOpcional(dto.tipoCarroceria),
+    ),
+    numeroSerieCarroceria: val('numeroSerieCarroceria', () =>
+      aTextoOpcional(dto.numeroSerieCarroceria),
+    ),
+    tipoCombustible: val('tipoCombustible', () =>
+      aTextoOpcional(dto.tipoCombustible),
+    ),
     kilometraje: val('kilometraje', () => aNumeroOpcional(dto.kilometraje)),
+    ultimoMantenimientoFecha: val('ultimoMantenimientoFecha', () =>
+      aFechaOpcional(dto.ultimoMantenimientoFecha),
+    ),
+    ultimoMantenimientoKilometraje: val('ultimoMantenimientoKilometraje', () =>
+      aNumeroOpcional(dto.ultimoMantenimientoKilometraje),
+    ),
+    proximoMantenimientoFecha: val('proximoMantenimientoFecha', () =>
+      aFechaOpcional(dto.proximoMantenimientoFecha),
+    ),
+    proximoMantenimientoKilometraje: val('proximoMantenimientoKilometraje', () =>
+      aNumeroOpcional(dto.proximoMantenimientoKilometraje),
+    ),
+    mantenimientoObservacion: val('mantenimientoObservacion', () =>
+      aTextoOpcional(dto.mantenimientoObservacion),
+    ),
     fotos: val('fotos', () => limpiarFotos(dto.fotos)),
   };
 }
@@ -174,10 +244,13 @@ export class RegistrarUnidadUseCase {
     @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
   ) {}
 
-  async execute(dto: RegistrarUnidadDto): Promise<UnidadProps> {
+  async execute(dto: RegistrarUnidadDto, actor: string): Promise<UnidadProps> {
     const placa = exigirPlaca(dto.placa);
     const clase = exigirClase(dto.clase);
-    const estadoUnidad = resolverEstado(dto.estadoUnidad, EstadoUnidad.OPERATIVA);
+    const estadoUnidad = resolverEstado(
+      dto.estadoUnidad,
+      EstadoUnidad.OPERATIVA,
+    );
 
     const existente = await this.unidades.findByPlacaActiva(placa);
     if (existente) {
@@ -194,10 +267,14 @@ export class RegistrarUnidadUseCase {
       placaNormalizada: placa,
       clase,
       estadoUnidad,
-      usuarioCreacion: USUARIO_SISTEMA,
+      usuarioCreacion: actor,
       ...(camposComunes(dto, false) as Omit<
         CrearUnidadData,
-        'placa' | 'placaNormalizada' | 'clase' | 'estadoUnidad' | 'usuarioCreacion'
+        | 'placa'
+        | 'placaNormalizada'
+        | 'clase'
+        | 'estadoUnidad'
+        | 'usuarioCreacion'
       >),
     });
   }
@@ -226,7 +303,9 @@ export class ListarUnidadesUseCase {
     const { datos, total } = await this.unidades.buscar({
       placa: query.placa ? normalizarPlaca(query.placa) : undefined,
       clase: esClaseUnidad(query.clase) ? query.clase : undefined,
-      estadoUnidad: esEstadoUnidad(query.estadoUnidad) ? query.estadoUnidad : undefined,
+      estadoUnidad: esEstadoUnidad(query.estadoUnidad)
+        ? query.estadoUnidad
+        : undefined,
       estadoRegistro:
         query.estadoRegistro === 'TODOS' ? undefined : EstadoRegistro.ACTIVO,
       page,
@@ -262,7 +341,11 @@ export class ActualizarUnidadUseCase {
     @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
   ) {}
 
-  async execute(id: number, dto: ActualizarUnidadDto): Promise<UnidadProps> {
+  async execute(
+    id: number,
+    dto: ActualizarUnidadDto,
+    actor: string,
+  ): Promise<UnidadProps> {
     const unidad = await this.unidades.findById(id);
     if (!unidad) {
       throw new RecursoNoEncontradoError(
@@ -302,7 +385,7 @@ export class ActualizarUnidadUseCase {
           : esEstadoActivo(dto.estadoActivo)
             ? dto.estadoActivo
             : throwEstadoActivoInvalido(dto.estadoActivo),
-      usuarioModificacion: USUARIO_SISTEMA,
+      usuarioModificacion: actor,
       ...camposComunes(dto, true),
     };
 
@@ -316,7 +399,7 @@ export class AnularUnidadUseCase {
     @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
   ) {}
 
-  async execute(id: number): Promise<UnidadProps> {
+  async execute(id: number, actor: string): Promise<UnidadProps> {
     const unidad = await this.unidades.findById(id);
     if (!unidad) {
       throw new RecursoNoEncontradoError(
@@ -325,6 +408,6 @@ export class AnularUnidadUseCase {
         id,
       );
     }
-    return this.unidades.anular(id, USUARIO_SISTEMA);
+    return this.unidades.anular(id, actor);
   }
 }

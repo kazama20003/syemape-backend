@@ -28,25 +28,40 @@ export type AggregateUnidad = {
 
 export type UnidadAvgAggregateOutputType = {
   id: number | null
+  activoId: number | null
   anio: number | null
   anioFabricacion: number | null
   numeroEjes: number | null
   capacidadCarga: runtime.Decimal | null
+  pesoBrutoVehicular: runtime.Decimal | null
+  tara: runtime.Decimal | null
+  capacidadPasajeros: number | null
+  volumenCarga: runtime.Decimal | null
   kilometraje: number | null
+  ultimoMantenimientoKilometraje: number | null
+  proximoMantenimientoKilometraje: number | null
 }
 
 export type UnidadSumAggregateOutputType = {
   id: number | null
+  activoId: number | null
   anio: number | null
   anioFabricacion: number | null
   numeroEjes: number | null
   capacidadCarga: runtime.Decimal | null
+  pesoBrutoVehicular: runtime.Decimal | null
+  tara: runtime.Decimal | null
+  capacidadPasajeros: number | null
+  volumenCarga: runtime.Decimal | null
   kilometraje: number | null
+  ultimoMantenimientoKilometraje: number | null
+  proximoMantenimientoKilometraje: number | null
 }
 
 export type UnidadMinAggregateOutputType = {
   id: number | null
   publicId: string | null
+  activoId: number | null
   placa: string | null
   placaNormalizada: string | null
   clase: $Enums.ClaseUnidad | null
@@ -66,8 +81,19 @@ export type UnidadMinAggregateOutputType = {
   cuenta: string | null
   clienteAsociado: string | null
   capacidadCarga: runtime.Decimal | null
+  pesoBrutoVehicular: runtime.Decimal | null
+  tara: runtime.Decimal | null
+  capacidadPasajeros: number | null
+  volumenCarga: runtime.Decimal | null
+  tipoCarroceria: string | null
+  numeroSerieCarroceria: string | null
   tipoCombustible: string | null
   kilometraje: number | null
+  ultimoMantenimientoFecha: Date | null
+  ultimoMantenimientoKilometraje: number | null
+  proximoMantenimientoFecha: Date | null
+  proximoMantenimientoKilometraje: number | null
+  mantenimientoObservacion: string | null
   estadoUnidad: $Enums.EstadoUnidad | null
   estadoActivo: $Enums.EstadoActivo | null
   estadoRegistro: $Enums.EstadoRegistro | null
@@ -80,6 +106,7 @@ export type UnidadMinAggregateOutputType = {
 export type UnidadMaxAggregateOutputType = {
   id: number | null
   publicId: string | null
+  activoId: number | null
   placa: string | null
   placaNormalizada: string | null
   clase: $Enums.ClaseUnidad | null
@@ -99,8 +126,19 @@ export type UnidadMaxAggregateOutputType = {
   cuenta: string | null
   clienteAsociado: string | null
   capacidadCarga: runtime.Decimal | null
+  pesoBrutoVehicular: runtime.Decimal | null
+  tara: runtime.Decimal | null
+  capacidadPasajeros: number | null
+  volumenCarga: runtime.Decimal | null
+  tipoCarroceria: string | null
+  numeroSerieCarroceria: string | null
   tipoCombustible: string | null
   kilometraje: number | null
+  ultimoMantenimientoFecha: Date | null
+  ultimoMantenimientoKilometraje: number | null
+  proximoMantenimientoFecha: Date | null
+  proximoMantenimientoKilometraje: number | null
+  mantenimientoObservacion: string | null
   estadoUnidad: $Enums.EstadoUnidad | null
   estadoActivo: $Enums.EstadoActivo | null
   estadoRegistro: $Enums.EstadoRegistro | null
@@ -113,6 +151,7 @@ export type UnidadMaxAggregateOutputType = {
 export type UnidadCountAggregateOutputType = {
   id: number
   publicId: number
+  activoId: number
   placa: number
   placaNormalizada: number
   clase: number
@@ -132,8 +171,19 @@ export type UnidadCountAggregateOutputType = {
   cuenta: number
   clienteAsociado: number
   capacidadCarga: number
+  pesoBrutoVehicular: number
+  tara: number
+  capacidadPasajeros: number
+  volumenCarga: number
+  tipoCarroceria: number
+  numeroSerieCarroceria: number
   tipoCombustible: number
   kilometraje: number
+  ultimoMantenimientoFecha: number
+  ultimoMantenimientoKilometraje: number
+  proximoMantenimientoFecha: number
+  proximoMantenimientoKilometraje: number
+  mantenimientoObservacion: number
   fotos: number
   estadoUnidad: number
   estadoActivo: number
@@ -148,25 +198,40 @@ export type UnidadCountAggregateOutputType = {
 
 export type UnidadAvgAggregateInputType = {
   id?: true
+  activoId?: true
   anio?: true
   anioFabricacion?: true
   numeroEjes?: true
   capacidadCarga?: true
+  pesoBrutoVehicular?: true
+  tara?: true
+  capacidadPasajeros?: true
+  volumenCarga?: true
   kilometraje?: true
+  ultimoMantenimientoKilometraje?: true
+  proximoMantenimientoKilometraje?: true
 }
 
 export type UnidadSumAggregateInputType = {
   id?: true
+  activoId?: true
   anio?: true
   anioFabricacion?: true
   numeroEjes?: true
   capacidadCarga?: true
+  pesoBrutoVehicular?: true
+  tara?: true
+  capacidadPasajeros?: true
+  volumenCarga?: true
   kilometraje?: true
+  ultimoMantenimientoKilometraje?: true
+  proximoMantenimientoKilometraje?: true
 }
 
 export type UnidadMinAggregateInputType = {
   id?: true
   publicId?: true
+  activoId?: true
   placa?: true
   placaNormalizada?: true
   clase?: true
@@ -186,8 +251,19 @@ export type UnidadMinAggregateInputType = {
   cuenta?: true
   clienteAsociado?: true
   capacidadCarga?: true
+  pesoBrutoVehicular?: true
+  tara?: true
+  capacidadPasajeros?: true
+  volumenCarga?: true
+  tipoCarroceria?: true
+  numeroSerieCarroceria?: true
   tipoCombustible?: true
   kilometraje?: true
+  ultimoMantenimientoFecha?: true
+  ultimoMantenimientoKilometraje?: true
+  proximoMantenimientoFecha?: true
+  proximoMantenimientoKilometraje?: true
+  mantenimientoObservacion?: true
   estadoUnidad?: true
   estadoActivo?: true
   estadoRegistro?: true
@@ -200,6 +276,7 @@ export type UnidadMinAggregateInputType = {
 export type UnidadMaxAggregateInputType = {
   id?: true
   publicId?: true
+  activoId?: true
   placa?: true
   placaNormalizada?: true
   clase?: true
@@ -219,8 +296,19 @@ export type UnidadMaxAggregateInputType = {
   cuenta?: true
   clienteAsociado?: true
   capacidadCarga?: true
+  pesoBrutoVehicular?: true
+  tara?: true
+  capacidadPasajeros?: true
+  volumenCarga?: true
+  tipoCarroceria?: true
+  numeroSerieCarroceria?: true
   tipoCombustible?: true
   kilometraje?: true
+  ultimoMantenimientoFecha?: true
+  ultimoMantenimientoKilometraje?: true
+  proximoMantenimientoFecha?: true
+  proximoMantenimientoKilometraje?: true
+  mantenimientoObservacion?: true
   estadoUnidad?: true
   estadoActivo?: true
   estadoRegistro?: true
@@ -233,6 +321,7 @@ export type UnidadMaxAggregateInputType = {
 export type UnidadCountAggregateInputType = {
   id?: true
   publicId?: true
+  activoId?: true
   placa?: true
   placaNormalizada?: true
   clase?: true
@@ -252,8 +341,19 @@ export type UnidadCountAggregateInputType = {
   cuenta?: true
   clienteAsociado?: true
   capacidadCarga?: true
+  pesoBrutoVehicular?: true
+  tara?: true
+  capacidadPasajeros?: true
+  volumenCarga?: true
+  tipoCarroceria?: true
+  numeroSerieCarroceria?: true
   tipoCombustible?: true
   kilometraje?: true
+  ultimoMantenimientoFecha?: true
+  ultimoMantenimientoKilometraje?: true
+  proximoMantenimientoFecha?: true
+  proximoMantenimientoKilometraje?: true
+  mantenimientoObservacion?: true
   fotos?: true
   estadoUnidad?: true
   estadoActivo?: true
@@ -354,6 +454,7 @@ export type UnidadGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type UnidadGroupByOutputType = {
   id: number
   publicId: string
+  activoId: number
   placa: string
   placaNormalizada: string
   clase: $Enums.ClaseUnidad
@@ -373,8 +474,19 @@ export type UnidadGroupByOutputType = {
   cuenta: string | null
   clienteAsociado: string | null
   capacidadCarga: runtime.Decimal | null
+  pesoBrutoVehicular: runtime.Decimal | null
+  tara: runtime.Decimal | null
+  capacidadPasajeros: number | null
+  volumenCarga: runtime.Decimal | null
+  tipoCarroceria: string | null
+  numeroSerieCarroceria: string | null
   tipoCombustible: string | null
   kilometraje: number | null
+  ultimoMantenimientoFecha: Date | null
+  ultimoMantenimientoKilometraje: number | null
+  proximoMantenimientoFecha: Date | null
+  proximoMantenimientoKilometraje: number | null
+  mantenimientoObservacion: string | null
   fotos: string[]
   estadoUnidad: $Enums.EstadoUnidad
   estadoActivo: $Enums.EstadoActivo
@@ -411,6 +523,7 @@ export type UnidadWhereInput = {
   NOT?: Prisma.UnidadWhereInput | Prisma.UnidadWhereInput[]
   id?: Prisma.IntFilter<"Unidad"> | number
   publicId?: Prisma.UuidFilter<"Unidad"> | string
+  activoId?: Prisma.IntFilter<"Unidad"> | number
   placa?: Prisma.StringFilter<"Unidad"> | string
   placaNormalizada?: Prisma.StringFilter<"Unidad"> | string
   clase?: Prisma.EnumClaseUnidadFilter<"Unidad"> | $Enums.ClaseUnidad
@@ -430,8 +543,19 @@ export type UnidadWhereInput = {
   cuenta?: Prisma.StringNullableFilter<"Unidad"> | string | null
   clienteAsociado?: Prisma.StringNullableFilter<"Unidad"> | string | null
   capacidadCarga?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  volumenCarga?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.StringNullableFilter<"Unidad"> | string | null
+  numeroSerieCarroceria?: Prisma.StringNullableFilter<"Unidad"> | string | null
   tipoCombustible?: Prisma.StringNullableFilter<"Unidad"> | string | null
   kilometraje?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  ultimoMantenimientoFecha?: Prisma.DateTimeNullableFilter<"Unidad"> | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  proximoMantenimientoFecha?: Prisma.DateTimeNullableFilter<"Unidad"> | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  mantenimientoObservacion?: Prisma.StringNullableFilter<"Unidad"> | string | null
   fotos?: Prisma.StringNullableListFilter<"Unidad">
   estadoUnidad?: Prisma.EnumEstadoUnidadFilter<"Unidad"> | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFilter<"Unidad"> | $Enums.EstadoActivo
@@ -444,11 +568,15 @@ export type UnidadWhereInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoListRelationFilter
   documentos?: Prisma.DocumentoUnidadListRelationFilter
   inspecciones?: Prisma.InspeccionPreoperacionalListRelationFilter
+  asignacionesGps?: Prisma.AsignacionGpsUnidadListRelationFilter
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadListRelationFilter
+  activo?: Prisma.XOR<Prisma.ActivoScalarRelationFilter, Prisma.ActivoWhereInput>
 }
 
 export type UnidadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   publicId?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   placa?: Prisma.SortOrder
   placaNormalizada?: Prisma.SortOrder
   clase?: Prisma.SortOrder
@@ -468,8 +596,19 @@ export type UnidadOrderByWithRelationInput = {
   cuenta?: Prisma.SortOrderInput | Prisma.SortOrder
   clienteAsociado?: Prisma.SortOrderInput | Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrderInput | Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrderInput | Prisma.SortOrder
+  tara?: Prisma.SortOrderInput | Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrderInput | Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrderInput | Prisma.SortOrder
+  tipoCarroceria?: Prisma.SortOrderInput | Prisma.SortOrder
+  numeroSerieCarroceria?: Prisma.SortOrderInput | Prisma.SortOrder
   tipoCombustible?: Prisma.SortOrderInput | Prisma.SortOrder
   kilometraje?: Prisma.SortOrderInput | Prisma.SortOrder
+  ultimoMantenimientoFecha?: Prisma.SortOrderInput | Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrderInput | Prisma.SortOrder
+  proximoMantenimientoFecha?: Prisma.SortOrderInput | Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrderInput | Prisma.SortOrder
+  mantenimientoObservacion?: Prisma.SortOrderInput | Prisma.SortOrder
   fotos?: Prisma.SortOrder
   estadoUnidad?: Prisma.SortOrder
   estadoActivo?: Prisma.SortOrder
@@ -482,11 +621,15 @@ export type UnidadOrderByWithRelationInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoOrderByRelationAggregateInput
   documentos?: Prisma.DocumentoUnidadOrderByRelationAggregateInput
   inspecciones?: Prisma.InspeccionPreoperacionalOrderByRelationAggregateInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadOrderByRelationAggregateInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadOrderByRelationAggregateInput
+  activo?: Prisma.ActivoOrderByWithRelationInput
 }
 
 export type UnidadWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   publicId?: string
+  activoId?: number
   AND?: Prisma.UnidadWhereInput | Prisma.UnidadWhereInput[]
   OR?: Prisma.UnidadWhereInput[]
   NOT?: Prisma.UnidadWhereInput | Prisma.UnidadWhereInput[]
@@ -509,8 +652,19 @@ export type UnidadWhereUniqueInput = Prisma.AtLeast<{
   cuenta?: Prisma.StringNullableFilter<"Unidad"> | string | null
   clienteAsociado?: Prisma.StringNullableFilter<"Unidad"> | string | null
   capacidadCarga?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  volumenCarga?: Prisma.DecimalNullableFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.StringNullableFilter<"Unidad"> | string | null
+  numeroSerieCarroceria?: Prisma.StringNullableFilter<"Unidad"> | string | null
   tipoCombustible?: Prisma.StringNullableFilter<"Unidad"> | string | null
   kilometraje?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  ultimoMantenimientoFecha?: Prisma.DateTimeNullableFilter<"Unidad"> | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  proximoMantenimientoFecha?: Prisma.DateTimeNullableFilter<"Unidad"> | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.IntNullableFilter<"Unidad"> | number | null
+  mantenimientoObservacion?: Prisma.StringNullableFilter<"Unidad"> | string | null
   fotos?: Prisma.StringNullableListFilter<"Unidad">
   estadoUnidad?: Prisma.EnumEstadoUnidadFilter<"Unidad"> | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFilter<"Unidad"> | $Enums.EstadoActivo
@@ -523,11 +677,15 @@ export type UnidadWhereUniqueInput = Prisma.AtLeast<{
   manifiestosSegundaUnidad?: Prisma.ManifiestoListRelationFilter
   documentos?: Prisma.DocumentoUnidadListRelationFilter
   inspecciones?: Prisma.InspeccionPreoperacionalListRelationFilter
-}, "id" | "publicId">
+  asignacionesGps?: Prisma.AsignacionGpsUnidadListRelationFilter
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadListRelationFilter
+  activo?: Prisma.XOR<Prisma.ActivoScalarRelationFilter, Prisma.ActivoWhereInput>
+}, "id" | "publicId" | "activoId">
 
 export type UnidadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   publicId?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   placa?: Prisma.SortOrder
   placaNormalizada?: Prisma.SortOrder
   clase?: Prisma.SortOrder
@@ -547,8 +705,19 @@ export type UnidadOrderByWithAggregationInput = {
   cuenta?: Prisma.SortOrderInput | Prisma.SortOrder
   clienteAsociado?: Prisma.SortOrderInput | Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrderInput | Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrderInput | Prisma.SortOrder
+  tara?: Prisma.SortOrderInput | Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrderInput | Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrderInput | Prisma.SortOrder
+  tipoCarroceria?: Prisma.SortOrderInput | Prisma.SortOrder
+  numeroSerieCarroceria?: Prisma.SortOrderInput | Prisma.SortOrder
   tipoCombustible?: Prisma.SortOrderInput | Prisma.SortOrder
   kilometraje?: Prisma.SortOrderInput | Prisma.SortOrder
+  ultimoMantenimientoFecha?: Prisma.SortOrderInput | Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrderInput | Prisma.SortOrder
+  proximoMantenimientoFecha?: Prisma.SortOrderInput | Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrderInput | Prisma.SortOrder
+  mantenimientoObservacion?: Prisma.SortOrderInput | Prisma.SortOrder
   fotos?: Prisma.SortOrder
   estadoUnidad?: Prisma.SortOrder
   estadoActivo?: Prisma.SortOrder
@@ -570,6 +739,7 @@ export type UnidadScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UnidadScalarWhereWithAggregatesInput | Prisma.UnidadScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Unidad"> | number
   publicId?: Prisma.UuidWithAggregatesFilter<"Unidad"> | string
+  activoId?: Prisma.IntWithAggregatesFilter<"Unidad"> | number
   placa?: Prisma.StringWithAggregatesFilter<"Unidad"> | string
   placaNormalizada?: Prisma.StringWithAggregatesFilter<"Unidad"> | string
   clase?: Prisma.EnumClaseUnidadWithAggregatesFilter<"Unidad"> | $Enums.ClaseUnidad
@@ -589,8 +759,19 @@ export type UnidadScalarWhereWithAggregatesInput = {
   cuenta?: Prisma.StringNullableWithAggregatesFilter<"Unidad"> | string | null
   clienteAsociado?: Prisma.StringNullableWithAggregatesFilter<"Unidad"> | string | null
   capacidadCarga?: Prisma.DecimalNullableWithAggregatesFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.DecimalNullableWithAggregatesFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.DecimalNullableWithAggregatesFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.IntNullableWithAggregatesFilter<"Unidad"> | number | null
+  volumenCarga?: Prisma.DecimalNullableWithAggregatesFilter<"Unidad"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.StringNullableWithAggregatesFilter<"Unidad"> | string | null
+  numeroSerieCarroceria?: Prisma.StringNullableWithAggregatesFilter<"Unidad"> | string | null
   tipoCombustible?: Prisma.StringNullableWithAggregatesFilter<"Unidad"> | string | null
   kilometraje?: Prisma.IntNullableWithAggregatesFilter<"Unidad"> | number | null
+  ultimoMantenimientoFecha?: Prisma.DateTimeNullableWithAggregatesFilter<"Unidad"> | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.IntNullableWithAggregatesFilter<"Unidad"> | number | null
+  proximoMantenimientoFecha?: Prisma.DateTimeNullableWithAggregatesFilter<"Unidad"> | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.IntNullableWithAggregatesFilter<"Unidad"> | number | null
+  mantenimientoObservacion?: Prisma.StringNullableWithAggregatesFilter<"Unidad"> | string | null
   fotos?: Prisma.StringNullableListFilter<"Unidad">
   estadoUnidad?: Prisma.EnumEstadoUnidadWithAggregatesFilter<"Unidad"> | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoWithAggregatesFilter<"Unidad"> | $Enums.EstadoActivo
@@ -622,8 +803,19 @@ export type UnidadCreateInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -636,11 +828,15 @@ export type UnidadCreateInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
   documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
 }
 
 export type UnidadUncheckedCreateInput = {
   id?: number
   publicId: string
+  activoId: number
   placa: string
   placaNormalizada: string
   clase: $Enums.ClaseUnidad
@@ -660,8 +856,19 @@ export type UnidadUncheckedCreateInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -674,6 +881,8 @@ export type UnidadUncheckedCreateInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
   documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
 }
 
 export type UnidadUpdateInput = {
@@ -697,8 +906,19 @@ export type UnidadUpdateInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -711,11 +931,15 @@ export type UnidadUpdateInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
 }
 
 export type UnidadUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
   placa?: Prisma.StringFieldUpdateOperationsInput | string
   placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
   clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
@@ -735,8 +959,19 @@ export type UnidadUncheckedUpdateInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -749,11 +984,14 @@ export type UnidadUncheckedUpdateInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
 }
 
 export type UnidadCreateManyInput = {
   id?: number
   publicId: string
+  activoId: number
   placa: string
   placaNormalizada: string
   clase: $Enums.ClaseUnidad
@@ -773,8 +1011,19 @@ export type UnidadCreateManyInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -806,8 +1055,19 @@ export type UnidadUpdateManyMutationInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -821,6 +1081,7 @@ export type UnidadUpdateManyMutationInput = {
 export type UnidadUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
   placa?: Prisma.StringFieldUpdateOperationsInput | string
   placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
   clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
@@ -840,8 +1101,19 @@ export type UnidadUncheckedUpdateManyInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -850,6 +1122,11 @@ export type UnidadUncheckedUpdateManyInput = {
   usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UnidadNullableScalarRelationFilter = {
+  is?: Prisma.UnidadWhereInput | null
+  isNot?: Prisma.UnidadWhereInput | null
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -863,6 +1140,7 @@ export type StringNullableListFilter<$PrismaModel = never> = {
 export type UnidadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   publicId?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   placa?: Prisma.SortOrder
   placaNormalizada?: Prisma.SortOrder
   clase?: Prisma.SortOrder
@@ -882,8 +1160,19 @@ export type UnidadCountOrderByAggregateInput = {
   cuenta?: Prisma.SortOrder
   clienteAsociado?: Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrder
+  tara?: Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrder
+  tipoCarroceria?: Prisma.SortOrder
+  numeroSerieCarroceria?: Prisma.SortOrder
   tipoCombustible?: Prisma.SortOrder
   kilometraje?: Prisma.SortOrder
+  ultimoMantenimientoFecha?: Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrder
+  proximoMantenimientoFecha?: Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrder
+  mantenimientoObservacion?: Prisma.SortOrder
   fotos?: Prisma.SortOrder
   estadoUnidad?: Prisma.SortOrder
   estadoActivo?: Prisma.SortOrder
@@ -896,16 +1185,24 @@ export type UnidadCountOrderByAggregateInput = {
 
 export type UnidadAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   anio?: Prisma.SortOrder
   anioFabricacion?: Prisma.SortOrder
   numeroEjes?: Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrder
+  tara?: Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrder
   kilometraje?: Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrder
 }
 
 export type UnidadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   publicId?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   placa?: Prisma.SortOrder
   placaNormalizada?: Prisma.SortOrder
   clase?: Prisma.SortOrder
@@ -925,8 +1222,19 @@ export type UnidadMaxOrderByAggregateInput = {
   cuenta?: Prisma.SortOrder
   clienteAsociado?: Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrder
+  tara?: Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrder
+  tipoCarroceria?: Prisma.SortOrder
+  numeroSerieCarroceria?: Prisma.SortOrder
   tipoCombustible?: Prisma.SortOrder
   kilometraje?: Prisma.SortOrder
+  ultimoMantenimientoFecha?: Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrder
+  proximoMantenimientoFecha?: Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrder
+  mantenimientoObservacion?: Prisma.SortOrder
   estadoUnidad?: Prisma.SortOrder
   estadoActivo?: Prisma.SortOrder
   estadoRegistro?: Prisma.SortOrder
@@ -939,6 +1247,7 @@ export type UnidadMaxOrderByAggregateInput = {
 export type UnidadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   publicId?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   placa?: Prisma.SortOrder
   placaNormalizada?: Prisma.SortOrder
   clase?: Prisma.SortOrder
@@ -958,8 +1267,19 @@ export type UnidadMinOrderByAggregateInput = {
   cuenta?: Prisma.SortOrder
   clienteAsociado?: Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrder
+  tara?: Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrder
+  tipoCarroceria?: Prisma.SortOrder
+  numeroSerieCarroceria?: Prisma.SortOrder
   tipoCombustible?: Prisma.SortOrder
   kilometraje?: Prisma.SortOrder
+  ultimoMantenimientoFecha?: Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrder
+  proximoMantenimientoFecha?: Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrder
+  mantenimientoObservacion?: Prisma.SortOrder
   estadoUnidad?: Prisma.SortOrder
   estadoActivo?: Prisma.SortOrder
   estadoRegistro?: Prisma.SortOrder
@@ -971,11 +1291,18 @@ export type UnidadMinOrderByAggregateInput = {
 
 export type UnidadSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  activoId?: Prisma.SortOrder
   anio?: Prisma.SortOrder
   anioFabricacion?: Prisma.SortOrder
   numeroEjes?: Prisma.SortOrder
   capacidadCarga?: Prisma.SortOrder
+  pesoBrutoVehicular?: Prisma.SortOrder
+  tara?: Prisma.SortOrder
+  capacidadPasajeros?: Prisma.SortOrder
+  volumenCarga?: Prisma.SortOrder
   kilometraje?: Prisma.SortOrder
+  ultimoMantenimientoKilometraje?: Prisma.SortOrder
+  proximoMantenimientoKilometraje?: Prisma.SortOrder
 }
 
 export type UnidadScalarRelationFilter = {
@@ -983,9 +1310,36 @@ export type UnidadScalarRelationFilter = {
   isNot?: Prisma.UnidadWhereInput
 }
 
-export type UnidadNullableScalarRelationFilter = {
-  is?: Prisma.UnidadWhereInput | null
-  isNot?: Prisma.UnidadWhereInput | null
+export type UnidadCreateNestedOneWithoutActivoInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutActivoInput, Prisma.UnidadUncheckedCreateWithoutActivoInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutActivoInput
+  connect?: Prisma.UnidadWhereUniqueInput
+}
+
+export type UnidadUncheckedCreateNestedOneWithoutActivoInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutActivoInput, Prisma.UnidadUncheckedCreateWithoutActivoInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutActivoInput
+  connect?: Prisma.UnidadWhereUniqueInput
+}
+
+export type UnidadUpdateOneWithoutActivoNestedInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutActivoInput, Prisma.UnidadUncheckedCreateWithoutActivoInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutActivoInput
+  upsert?: Prisma.UnidadUpsertWithoutActivoInput
+  disconnect?: Prisma.UnidadWhereInput | boolean
+  delete?: Prisma.UnidadWhereInput | boolean
+  connect?: Prisma.UnidadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnidadUpdateToOneWithWhereWithoutActivoInput, Prisma.UnidadUpdateWithoutActivoInput>, Prisma.UnidadUncheckedUpdateWithoutActivoInput>
+}
+
+export type UnidadUncheckedUpdateOneWithoutActivoNestedInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutActivoInput, Prisma.UnidadUncheckedCreateWithoutActivoInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutActivoInput
+  upsert?: Prisma.UnidadUpsertWithoutActivoInput
+  disconnect?: Prisma.UnidadWhereInput | boolean
+  delete?: Prisma.UnidadWhereInput | boolean
+  connect?: Prisma.UnidadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnidadUpdateToOneWithWhereWithoutActivoInput, Prisma.UnidadUpdateWithoutActivoInput>, Prisma.UnidadUncheckedUpdateWithoutActivoInput>
 }
 
 export type UnidadCreatefotosInput = {
@@ -996,14 +1350,6 @@ export type EnumClaseUnidadFieldUpdateOperationsInput = {
   set?: $Enums.ClaseUnidad
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type UnidadUpdatefotosInput = {
   set?: string[]
   push?: string | string[]
@@ -1011,6 +1357,34 @@ export type UnidadUpdatefotosInput = {
 
 export type EnumEstadoUnidadFieldUpdateOperationsInput = {
   set?: $Enums.EstadoUnidad
+}
+
+export type UnidadCreateNestedOneWithoutAsignacionesGpsInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutAsignacionesGpsInput, Prisma.UnidadUncheckedCreateWithoutAsignacionesGpsInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutAsignacionesGpsInput
+  connect?: Prisma.UnidadWhereUniqueInput
+}
+
+export type UnidadUpdateOneRequiredWithoutAsignacionesGpsNestedInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutAsignacionesGpsInput, Prisma.UnidadUncheckedCreateWithoutAsignacionesGpsInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutAsignacionesGpsInput
+  upsert?: Prisma.UnidadUpsertWithoutAsignacionesGpsInput
+  connect?: Prisma.UnidadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnidadUpdateToOneWithWhereWithoutAsignacionesGpsInput, Prisma.UnidadUpdateWithoutAsignacionesGpsInput>, Prisma.UnidadUncheckedUpdateWithoutAsignacionesGpsInput>
+}
+
+export type UnidadCreateNestedOneWithoutLecturasKilometrajeInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutLecturasKilometrajeInput, Prisma.UnidadUncheckedCreateWithoutLecturasKilometrajeInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutLecturasKilometrajeInput
+  connect?: Prisma.UnidadWhereUniqueInput
+}
+
+export type UnidadUpdateOneRequiredWithoutLecturasKilometrajeNestedInput = {
+  create?: Prisma.XOR<Prisma.UnidadCreateWithoutLecturasKilometrajeInput, Prisma.UnidadUncheckedCreateWithoutLecturasKilometrajeInput>
+  connectOrCreate?: Prisma.UnidadCreateOrConnectWithoutLecturasKilometrajeInput
+  upsert?: Prisma.UnidadUpsertWithoutLecturasKilometrajeInput
+  connect?: Prisma.UnidadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnidadUpdateToOneWithWhereWithoutLecturasKilometrajeInput, Prisma.UnidadUpdateWithoutLecturasKilometrajeInput>, Prisma.UnidadUncheckedUpdateWithoutLecturasKilometrajeInput>
 }
 
 export type UnidadCreateNestedOneWithoutManifiestosInput = {
@@ -1071,7 +1445,7 @@ export type UnidadUpdateOneRequiredWithoutInspeccionesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UnidadUpdateToOneWithWhereWithoutInspeccionesInput, Prisma.UnidadUpdateWithoutInspeccionesInput>, Prisma.UnidadUncheckedUpdateWithoutInspeccionesInput>
 }
 
-export type UnidadCreateWithoutManifiestosInput = {
+export type UnidadCreateWithoutActivoInput = {
   publicId: string
   placa: string
   placaNormalizada: string
@@ -1092,8 +1466,19 @@ export type UnidadCreateWithoutManifiestosInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1102,12 +1487,15 @@ export type UnidadCreateWithoutManifiestosInput = {
   usuarioCreacion: string
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutUnidadInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
   documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
 }
 
-export type UnidadUncheckedCreateWithoutManifiestosInput = {
+export type UnidadUncheckedCreateWithoutActivoInput = {
   id?: number
   publicId: string
   placa: string
@@ -1129,8 +1517,674 @@ export type UnidadUncheckedCreateWithoutManifiestosInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
+  fotos?: Prisma.UnidadCreatefotosInput | string[]
+  estadoUnidad?: $Enums.EstadoUnidad
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUnidadInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
+  documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
+}
+
+export type UnidadCreateOrConnectWithoutActivoInput = {
+  where: Prisma.UnidadWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnidadCreateWithoutActivoInput, Prisma.UnidadUncheckedCreateWithoutActivoInput>
+}
+
+export type UnidadUpsertWithoutActivoInput = {
+  update: Prisma.XOR<Prisma.UnidadUpdateWithoutActivoInput, Prisma.UnidadUncheckedUpdateWithoutActivoInput>
+  create: Prisma.XOR<Prisma.UnidadCreateWithoutActivoInput, Prisma.UnidadUncheckedCreateWithoutActivoInput>
+  where?: Prisma.UnidadWhereInput
+}
+
+export type UnidadUpdateToOneWithWhereWithoutActivoInput = {
+  where?: Prisma.UnidadWhereInput
+  data: Prisma.XOR<Prisma.UnidadUpdateWithoutActivoInput, Prisma.UnidadUncheckedUpdateWithoutActivoInput>
+}
+
+export type UnidadUpdateWithoutActivoInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  placa?: Prisma.StringFieldUpdateOperationsInput | string
+  placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
+  clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
+  tipoVehiculo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaVehicular?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  modelo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  anioFabricacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroEjes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numeroMotor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroVin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registroMtc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mtcVigencia?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  materialesPeligrosos?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotos?: Prisma.UnidadUpdatefotosInput | string[]
+  estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUpdateManyWithoutUnidadNestedInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
+  documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+}
+
+export type UnidadUncheckedUpdateWithoutActivoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  placa?: Prisma.StringFieldUpdateOperationsInput | string
+  placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
+  clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
+  tipoVehiculo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaVehicular?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  modelo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  anioFabricacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroEjes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numeroMotor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroVin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registroMtc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mtcVigencia?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  materialesPeligrosos?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotos?: Prisma.UnidadUpdatefotosInput | string[]
+  estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutUnidadNestedInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
+  documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+}
+
+export type UnidadCreateWithoutAsignacionesGpsInput = {
+  publicId: string
+  placa: string
+  placaNormalizada: string
+  clase: $Enums.ClaseUnidad
+  tipoVehiculo?: string | null
+  categoriaVehicular?: string | null
+  marca?: string | null
+  modelo?: string | null
+  anio?: number | null
+  anioFabricacion?: number | null
+  color?: string | null
+  numeroEjes?: number | null
+  numeroMotor?: string | null
+  numeroVin?: string | null
+  registroMtc?: string | null
+  mtcVigencia?: Date | string | null
+  materialesPeligrosos?: string | null
+  cuenta?: string | null
+  clienteAsociado?: string | null
+  capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
+  tipoCombustible?: string | null
+  kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
+  fotos?: Prisma.UnidadCreatefotosInput | string[]
+  estadoUnidad?: $Enums.EstadoUnidad
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutUnidadInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
+  documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
+  inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
+}
+
+export type UnidadUncheckedCreateWithoutAsignacionesGpsInput = {
+  id?: number
+  publicId: string
+  activoId: number
+  placa: string
+  placaNormalizada: string
+  clase: $Enums.ClaseUnidad
+  tipoVehiculo?: string | null
+  categoriaVehicular?: string | null
+  marca?: string | null
+  modelo?: string | null
+  anio?: number | null
+  anioFabricacion?: number | null
+  color?: string | null
+  numeroEjes?: number | null
+  numeroMotor?: string | null
+  numeroVin?: string | null
+  registroMtc?: string | null
+  mtcVigencia?: Date | string | null
+  materialesPeligrosos?: string | null
+  cuenta?: string | null
+  clienteAsociado?: string | null
+  capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
+  tipoCombustible?: string | null
+  kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
+  fotos?: Prisma.UnidadCreatefotosInput | string[]
+  estadoUnidad?: $Enums.EstadoUnidad
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUnidadInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
+  documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
+}
+
+export type UnidadCreateOrConnectWithoutAsignacionesGpsInput = {
+  where: Prisma.UnidadWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnidadCreateWithoutAsignacionesGpsInput, Prisma.UnidadUncheckedCreateWithoutAsignacionesGpsInput>
+}
+
+export type UnidadUpsertWithoutAsignacionesGpsInput = {
+  update: Prisma.XOR<Prisma.UnidadUpdateWithoutAsignacionesGpsInput, Prisma.UnidadUncheckedUpdateWithoutAsignacionesGpsInput>
+  create: Prisma.XOR<Prisma.UnidadCreateWithoutAsignacionesGpsInput, Prisma.UnidadUncheckedCreateWithoutAsignacionesGpsInput>
+  where?: Prisma.UnidadWhereInput
+}
+
+export type UnidadUpdateToOneWithWhereWithoutAsignacionesGpsInput = {
+  where?: Prisma.UnidadWhereInput
+  data: Prisma.XOR<Prisma.UnidadUpdateWithoutAsignacionesGpsInput, Prisma.UnidadUncheckedUpdateWithoutAsignacionesGpsInput>
+}
+
+export type UnidadUpdateWithoutAsignacionesGpsInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  placa?: Prisma.StringFieldUpdateOperationsInput | string
+  placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
+  clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
+  tipoVehiculo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaVehicular?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  modelo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  anioFabricacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroEjes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numeroMotor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroVin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registroMtc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mtcVigencia?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  materialesPeligrosos?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotos?: Prisma.UnidadUpdatefotosInput | string[]
+  estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUpdateManyWithoutUnidadNestedInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
+  documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
+}
+
+export type UnidadUncheckedUpdateWithoutAsignacionesGpsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
+  placa?: Prisma.StringFieldUpdateOperationsInput | string
+  placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
+  clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
+  tipoVehiculo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaVehicular?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  modelo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  anioFabricacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroEjes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numeroMotor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroVin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registroMtc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mtcVigencia?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  materialesPeligrosos?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotos?: Prisma.UnidadUpdatefotosInput | string[]
+  estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutUnidadNestedInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
+  documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+}
+
+export type UnidadCreateWithoutLecturasKilometrajeInput = {
+  publicId: string
+  placa: string
+  placaNormalizada: string
+  clase: $Enums.ClaseUnidad
+  tipoVehiculo?: string | null
+  categoriaVehicular?: string | null
+  marca?: string | null
+  modelo?: string | null
+  anio?: number | null
+  anioFabricacion?: number | null
+  color?: string | null
+  numeroEjes?: number | null
+  numeroMotor?: string | null
+  numeroVin?: string | null
+  registroMtc?: string | null
+  mtcVigencia?: Date | string | null
+  materialesPeligrosos?: string | null
+  cuenta?: string | null
+  clienteAsociado?: string | null
+  capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
+  tipoCombustible?: string | null
+  kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
+  fotos?: Prisma.UnidadCreatefotosInput | string[]
+  estadoUnidad?: $Enums.EstadoUnidad
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutUnidadInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
+  documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
+  inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
+}
+
+export type UnidadUncheckedCreateWithoutLecturasKilometrajeInput = {
+  id?: number
+  publicId: string
+  activoId: number
+  placa: string
+  placaNormalizada: string
+  clase: $Enums.ClaseUnidad
+  tipoVehiculo?: string | null
+  categoriaVehicular?: string | null
+  marca?: string | null
+  modelo?: string | null
+  anio?: number | null
+  anioFabricacion?: number | null
+  color?: string | null
+  numeroEjes?: number | null
+  numeroMotor?: string | null
+  numeroVin?: string | null
+  registroMtc?: string | null
+  mtcVigencia?: Date | string | null
+  materialesPeligrosos?: string | null
+  cuenta?: string | null
+  clienteAsociado?: string | null
+  capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
+  tipoCombustible?: string | null
+  kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
+  fotos?: Prisma.UnidadCreatefotosInput | string[]
+  estadoUnidad?: $Enums.EstadoUnidad
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUnidadInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
+  documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+}
+
+export type UnidadCreateOrConnectWithoutLecturasKilometrajeInput = {
+  where: Prisma.UnidadWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnidadCreateWithoutLecturasKilometrajeInput, Prisma.UnidadUncheckedCreateWithoutLecturasKilometrajeInput>
+}
+
+export type UnidadUpsertWithoutLecturasKilometrajeInput = {
+  update: Prisma.XOR<Prisma.UnidadUpdateWithoutLecturasKilometrajeInput, Prisma.UnidadUncheckedUpdateWithoutLecturasKilometrajeInput>
+  create: Prisma.XOR<Prisma.UnidadCreateWithoutLecturasKilometrajeInput, Prisma.UnidadUncheckedCreateWithoutLecturasKilometrajeInput>
+  where?: Prisma.UnidadWhereInput
+}
+
+export type UnidadUpdateToOneWithWhereWithoutLecturasKilometrajeInput = {
+  where?: Prisma.UnidadWhereInput
+  data: Prisma.XOR<Prisma.UnidadUpdateWithoutLecturasKilometrajeInput, Prisma.UnidadUncheckedUpdateWithoutLecturasKilometrajeInput>
+}
+
+export type UnidadUpdateWithoutLecturasKilometrajeInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  placa?: Prisma.StringFieldUpdateOperationsInput | string
+  placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
+  clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
+  tipoVehiculo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaVehicular?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  modelo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  anioFabricacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroEjes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numeroMotor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroVin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registroMtc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mtcVigencia?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  materialesPeligrosos?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotos?: Prisma.UnidadUpdatefotosInput | string[]
+  estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUpdateManyWithoutUnidadNestedInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
+  documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
+}
+
+export type UnidadUncheckedUpdateWithoutLecturasKilometrajeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
+  placa?: Prisma.StringFieldUpdateOperationsInput | string
+  placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
+  clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
+  tipoVehiculo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaVehicular?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  modelo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  anioFabricacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroEjes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numeroMotor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroVin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registroMtc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mtcVigencia?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  materialesPeligrosos?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotos?: Prisma.UnidadUpdatefotosInput | string[]
+  estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutUnidadNestedInput
+  manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
+  documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+}
+
+export type UnidadCreateWithoutManifiestosInput = {
+  publicId: string
+  placa: string
+  placaNormalizada: string
+  clase: $Enums.ClaseUnidad
+  tipoVehiculo?: string | null
+  categoriaVehicular?: string | null
+  marca?: string | null
+  modelo?: string | null
+  anio?: number | null
+  anioFabricacion?: number | null
+  color?: string | null
+  numeroEjes?: number | null
+  numeroMotor?: string | null
+  numeroVin?: string | null
+  registroMtc?: string | null
+  mtcVigencia?: Date | string | null
+  materialesPeligrosos?: string | null
+  cuenta?: string | null
+  clienteAsociado?: string | null
+  capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
+  tipoCombustible?: string | null
+  kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
+  fotos?: Prisma.UnidadCreatefotosInput | string[]
+  estadoUnidad?: $Enums.EstadoUnidad
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
+  documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
+  inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
+}
+
+export type UnidadUncheckedCreateWithoutManifiestosInput = {
+  id?: number
+  publicId: string
+  activoId: number
+  placa: string
+  placaNormalizada: string
+  clase: $Enums.ClaseUnidad
+  tipoVehiculo?: string | null
+  categoriaVehicular?: string | null
+  marca?: string | null
+  modelo?: string | null
+  anio?: number | null
+  anioFabricacion?: number | null
+  color?: string | null
+  numeroEjes?: number | null
+  numeroMotor?: string | null
+  numeroVin?: string | null
+  registroMtc?: string | null
+  mtcVigencia?: Date | string | null
+  materialesPeligrosos?: string | null
+  cuenta?: string | null
+  clienteAsociado?: string | null
+  capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
+  tipoCombustible?: string | null
+  kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1142,6 +2196,8 @@ export type UnidadUncheckedCreateWithoutManifiestosInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
   documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
 }
 
 export type UnidadCreateOrConnectWithoutManifiestosInput = {
@@ -1170,8 +2226,19 @@ export type UnidadCreateWithoutManifiestosSegundaUnidadInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1183,11 +2250,15 @@ export type UnidadCreateWithoutManifiestosSegundaUnidadInput = {
   manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutUnidadInput
   documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
 }
 
 export type UnidadUncheckedCreateWithoutManifiestosSegundaUnidadInput = {
   id?: number
   publicId: string
+  activoId: number
   placa: string
   placaNormalizada: string
   clase: $Enums.ClaseUnidad
@@ -1207,8 +2278,19 @@ export type UnidadUncheckedCreateWithoutManifiestosSegundaUnidadInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1220,6 +2302,8 @@ export type UnidadUncheckedCreateWithoutManifiestosSegundaUnidadInput = {
   manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUnidadInput
   documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
 }
 
 export type UnidadCreateOrConnectWithoutManifiestosSegundaUnidadInput = {
@@ -1259,8 +2343,19 @@ export type UnidadUpdateWithoutManifiestosInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1272,11 +2367,15 @@ export type UnidadUpdateWithoutManifiestosInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
 }
 
 export type UnidadUncheckedUpdateWithoutManifiestosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
   placa?: Prisma.StringFieldUpdateOperationsInput | string
   placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
   clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
@@ -1296,8 +2395,19 @@ export type UnidadUncheckedUpdateWithoutManifiestosInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1309,6 +2419,8 @@ export type UnidadUncheckedUpdateWithoutManifiestosInput = {
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
 }
 
 export type UnidadUpsertWithoutManifiestosSegundaUnidadInput = {
@@ -1343,8 +2455,19 @@ export type UnidadUpdateWithoutManifiestosSegundaUnidadInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1356,11 +2479,15 @@ export type UnidadUpdateWithoutManifiestosSegundaUnidadInput = {
   manifiestos?: Prisma.ManifiestoUpdateManyWithoutUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
 }
 
 export type UnidadUncheckedUpdateWithoutManifiestosSegundaUnidadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
   placa?: Prisma.StringFieldUpdateOperationsInput | string
   placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
   clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
@@ -1380,8 +2507,19 @@ export type UnidadUncheckedUpdateWithoutManifiestosSegundaUnidadInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1393,6 +2531,8 @@ export type UnidadUncheckedUpdateWithoutManifiestosSegundaUnidadInput = {
   manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
 }
 
 export type UnidadCreateWithoutDocumentosInput = {
@@ -1416,8 +2556,19 @@ export type UnidadCreateWithoutDocumentosInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1429,11 +2580,15 @@ export type UnidadCreateWithoutDocumentosInput = {
   manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutUnidadInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
 }
 
 export type UnidadUncheckedCreateWithoutDocumentosInput = {
   id?: number
   publicId: string
+  activoId: number
   placa: string
   placaNormalizada: string
   clase: $Enums.ClaseUnidad
@@ -1453,8 +2608,19 @@ export type UnidadUncheckedCreateWithoutDocumentosInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1466,6 +2632,8 @@ export type UnidadUncheckedCreateWithoutDocumentosInput = {
   manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUnidadInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
 }
 
 export type UnidadCreateOrConnectWithoutDocumentosInput = {
@@ -1505,8 +2673,19 @@ export type UnidadUpdateWithoutDocumentosInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1518,11 +2697,15 @@ export type UnidadUpdateWithoutDocumentosInput = {
   manifiestos?: Prisma.ManifiestoUpdateManyWithoutUnidadNestedInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
 }
 
 export type UnidadUncheckedUpdateWithoutDocumentosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
   placa?: Prisma.StringFieldUpdateOperationsInput | string
   placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
   clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
@@ -1542,8 +2725,19 @@ export type UnidadUncheckedUpdateWithoutDocumentosInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1555,6 +2749,8 @@ export type UnidadUncheckedUpdateWithoutDocumentosInput = {
   manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutUnidadNestedInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
 }
 
 export type UnidadCreateWithoutInspeccionesInput = {
@@ -1578,8 +2774,19 @@ export type UnidadCreateWithoutInspeccionesInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1591,11 +2798,15 @@ export type UnidadCreateWithoutInspeccionesInput = {
   manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutUnidadInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoCreateNestedManyWithoutSegundaUnidadInput
   documentos?: Prisma.DocumentoUnidadCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadCreateNestedManyWithoutUnidadInput
+  activo: Prisma.ActivoCreateNestedOneWithoutUnidadInput
 }
 
 export type UnidadUncheckedCreateWithoutInspeccionesInput = {
   id?: number
   publicId: string
+  activoId: number
   placa: string
   placaNormalizada: string
   clase: $Enums.ClaseUnidad
@@ -1615,8 +2826,19 @@ export type UnidadUncheckedCreateWithoutInspeccionesInput = {
   cuenta?: string | null
   clienteAsociado?: string | null
   capacidadCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: number | null
+  volumenCarga?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: string | null
+  numeroSerieCarroceria?: string | null
   tipoCombustible?: string | null
   kilometraje?: number | null
+  ultimoMantenimientoFecha?: Date | string | null
+  ultimoMantenimientoKilometraje?: number | null
+  proximoMantenimientoFecha?: Date | string | null
+  proximoMantenimientoKilometraje?: number | null
+  mantenimientoObservacion?: string | null
   fotos?: Prisma.UnidadCreatefotosInput | string[]
   estadoUnidad?: $Enums.EstadoUnidad
   estadoActivo?: $Enums.EstadoActivo
@@ -1628,6 +2850,8 @@ export type UnidadUncheckedCreateWithoutInspeccionesInput = {
   manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUnidadInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSegundaUnidadInput
   documentos?: Prisma.DocumentoUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedCreateNestedManyWithoutUnidadInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedCreateNestedManyWithoutUnidadInput
 }
 
 export type UnidadCreateOrConnectWithoutInspeccionesInput = {
@@ -1667,8 +2891,19 @@ export type UnidadUpdateWithoutInspeccionesInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1680,11 +2915,15 @@ export type UnidadUpdateWithoutInspeccionesInput = {
   manifiestos?: Prisma.ManifiestoUpdateManyWithoutUnidadNestedInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoUpdateManyWithoutSegundaUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUpdateManyWithoutUnidadNestedInput
+  activo?: Prisma.ActivoUpdateOneRequiredWithoutUnidadNestedInput
 }
 
 export type UnidadUncheckedUpdateWithoutInspeccionesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  activoId?: Prisma.IntFieldUpdateOperationsInput | number
   placa?: Prisma.StringFieldUpdateOperationsInput | string
   placaNormalizada?: Prisma.StringFieldUpdateOperationsInput | string
   clase?: Prisma.EnumClaseUnidadFieldUpdateOperationsInput | $Enums.ClaseUnidad
@@ -1704,8 +2943,19 @@ export type UnidadUncheckedUpdateWithoutInspeccionesInput = {
   cuenta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clienteAsociado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacidadCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pesoBrutoVehicular?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tara?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  capacidadPasajeros?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  volumenCarga?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tipoCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numeroSerieCarroceria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipoCombustible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   kilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ultimoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proximoMantenimientoFecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  proximoMantenimientoKilometraje?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mantenimientoObservacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotos?: Prisma.UnidadUpdatefotosInput | string[]
   estadoUnidad?: Prisma.EnumEstadoUnidadFieldUpdateOperationsInput | $Enums.EstadoUnidad
   estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
@@ -1717,6 +2967,8 @@ export type UnidadUncheckedUpdateWithoutInspeccionesInput = {
   manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutUnidadNestedInput
   manifiestosSegundaUnidad?: Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput
   documentos?: Prisma.DocumentoUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  asignacionesGps?: Prisma.AsignacionGpsUnidadUncheckedUpdateManyWithoutUnidadNestedInput
+  lecturasKilometraje?: Prisma.LecturaKilometrajeUnidadUncheckedUpdateManyWithoutUnidadNestedInput
 }
 
 
@@ -1729,6 +2981,8 @@ export type UnidadCountOutputType = {
   manifiestosSegundaUnidad: number
   documentos: number
   inspecciones: number
+  asignacionesGps: number
+  lecturasKilometraje: number
 }
 
 export type UnidadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1736,6 +2990,8 @@ export type UnidadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   manifiestosSegundaUnidad?: boolean | UnidadCountOutputTypeCountManifiestosSegundaUnidadArgs
   documentos?: boolean | UnidadCountOutputTypeCountDocumentosArgs
   inspecciones?: boolean | UnidadCountOutputTypeCountInspeccionesArgs
+  asignacionesGps?: boolean | UnidadCountOutputTypeCountAsignacionesGpsArgs
+  lecturasKilometraje?: boolean | UnidadCountOutputTypeCountLecturasKilometrajeArgs
 }
 
 /**
@@ -1776,10 +3032,25 @@ export type UnidadCountOutputTypeCountInspeccionesArgs<ExtArgs extends runtime.T
   where?: Prisma.InspeccionPreoperacionalWhereInput
 }
 
+/**
+ * UnidadCountOutputType without action
+ */
+export type UnidadCountOutputTypeCountAsignacionesGpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AsignacionGpsUnidadWhereInput
+}
+
+/**
+ * UnidadCountOutputType without action
+ */
+export type UnidadCountOutputTypeCountLecturasKilometrajeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LecturaKilometrajeUnidadWhereInput
+}
+
 
 export type UnidadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   publicId?: boolean
+  activoId?: boolean
   placa?: boolean
   placaNormalizada?: boolean
   clase?: boolean
@@ -1799,8 +3070,19 @@ export type UnidadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   cuenta?: boolean
   clienteAsociado?: boolean
   capacidadCarga?: boolean
+  pesoBrutoVehicular?: boolean
+  tara?: boolean
+  capacidadPasajeros?: boolean
+  volumenCarga?: boolean
+  tipoCarroceria?: boolean
+  numeroSerieCarroceria?: boolean
   tipoCombustible?: boolean
   kilometraje?: boolean
+  ultimoMantenimientoFecha?: boolean
+  ultimoMantenimientoKilometraje?: boolean
+  proximoMantenimientoFecha?: boolean
+  proximoMantenimientoKilometraje?: boolean
+  mantenimientoObservacion?: boolean
   fotos?: boolean
   estadoUnidad?: boolean
   estadoActivo?: boolean
@@ -1813,12 +3095,16 @@ export type UnidadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   manifiestosSegundaUnidad?: boolean | Prisma.Unidad$manifiestosSegundaUnidadArgs<ExtArgs>
   documentos?: boolean | Prisma.Unidad$documentosArgs<ExtArgs>
   inspecciones?: boolean | Prisma.Unidad$inspeccionesArgs<ExtArgs>
+  asignacionesGps?: boolean | Prisma.Unidad$asignacionesGpsArgs<ExtArgs>
+  lecturasKilometraje?: boolean | Prisma.Unidad$lecturasKilometrajeArgs<ExtArgs>
+  activo?: boolean | Prisma.ActivoDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnidadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unidad"]>
 
 export type UnidadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   publicId?: boolean
+  activoId?: boolean
   placa?: boolean
   placaNormalizada?: boolean
   clase?: boolean
@@ -1838,8 +3124,19 @@ export type UnidadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   cuenta?: boolean
   clienteAsociado?: boolean
   capacidadCarga?: boolean
+  pesoBrutoVehicular?: boolean
+  tara?: boolean
+  capacidadPasajeros?: boolean
+  volumenCarga?: boolean
+  tipoCarroceria?: boolean
+  numeroSerieCarroceria?: boolean
   tipoCombustible?: boolean
   kilometraje?: boolean
+  ultimoMantenimientoFecha?: boolean
+  ultimoMantenimientoKilometraje?: boolean
+  proximoMantenimientoFecha?: boolean
+  proximoMantenimientoKilometraje?: boolean
+  mantenimientoObservacion?: boolean
   fotos?: boolean
   estadoUnidad?: boolean
   estadoActivo?: boolean
@@ -1848,11 +3145,13 @@ export type UnidadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   usuarioCreacion?: boolean
   fechaModificacion?: boolean
   usuarioModificacion?: boolean
+  activo?: boolean | Prisma.ActivoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unidad"]>
 
 export type UnidadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   publicId?: boolean
+  activoId?: boolean
   placa?: boolean
   placaNormalizada?: boolean
   clase?: boolean
@@ -1872,8 +3171,19 @@ export type UnidadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   cuenta?: boolean
   clienteAsociado?: boolean
   capacidadCarga?: boolean
+  pesoBrutoVehicular?: boolean
+  tara?: boolean
+  capacidadPasajeros?: boolean
+  volumenCarga?: boolean
+  tipoCarroceria?: boolean
+  numeroSerieCarroceria?: boolean
   tipoCombustible?: boolean
   kilometraje?: boolean
+  ultimoMantenimientoFecha?: boolean
+  ultimoMantenimientoKilometraje?: boolean
+  proximoMantenimientoFecha?: boolean
+  proximoMantenimientoKilometraje?: boolean
+  mantenimientoObservacion?: boolean
   fotos?: boolean
   estadoUnidad?: boolean
   estadoActivo?: boolean
@@ -1882,11 +3192,13 @@ export type UnidadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   usuarioCreacion?: boolean
   fechaModificacion?: boolean
   usuarioModificacion?: boolean
+  activo?: boolean | Prisma.ActivoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unidad"]>
 
 export type UnidadSelectScalar = {
   id?: boolean
   publicId?: boolean
+  activoId?: boolean
   placa?: boolean
   placaNormalizada?: boolean
   clase?: boolean
@@ -1906,8 +3218,19 @@ export type UnidadSelectScalar = {
   cuenta?: boolean
   clienteAsociado?: boolean
   capacidadCarga?: boolean
+  pesoBrutoVehicular?: boolean
+  tara?: boolean
+  capacidadPasajeros?: boolean
+  volumenCarga?: boolean
+  tipoCarroceria?: boolean
+  numeroSerieCarroceria?: boolean
   tipoCombustible?: boolean
   kilometraje?: boolean
+  ultimoMantenimientoFecha?: boolean
+  ultimoMantenimientoKilometraje?: boolean
+  proximoMantenimientoFecha?: boolean
+  proximoMantenimientoKilometraje?: boolean
+  mantenimientoObservacion?: boolean
   fotos?: boolean
   estadoUnidad?: boolean
   estadoActivo?: boolean
@@ -1918,16 +3241,23 @@ export type UnidadSelectScalar = {
   usuarioModificacion?: boolean
 }
 
-export type UnidadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "placa" | "placaNormalizada" | "clase" | "tipoVehiculo" | "categoriaVehicular" | "marca" | "modelo" | "anio" | "anioFabricacion" | "color" | "numeroEjes" | "numeroMotor" | "numeroVin" | "registroMtc" | "mtcVigencia" | "materialesPeligrosos" | "cuenta" | "clienteAsociado" | "capacidadCarga" | "tipoCombustible" | "kilometraje" | "fotos" | "estadoUnidad" | "estadoActivo" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["unidad"]>
+export type UnidadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "activoId" | "placa" | "placaNormalizada" | "clase" | "tipoVehiculo" | "categoriaVehicular" | "marca" | "modelo" | "anio" | "anioFabricacion" | "color" | "numeroEjes" | "numeroMotor" | "numeroVin" | "registroMtc" | "mtcVigencia" | "materialesPeligrosos" | "cuenta" | "clienteAsociado" | "capacidadCarga" | "pesoBrutoVehicular" | "tara" | "capacidadPasajeros" | "volumenCarga" | "tipoCarroceria" | "numeroSerieCarroceria" | "tipoCombustible" | "kilometraje" | "ultimoMantenimientoFecha" | "ultimoMantenimientoKilometraje" | "proximoMantenimientoFecha" | "proximoMantenimientoKilometraje" | "mantenimientoObservacion" | "fotos" | "estadoUnidad" | "estadoActivo" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["unidad"]>
 export type UnidadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manifiestos?: boolean | Prisma.Unidad$manifiestosArgs<ExtArgs>
   manifiestosSegundaUnidad?: boolean | Prisma.Unidad$manifiestosSegundaUnidadArgs<ExtArgs>
   documentos?: boolean | Prisma.Unidad$documentosArgs<ExtArgs>
   inspecciones?: boolean | Prisma.Unidad$inspeccionesArgs<ExtArgs>
+  asignacionesGps?: boolean | Prisma.Unidad$asignacionesGpsArgs<ExtArgs>
+  lecturasKilometraje?: boolean | Prisma.Unidad$lecturasKilometrajeArgs<ExtArgs>
+  activo?: boolean | Prisma.ActivoDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnidadCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UnidadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UnidadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UnidadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  activo?: boolean | Prisma.ActivoDefaultArgs<ExtArgs>
+}
+export type UnidadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  activo?: boolean | Prisma.ActivoDefaultArgs<ExtArgs>
+}
 
 export type $UnidadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Unidad"
@@ -1936,10 +3266,14 @@ export type $UnidadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     manifiestosSegundaUnidad: Prisma.$ManifiestoPayload<ExtArgs>[]
     documentos: Prisma.$DocumentoUnidadPayload<ExtArgs>[]
     inspecciones: Prisma.$InspeccionPreoperacionalPayload<ExtArgs>[]
+    asignacionesGps: Prisma.$AsignacionGpsUnidadPayload<ExtArgs>[]
+    lecturasKilometraje: Prisma.$LecturaKilometrajeUnidadPayload<ExtArgs>[]
+    activo: Prisma.$ActivoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     publicId: string
+    activoId: number
     placa: string
     placaNormalizada: string
     clase: $Enums.ClaseUnidad
@@ -1959,8 +3293,19 @@ export type $UnidadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     cuenta: string | null
     clienteAsociado: string | null
     capacidadCarga: runtime.Decimal | null
+    pesoBrutoVehicular: runtime.Decimal | null
+    tara: runtime.Decimal | null
+    capacidadPasajeros: number | null
+    volumenCarga: runtime.Decimal | null
+    tipoCarroceria: string | null
+    numeroSerieCarroceria: string | null
     tipoCombustible: string | null
     kilometraje: number | null
+    ultimoMantenimientoFecha: Date | null
+    ultimoMantenimientoKilometraje: number | null
+    proximoMantenimientoFecha: Date | null
+    proximoMantenimientoKilometraje: number | null
+    mantenimientoObservacion: string | null
     fotos: string[]
     estadoUnidad: $Enums.EstadoUnidad
     estadoActivo: $Enums.EstadoActivo
@@ -2367,6 +3712,9 @@ export interface Prisma__UnidadClient<T, Null = never, ExtArgs extends runtime.T
   manifiestosSegundaUnidad<T extends Prisma.Unidad$manifiestosSegundaUnidadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unidad$manifiestosSegundaUnidadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManifiestoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documentos<T extends Prisma.Unidad$documentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unidad$documentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentoUnidadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inspecciones<T extends Prisma.Unidad$inspeccionesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unidad$inspeccionesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspeccionPreoperacionalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  asignacionesGps<T extends Prisma.Unidad$asignacionesGpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unidad$asignacionesGpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AsignacionGpsUnidadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lecturasKilometraje<T extends Prisma.Unidad$lecturasKilometrajeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unidad$lecturasKilometrajeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LecturaKilometrajeUnidadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activo<T extends Prisma.ActivoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ActivoDefaultArgs<ExtArgs>>): Prisma.Prisma__ActivoClient<runtime.Types.Result.GetResult<Prisma.$ActivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2398,6 +3746,7 @@ export interface Prisma__UnidadClient<T, Null = never, ExtArgs extends runtime.T
 export interface UnidadFieldRefs {
   readonly id: Prisma.FieldRef<"Unidad", 'Int'>
   readonly publicId: Prisma.FieldRef<"Unidad", 'String'>
+  readonly activoId: Prisma.FieldRef<"Unidad", 'Int'>
   readonly placa: Prisma.FieldRef<"Unidad", 'String'>
   readonly placaNormalizada: Prisma.FieldRef<"Unidad", 'String'>
   readonly clase: Prisma.FieldRef<"Unidad", 'ClaseUnidad'>
@@ -2417,8 +3766,19 @@ export interface UnidadFieldRefs {
   readonly cuenta: Prisma.FieldRef<"Unidad", 'String'>
   readonly clienteAsociado: Prisma.FieldRef<"Unidad", 'String'>
   readonly capacidadCarga: Prisma.FieldRef<"Unidad", 'Decimal'>
+  readonly pesoBrutoVehicular: Prisma.FieldRef<"Unidad", 'Decimal'>
+  readonly tara: Prisma.FieldRef<"Unidad", 'Decimal'>
+  readonly capacidadPasajeros: Prisma.FieldRef<"Unidad", 'Int'>
+  readonly volumenCarga: Prisma.FieldRef<"Unidad", 'Decimal'>
+  readonly tipoCarroceria: Prisma.FieldRef<"Unidad", 'String'>
+  readonly numeroSerieCarroceria: Prisma.FieldRef<"Unidad", 'String'>
   readonly tipoCombustible: Prisma.FieldRef<"Unidad", 'String'>
   readonly kilometraje: Prisma.FieldRef<"Unidad", 'Int'>
+  readonly ultimoMantenimientoFecha: Prisma.FieldRef<"Unidad", 'DateTime'>
+  readonly ultimoMantenimientoKilometraje: Prisma.FieldRef<"Unidad", 'Int'>
+  readonly proximoMantenimientoFecha: Prisma.FieldRef<"Unidad", 'DateTime'>
+  readonly proximoMantenimientoKilometraje: Prisma.FieldRef<"Unidad", 'Int'>
+  readonly mantenimientoObservacion: Prisma.FieldRef<"Unidad", 'String'>
   readonly fotos: Prisma.FieldRef<"Unidad", 'String[]'>
   readonly estadoUnidad: Prisma.FieldRef<"Unidad", 'EstadoUnidad'>
   readonly estadoActivo: Prisma.FieldRef<"Unidad", 'EstadoActivo'>
@@ -2681,6 +4041,10 @@ export type UnidadCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.UnidadCreateManyInput | Prisma.UnidadCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UnidadIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2751,6 +4115,10 @@ export type UnidadUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Unidads to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UnidadIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2913,6 +4281,54 @@ export type Unidad$inspeccionesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.InspeccionPreoperacionalScalarFieldEnum | Prisma.InspeccionPreoperacionalScalarFieldEnum[]
+}
+
+/**
+ * Unidad.asignacionesGps
+ */
+export type Unidad$asignacionesGpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AsignacionGpsUnidad
+   */
+  select?: Prisma.AsignacionGpsUnidadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AsignacionGpsUnidad
+   */
+  omit?: Prisma.AsignacionGpsUnidadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AsignacionGpsUnidadInclude<ExtArgs> | null
+  where?: Prisma.AsignacionGpsUnidadWhereInput
+  orderBy?: Prisma.AsignacionGpsUnidadOrderByWithRelationInput | Prisma.AsignacionGpsUnidadOrderByWithRelationInput[]
+  cursor?: Prisma.AsignacionGpsUnidadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AsignacionGpsUnidadScalarFieldEnum | Prisma.AsignacionGpsUnidadScalarFieldEnum[]
+}
+
+/**
+ * Unidad.lecturasKilometraje
+ */
+export type Unidad$lecturasKilometrajeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LecturaKilometrajeUnidad
+   */
+  select?: Prisma.LecturaKilometrajeUnidadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LecturaKilometrajeUnidad
+   */
+  omit?: Prisma.LecturaKilometrajeUnidadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LecturaKilometrajeUnidadInclude<ExtArgs> | null
+  where?: Prisma.LecturaKilometrajeUnidadWhereInput
+  orderBy?: Prisma.LecturaKilometrajeUnidadOrderByWithRelationInput | Prisma.LecturaKilometrajeUnidadOrderByWithRelationInput[]
+  cursor?: Prisma.LecturaKilometrajeUnidadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LecturaKilometrajeUnidadScalarFieldEnum | Prisma.LecturaKilometrajeUnidadScalarFieldEnum[]
 }
 
 /**

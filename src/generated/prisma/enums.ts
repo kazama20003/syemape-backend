@@ -56,6 +56,27 @@ export const EstadoUnidad = {
 export type EstadoUnidad = (typeof EstadoUnidad)[keyof typeof EstadoUnidad]
 
 
+export const TipoActivo = {
+  UNIDAD: 'UNIDAD',
+  EQUIPO: 'EQUIPO',
+  HERRAMIENTA: 'HERRAMIENTA',
+  INFRAESTRUCTURA: 'INFRAESTRUCTURA',
+  OTRO: 'OTRO'
+} as const
+
+export type TipoActivo = (typeof TipoActivo)[keyof typeof TipoActivo]
+
+
+export const EstadoOperativoActivo = {
+  OPERATIVO: 'OPERATIVO',
+  EN_MANTENIMIENTO: 'EN_MANTENIMIENTO',
+  FUERA_DE_SERVICIO: 'FUERA_DE_SERVICIO',
+  DE_BAJA: 'DE_BAJA'
+} as const
+
+export type EstadoOperativoActivo = (typeof EstadoOperativoActivo)[keyof typeof EstadoOperativoActivo]
+
+
 export const TipoPersonal = {
   CONDUCTOR: 'CONDUCTOR',
   COPILOTO: 'COPILOTO',

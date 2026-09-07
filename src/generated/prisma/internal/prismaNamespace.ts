@@ -400,8 +400,11 @@ export const ModelName = {
   Cliente: 'Cliente',
   Ubicacion: 'Ubicacion',
   TipoServicio: 'TipoServicio',
+  Activo: 'Activo',
   Unidad: 'Unidad',
   Personal: 'Personal',
+  AsignacionGpsUnidad: 'AsignacionGpsUnidad',
+  LecturaKilometrajeUnidad: 'LecturaKilometrajeUnidad',
   Ruta: 'Ruta',
   Manifiesto: 'Manifiesto',
   ManifiestoCarga: 'ManifiestoCarga',
@@ -433,7 +436,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "cliente" | "ubicacion" | "tipoServicio" | "unidad" | "personal" | "ruta" | "manifiesto" | "manifiestoCarga" | "manifiestoTripulante" | "historialEvento" | "rutaPunto" | "seguimientoManifiesto" | "incidencia" | "evidenciaIncidencia" | "documentoUnidad" | "documentoPersonal" | "inspeccionPreoperacional" | "inspeccionItem" | "turnoSupervisor" | "usuario" | "alerta"
+    modelProps: "cliente" | "ubicacion" | "tipoServicio" | "activo" | "unidad" | "personal" | "asignacionGpsUnidad" | "lecturaKilometrajeUnidad" | "ruta" | "manifiesto" | "manifiestoCarga" | "manifiestoTripulante" | "historialEvento" | "rutaPunto" | "seguimientoManifiesto" | "incidencia" | "evidenciaIncidencia" | "documentoUnidad" | "documentoPersonal" | "inspeccionPreoperacional" | "inspeccionItem" | "turnoSupervisor" | "usuario" | "alerta"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -659,6 +662,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Activo: {
+      payload: Prisma.$ActivoPayload<ExtArgs>
+      fields: Prisma.ActivoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ActivoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ActivoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>
+        }
+        findFirst: {
+          args: Prisma.ActivoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ActivoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>
+        }
+        findMany: {
+          args: Prisma.ActivoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>[]
+        }
+        create: {
+          args: Prisma.ActivoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>
+        }
+        createMany: {
+          args: Prisma.ActivoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ActivoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>[]
+        }
+        delete: {
+          args: Prisma.ActivoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>
+        }
+        update: {
+          args: Prisma.ActivoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ActivoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ActivoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ActivoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ActivoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivoPayload>
+        }
+        aggregate: {
+          args: Prisma.ActivoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateActivo>
+        }
+        groupBy: {
+          args: Prisma.ActivoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ActivoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivoCountAggregateOutputType> | number
+        }
+      }
+    }
     Unidad: {
       payload: Prisma.$UnidadPayload<ExtArgs>
       fields: Prisma.UnidadFieldRefs
@@ -804,6 +881,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PersonalCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PersonalCountAggregateOutputType> | number
+        }
+      }
+    }
+    AsignacionGpsUnidad: {
+      payload: Prisma.$AsignacionGpsUnidadPayload<ExtArgs>
+      fields: Prisma.AsignacionGpsUnidadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AsignacionGpsUnidadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AsignacionGpsUnidadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>
+        }
+        findFirst: {
+          args: Prisma.AsignacionGpsUnidadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AsignacionGpsUnidadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>
+        }
+        findMany: {
+          args: Prisma.AsignacionGpsUnidadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>[]
+        }
+        create: {
+          args: Prisma.AsignacionGpsUnidadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>
+        }
+        createMany: {
+          args: Prisma.AsignacionGpsUnidadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AsignacionGpsUnidadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>[]
+        }
+        delete: {
+          args: Prisma.AsignacionGpsUnidadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>
+        }
+        update: {
+          args: Prisma.AsignacionGpsUnidadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>
+        }
+        deleteMany: {
+          args: Prisma.AsignacionGpsUnidadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AsignacionGpsUnidadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AsignacionGpsUnidadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>[]
+        }
+        upsert: {
+          args: Prisma.AsignacionGpsUnidadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AsignacionGpsUnidadPayload>
+        }
+        aggregate: {
+          args: Prisma.AsignacionGpsUnidadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAsignacionGpsUnidad>
+        }
+        groupBy: {
+          args: Prisma.AsignacionGpsUnidadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AsignacionGpsUnidadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AsignacionGpsUnidadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AsignacionGpsUnidadCountAggregateOutputType> | number
+        }
+      }
+    }
+    LecturaKilometrajeUnidad: {
+      payload: Prisma.$LecturaKilometrajeUnidadPayload<ExtArgs>
+      fields: Prisma.LecturaKilometrajeUnidadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LecturaKilometrajeUnidadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LecturaKilometrajeUnidadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>
+        }
+        findFirst: {
+          args: Prisma.LecturaKilometrajeUnidadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LecturaKilometrajeUnidadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>
+        }
+        findMany: {
+          args: Prisma.LecturaKilometrajeUnidadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>[]
+        }
+        create: {
+          args: Prisma.LecturaKilometrajeUnidadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>
+        }
+        createMany: {
+          args: Prisma.LecturaKilometrajeUnidadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LecturaKilometrajeUnidadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>[]
+        }
+        delete: {
+          args: Prisma.LecturaKilometrajeUnidadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>
+        }
+        update: {
+          args: Prisma.LecturaKilometrajeUnidadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>
+        }
+        deleteMany: {
+          args: Prisma.LecturaKilometrajeUnidadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LecturaKilometrajeUnidadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LecturaKilometrajeUnidadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>[]
+        }
+        upsert: {
+          args: Prisma.LecturaKilometrajeUnidadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LecturaKilometrajeUnidadPayload>
+        }
+        aggregate: {
+          args: Prisma.LecturaKilometrajeUnidadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLecturaKilometrajeUnidad>
+        }
+        groupBy: {
+          args: Prisma.LecturaKilometrajeUnidadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LecturaKilometrajeUnidadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LecturaKilometrajeUnidadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LecturaKilometrajeUnidadCountAggregateOutputType> | number
         }
       }
     }
@@ -2093,9 +2318,35 @@ export const TipoServicioScalarFieldEnum = {
 export type TipoServicioScalarFieldEnum = (typeof TipoServicioScalarFieldEnum)[keyof typeof TipoServicioScalarFieldEnum]
 
 
+export const ActivoScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  tipo: 'tipo',
+  descripcion: 'descripcion',
+  estadoOperativo: 'estadoOperativo',
+  fechaAdquisicion: 'fechaAdquisicion',
+  valorAdquisicion: 'valorAdquisicion',
+  vidaUtilMeses: 'vidaUtilMeses',
+  proveedor: 'proveedor',
+  numeroSerie: 'numeroSerie',
+  responsableId: 'responsableId',
+  ubicacionHabitualId: 'ubicacionHabitualId',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type ActivoScalarFieldEnum = (typeof ActivoScalarFieldEnum)[keyof typeof ActivoScalarFieldEnum]
+
+
 export const UnidadScalarFieldEnum = {
   id: 'id',
   publicId: 'publicId',
+  activoId: 'activoId',
   placa: 'placa',
   placaNormalizada: 'placaNormalizada',
   clase: 'clase',
@@ -2115,8 +2366,19 @@ export const UnidadScalarFieldEnum = {
   cuenta: 'cuenta',
   clienteAsociado: 'clienteAsociado',
   capacidadCarga: 'capacidadCarga',
+  pesoBrutoVehicular: 'pesoBrutoVehicular',
+  tara: 'tara',
+  capacidadPasajeros: 'capacidadPasajeros',
+  volumenCarga: 'volumenCarga',
+  tipoCarroceria: 'tipoCarroceria',
+  numeroSerieCarroceria: 'numeroSerieCarroceria',
   tipoCombustible: 'tipoCombustible',
   kilometraje: 'kilometraje',
+  ultimoMantenimientoFecha: 'ultimoMantenimientoFecha',
+  ultimoMantenimientoKilometraje: 'ultimoMantenimientoKilometraje',
+  proximoMantenimientoFecha: 'proximoMantenimientoFecha',
+  proximoMantenimientoKilometraje: 'proximoMantenimientoKilometraje',
+  mantenimientoObservacion: 'mantenimientoObservacion',
   fotos: 'fotos',
   estadoUnidad: 'estadoUnidad',
   estadoActivo: 'estadoActivo',
@@ -2153,6 +2415,38 @@ export const PersonalScalarFieldEnum = {
 } as const
 
 export type PersonalScalarFieldEnum = (typeof PersonalScalarFieldEnum)[keyof typeof PersonalScalarFieldEnum]
+
+
+export const AsignacionGpsUnidadScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  unidadId: 'unidadId',
+  activoId: 'activoId',
+  fechaInicio: 'fechaInicio',
+  fechaFin: 'fechaFin',
+  observacion: 'observacion',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type AsignacionGpsUnidadScalarFieldEnum = (typeof AsignacionGpsUnidadScalarFieldEnum)[keyof typeof AsignacionGpsUnidadScalarFieldEnum]
+
+
+export const LecturaKilometrajeUnidadScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  unidadId: 'unidadId',
+  valor: 'valor',
+  fecha: 'fecha',
+  fuente: 'fuente',
+  observacion: 'observacion',
+  registradoPor: 'registradoPor'
+} as const
+
+export type LecturaKilometrajeUnidadScalarFieldEnum = (typeof LecturaKilometrajeUnidadScalarFieldEnum)[keyof typeof LecturaKilometrajeUnidadScalarFieldEnum]
 
 
 export const RutaScalarFieldEnum = {
@@ -2602,6 +2896,34 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TipoActivo'
+ */
+export type EnumTipoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoActivo'>
+    
+
+
+/**
+ * Reference to a field of type 'TipoActivo[]'
+ */
+export type ListEnumTipoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoActivo[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EstadoOperativoActivo'
+ */
+export type EnumEstadoOperativoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoOperativoActivo'>
+    
+
+
+/**
+ * Reference to a field of type 'EstadoOperativoActivo[]'
+ */
+export type ListEnumEstadoOperativoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoOperativoActivo[]'>
     
 
 
@@ -3059,8 +3381,11 @@ export type GlobalOmitConfig = {
   cliente?: Prisma.ClienteOmit
   ubicacion?: Prisma.UbicacionOmit
   tipoServicio?: Prisma.TipoServicioOmit
+  activo?: Prisma.ActivoOmit
   unidad?: Prisma.UnidadOmit
   personal?: Prisma.PersonalOmit
+  asignacionGpsUnidad?: Prisma.AsignacionGpsUnidadOmit
+  lecturaKilometrajeUnidad?: Prisma.LecturaKilometrajeUnidadOmit
   ruta?: Prisma.RutaOmit
   manifiesto?: Prisma.ManifiestoOmit
   manifiestoCarga?: Prisma.ManifiestoCargaOmit
