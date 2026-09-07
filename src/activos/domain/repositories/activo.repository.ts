@@ -12,6 +12,7 @@ export interface ActivoProps {
   codigo: string;
   nombre: string;
   tipo: TipoActivo;
+  subtipo: string | null;
   descripcion: string | null;
   estadoOperativo: EstadoOperativoActivo;
   fechaAdquisicion: Date | null;
@@ -28,6 +29,7 @@ export interface CrearActivoData {
   codigo: string;
   nombre: string;
   tipo: TipoActivo;
+  subtipo: string | null;
   descripcion: string | null;
   estadoOperativo: EstadoOperativoActivo;
   fechaAdquisicion: Date | null;
@@ -44,6 +46,7 @@ export interface ActualizarActivoData {
   codigo?: string;
   nombre?: string;
   tipo?: TipoActivo;
+  subtipo?: string | null;
   descripcion?: string | null;
   estadoOperativo?: EstadoOperativoActivo;
   fechaAdquisicion?: Date | null;

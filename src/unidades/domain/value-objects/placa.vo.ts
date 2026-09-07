@@ -7,14 +7,14 @@ import { DomainValidationError } from '../../../shared/errors/domain-validation.
 // `\p{Pd}` cubre TODOS los guiones Unicode (los datos reales pegados desde
 // Excel traen guion largo U+2013); U+2212 (signo menos) se agrega aparte
 // porque es categoria Sm, no Pd, y a la vista es indistinguible.
-export function normalizarPlaca(valor: string | null | undefined): string {
-  return (valor ?? '')
+export function normalizarPlaca(valor: unknown): string {
+  return (typeof valor === 'string' ? valor : '')
     .toUpperCase()
     .replace(/[\s\p{Pd}−]/gu, '')
     .trim();
 }
 
-export function exigirPlaca(valor: string | null | undefined): string {
+export function exigirPlaca(valor: unknown): string {
   const placa = normalizarPlaca(valor);
   if (!placa) {
     throw new DomainValidationError(

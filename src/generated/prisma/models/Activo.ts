@@ -48,6 +48,7 @@ export type ActivoMinAggregateOutputType = {
   codigo: string | null
   nombre: string | null
   tipo: $Enums.TipoActivo | null
+  subtipo: string | null
   descripcion: string | null
   estadoOperativo: $Enums.EstadoOperativoActivo | null
   fechaAdquisicion: Date | null
@@ -70,6 +71,7 @@ export type ActivoMaxAggregateOutputType = {
   codigo: string | null
   nombre: string | null
   tipo: $Enums.TipoActivo | null
+  subtipo: string | null
   descripcion: string | null
   estadoOperativo: $Enums.EstadoOperativoActivo | null
   fechaAdquisicion: Date | null
@@ -92,6 +94,7 @@ export type ActivoCountAggregateOutputType = {
   codigo: number
   nombre: number
   tipo: number
+  subtipo: number
   descripcion: number
   estadoOperativo: number
   fechaAdquisicion: number
@@ -132,6 +135,7 @@ export type ActivoMinAggregateInputType = {
   codigo?: true
   nombre?: true
   tipo?: true
+  subtipo?: true
   descripcion?: true
   estadoOperativo?: true
   fechaAdquisicion?: true
@@ -154,6 +158,7 @@ export type ActivoMaxAggregateInputType = {
   codigo?: true
   nombre?: true
   tipo?: true
+  subtipo?: true
   descripcion?: true
   estadoOperativo?: true
   fechaAdquisicion?: true
@@ -176,6 +181,7 @@ export type ActivoCountAggregateInputType = {
   codigo?: true
   nombre?: true
   tipo?: true
+  subtipo?: true
   descripcion?: true
   estadoOperativo?: true
   fechaAdquisicion?: true
@@ -285,6 +291,7 @@ export type ActivoGroupByOutputType = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo: string | null
   descripcion: string | null
   estadoOperativo: $Enums.EstadoOperativoActivo
   fechaAdquisicion: Date | null
@@ -330,6 +337,7 @@ export type ActivoWhereInput = {
   codigo?: Prisma.StringFilter<"Activo"> | string
   nombre?: Prisma.StringFilter<"Activo"> | string
   tipo?: Prisma.EnumTipoActivoFilter<"Activo"> | $Enums.TipoActivo
+  subtipo?: Prisma.StringNullableFilter<"Activo"> | string | null
   descripcion?: Prisma.StringNullableFilter<"Activo"> | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFilter<"Activo"> | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.DateTimeNullableFilter<"Activo"> | Date | string | null
@@ -356,6 +364,7 @@ export type ActivoOrderByWithRelationInput = {
   codigo?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
+  subtipo?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   estadoOperativo?: Prisma.SortOrder
   fechaAdquisicion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -385,6 +394,7 @@ export type ActivoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ActivoWhereInput | Prisma.ActivoWhereInput[]
   nombre?: Prisma.StringFilter<"Activo"> | string
   tipo?: Prisma.EnumTipoActivoFilter<"Activo"> | $Enums.TipoActivo
+  subtipo?: Prisma.StringNullableFilter<"Activo"> | string | null
   descripcion?: Prisma.StringNullableFilter<"Activo"> | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFilter<"Activo"> | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.DateTimeNullableFilter<"Activo"> | Date | string | null
@@ -411,6 +421,7 @@ export type ActivoOrderByWithAggregationInput = {
   codigo?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
+  subtipo?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   estadoOperativo?: Prisma.SortOrder
   fechaAdquisicion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -441,6 +452,7 @@ export type ActivoScalarWhereWithAggregatesInput = {
   codigo?: Prisma.StringWithAggregatesFilter<"Activo"> | string
   nombre?: Prisma.StringWithAggregatesFilter<"Activo"> | string
   tipo?: Prisma.EnumTipoActivoWithAggregatesFilter<"Activo"> | $Enums.TipoActivo
+  subtipo?: Prisma.StringNullableWithAggregatesFilter<"Activo"> | string | null
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"Activo"> | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoWithAggregatesFilter<"Activo"> | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.DateTimeNullableWithAggregatesFilter<"Activo"> | Date | string | null
@@ -462,6 +474,7 @@ export type ActivoCreateInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -486,6 +499,7 @@ export type ActivoUncheckedCreateInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -509,6 +523,7 @@ export type ActivoUpdateInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -533,6 +548,7 @@ export type ActivoUncheckedUpdateInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -557,6 +573,7 @@ export type ActivoCreateManyInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -578,6 +595,7 @@ export type ActivoUpdateManyMutationInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -598,6 +616,7 @@ export type ActivoUncheckedUpdateManyInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -630,6 +649,7 @@ export type ActivoCountOrderByAggregateInput = {
   codigo?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
+  subtipo?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   estadoOperativo?: Prisma.SortOrder
   fechaAdquisicion?: Prisma.SortOrder
@@ -660,6 +680,7 @@ export type ActivoMaxOrderByAggregateInput = {
   codigo?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
+  subtipo?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   estadoOperativo?: Prisma.SortOrder
   fechaAdquisicion?: Prisma.SortOrder
@@ -682,6 +703,7 @@ export type ActivoMinOrderByAggregateInput = {
   codigo?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   tipo?: Prisma.SortOrder
+  subtipo?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   estadoOperativo?: Prisma.SortOrder
   fechaAdquisicion?: Prisma.SortOrder
@@ -844,6 +866,7 @@ export type ActivoCreateWithoutUbicacionHabitualInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -867,6 +890,7 @@ export type ActivoUncheckedCreateWithoutUbicacionHabitualInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -919,6 +943,7 @@ export type ActivoScalarWhereInput = {
   codigo?: Prisma.StringFilter<"Activo"> | string
   nombre?: Prisma.StringFilter<"Activo"> | string
   tipo?: Prisma.EnumTipoActivoFilter<"Activo"> | $Enums.TipoActivo
+  subtipo?: Prisma.StringNullableFilter<"Activo"> | string | null
   descripcion?: Prisma.StringNullableFilter<"Activo"> | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFilter<"Activo"> | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.DateTimeNullableFilter<"Activo"> | Date | string | null
@@ -940,6 +965,7 @@ export type ActivoCreateWithoutUnidadInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -963,6 +989,7 @@ export type ActivoUncheckedCreateWithoutUnidadInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1001,6 +1028,7 @@ export type ActivoUpdateWithoutUnidadInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1024,6 +1052,7 @@ export type ActivoUncheckedUpdateWithoutUnidadInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1046,6 +1075,7 @@ export type ActivoCreateWithoutResponsableInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1069,6 +1099,7 @@ export type ActivoUncheckedCreateWithoutResponsableInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1117,6 +1148,7 @@ export type ActivoCreateWithoutAsignacionesGpsInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1140,6 +1172,7 @@ export type ActivoUncheckedCreateWithoutAsignacionesGpsInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1178,6 +1211,7 @@ export type ActivoUpdateWithoutAsignacionesGpsInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1201,6 +1235,7 @@ export type ActivoUncheckedUpdateWithoutAsignacionesGpsInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1224,6 +1259,7 @@ export type ActivoCreateManyUbicacionHabitualInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1244,6 +1280,7 @@ export type ActivoUpdateWithoutUbicacionHabitualInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1267,6 +1304,7 @@ export type ActivoUncheckedUpdateWithoutUbicacionHabitualInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1290,6 +1328,7 @@ export type ActivoUncheckedUpdateManyWithoutUbicacionHabitualInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1311,6 +1350,7 @@ export type ActivoCreateManyResponsableInput = {
   codigo: string
   nombre: string
   tipo: $Enums.TipoActivo
+  subtipo?: string | null
   descripcion?: string | null
   estadoOperativo?: $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Date | string | null
@@ -1331,6 +1371,7 @@ export type ActivoUpdateWithoutResponsableInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1354,6 +1395,7 @@ export type ActivoUncheckedUpdateWithoutResponsableInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1377,6 +1419,7 @@ export type ActivoUncheckedUpdateManyWithoutResponsableInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   tipo?: Prisma.EnumTipoActivoFieldUpdateOperationsInput | $Enums.TipoActivo
+  subtipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estadoOperativo?: Prisma.EnumEstadoOperativoActivoFieldUpdateOperationsInput | $Enums.EstadoOperativoActivo
   fechaAdquisicion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1429,6 +1472,7 @@ export type ActivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   codigo?: boolean
   nombre?: boolean
   tipo?: boolean
+  subtipo?: boolean
   descripcion?: boolean
   estadoOperativo?: boolean
   fechaAdquisicion?: boolean
@@ -1456,6 +1500,7 @@ export type ActivoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   codigo?: boolean
   nombre?: boolean
   tipo?: boolean
+  subtipo?: boolean
   descripcion?: boolean
   estadoOperativo?: boolean
   fechaAdquisicion?: boolean
@@ -1480,6 +1525,7 @@ export type ActivoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   codigo?: boolean
   nombre?: boolean
   tipo?: boolean
+  subtipo?: boolean
   descripcion?: boolean
   estadoOperativo?: boolean
   fechaAdquisicion?: boolean
@@ -1504,6 +1550,7 @@ export type ActivoSelectScalar = {
   codigo?: boolean
   nombre?: boolean
   tipo?: boolean
+  subtipo?: boolean
   descripcion?: boolean
   estadoOperativo?: boolean
   fechaAdquisicion?: boolean
@@ -1520,7 +1567,7 @@ export type ActivoSelectScalar = {
   usuarioModificacion?: boolean
 }
 
-export type ActivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "codigo" | "nombre" | "tipo" | "descripcion" | "estadoOperativo" | "fechaAdquisicion" | "valorAdquisicion" | "vidaUtilMeses" | "proveedor" | "numeroSerie" | "responsableId" | "ubicacionHabitualId" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["activo"]>
+export type ActivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "codigo" | "nombre" | "tipo" | "subtipo" | "descripcion" | "estadoOperativo" | "fechaAdquisicion" | "valorAdquisicion" | "vidaUtilMeses" | "proveedor" | "numeroSerie" | "responsableId" | "ubicacionHabitualId" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["activo"]>
 export type ActivoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   unidad?: boolean | Prisma.Activo$unidadArgs<ExtArgs>
   asignacionesGps?: boolean | Prisma.Activo$asignacionesGpsArgs<ExtArgs>
@@ -1551,6 +1598,7 @@ export type $ActivoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     codigo: string
     nombre: string
     tipo: $Enums.TipoActivo
+    subtipo: string | null
     descripcion: string | null
     estadoOperativo: $Enums.EstadoOperativoActivo
     fechaAdquisicion: Date | null
@@ -1997,6 +2045,7 @@ export interface ActivoFieldRefs {
   readonly codigo: Prisma.FieldRef<"Activo", 'String'>
   readonly nombre: Prisma.FieldRef<"Activo", 'String'>
   readonly tipo: Prisma.FieldRef<"Activo", 'TipoActivo'>
+  readonly subtipo: Prisma.FieldRef<"Activo", 'String'>
   readonly descripcion: Prisma.FieldRef<"Activo", 'String'>
   readonly estadoOperativo: Prisma.FieldRef<"Activo", 'EstadoOperativoActivo'>
   readonly fechaAdquisicion: Prisma.FieldRef<"Activo", 'DateTime'>

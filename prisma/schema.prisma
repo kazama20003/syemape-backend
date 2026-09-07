@@ -251,6 +251,7 @@ model Activo {
   codigo           String                 @unique
   nombre           String
   tipo             TipoActivo
+  subtipo          String?
   descripcion      String?
   estadoOperativo  EstadoOperativoActivo  @default(OPERATIVO) @map("estado_operativo")
   fechaAdquisicion DateTime?              @map("fecha_adquisicion")

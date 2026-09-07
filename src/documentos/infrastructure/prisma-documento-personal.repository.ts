@@ -96,11 +96,11 @@ export class PrismaDocumentoPersonalRepository implements DocumentoRepository {
   }
 
   async actualizar(
-    id: number,
+    padreId: number, id: number,
     data: ActualizarDocumentoData,
-  ): Promise<DocumentoProps> {
-    const row = await this.prisma.documentoPersonal.update({
-      where: { id },
+  ): Promise<DocumentoProps | null> {
+    const actualizado = await this.prisma.documentoPersonal.updateMany({
+      where: { id, personalId: padreId },
       data: {
         tipo: data.tipo,
         nombre: data.nombre,
@@ -112,8 +112,9 @@ export class PrismaDocumentoPersonalRepository implements DocumentoRepository {
         usuarioModificacion: data.usuarioModificacion,
         fechaModificacion: new Date(),
       },
-      select: SELECT,
     });
+    if (!actualizado.count) return null;
+    const row = await this.prisma.documentoPersonal.findUniqueOrThrow({ where: { id }, select: SELECT });
     await registrarHistorial(this.prisma, {
       entidad: this.entidad,
       entidadId: row.id,
@@ -125,16 +126,17 @@ export class PrismaDocumentoPersonalRepository implements DocumentoRepository {
     return aProps(row);
   }
 
-  async anular(id: number, usuarioModificacion: string): Promise<DocumentoProps> {
-    const row = await this.prisma.documentoPersonal.update({
-      where: { id },
+  async anular(padreId: number, id: number, usuarioModificacion: string): Promise<DocumentoProps | null> {
+    const actualizado = await this.prisma.documentoPersonal.updateMany({
+      where: { id, personalId: padreId },
       data: {
         estadoRegistro: EstadoRegistro.ANULADO,
         usuarioModificacion,
         fechaModificacion: new Date(),
       },
-      select: SELECT,
     });
+    if (!actualizado.count) return null;
+    const row = await this.prisma.documentoPersonal.findUniqueOrThrow({ where: { id }, select: SELECT });
     await registrarHistorial(this.prisma, {
       entidad: this.entidad,
       entidadId: row.id,

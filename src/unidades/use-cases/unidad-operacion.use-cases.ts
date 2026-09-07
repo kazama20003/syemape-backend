@@ -87,10 +87,12 @@ export class AsignarGpsUnidadUseCase {
     dto: AsignarGpsUnidadDto,
     actor: string,
   ): Promise<AsignacionGpsUnidadProps> {
+    const fechaInicio = fechaOpcional(dto.fechaInicio, 'fechaInicio') ?? new Date();
+    if (fechaInicio > new Date()) throw new DomainValidationError('La fecha de inicio no puede estar en el futuro.', 'fechaInicio', 'FECHA_FUTURA', dto.fechaInicio);
     return this.operaciones.asignarGps({
       unidadId,
       activoId: exigirEnteroNoNegativo(dto.activoId, 'activoId'),
-      fechaInicio: fechaOpcional(dto.fechaInicio, 'fechaInicio') ?? new Date(),
+      fechaInicio,
       observacion: aTextoOpcional(dto.observacion),
       actor,
     });

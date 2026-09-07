@@ -18,6 +18,7 @@ const SELECT = {
   codigo: true,
   nombre: true,
   tipo: true,
+  subtipo: true,
   descripcion: true,
   estadoOperativo: true,
   fechaAdquisicion: true,
