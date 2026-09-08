@@ -177,4 +177,18 @@ export interface ManifiestoRepository {
   ): Promise<{ datos: ManifiestoProps[]; total: number }>;
   // Total de manifiestos creados (para el correlativo MAPE-####).
   contarTotal(): Promise<number>;
+  // Manifiestos NO terminales (BORRADOR/EMITIDO/EN_RUTA) que ya ocupan alguna
+  // de las unidades o el conductor indicados. Para validar disponibilidad.
+  buscarActivosPorRecursos(filtros: {
+    unidadIds: number[];
+    conductorId: number;
+  }): Promise<
+    {
+      numero: string;
+      estado: EstadoManifiesto;
+      unidadId: number;
+      segundaUnidadId: number | null;
+      conductorId: number;
+    }[]
+  >;
 }

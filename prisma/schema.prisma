@@ -212,6 +212,8 @@ model Ubicacion {
 
   manifiestosOrigen  Manifiesto[] @relation("UbicacionOrigen")
   manifiestosDestino Manifiesto[] @relation("UbicacionDestino")
+  rutasOrigen        Ruta[]       @relation("RutaUbicacionOrigen")
+  rutasDestino       Ruta[]       @relation("RutaUbicacionDestino")
   rutaPuntos         RutaPunto[]
   activosHabituales  Activo[]     @relation("UbicacionHabitualActivo")
 
@@ -239,6 +241,29 @@ model TipoServicio {
   manifiestos Manifiesto[]
 
   @@map("tipo_servicio")
+}
+
+// Maestro administrable de tipos de vehiculo (CAMIONETA, TRACTO, CISTERNA...).
+// Trae la clase y la categoria MTC sugeridas para autocompletar el alta de
+// unidades.
+model TipoVehiculo {
+  id                Int          @id @default(autoincrement())
+  publicId          String       @unique @map("public_id") @db.Uuid
+  // Codigo estable para referencia programatica (ej. CAMA_BAJA).
+  codigo            String       @unique
+  nombre            String
+  descripcion       String?
+  claseSugerida     ClaseUnidad? @map("clase_sugerida")
+  categoriaSugerida String?      @map("categoria_sugerida")
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  @@map("tipo_vehiculo")
 }
 
 // ------------------------------- MAESTROS -------------------------------
@@ -433,8 +458,12 @@ model Ruta {
   id                    Int      @id @default(autoincrement())
   publicId              String   @unique @map("public_id") @db.Uuid
   nombre                String
+  // Nombre visible del trayecto; se deriva del maestro de ubicaciones cuando
+  // se referencia por id.
   origen                String
   destino               String
+  ubicacionOrigenId     Int?     @map("ubicacion_origen_id")
+  ubicacionDestinoId    Int?     @map("ubicacion_destino_id")
   distanciaKm           Decimal? @map("distancia_km") @db.Decimal(10, 2)
   duracionEstimadaHoras Decimal? @map("duracion_estimada_horas") @db.Decimal(6, 2)
   descripcion           String?
@@ -445,6 +474,9 @@ model Ruta {
   usuarioCreacion     String         @map("usuario_creacion")
   fechaModificacion   DateTime?      @map("fecha_modificacion")
   usuarioModificacion String?        @map("usuario_modificacion")
+
+  ubicacionOrigen  Ubicacion? @relation("RutaUbicacionOrigen", fields: [ubicacionOrigenId], references: [id])
+  ubicacionDestino Ubicacion? @relation("RutaUbicacionDestino", fields: [ubicacionDestinoId], references: [id])
 
   manifiestos Manifiesto[]
   puntos      RutaPunto[]

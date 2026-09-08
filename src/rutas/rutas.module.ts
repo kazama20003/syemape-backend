@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { UbicacionesModule } from '../ubicaciones/ubicaciones.module.js';
 import { RUTA_REPOSITORY } from './domain/repositories/ruta.repository.js';
 import { PrismaRutaRepository } from './infrastructure/prisma-ruta.repository.js';
 import { RutasController } from './controllers/rutas.controller.js';
@@ -11,6 +12,7 @@ import {
 } from './use-cases/ruta.use-cases.js';
 
 @Module({
+  imports: [UbicacionesModule],
   controllers: [RutasController],
   providers: [
     { provide: RUTA_REPOSITORY, useClass: PrismaRutaRepository },

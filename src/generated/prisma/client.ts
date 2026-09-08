@@ -57,6 +57,11 @@ export type Ubicacion = Prisma.UbicacionModel
  */
 export type TipoServicio = Prisma.TipoServicioModel
 /**
+ * Model TipoVehiculo
+ * 
+ */
+export type TipoVehiculo = Prisma.TipoVehiculoModel
+/**
  * Model Activo
  * 
  */

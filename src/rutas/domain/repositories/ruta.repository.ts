@@ -9,6 +9,8 @@ export interface RutaProps {
   nombre: string;
   origen: string;
   destino: string;
+  ubicacionOrigenId: number | null;
+  ubicacionDestinoId: number | null;
   distanciaKm: number | null;
   duracionEstimadaHoras: number | null;
   descripcion: string | null;
@@ -20,6 +22,8 @@ export interface CrearRutaData {
   nombre: string;
   origen: string;
   destino: string;
+  ubicacionOrigenId: number | null;
+  ubicacionDestinoId: number | null;
   distanciaKm: number | null;
   duracionEstimadaHoras: number | null;
   descripcion: string | null;
@@ -30,6 +34,8 @@ export interface ActualizarRutaData {
   nombre?: string;
   origen?: string;
   destino?: string;
+  ubicacionOrigenId?: number | null;
+  ubicacionDestinoId?: number | null;
   distanciaKm?: number | null;
   duracionEstimadaHoras?: number | null;
   descripcion?: string | null;

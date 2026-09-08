@@ -309,6 +309,7 @@ export class ListarUnidadesUseCase {
 
   async execute(query: {
     placa?: string;
+    color?: string;
     clase?: string;
     estadoUnidad?: string;
     estadoRegistro?: string;
@@ -323,6 +324,7 @@ export class ListarUnidadesUseCase {
 
     const { datos, total } = await this.unidades.buscar({
       placa: query.placa ? normalizarPlaca(query.placa) : undefined,
+      color: aTextoOpcional(query.color) ?? undefined,
       clase: esClaseUnidad(query.clase) ? query.clase : undefined,
       estadoUnidad: esEstadoUnidad(query.estadoUnidad)
         ? query.estadoUnidad

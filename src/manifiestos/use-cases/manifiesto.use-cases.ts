@@ -205,7 +205,9 @@ export class RegistrarManifiestoUseCase {
         conductorId,
       );
     }
-    if (conductor.estadoActivo !== 'ACTIVO' || conductor.tipo !== TipoPersonal.CONDUCTOR) throw new DomainValidationError('El conductor debe estar activo y ser de tipo CONDUCTOR.', 'conductorId', 'PERSONAL_NO_HABILITADO', conductorId);
+    // Un supervisor tambien puede conducir la unidad.
+    const puedeConducir = new Set([TipoPersonal.CONDUCTOR, TipoPersonal.SUPERVISOR]);
+    if (conductor.estadoActivo !== 'ACTIVO' || !puedeConducir.has(conductor.tipo)) throw new DomainValidationError('El conductor debe estar activo y ser CONDUCTOR o SUPERVISOR.', 'conductorId', 'PERSONAL_NO_HABILITADO', conductorId);
 
     // Referencias opcionales.
     const segundaUnidadId = idOpcional(dto.segundaUnidadId, 'segundaUnidadId');
@@ -274,6 +276,44 @@ export class RegistrarManifiestoUseCase {
     const ubicacionDestinoId = idOpcional(dto.ubicacionDestinoId, 'ubicacionDestinoId');
     if (ubicacionDestinoId !== null) {
       await this.exigirUbicacion(ubicacionDestinoId);
+    }
+
+    // Disponibilidad: la unidad, el acople y el conductor no pueden estar en
+    // otro manifiesto vigente (BORRADOR/EMITIDO/EN_RUTA). Solo un manifiesto
+    // CERRADO o ANULADO libera el recurso.
+    const unidadIds = [unidadId, ...(segundaUnidadId !== null ? [segundaUnidadId] : [])];
+    const ocupados = await this.manifiestos.buscarActivosPorRecursos({
+      unidadIds,
+      conductorId,
+    });
+    for (const m of ocupados) {
+      if (m.unidadId === unidadId || m.segundaUnidadId === unidadId) {
+        throw new DomainValidationError(
+          `La unidad ya está asignada al manifiesto ${m.numero} (${m.estado}). Ciérralo o anúlalo antes de asignarla a otro servicio.`,
+          'unidadId',
+          'RECURSO_OCUPADO',
+          unidadId,
+        );
+      }
+      if (
+        segundaUnidadId !== null &&
+        (m.unidadId === segundaUnidadId || m.segundaUnidadId === segundaUnidadId)
+      ) {
+        throw new DomainValidationError(
+          `La segunda unidad ya está asignada al manifiesto ${m.numero} (${m.estado}).`,
+          'segundaUnidadId',
+          'RECURSO_OCUPADO',
+          segundaUnidadId,
+        );
+      }
+      if (m.conductorId === conductorId) {
+        throw new DomainValidationError(
+          `El conductor ya está asignado al manifiesto ${m.numero} (${m.estado}).`,
+          'conductorId',
+          'RECURSO_OCUPADO',
+          conductorId,
+        );
+      }
     }
 
     const tripulantes = await this.resolverTripulantes(
@@ -520,7 +560,7 @@ export class CambiarEstadoManifiestoUseCase {
     const [unidad, segundaUnidad, conductor, supervisor] = await Promise.all([this.unidades.findById(manifiesto.unidad.id), manifiesto.segundaUnidad ? this.unidades.findById(manifiesto.segundaUnidad.id) : null, this.personal.findById(manifiesto.conductor.id), manifiesto.supervisor ? this.personal.findById(manifiesto.supervisor.id) : null]);
     const unidadValida = (u: Awaited<ReturnType<UnidadRepository['findById']>> | null) => u && u.estadoRegistro === EstadoRegistro.ACTIVO && u.estadoActivo === 'ACTIVO' && u.estadoUnidad === EstadoUnidad.OPERATIVA;
     if (!unidadValida(unidad) || (manifiesto.segundaUnidad !== null && !unidadValida(segundaUnidad))) throw new DomainValidationError('Las unidades del manifiesto deben estar activas y operativas.', 'unidadId', 'UNIDAD_NO_OPERATIVA');
-    if (!conductor || conductor.estadoRegistro !== EstadoRegistro.ACTIVO || conductor.estadoActivo !== 'ACTIVO' || conductor.tipo !== TipoPersonal.CONDUCTOR) throw new DomainValidationError('El conductor del manifiesto no esta habilitado.', 'conductorId', 'PERSONAL_NO_HABILITADO');
+    if (!conductor || conductor.estadoRegistro !== EstadoRegistro.ACTIVO || conductor.estadoActivo !== 'ACTIVO' || (conductor.tipo !== TipoPersonal.CONDUCTOR && conductor.tipo !== TipoPersonal.SUPERVISOR)) throw new DomainValidationError('El conductor del manifiesto no esta habilitado.', 'conductorId', 'PERSONAL_NO_HABILITADO');
     if (manifiesto.supervisor && (!supervisor || supervisor.estadoRegistro !== EstadoRegistro.ACTIVO || supervisor.estadoActivo !== 'ACTIVO' || supervisor.tipo !== TipoPersonal.SUPERVISOR)) throw new DomainValidationError('El supervisor del manifiesto no esta habilitado.', 'supervisorId', 'PERSONAL_NO_HABILITADO');
     for (const tripulante of manifiesto.tripulantes) {
       const persona = await this.personal.findById(tripulante.personal.id);
