@@ -254,4 +254,49 @@ export class PrismaManifiestoRepository implements ManifiestoRepository {
   async contarTotal(): Promise<number> {
     return this.prisma.manifiesto.count();
   }
+
+  async buscarActivosPorRecursos(filtros: {
+    unidadIds: number[];
+    conductorId: number;
+  }): Promise<
+    {
+      numero: string;
+      estado: EstadoManifiesto;
+      unidadId: number;
+      segundaUnidadId: number | null;
+      conductorId: number;
+    }[]
+  > {
+    const rows = await this.prisma.manifiesto.findMany({
+      where: {
+        estadoRegistro: EstadoRegistro.ACTIVO,
+        estado: {
+          in: [
+            EstadoManifiesto.BORRADOR,
+            EstadoManifiesto.EMITIDO,
+            EstadoManifiesto.EN_RUTA,
+          ],
+        },
+        OR: [
+          { unidadId: { in: filtros.unidadIds } },
+          { segundaUnidadId: { in: filtros.unidadIds } },
+          { conductorId: filtros.conductorId },
+        ],
+      },
+      select: {
+        numero: true,
+        estado: true,
+        unidadId: true,
+        segundaUnidadId: true,
+        conductorId: true,
+      },
+    });
+    return rows as {
+      numero: string;
+      estado: EstadoManifiesto;
+      unidadId: number;
+      segundaUnidadId: number | null;
+      conductorId: number;
+    }[];
+  }
 }

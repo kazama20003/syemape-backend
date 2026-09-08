@@ -400,6 +400,7 @@ export const ModelName = {
   Cliente: 'Cliente',
   Ubicacion: 'Ubicacion',
   TipoServicio: 'TipoServicio',
+  TipoVehiculo: 'TipoVehiculo',
   Activo: 'Activo',
   Unidad: 'Unidad',
   Personal: 'Personal',
@@ -436,7 +437,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "cliente" | "ubicacion" | "tipoServicio" | "activo" | "unidad" | "personal" | "asignacionGpsUnidad" | "lecturaKilometrajeUnidad" | "ruta" | "manifiesto" | "manifiestoCarga" | "manifiestoTripulante" | "historialEvento" | "rutaPunto" | "seguimientoManifiesto" | "incidencia" | "evidenciaIncidencia" | "documentoUnidad" | "documentoPersonal" | "inspeccionPreoperacional" | "inspeccionItem" | "turnoSupervisor" | "usuario" | "alerta"
+    modelProps: "cliente" | "ubicacion" | "tipoServicio" | "tipoVehiculo" | "activo" | "unidad" | "personal" | "asignacionGpsUnidad" | "lecturaKilometrajeUnidad" | "ruta" | "manifiesto" | "manifiestoCarga" | "manifiestoTripulante" | "historialEvento" | "rutaPunto" | "seguimientoManifiesto" | "incidencia" | "evidenciaIncidencia" | "documentoUnidad" | "documentoPersonal" | "inspeccionPreoperacional" | "inspeccionItem" | "turnoSupervisor" | "usuario" | "alerta"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -659,6 +660,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TipoServicioCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TipoServicioCountAggregateOutputType> | number
+        }
+      }
+    }
+    TipoVehiculo: {
+      payload: Prisma.$TipoVehiculoPayload<ExtArgs>
+      fields: Prisma.TipoVehiculoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TipoVehiculoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TipoVehiculoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>
+        }
+        findFirst: {
+          args: Prisma.TipoVehiculoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TipoVehiculoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>
+        }
+        findMany: {
+          args: Prisma.TipoVehiculoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>[]
+        }
+        create: {
+          args: Prisma.TipoVehiculoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>
+        }
+        createMany: {
+          args: Prisma.TipoVehiculoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TipoVehiculoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>[]
+        }
+        delete: {
+          args: Prisma.TipoVehiculoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>
+        }
+        update: {
+          args: Prisma.TipoVehiculoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>
+        }
+        deleteMany: {
+          args: Prisma.TipoVehiculoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TipoVehiculoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TipoVehiculoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>[]
+        }
+        upsert: {
+          args: Prisma.TipoVehiculoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TipoVehiculoPayload>
+        }
+        aggregate: {
+          args: Prisma.TipoVehiculoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTipoVehiculo>
+        }
+        groupBy: {
+          args: Prisma.TipoVehiculoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TipoVehiculoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TipoVehiculoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TipoVehiculoCountAggregateOutputType> | number
         }
       }
     }
@@ -2318,6 +2393,25 @@ export const TipoServicioScalarFieldEnum = {
 export type TipoServicioScalarFieldEnum = (typeof TipoServicioScalarFieldEnum)[keyof typeof TipoServicioScalarFieldEnum]
 
 
+export const TipoVehiculoScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  claseSugerida: 'claseSugerida',
+  categoriaSugerida: 'categoriaSugerida',
+  estadoActivo: 'estadoActivo',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type TipoVehiculoScalarFieldEnum = (typeof TipoVehiculoScalarFieldEnum)[keyof typeof TipoVehiculoScalarFieldEnum]
+
+
 export const ActivoScalarFieldEnum = {
   id: 'id',
   publicId: 'publicId',
@@ -2460,6 +2554,8 @@ export const RutaScalarFieldEnum = {
   nombre: 'nombre',
   origen: 'origen',
   destino: 'destino',
+  ubicacionOrigenId: 'ubicacionOrigenId',
+  ubicacionDestinoId: 'ubicacionDestinoId',
   distanciaKm: 'distanciaKm',
   duracionEstimadaHoras: 'duracionEstimadaHoras',
   descripcion: 'descripcion',
@@ -2905,6 +3001,20 @@ export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
 
 
 /**
+ * Reference to a field of type 'ClaseUnidad'
+ */
+export type EnumClaseUnidadFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClaseUnidad'>
+    
+
+
+/**
+ * Reference to a field of type 'ClaseUnidad[]'
+ */
+export type ListEnumClaseUnidadFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClaseUnidad[]'>
+    
+
+
+/**
  * Reference to a field of type 'TipoActivo'
  */
 export type EnumTipoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoActivo'>
@@ -2929,20 +3039,6 @@ export type EnumEstadoOperativoActivoFieldRefInput<$PrismaModel> = FieldRefInput
  * Reference to a field of type 'EstadoOperativoActivo[]'
  */
 export type ListEnumEstadoOperativoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoOperativoActivo[]'>
-    
-
-
-/**
- * Reference to a field of type 'ClaseUnidad'
- */
-export type EnumClaseUnidadFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClaseUnidad'>
-    
-
-
-/**
- * Reference to a field of type 'ClaseUnidad[]'
- */
-export type ListEnumClaseUnidadFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClaseUnidad[]'>
     
 
 
@@ -3386,6 +3482,7 @@ export type GlobalOmitConfig = {
   cliente?: Prisma.ClienteOmit
   ubicacion?: Prisma.UbicacionOmit
   tipoServicio?: Prisma.TipoServicioOmit
+  tipoVehiculo?: Prisma.TipoVehiculoOmit
   activo?: Prisma.ActivoOmit
   unidad?: Prisma.UnidadOmit
   personal?: Prisma.PersonalOmit

@@ -344,6 +344,9 @@ export class PrismaUnidadRepository implements UnidadRepository {
             },
           }
         : {}),
+      ...(filtros.color
+        ? { color: { equals: filtros.color, mode: 'insensitive' as const } }
+        : {}),
     };
     const [rows, total] = await Promise.all([
       this.prisma.unidad.findMany({

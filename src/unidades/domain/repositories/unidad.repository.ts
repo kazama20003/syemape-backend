@@ -124,6 +124,7 @@ export interface ActualizarUnidadData {
 
 export interface BuscarUnidadesFiltros {
   placa?: string;
+  color?: string;
   clase?: ClaseUnidad;
   estadoUnidad?: EstadoUnidad;
   estadoRegistro?: EstadoRegistro;
