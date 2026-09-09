@@ -54,6 +54,7 @@ export const ModelName = {
   Cliente: 'Cliente',
   Ubicacion: 'Ubicacion',
   TipoServicio: 'TipoServicio',
+  TipoVehiculo: 'TipoVehiculo',
   Activo: 'Activo',
   Unidad: 'Unidad',
   Personal: 'Personal',
@@ -154,6 +155,25 @@ export const TipoServicioScalarFieldEnum = {
 } as const
 
 export type TipoServicioScalarFieldEnum = (typeof TipoServicioScalarFieldEnum)[keyof typeof TipoServicioScalarFieldEnum]
+
+
+export const TipoVehiculoScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  claseSugerida: 'claseSugerida',
+  categoriaSugerida: 'categoriaSugerida',
+  estadoActivo: 'estadoActivo',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type TipoVehiculoScalarFieldEnum = (typeof TipoVehiculoScalarFieldEnum)[keyof typeof TipoVehiculoScalarFieldEnum]
 
 
 export const ActivoScalarFieldEnum = {
@@ -298,6 +318,8 @@ export const RutaScalarFieldEnum = {
   nombre: 'nombre',
   origen: 'origen',
   destino: 'destino',
+  ubicacionOrigenId: 'ubicacionOrigenId',
+  ubicacionDestinoId: 'ubicacionDestinoId',
   distanciaKm: 'distanciaKm',
   duracionEstimadaHoras: 'duracionEstimadaHoras',
   descripcion: 'descripcion',

@@ -7,6 +7,7 @@ import { RutasModule } from './rutas/rutas.module.js';
 import { ClientesModule } from './clientes/clientes.module.js';
 import { UbicacionesModule } from './ubicaciones/ubicaciones.module.js';
 import { TiposServicioModule } from './tipos-servicio/tipos-servicio.module.js';
+import { TiposVehiculoModule } from './tipos-vehiculo/tipos-vehiculo.module.js';
 import { ManifiestosModule } from './manifiestos/manifiestos.module.js';
 import { HistorialModule } from './historial/historial.module.js';
 import { SeguimientoModule } from './seguimiento/seguimiento.module.js';
@@ -24,6 +25,7 @@ import { ActivosModule } from './activos/activos.module.js';
     ClientesModule,
     UbicacionesModule,
     TiposServicioModule,
+    TiposVehiculoModule,
     ManifiestosModule,
     HistorialModule,
     SeguimientoModule,

@@ -19,6 +19,8 @@ const SELECT = {
   nombre: true,
   origen: true,
   destino: true,
+  ubicacionOrigenId: true,
+  ubicacionDestinoId: true,
   distanciaKm: true,
   duracionEstimadaHoras: true,
   descripcion: true,
@@ -32,6 +34,8 @@ interface FilaRuta {
   nombre: string;
   origen: string;
   destino: string;
+  ubicacionOrigenId: number | null;
+  ubicacionDestinoId: number | null;
   distanciaKm: { toNumber(): number } | null;
   duracionEstimadaHoras: { toNumber(): number } | null;
   descripcion: string | null;
@@ -46,6 +50,8 @@ function aProps(fila: FilaRuta): RutaProps {
     nombre: fila.nombre,
     origen: fila.origen,
     destino: fila.destino,
+    ubicacionOrigenId: fila.ubicacionOrigenId,
+    ubicacionDestinoId: fila.ubicacionDestinoId,
     distanciaKm: fila.distanciaKm?.toNumber() ?? null,
     duracionEstimadaHoras: fila.duracionEstimadaHoras?.toNumber() ?? null,
     descripcion: fila.descripcion,
@@ -78,6 +84,8 @@ export class PrismaRutaRepository implements RutaRepository {
         nombre: data.nombre,
         origen: data.origen,
         destino: data.destino,
+        ubicacionOrigenId: data.ubicacionOrigenId,
+        ubicacionDestinoId: data.ubicacionDestinoId,
         distanciaKm: data.distanciaKm,
         duracionEstimadaHoras: data.duracionEstimadaHoras,
         descripcion: data.descripcion,
@@ -103,6 +111,8 @@ export class PrismaRutaRepository implements RutaRepository {
         nombre: data.nombre,
         origen: data.origen,
         destino: data.destino,
+        ubicacionOrigenId: data.ubicacionOrigenId,
+        ubicacionDestinoId: data.ubicacionDestinoId,
         distanciaKm: data.distanciaKm,
         duracionEstimadaHoras: data.duracionEstimadaHoras,
         descripcion: data.descripcion,

@@ -28,12 +28,16 @@ export type AggregateRuta = {
 
 export type RutaAvgAggregateOutputType = {
   id: number | null
+  ubicacionOrigenId: number | null
+  ubicacionDestinoId: number | null
   distanciaKm: runtime.Decimal | null
   duracionEstimadaHoras: runtime.Decimal | null
 }
 
 export type RutaSumAggregateOutputType = {
   id: number | null
+  ubicacionOrigenId: number | null
+  ubicacionDestinoId: number | null
   distanciaKm: runtime.Decimal | null
   duracionEstimadaHoras: runtime.Decimal | null
 }
@@ -44,6 +48,8 @@ export type RutaMinAggregateOutputType = {
   nombre: string | null
   origen: string | null
   destino: string | null
+  ubicacionOrigenId: number | null
+  ubicacionDestinoId: number | null
   distanciaKm: runtime.Decimal | null
   duracionEstimadaHoras: runtime.Decimal | null
   descripcion: string | null
@@ -61,6 +67,8 @@ export type RutaMaxAggregateOutputType = {
   nombre: string | null
   origen: string | null
   destino: string | null
+  ubicacionOrigenId: number | null
+  ubicacionDestinoId: number | null
   distanciaKm: runtime.Decimal | null
   duracionEstimadaHoras: runtime.Decimal | null
   descripcion: string | null
@@ -78,6 +86,8 @@ export type RutaCountAggregateOutputType = {
   nombre: number
   origen: number
   destino: number
+  ubicacionOrigenId: number
+  ubicacionDestinoId: number
   distanciaKm: number
   duracionEstimadaHoras: number
   descripcion: number
@@ -93,12 +103,16 @@ export type RutaCountAggregateOutputType = {
 
 export type RutaAvgAggregateInputType = {
   id?: true
+  ubicacionOrigenId?: true
+  ubicacionDestinoId?: true
   distanciaKm?: true
   duracionEstimadaHoras?: true
 }
 
 export type RutaSumAggregateInputType = {
   id?: true
+  ubicacionOrigenId?: true
+  ubicacionDestinoId?: true
   distanciaKm?: true
   duracionEstimadaHoras?: true
 }
@@ -109,6 +123,8 @@ export type RutaMinAggregateInputType = {
   nombre?: true
   origen?: true
   destino?: true
+  ubicacionOrigenId?: true
+  ubicacionDestinoId?: true
   distanciaKm?: true
   duracionEstimadaHoras?: true
   descripcion?: true
@@ -126,6 +142,8 @@ export type RutaMaxAggregateInputType = {
   nombre?: true
   origen?: true
   destino?: true
+  ubicacionOrigenId?: true
+  ubicacionDestinoId?: true
   distanciaKm?: true
   duracionEstimadaHoras?: true
   descripcion?: true
@@ -143,6 +161,8 @@ export type RutaCountAggregateInputType = {
   nombre?: true
   origen?: true
   destino?: true
+  ubicacionOrigenId?: true
+  ubicacionDestinoId?: true
   distanciaKm?: true
   duracionEstimadaHoras?: true
   descripcion?: true
@@ -247,6 +267,8 @@ export type RutaGroupByOutputType = {
   nombre: string
   origen: string
   destino: string
+  ubicacionOrigenId: number | null
+  ubicacionDestinoId: number | null
   distanciaKm: runtime.Decimal | null
   duracionEstimadaHoras: runtime.Decimal | null
   descripcion: string | null
@@ -287,6 +309,8 @@ export type RutaWhereInput = {
   nombre?: Prisma.StringFilter<"Ruta"> | string
   origen?: Prisma.StringFilter<"Ruta"> | string
   destino?: Prisma.StringFilter<"Ruta"> | string
+  ubicacionOrigenId?: Prisma.IntNullableFilter<"Ruta"> | number | null
+  ubicacionDestinoId?: Prisma.IntNullableFilter<"Ruta"> | number | null
   distanciaKm?: Prisma.DecimalNullableFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: Prisma.DecimalNullableFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: Prisma.StringNullableFilter<"Ruta"> | string | null
@@ -296,6 +320,8 @@ export type RutaWhereInput = {
   usuarioCreacion?: Prisma.StringFilter<"Ruta"> | string
   fechaModificacion?: Prisma.DateTimeNullableFilter<"Ruta"> | Date | string | null
   usuarioModificacion?: Prisma.StringNullableFilter<"Ruta"> | string | null
+  ubicacionOrigen?: Prisma.XOR<Prisma.UbicacionNullableScalarRelationFilter, Prisma.UbicacionWhereInput> | null
+  ubicacionDestino?: Prisma.XOR<Prisma.UbicacionNullableScalarRelationFilter, Prisma.UbicacionWhereInput> | null
   manifiestos?: Prisma.ManifiestoListRelationFilter
   puntos?: Prisma.RutaPuntoListRelationFilter
 }
@@ -306,6 +332,8 @@ export type RutaOrderByWithRelationInput = {
   nombre?: Prisma.SortOrder
   origen?: Prisma.SortOrder
   destino?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrderInput | Prisma.SortOrder
   distanciaKm?: Prisma.SortOrderInput | Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -315,6 +343,8 @@ export type RutaOrderByWithRelationInput = {
   usuarioCreacion?: Prisma.SortOrder
   fechaModificacion?: Prisma.SortOrderInput | Prisma.SortOrder
   usuarioModificacion?: Prisma.SortOrderInput | Prisma.SortOrder
+  ubicacionOrigen?: Prisma.UbicacionOrderByWithRelationInput
+  ubicacionDestino?: Prisma.UbicacionOrderByWithRelationInput
   manifiestos?: Prisma.ManifiestoOrderByRelationAggregateInput
   puntos?: Prisma.RutaPuntoOrderByRelationAggregateInput
 }
@@ -328,6 +358,8 @@ export type RutaWhereUniqueInput = Prisma.AtLeast<{
   nombre?: Prisma.StringFilter<"Ruta"> | string
   origen?: Prisma.StringFilter<"Ruta"> | string
   destino?: Prisma.StringFilter<"Ruta"> | string
+  ubicacionOrigenId?: Prisma.IntNullableFilter<"Ruta"> | number | null
+  ubicacionDestinoId?: Prisma.IntNullableFilter<"Ruta"> | number | null
   distanciaKm?: Prisma.DecimalNullableFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: Prisma.DecimalNullableFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: Prisma.StringNullableFilter<"Ruta"> | string | null
@@ -337,6 +369,8 @@ export type RutaWhereUniqueInput = Prisma.AtLeast<{
   usuarioCreacion?: Prisma.StringFilter<"Ruta"> | string
   fechaModificacion?: Prisma.DateTimeNullableFilter<"Ruta"> | Date | string | null
   usuarioModificacion?: Prisma.StringNullableFilter<"Ruta"> | string | null
+  ubicacionOrigen?: Prisma.XOR<Prisma.UbicacionNullableScalarRelationFilter, Prisma.UbicacionWhereInput> | null
+  ubicacionDestino?: Prisma.XOR<Prisma.UbicacionNullableScalarRelationFilter, Prisma.UbicacionWhereInput> | null
   manifiestos?: Prisma.ManifiestoListRelationFilter
   puntos?: Prisma.RutaPuntoListRelationFilter
 }, "id" | "publicId">
@@ -347,6 +381,8 @@ export type RutaOrderByWithAggregationInput = {
   nombre?: Prisma.SortOrder
   origen?: Prisma.SortOrder
   destino?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrderInput | Prisma.SortOrder
   distanciaKm?: Prisma.SortOrderInput | Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -372,6 +408,8 @@ export type RutaScalarWhereWithAggregatesInput = {
   nombre?: Prisma.StringWithAggregatesFilter<"Ruta"> | string
   origen?: Prisma.StringWithAggregatesFilter<"Ruta"> | string
   destino?: Prisma.StringWithAggregatesFilter<"Ruta"> | string
+  ubicacionOrigenId?: Prisma.IntNullableWithAggregatesFilter<"Ruta"> | number | null
+  ubicacionDestinoId?: Prisma.IntNullableWithAggregatesFilter<"Ruta"> | number | null
   distanciaKm?: Prisma.DecimalNullableWithAggregatesFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: Prisma.DecimalNullableWithAggregatesFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"Ruta"> | string | null
@@ -397,6 +435,8 @@ export type RutaCreateInput = {
   usuarioCreacion: string
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
+  ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutRutasOrigenInput
+  ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutRutasDestinoInput
   manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutRutaInput
   puntos?: Prisma.RutaPuntoCreateNestedManyWithoutRutaInput
 }
@@ -407,6 +447,8 @@ export type RutaUncheckedCreateInput = {
   nombre: string
   origen: string
   destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
   distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: string | null
@@ -434,6 +476,8 @@ export type RutaUpdateInput = {
   usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutRutasOrigenNestedInput
+  ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutRutasDestinoNestedInput
   manifiestos?: Prisma.ManifiestoUpdateManyWithoutRutaNestedInput
   puntos?: Prisma.RutaPuntoUpdateManyWithoutRutaNestedInput
 }
@@ -444,6 +488,8 @@ export type RutaUncheckedUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   origen?: Prisma.StringFieldUpdateOperationsInput | string
   destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -463,6 +509,8 @@ export type RutaCreateManyInput = {
   nombre: string
   origen: string
   destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
   distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: string | null
@@ -496,6 +544,8 @@ export type RutaUncheckedUpdateManyInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   origen?: Prisma.StringFieldUpdateOperationsInput | string
   destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -507,12 +557,24 @@ export type RutaUncheckedUpdateManyInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+export type RutaListRelationFilter = {
+  every?: Prisma.RutaWhereInput
+  some?: Prisma.RutaWhereInput
+  none?: Prisma.RutaWhereInput
+}
+
+export type RutaOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type RutaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   publicId?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   origen?: Prisma.SortOrder
   destino?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrder
   distanciaKm?: Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
@@ -526,6 +588,8 @@ export type RutaCountOrderByAggregateInput = {
 
 export type RutaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrder
   distanciaKm?: Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrder
 }
@@ -536,6 +600,8 @@ export type RutaMaxOrderByAggregateInput = {
   nombre?: Prisma.SortOrder
   origen?: Prisma.SortOrder
   destino?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrder
   distanciaKm?: Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
@@ -553,6 +619,8 @@ export type RutaMinOrderByAggregateInput = {
   nombre?: Prisma.SortOrder
   origen?: Prisma.SortOrder
   destino?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrder
   distanciaKm?: Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
@@ -566,6 +634,8 @@ export type RutaMinOrderByAggregateInput = {
 
 export type RutaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  ubicacionOrigenId?: Prisma.SortOrder
+  ubicacionDestinoId?: Prisma.SortOrder
   distanciaKm?: Prisma.SortOrder
   duracionEstimadaHoras?: Prisma.SortOrder
 }
@@ -578,6 +648,90 @@ export type RutaNullableScalarRelationFilter = {
 export type RutaScalarRelationFilter = {
   is?: Prisma.RutaWhereInput
   isNot?: Prisma.RutaWhereInput
+}
+
+export type RutaCreateNestedManyWithoutUbicacionOrigenInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput> | Prisma.RutaCreateWithoutUbicacionOrigenInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput | Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionOrigenInputEnvelope
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+}
+
+export type RutaCreateNestedManyWithoutUbicacionDestinoInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput> | Prisma.RutaCreateWithoutUbicacionDestinoInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput | Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionDestinoInputEnvelope
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+}
+
+export type RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput> | Prisma.RutaCreateWithoutUbicacionOrigenInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput | Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionOrigenInputEnvelope
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+}
+
+export type RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput> | Prisma.RutaCreateWithoutUbicacionDestinoInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput | Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionDestinoInputEnvelope
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+}
+
+export type RutaUpdateManyWithoutUbicacionOrigenNestedInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput> | Prisma.RutaCreateWithoutUbicacionOrigenInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput | Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput[]
+  upsert?: Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionOrigenInput | Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionOrigenInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionOrigenInputEnvelope
+  set?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  disconnect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  delete?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  update?: Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionOrigenInput | Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionOrigenInput[]
+  updateMany?: Prisma.RutaUpdateManyWithWhereWithoutUbicacionOrigenInput | Prisma.RutaUpdateManyWithWhereWithoutUbicacionOrigenInput[]
+  deleteMany?: Prisma.RutaScalarWhereInput | Prisma.RutaScalarWhereInput[]
+}
+
+export type RutaUpdateManyWithoutUbicacionDestinoNestedInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput> | Prisma.RutaCreateWithoutUbicacionDestinoInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput | Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput[]
+  upsert?: Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionDestinoInput | Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionDestinoInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionDestinoInputEnvelope
+  set?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  disconnect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  delete?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  update?: Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionDestinoInput | Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionDestinoInput[]
+  updateMany?: Prisma.RutaUpdateManyWithWhereWithoutUbicacionDestinoInput | Prisma.RutaUpdateManyWithWhereWithoutUbicacionDestinoInput[]
+  deleteMany?: Prisma.RutaScalarWhereInput | Prisma.RutaScalarWhereInput[]
+}
+
+export type RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput> | Prisma.RutaCreateWithoutUbicacionOrigenInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput | Prisma.RutaCreateOrConnectWithoutUbicacionOrigenInput[]
+  upsert?: Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionOrigenInput | Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionOrigenInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionOrigenInputEnvelope
+  set?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  disconnect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  delete?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  update?: Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionOrigenInput | Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionOrigenInput[]
+  updateMany?: Prisma.RutaUpdateManyWithWhereWithoutUbicacionOrigenInput | Prisma.RutaUpdateManyWithWhereWithoutUbicacionOrigenInput[]
+  deleteMany?: Prisma.RutaScalarWhereInput | Prisma.RutaScalarWhereInput[]
+}
+
+export type RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput = {
+  create?: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput> | Prisma.RutaCreateWithoutUbicacionDestinoInput[] | Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput[]
+  connectOrCreate?: Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput | Prisma.RutaCreateOrConnectWithoutUbicacionDestinoInput[]
+  upsert?: Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionDestinoInput | Prisma.RutaUpsertWithWhereUniqueWithoutUbicacionDestinoInput[]
+  createMany?: Prisma.RutaCreateManyUbicacionDestinoInputEnvelope
+  set?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  disconnect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  delete?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  connect?: Prisma.RutaWhereUniqueInput | Prisma.RutaWhereUniqueInput[]
+  update?: Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionDestinoInput | Prisma.RutaUpdateWithWhereUniqueWithoutUbicacionDestinoInput[]
+  updateMany?: Prisma.RutaUpdateManyWithWhereWithoutUbicacionDestinoInput | Prisma.RutaUpdateManyWithWhereWithoutUbicacionDestinoInput[]
+  deleteMany?: Prisma.RutaScalarWhereInput | Prisma.RutaScalarWhereInput[]
 }
 
 export type RutaCreateNestedOneWithoutManifiestosInput = {
@@ -610,6 +764,158 @@ export type RutaUpdateOneRequiredWithoutPuntosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RutaUpdateToOneWithWhereWithoutPuntosInput, Prisma.RutaUpdateWithoutPuntosInput>, Prisma.RutaUncheckedUpdateWithoutPuntosInput>
 }
 
+export type RutaCreateWithoutUbicacionOrigenInput = {
+  publicId: string
+  nombre: string
+  origen: string
+  destino: string
+  distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutRutasDestinoInput
+  manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutRutaInput
+  puntos?: Prisma.RutaPuntoCreateNestedManyWithoutRutaInput
+}
+
+export type RutaUncheckedCreateWithoutUbicacionOrigenInput = {
+  id?: number
+  publicId: string
+  nombre: string
+  origen: string
+  destino: string
+  ubicacionDestinoId?: number | null
+  distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutRutaInput
+  puntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutRutaInput
+}
+
+export type RutaCreateOrConnectWithoutUbicacionOrigenInput = {
+  where: Prisma.RutaWhereUniqueInput
+  create: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput>
+}
+
+export type RutaCreateManyUbicacionOrigenInputEnvelope = {
+  data: Prisma.RutaCreateManyUbicacionOrigenInput | Prisma.RutaCreateManyUbicacionOrigenInput[]
+  skipDuplicates?: boolean
+}
+
+export type RutaCreateWithoutUbicacionDestinoInput = {
+  publicId: string
+  nombre: string
+  origen: string
+  destino: string
+  distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutRutasOrigenInput
+  manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutRutaInput
+  puntos?: Prisma.RutaPuntoCreateNestedManyWithoutRutaInput
+}
+
+export type RutaUncheckedCreateWithoutUbicacionDestinoInput = {
+  id?: number
+  publicId: string
+  nombre: string
+  origen: string
+  destino: string
+  ubicacionOrigenId?: number | null
+  distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutRutaInput
+  puntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutRutaInput
+}
+
+export type RutaCreateOrConnectWithoutUbicacionDestinoInput = {
+  where: Prisma.RutaWhereUniqueInput
+  create: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput>
+}
+
+export type RutaCreateManyUbicacionDestinoInputEnvelope = {
+  data: Prisma.RutaCreateManyUbicacionDestinoInput | Prisma.RutaCreateManyUbicacionDestinoInput[]
+  skipDuplicates?: boolean
+}
+
+export type RutaUpsertWithWhereUniqueWithoutUbicacionOrigenInput = {
+  where: Prisma.RutaWhereUniqueInput
+  update: Prisma.XOR<Prisma.RutaUpdateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedUpdateWithoutUbicacionOrigenInput>
+  create: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedCreateWithoutUbicacionOrigenInput>
+}
+
+export type RutaUpdateWithWhereUniqueWithoutUbicacionOrigenInput = {
+  where: Prisma.RutaWhereUniqueInput
+  data: Prisma.XOR<Prisma.RutaUpdateWithoutUbicacionOrigenInput, Prisma.RutaUncheckedUpdateWithoutUbicacionOrigenInput>
+}
+
+export type RutaUpdateManyWithWhereWithoutUbicacionOrigenInput = {
+  where: Prisma.RutaScalarWhereInput
+  data: Prisma.XOR<Prisma.RutaUpdateManyMutationInput, Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenInput>
+}
+
+export type RutaScalarWhereInput = {
+  AND?: Prisma.RutaScalarWhereInput | Prisma.RutaScalarWhereInput[]
+  OR?: Prisma.RutaScalarWhereInput[]
+  NOT?: Prisma.RutaScalarWhereInput | Prisma.RutaScalarWhereInput[]
+  id?: Prisma.IntFilter<"Ruta"> | number
+  publicId?: Prisma.UuidFilter<"Ruta"> | string
+  nombre?: Prisma.StringFilter<"Ruta"> | string
+  origen?: Prisma.StringFilter<"Ruta"> | string
+  destino?: Prisma.StringFilter<"Ruta"> | string
+  ubicacionOrigenId?: Prisma.IntNullableFilter<"Ruta"> | number | null
+  ubicacionDestinoId?: Prisma.IntNullableFilter<"Ruta"> | number | null
+  distanciaKm?: Prisma.DecimalNullableFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.DecimalNullableFilter<"Ruta"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.StringNullableFilter<"Ruta"> | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFilter<"Ruta"> | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFilter<"Ruta"> | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFilter<"Ruta"> | Date | string
+  usuarioCreacion?: Prisma.StringFilter<"Ruta"> | string
+  fechaModificacion?: Prisma.DateTimeNullableFilter<"Ruta"> | Date | string | null
+  usuarioModificacion?: Prisma.StringNullableFilter<"Ruta"> | string | null
+}
+
+export type RutaUpsertWithWhereUniqueWithoutUbicacionDestinoInput = {
+  where: Prisma.RutaWhereUniqueInput
+  update: Prisma.XOR<Prisma.RutaUpdateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedUpdateWithoutUbicacionDestinoInput>
+  create: Prisma.XOR<Prisma.RutaCreateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedCreateWithoutUbicacionDestinoInput>
+}
+
+export type RutaUpdateWithWhereUniqueWithoutUbicacionDestinoInput = {
+  where: Prisma.RutaWhereUniqueInput
+  data: Prisma.XOR<Prisma.RutaUpdateWithoutUbicacionDestinoInput, Prisma.RutaUncheckedUpdateWithoutUbicacionDestinoInput>
+}
+
+export type RutaUpdateManyWithWhereWithoutUbicacionDestinoInput = {
+  where: Prisma.RutaScalarWhereInput
+  data: Prisma.XOR<Prisma.RutaUpdateManyMutationInput, Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoInput>
+}
+
 export type RutaCreateWithoutManifiestosInput = {
   publicId: string
   nombre: string
@@ -624,6 +930,8 @@ export type RutaCreateWithoutManifiestosInput = {
   usuarioCreacion: string
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
+  ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutRutasOrigenInput
+  ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutRutasDestinoInput
   puntos?: Prisma.RutaPuntoCreateNestedManyWithoutRutaInput
 }
 
@@ -633,6 +941,8 @@ export type RutaUncheckedCreateWithoutManifiestosInput = {
   nombre: string
   origen: string
   destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
   distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: string | null
@@ -675,6 +985,8 @@ export type RutaUpdateWithoutManifiestosInput = {
   usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutRutasOrigenNestedInput
+  ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutRutasDestinoNestedInput
   puntos?: Prisma.RutaPuntoUpdateManyWithoutRutaNestedInput
 }
 
@@ -684,6 +996,8 @@ export type RutaUncheckedUpdateWithoutManifiestosInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   origen?: Prisma.StringFieldUpdateOperationsInput | string
   destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -710,6 +1024,8 @@ export type RutaCreateWithoutPuntosInput = {
   usuarioCreacion: string
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
+  ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutRutasOrigenInput
+  ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutRutasDestinoInput
   manifiestos?: Prisma.ManifiestoCreateNestedManyWithoutRutaInput
 }
 
@@ -719,6 +1035,8 @@ export type RutaUncheckedCreateWithoutPuntosInput = {
   nombre: string
   origen: string
   destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
   distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descripcion?: string | null
@@ -761,11 +1079,68 @@ export type RutaUpdateWithoutPuntosInput = {
   usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutRutasOrigenNestedInput
+  ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutRutasDestinoNestedInput
   manifiestos?: Prisma.ManifiestoUpdateManyWithoutRutaNestedInput
 }
 
 export type RutaUncheckedUpdateWithoutPuntosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutRutaNestedInput
+}
+
+export type RutaCreateManyUbicacionOrigenInput = {
+  id?: number
+  publicId: string
+  nombre: string
+  origen: string
+  destino: string
+  ubicacionDestinoId?: number | null
+  distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+}
+
+export type RutaCreateManyUbicacionDestinoInput = {
+  id?: number
+  publicId: string
+  nombre: string
+  origen: string
+  destino: string
+  ubicacionOrigenId?: number | null
+  distanciaKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+}
+
+export type RutaUpdateWithoutUbicacionOrigenInput = {
   publicId?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   origen?: Prisma.StringFieldUpdateOperationsInput | string
@@ -779,7 +1154,104 @@ export type RutaUncheckedUpdateWithoutPuntosInput = {
   usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutRutasDestinoNestedInput
+  manifiestos?: Prisma.ManifiestoUpdateManyWithoutRutaNestedInput
+  puntos?: Prisma.RutaPuntoUpdateManyWithoutRutaNestedInput
+}
+
+export type RutaUncheckedUpdateWithoutUbicacionOrigenInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutRutaNestedInput
+  puntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutRutaNestedInput
+}
+
+export type RutaUncheckedUpdateManyWithoutUbicacionOrigenInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type RutaUpdateWithoutUbicacionDestinoInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutRutasOrigenNestedInput
+  manifiestos?: Prisma.ManifiestoUpdateManyWithoutRutaNestedInput
+  puntos?: Prisma.RutaPuntoUpdateManyWithoutRutaNestedInput
+}
+
+export type RutaUncheckedUpdateWithoutUbicacionDestinoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestos?: Prisma.ManifiestoUncheckedUpdateManyWithoutRutaNestedInput
+  puntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutRutaNestedInput
+}
+
+export type RutaUncheckedUpdateManyWithoutUbicacionDestinoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  distanciaKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duracionEstimadaHoras?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -828,6 +1300,8 @@ export type RutaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   nombre?: boolean
   origen?: boolean
   destino?: boolean
+  ubicacionOrigenId?: boolean
+  ubicacionDestinoId?: boolean
   distanciaKm?: boolean
   duracionEstimadaHoras?: boolean
   descripcion?: boolean
@@ -837,6 +1311,8 @@ export type RutaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   usuarioCreacion?: boolean
   fechaModificacion?: boolean
   usuarioModificacion?: boolean
+  ubicacionOrigen?: boolean | Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>
+  ubicacionDestino?: boolean | Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>
   manifiestos?: boolean | Prisma.Ruta$manifiestosArgs<ExtArgs>
   puntos?: boolean | Prisma.Ruta$puntosArgs<ExtArgs>
   _count?: boolean | Prisma.RutaCountOutputTypeDefaultArgs<ExtArgs>
@@ -848,6 +1324,8 @@ export type RutaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nombre?: boolean
   origen?: boolean
   destino?: boolean
+  ubicacionOrigenId?: boolean
+  ubicacionDestinoId?: boolean
   distanciaKm?: boolean
   duracionEstimadaHoras?: boolean
   descripcion?: boolean
@@ -857,6 +1335,8 @@ export type RutaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   usuarioCreacion?: boolean
   fechaModificacion?: boolean
   usuarioModificacion?: boolean
+  ubicacionOrigen?: boolean | Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>
+  ubicacionDestino?: boolean | Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>
 }, ExtArgs["result"]["ruta"]>
 
 export type RutaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -865,6 +1345,8 @@ export type RutaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nombre?: boolean
   origen?: boolean
   destino?: boolean
+  ubicacionOrigenId?: boolean
+  ubicacionDestinoId?: boolean
   distanciaKm?: boolean
   duracionEstimadaHoras?: boolean
   descripcion?: boolean
@@ -874,6 +1356,8 @@ export type RutaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   usuarioCreacion?: boolean
   fechaModificacion?: boolean
   usuarioModificacion?: boolean
+  ubicacionOrigen?: boolean | Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>
+  ubicacionDestino?: boolean | Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>
 }, ExtArgs["result"]["ruta"]>
 
 export type RutaSelectScalar = {
@@ -882,6 +1366,8 @@ export type RutaSelectScalar = {
   nombre?: boolean
   origen?: boolean
   destino?: boolean
+  ubicacionOrigenId?: boolean
+  ubicacionDestinoId?: boolean
   distanciaKm?: boolean
   duracionEstimadaHoras?: boolean
   descripcion?: boolean
@@ -893,18 +1379,28 @@ export type RutaSelectScalar = {
   usuarioModificacion?: boolean
 }
 
-export type RutaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "nombre" | "origen" | "destino" | "distanciaKm" | "duracionEstimadaHoras" | "descripcion" | "estadoActivo" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["ruta"]>
+export type RutaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "nombre" | "origen" | "destino" | "ubicacionOrigenId" | "ubicacionDestinoId" | "distanciaKm" | "duracionEstimadaHoras" | "descripcion" | "estadoActivo" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["ruta"]>
 export type RutaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ubicacionOrigen?: boolean | Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>
+  ubicacionDestino?: boolean | Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>
   manifiestos?: boolean | Prisma.Ruta$manifiestosArgs<ExtArgs>
   puntos?: boolean | Prisma.Ruta$puntosArgs<ExtArgs>
   _count?: boolean | Prisma.RutaCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type RutaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type RutaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type RutaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ubicacionOrigen?: boolean | Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>
+  ubicacionDestino?: boolean | Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>
+}
+export type RutaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ubicacionOrigen?: boolean | Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>
+  ubicacionDestino?: boolean | Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>
+}
 
 export type $RutaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ruta"
   objects: {
+    ubicacionOrigen: Prisma.$UbicacionPayload<ExtArgs> | null
+    ubicacionDestino: Prisma.$UbicacionPayload<ExtArgs> | null
     manifiestos: Prisma.$ManifiestoPayload<ExtArgs>[]
     puntos: Prisma.$RutaPuntoPayload<ExtArgs>[]
   }
@@ -914,6 +1410,8 @@ export type $RutaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     nombre: string
     origen: string
     destino: string
+    ubicacionOrigenId: number | null
+    ubicacionDestinoId: number | null
     distanciaKm: runtime.Decimal | null
     duracionEstimadaHoras: runtime.Decimal | null
     descripcion: string | null
@@ -1317,6 +1815,8 @@ readonly fields: RutaFieldRefs;
  */
 export interface Prisma__RutaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  ubicacionOrigen<T extends Prisma.Ruta$ubicacionOrigenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ruta$ubicacionOrigenArgs<ExtArgs>>): Prisma.Prisma__UbicacionClient<runtime.Types.Result.GetResult<Prisma.$UbicacionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ubicacionDestino<T extends Prisma.Ruta$ubicacionDestinoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ruta$ubicacionDestinoArgs<ExtArgs>>): Prisma.Prisma__UbicacionClient<runtime.Types.Result.GetResult<Prisma.$UbicacionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   manifiestos<T extends Prisma.Ruta$manifiestosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ruta$manifiestosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManifiestoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   puntos<T extends Prisma.Ruta$puntosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ruta$puntosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RutaPuntoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1353,6 +1853,8 @@ export interface RutaFieldRefs {
   readonly nombre: Prisma.FieldRef<"Ruta", 'String'>
   readonly origen: Prisma.FieldRef<"Ruta", 'String'>
   readonly destino: Prisma.FieldRef<"Ruta", 'String'>
+  readonly ubicacionOrigenId: Prisma.FieldRef<"Ruta", 'Int'>
+  readonly ubicacionDestinoId: Prisma.FieldRef<"Ruta", 'Int'>
   readonly distanciaKm: Prisma.FieldRef<"Ruta", 'Decimal'>
   readonly duracionEstimadaHoras: Prisma.FieldRef<"Ruta", 'Decimal'>
   readonly descripcion: Prisma.FieldRef<"Ruta", 'String'>
@@ -1616,6 +2118,10 @@ export type RutaCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.RutaCreateManyInput | Prisma.RutaCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RutaIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1686,6 +2192,10 @@ export type RutaUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Rutas to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RutaIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1752,6 +2262,44 @@ export type RutaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Rutas to delete.
    */
   limit?: number
+}
+
+/**
+ * Ruta.ubicacionOrigen
+ */
+export type Ruta$ubicacionOrigenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ubicacion
+   */
+  select?: Prisma.UbicacionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ubicacion
+   */
+  omit?: Prisma.UbicacionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UbicacionInclude<ExtArgs> | null
+  where?: Prisma.UbicacionWhereInput
+}
+
+/**
+ * Ruta.ubicacionDestino
+ */
+export type Ruta$ubicacionDestinoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ubicacion
+   */
+  select?: Prisma.UbicacionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ubicacion
+   */
+  omit?: Prisma.UbicacionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UbicacionInclude<ExtArgs> | null
+  where?: Prisma.UbicacionWhereInput
 }
 
 /**

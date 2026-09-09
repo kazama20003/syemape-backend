@@ -11,6 +11,7 @@
 export type * from './models/Cliente.js'
 export type * from './models/Ubicacion.js'
 export type * from './models/TipoServicio.js'
+export type * from './models/TipoVehiculo.js'
 export type * from './models/Activo.js'
 export type * from './models/Unidad.js'
 export type * from './models/Personal.js'

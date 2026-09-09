@@ -322,6 +322,8 @@ export type UbicacionWhereInput = {
   usuarioModificacion?: Prisma.StringNullableFilter<"Ubicacion"> | string | null
   manifiestosOrigen?: Prisma.ManifiestoListRelationFilter
   manifiestosDestino?: Prisma.ManifiestoListRelationFilter
+  rutasOrigen?: Prisma.RutaListRelationFilter
+  rutasDestino?: Prisma.RutaListRelationFilter
   rutaPuntos?: Prisma.RutaPuntoListRelationFilter
   activosHabituales?: Prisma.ActivoListRelationFilter
 }
@@ -346,6 +348,8 @@ export type UbicacionOrderByWithRelationInput = {
   usuarioModificacion?: Prisma.SortOrderInput | Prisma.SortOrder
   manifiestosOrigen?: Prisma.ManifiestoOrderByRelationAggregateInput
   manifiestosDestino?: Prisma.ManifiestoOrderByRelationAggregateInput
+  rutasOrigen?: Prisma.RutaOrderByRelationAggregateInput
+  rutasDestino?: Prisma.RutaOrderByRelationAggregateInput
   rutaPuntos?: Prisma.RutaPuntoOrderByRelationAggregateInput
   activosHabituales?: Prisma.ActivoOrderByRelationAggregateInput
 }
@@ -373,6 +377,8 @@ export type UbicacionWhereUniqueInput = Prisma.AtLeast<{
   usuarioModificacion?: Prisma.StringNullableFilter<"Ubicacion"> | string | null
   manifiestosOrigen?: Prisma.ManifiestoListRelationFilter
   manifiestosDestino?: Prisma.ManifiestoListRelationFilter
+  rutasOrigen?: Prisma.RutaListRelationFilter
+  rutasDestino?: Prisma.RutaListRelationFilter
   rutaPuntos?: Prisma.RutaPuntoListRelationFilter
   activosHabituales?: Prisma.ActivoListRelationFilter
 }, "id" | "publicId">
@@ -444,6 +450,8 @@ export type UbicacionCreateInput = {
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionOrigenInput
   manifiestosDestino?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoCreateNestedManyWithoutUbicacionInput
   activosHabituales?: Prisma.ActivoCreateNestedManyWithoutUbicacionHabitualInput
 }
@@ -468,6 +476,8 @@ export type UbicacionUncheckedCreateInput = {
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionOrigenInput
   manifiestosDestino?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutUbicacionInput
   activosHabituales?: Prisma.ActivoUncheckedCreateNestedManyWithoutUbicacionHabitualInput
 }
@@ -491,6 +501,8 @@ export type UbicacionUpdateInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUpdateManyWithoutUbicacionOrigenNestedInput
   manifiestosDestino?: Prisma.ManifiestoUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUpdateManyWithoutUbicacionNestedInput
   activosHabituales?: Prisma.ActivoUpdateManyWithoutUbicacionHabitualNestedInput
 }
@@ -515,6 +527,8 @@ export type UbicacionUncheckedUpdateInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
   manifiestosDestino?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutUbicacionNestedInput
   activosHabituales?: Prisma.ActivoUncheckedUpdateManyWithoutUbicacionHabitualNestedInput
 }
@@ -683,6 +697,38 @@ export type UbicacionUpdateOneWithoutActivosHabitualesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UbicacionUpdateToOneWithWhereWithoutActivosHabitualesInput, Prisma.UbicacionUpdateWithoutActivosHabitualesInput>, Prisma.UbicacionUncheckedUpdateWithoutActivosHabitualesInput>
 }
 
+export type UbicacionCreateNestedOneWithoutRutasOrigenInput = {
+  create?: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasOrigenInput, Prisma.UbicacionUncheckedCreateWithoutRutasOrigenInput>
+  connectOrCreate?: Prisma.UbicacionCreateOrConnectWithoutRutasOrigenInput
+  connect?: Prisma.UbicacionWhereUniqueInput
+}
+
+export type UbicacionCreateNestedOneWithoutRutasDestinoInput = {
+  create?: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasDestinoInput, Prisma.UbicacionUncheckedCreateWithoutRutasDestinoInput>
+  connectOrCreate?: Prisma.UbicacionCreateOrConnectWithoutRutasDestinoInput
+  connect?: Prisma.UbicacionWhereUniqueInput
+}
+
+export type UbicacionUpdateOneWithoutRutasOrigenNestedInput = {
+  create?: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasOrigenInput, Prisma.UbicacionUncheckedCreateWithoutRutasOrigenInput>
+  connectOrCreate?: Prisma.UbicacionCreateOrConnectWithoutRutasOrigenInput
+  upsert?: Prisma.UbicacionUpsertWithoutRutasOrigenInput
+  disconnect?: Prisma.UbicacionWhereInput | boolean
+  delete?: Prisma.UbicacionWhereInput | boolean
+  connect?: Prisma.UbicacionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UbicacionUpdateToOneWithWhereWithoutRutasOrigenInput, Prisma.UbicacionUpdateWithoutRutasOrigenInput>, Prisma.UbicacionUncheckedUpdateWithoutRutasOrigenInput>
+}
+
+export type UbicacionUpdateOneWithoutRutasDestinoNestedInput = {
+  create?: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasDestinoInput, Prisma.UbicacionUncheckedCreateWithoutRutasDestinoInput>
+  connectOrCreate?: Prisma.UbicacionCreateOrConnectWithoutRutasDestinoInput
+  upsert?: Prisma.UbicacionUpsertWithoutRutasDestinoInput
+  disconnect?: Prisma.UbicacionWhereInput | boolean
+  delete?: Prisma.UbicacionWhereInput | boolean
+  connect?: Prisma.UbicacionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UbicacionUpdateToOneWithWhereWithoutRutasDestinoInput, Prisma.UbicacionUpdateWithoutRutasDestinoInput>, Prisma.UbicacionUncheckedUpdateWithoutRutasDestinoInput>
+}
+
 export type UbicacionCreateNestedOneWithoutManifiestosOrigenInput = {
   create?: Prisma.XOR<Prisma.UbicacionCreateWithoutManifiestosOrigenInput, Prisma.UbicacionUncheckedCreateWithoutManifiestosOrigenInput>
   connectOrCreate?: Prisma.UbicacionCreateOrConnectWithoutManifiestosOrigenInput
@@ -750,6 +796,8 @@ export type UbicacionCreateWithoutActivosHabitualesInput = {
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionOrigenInput
   manifiestosDestino?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoCreateNestedManyWithoutUbicacionInput
 }
 
@@ -773,6 +821,8 @@ export type UbicacionUncheckedCreateWithoutActivosHabitualesInput = {
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionOrigenInput
   manifiestosDestino?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutUbicacionInput
 }
 
@@ -811,6 +861,8 @@ export type UbicacionUpdateWithoutActivosHabitualesInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUpdateManyWithoutUbicacionOrigenNestedInput
   manifiestosDestino?: Prisma.ManifiestoUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUpdateManyWithoutUbicacionNestedInput
 }
 
@@ -834,7 +886,237 @@ export type UbicacionUncheckedUpdateWithoutActivosHabitualesInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
   manifiestosDestino?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutUbicacionNestedInput
+}
+
+export type UbicacionCreateWithoutRutasOrigenInput = {
+  publicId: string
+  nombre: string
+  tipo?: $Enums.TipoUbicacion
+  direccion?: string | null
+  referencia?: string | null
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: string | null
+  provincia?: string | null
+  departamento?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosOrigen?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionOrigenInput
+  manifiestosDestino?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionDestinoInput
+  rutasDestino?: Prisma.RutaCreateNestedManyWithoutUbicacionDestinoInput
+  rutaPuntos?: Prisma.RutaPuntoCreateNestedManyWithoutUbicacionInput
+  activosHabituales?: Prisma.ActivoCreateNestedManyWithoutUbicacionHabitualInput
+}
+
+export type UbicacionUncheckedCreateWithoutRutasOrigenInput = {
+  id?: number
+  publicId: string
+  nombre: string
+  tipo?: $Enums.TipoUbicacion
+  direccion?: string | null
+  referencia?: string | null
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: string | null
+  provincia?: string | null
+  departamento?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosOrigen?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  manifiestosDestino?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutasDestino?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutaPuntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutUbicacionInput
+  activosHabituales?: Prisma.ActivoUncheckedCreateNestedManyWithoutUbicacionHabitualInput
+}
+
+export type UbicacionCreateOrConnectWithoutRutasOrigenInput = {
+  where: Prisma.UbicacionWhereUniqueInput
+  create: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasOrigenInput, Prisma.UbicacionUncheckedCreateWithoutRutasOrigenInput>
+}
+
+export type UbicacionCreateWithoutRutasDestinoInput = {
+  publicId: string
+  nombre: string
+  tipo?: $Enums.TipoUbicacion
+  direccion?: string | null
+  referencia?: string | null
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: string | null
+  provincia?: string | null
+  departamento?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosOrigen?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionOrigenInput
+  manifiestosDestino?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaCreateNestedManyWithoutUbicacionOrigenInput
+  rutaPuntos?: Prisma.RutaPuntoCreateNestedManyWithoutUbicacionInput
+  activosHabituales?: Prisma.ActivoCreateNestedManyWithoutUbicacionHabitualInput
+}
+
+export type UbicacionUncheckedCreateWithoutRutasDestinoInput = {
+  id?: number
+  publicId: string
+  nombre: string
+  tipo?: $Enums.TipoUbicacion
+  direccion?: string | null
+  referencia?: string | null
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: string | null
+  provincia?: string | null
+  departamento?: string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosOrigen?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  manifiestosDestino?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutaPuntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutUbicacionInput
+  activosHabituales?: Prisma.ActivoUncheckedCreateNestedManyWithoutUbicacionHabitualInput
+}
+
+export type UbicacionCreateOrConnectWithoutRutasDestinoInput = {
+  where: Prisma.UbicacionWhereUniqueInput
+  create: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasDestinoInput, Prisma.UbicacionUncheckedCreateWithoutRutasDestinoInput>
+}
+
+export type UbicacionUpsertWithoutRutasOrigenInput = {
+  update: Prisma.XOR<Prisma.UbicacionUpdateWithoutRutasOrigenInput, Prisma.UbicacionUncheckedUpdateWithoutRutasOrigenInput>
+  create: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasOrigenInput, Prisma.UbicacionUncheckedCreateWithoutRutasOrigenInput>
+  where?: Prisma.UbicacionWhereInput
+}
+
+export type UbicacionUpdateToOneWithWhereWithoutRutasOrigenInput = {
+  where?: Prisma.UbicacionWhereInput
+  data: Prisma.XOR<Prisma.UbicacionUpdateWithoutRutasOrigenInput, Prisma.UbicacionUncheckedUpdateWithoutRutasOrigenInput>
+}
+
+export type UbicacionUpdateWithoutRutasOrigenInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUbicacionFieldUpdateOperationsInput | $Enums.TipoUbicacion
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provincia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestosOrigen?: Prisma.ManifiestoUpdateManyWithoutUbicacionOrigenNestedInput
+  manifiestosDestino?: Prisma.ManifiestoUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasDestino?: Prisma.RutaUpdateManyWithoutUbicacionDestinoNestedInput
+  rutaPuntos?: Prisma.RutaPuntoUpdateManyWithoutUbicacionNestedInput
+  activosHabituales?: Prisma.ActivoUpdateManyWithoutUbicacionHabitualNestedInput
+}
+
+export type UbicacionUncheckedUpdateWithoutRutasOrigenInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUbicacionFieldUpdateOperationsInput | $Enums.TipoUbicacion
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provincia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestosOrigen?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  manifiestosDestino?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasDestino?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutaPuntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutUbicacionNestedInput
+  activosHabituales?: Prisma.ActivoUncheckedUpdateManyWithoutUbicacionHabitualNestedInput
+}
+
+export type UbicacionUpsertWithoutRutasDestinoInput = {
+  update: Prisma.XOR<Prisma.UbicacionUpdateWithoutRutasDestinoInput, Prisma.UbicacionUncheckedUpdateWithoutRutasDestinoInput>
+  create: Prisma.XOR<Prisma.UbicacionCreateWithoutRutasDestinoInput, Prisma.UbicacionUncheckedCreateWithoutRutasDestinoInput>
+  where?: Prisma.UbicacionWhereInput
+}
+
+export type UbicacionUpdateToOneWithWhereWithoutRutasDestinoInput = {
+  where?: Prisma.UbicacionWhereInput
+  data: Prisma.XOR<Prisma.UbicacionUpdateWithoutRutasDestinoInput, Prisma.UbicacionUncheckedUpdateWithoutRutasDestinoInput>
+}
+
+export type UbicacionUpdateWithoutRutasDestinoInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUbicacionFieldUpdateOperationsInput | $Enums.TipoUbicacion
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provincia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestosOrigen?: Prisma.ManifiestoUpdateManyWithoutUbicacionOrigenNestedInput
+  manifiestosDestino?: Prisma.ManifiestoUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUpdateManyWithoutUbicacionOrigenNestedInput
+  rutaPuntos?: Prisma.RutaPuntoUpdateManyWithoutUbicacionNestedInput
+  activosHabituales?: Prisma.ActivoUpdateManyWithoutUbicacionHabitualNestedInput
+}
+
+export type UbicacionUncheckedUpdateWithoutRutasDestinoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUbicacionFieldUpdateOperationsInput | $Enums.TipoUbicacion
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distrito?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provincia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestosOrigen?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  manifiestosDestino?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutaPuntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutUbicacionNestedInput
+  activosHabituales?: Prisma.ActivoUncheckedUpdateManyWithoutUbicacionHabitualNestedInput
 }
 
 export type UbicacionCreateWithoutManifiestosOrigenInput = {
@@ -855,6 +1137,8 @@ export type UbicacionCreateWithoutManifiestosOrigenInput = {
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
   manifiestosDestino?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoCreateNestedManyWithoutUbicacionInput
   activosHabituales?: Prisma.ActivoCreateNestedManyWithoutUbicacionHabitualInput
 }
@@ -878,6 +1162,8 @@ export type UbicacionUncheckedCreateWithoutManifiestosOrigenInput = {
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
   manifiestosDestino?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutUbicacionInput
   activosHabituales?: Prisma.ActivoUncheckedCreateNestedManyWithoutUbicacionHabitualInput
 }
@@ -905,6 +1191,8 @@ export type UbicacionCreateWithoutManifiestosDestinoInput = {
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionOrigenInput
+  rutasOrigen?: Prisma.RutaCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoCreateNestedManyWithoutUbicacionInput
   activosHabituales?: Prisma.ActivoCreateNestedManyWithoutUbicacionHabitualInput
 }
@@ -928,6 +1216,8 @@ export type UbicacionUncheckedCreateWithoutManifiestosDestinoInput = {
   fechaModificacion?: Date | string | null
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutasOrigen?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedCreateNestedManyWithoutUbicacionInput
   activosHabituales?: Prisma.ActivoUncheckedCreateNestedManyWithoutUbicacionHabitualInput
 }
@@ -966,6 +1256,8 @@ export type UbicacionUpdateWithoutManifiestosOrigenInput = {
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosDestino?: Prisma.ManifiestoUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUpdateManyWithoutUbicacionNestedInput
   activosHabituales?: Prisma.ActivoUpdateManyWithoutUbicacionHabitualNestedInput
 }
@@ -989,6 +1281,8 @@ export type UbicacionUncheckedUpdateWithoutManifiestosOrigenInput = {
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosDestino?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutUbicacionNestedInput
   activosHabituales?: Prisma.ActivoUncheckedUpdateManyWithoutUbicacionHabitualNestedInput
 }
@@ -1022,6 +1316,8 @@ export type UbicacionUpdateWithoutManifiestosDestinoInput = {
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasOrigen?: Prisma.RutaUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUpdateManyWithoutUbicacionNestedInput
   activosHabituales?: Prisma.ActivoUpdateManyWithoutUbicacionHabitualNestedInput
 }
@@ -1045,6 +1341,8 @@ export type UbicacionUncheckedUpdateWithoutManifiestosDestinoInput = {
   fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasOrigen?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
   rutaPuntos?: Prisma.RutaPuntoUncheckedUpdateManyWithoutUbicacionNestedInput
   activosHabituales?: Prisma.ActivoUncheckedUpdateManyWithoutUbicacionHabitualNestedInput
 }
@@ -1068,6 +1366,8 @@ export type UbicacionCreateWithoutRutaPuntosInput = {
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionOrigenInput
   manifiestosDestino?: Prisma.ManifiestoCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaCreateNestedManyWithoutUbicacionDestinoInput
   activosHabituales?: Prisma.ActivoCreateNestedManyWithoutUbicacionHabitualInput
 }
 
@@ -1091,6 +1391,8 @@ export type UbicacionUncheckedCreateWithoutRutaPuntosInput = {
   usuarioModificacion?: string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionOrigenInput
   manifiestosDestino?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutUbicacionDestinoInput
+  rutasOrigen?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionOrigenInput
+  rutasDestino?: Prisma.RutaUncheckedCreateNestedManyWithoutUbicacionDestinoInput
   activosHabituales?: Prisma.ActivoUncheckedCreateNestedManyWithoutUbicacionHabitualInput
 }
 
@@ -1129,6 +1431,8 @@ export type UbicacionUpdateWithoutRutaPuntosInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUpdateManyWithoutUbicacionOrigenNestedInput
   manifiestosDestino?: Prisma.ManifiestoUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUpdateManyWithoutUbicacionDestinoNestedInput
   activosHabituales?: Prisma.ActivoUpdateManyWithoutUbicacionHabitualNestedInput
 }
 
@@ -1152,6 +1456,8 @@ export type UbicacionUncheckedUpdateWithoutRutaPuntosInput = {
   usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   manifiestosOrigen?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
   manifiestosDestino?: Prisma.ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
+  rutasOrigen?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionOrigenNestedInput
+  rutasDestino?: Prisma.RutaUncheckedUpdateManyWithoutUbicacionDestinoNestedInput
   activosHabituales?: Prisma.ActivoUncheckedUpdateManyWithoutUbicacionHabitualNestedInput
 }
 
@@ -1163,6 +1469,8 @@ export type UbicacionUncheckedUpdateWithoutRutaPuntosInput = {
 export type UbicacionCountOutputType = {
   manifiestosOrigen: number
   manifiestosDestino: number
+  rutasOrigen: number
+  rutasDestino: number
   rutaPuntos: number
   activosHabituales: number
 }
@@ -1170,6 +1478,8 @@ export type UbicacionCountOutputType = {
 export type UbicacionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manifiestosOrigen?: boolean | UbicacionCountOutputTypeCountManifiestosOrigenArgs
   manifiestosDestino?: boolean | UbicacionCountOutputTypeCountManifiestosDestinoArgs
+  rutasOrigen?: boolean | UbicacionCountOutputTypeCountRutasOrigenArgs
+  rutasDestino?: boolean | UbicacionCountOutputTypeCountRutasDestinoArgs
   rutaPuntos?: boolean | UbicacionCountOutputTypeCountRutaPuntosArgs
   activosHabituales?: boolean | UbicacionCountOutputTypeCountActivosHabitualesArgs
 }
@@ -1196,6 +1506,20 @@ export type UbicacionCountOutputTypeCountManifiestosOrigenArgs<ExtArgs extends r
  */
 export type UbicacionCountOutputTypeCountManifiestosDestinoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ManifiestoWhereInput
+}
+
+/**
+ * UbicacionCountOutputType without action
+ */
+export type UbicacionCountOutputTypeCountRutasOrigenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RutaWhereInput
+}
+
+/**
+ * UbicacionCountOutputType without action
+ */
+export type UbicacionCountOutputTypeCountRutasDestinoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RutaWhereInput
 }
 
 /**
@@ -1233,6 +1557,8 @@ export type UbicacionSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   usuarioModificacion?: boolean
   manifiestosOrigen?: boolean | Prisma.Ubicacion$manifiestosOrigenArgs<ExtArgs>
   manifiestosDestino?: boolean | Prisma.Ubicacion$manifiestosDestinoArgs<ExtArgs>
+  rutasOrigen?: boolean | Prisma.Ubicacion$rutasOrigenArgs<ExtArgs>
+  rutasDestino?: boolean | Prisma.Ubicacion$rutasDestinoArgs<ExtArgs>
   rutaPuntos?: boolean | Prisma.Ubicacion$rutaPuntosArgs<ExtArgs>
   activosHabituales?: boolean | Prisma.Ubicacion$activosHabitualesArgs<ExtArgs>
   _count?: boolean | Prisma.UbicacionCountOutputTypeDefaultArgs<ExtArgs>
@@ -1302,6 +1628,8 @@ export type UbicacionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type UbicacionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manifiestosOrigen?: boolean | Prisma.Ubicacion$manifiestosOrigenArgs<ExtArgs>
   manifiestosDestino?: boolean | Prisma.Ubicacion$manifiestosDestinoArgs<ExtArgs>
+  rutasOrigen?: boolean | Prisma.Ubicacion$rutasOrigenArgs<ExtArgs>
+  rutasDestino?: boolean | Prisma.Ubicacion$rutasDestinoArgs<ExtArgs>
   rutaPuntos?: boolean | Prisma.Ubicacion$rutaPuntosArgs<ExtArgs>
   activosHabituales?: boolean | Prisma.Ubicacion$activosHabitualesArgs<ExtArgs>
   _count?: boolean | Prisma.UbicacionCountOutputTypeDefaultArgs<ExtArgs>
@@ -1314,6 +1642,8 @@ export type $UbicacionPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     manifiestosOrigen: Prisma.$ManifiestoPayload<ExtArgs>[]
     manifiestosDestino: Prisma.$ManifiestoPayload<ExtArgs>[]
+    rutasOrigen: Prisma.$RutaPayload<ExtArgs>[]
+    rutasDestino: Prisma.$RutaPayload<ExtArgs>[]
     rutaPuntos: Prisma.$RutaPuntoPayload<ExtArgs>[]
     activosHabituales: Prisma.$ActivoPayload<ExtArgs>[]
   }
@@ -1731,6 +2061,8 @@ export interface Prisma__UbicacionClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   manifiestosOrigen<T extends Prisma.Ubicacion$manifiestosOrigenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ubicacion$manifiestosOrigenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManifiestoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   manifiestosDestino<T extends Prisma.Ubicacion$manifiestosDestinoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ubicacion$manifiestosDestinoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManifiestoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rutasOrigen<T extends Prisma.Ubicacion$rutasOrigenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ubicacion$rutasOrigenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RutaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rutasDestino<T extends Prisma.Ubicacion$rutasDestinoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ubicacion$rutasDestinoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RutaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rutaPuntos<T extends Prisma.Ubicacion$rutaPuntosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ubicacion$rutaPuntosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RutaPuntoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activosHabituales<T extends Prisma.Ubicacion$activosHabitualesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ubicacion$activosHabitualesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2217,6 +2549,54 @@ export type Ubicacion$manifiestosDestinoArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ManifiestoScalarFieldEnum | Prisma.ManifiestoScalarFieldEnum[]
+}
+
+/**
+ * Ubicacion.rutasOrigen
+ */
+export type Ubicacion$rutasOrigenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ruta
+   */
+  select?: Prisma.RutaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ruta
+   */
+  omit?: Prisma.RutaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RutaInclude<ExtArgs> | null
+  where?: Prisma.RutaWhereInput
+  orderBy?: Prisma.RutaOrderByWithRelationInput | Prisma.RutaOrderByWithRelationInput[]
+  cursor?: Prisma.RutaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RutaScalarFieldEnum | Prisma.RutaScalarFieldEnum[]
+}
+
+/**
+ * Ubicacion.rutasDestino
+ */
+export type Ubicacion$rutasDestinoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ruta
+   */
+  select?: Prisma.RutaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ruta
+   */
+  omit?: Prisma.RutaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RutaInclude<ExtArgs> | null
+  where?: Prisma.RutaWhereInput
+  orderBy?: Prisma.RutaOrderByWithRelationInput | Prisma.RutaOrderByWithRelationInput[]
+  cursor?: Prisma.RutaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RutaScalarFieldEnum | Prisma.RutaScalarFieldEnum[]
 }
 
 /**
