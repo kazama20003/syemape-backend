@@ -5,6 +5,7 @@ import { UnidadesController } from './controllers/unidades.controller.js';
 import { UnidadesOperacionController } from './controllers/unidades-operacion.controller.js';
 import { UNIDAD_OPERACION_REPOSITORY } from './domain/repositories/unidad-operacion.repository.js';
 import { PrismaUnidadOperacionRepository } from './infrastructure/prisma-unidad-operacion.repository.js';
+import { CloudinaryService } from './infrastructure/cloudinary.service.js';
 import {
   AsignarGpsUnidadUseCase,
   LiberarGpsUnidadUseCase,
@@ -18,6 +19,7 @@ import {
   ListarUnidadesUseCase,
   ObtenerUnidadUseCase,
   RegistrarUnidadUseCase,
+  SubirFotosUnidadUseCase,
 } from './use-cases/unidad.use-cases.js';
 
 @Module({
@@ -33,6 +35,8 @@ import {
     ObtenerUnidadUseCase,
     ActualizarUnidadUseCase,
     AnularUnidadUseCase,
+    SubirFotosUnidadUseCase,
+    CloudinaryService,
     ListarAsignacionesGpsUnidadUseCase,
     AsignarGpsUnidadUseCase,
     LiberarGpsUnidadUseCase,

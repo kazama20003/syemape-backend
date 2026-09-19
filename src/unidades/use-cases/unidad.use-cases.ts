@@ -32,9 +32,15 @@ import {
   exigirPlaca,
   normalizarPlaca,
 } from '../domain/value-objects/placa.vo.js';
+import { CloudinaryService } from '../infrastructure/cloudinary.service.js';
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
+
+export interface ArchivoImagenSubida {
+  buffer: Buffer;
+  mimetype: string;
+}
 
 // Solo URLs http(s) no vacias; el maestro guarda referencias, no binarios.
 function limpiarFotos(fotos: unknown): string[] {
@@ -420,6 +426,44 @@ export class ActualizarUnidadUseCase {
     });
 
     return this.unidades.actualizar(id, data);
+  }
+}
+
+@Injectable()
+export class SubirFotosUnidadUseCase {
+  constructor(
+    @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+    private readonly cloudinary: CloudinaryService,
+  ) {}
+
+  async execute(
+    id: number,
+    archivos: ArchivoImagenSubida[],
+    actor: string,
+  ): Promise<UnidadProps> {
+    if (archivos.length === 0) {
+      throw new DomainValidationError('Seleccione al menos una imagen.', 'files');
+    }
+    if (archivos.some((archivo) => !archivo.mimetype.startsWith('image/'))) {
+      throw new DomainValidationError('Solo se permiten archivos de imagen.', 'files');
+    }
+
+    const unidad = await this.unidades.findById(id);
+    if (!unidad) {
+      throw new RecursoNoEncontradoError('La unidad indicada no existe.', 'unidad', id);
+    }
+    if (unidad.fotos.length + archivos.length > 20) {
+      throw new DomainValidationError('Una unidad admite como maximo 20 fotos.', 'files');
+    }
+
+    const fotos = await this.cloudinary.subirFotosUnidad(
+      id,
+      archivos.map((archivo) => archivo.buffer),
+    );
+    return this.unidades.actualizar(id, {
+      fotos: [...unidad.fotos, ...fotos],
+      usuarioModificacion: actor,
+    });
   }
 }
 
