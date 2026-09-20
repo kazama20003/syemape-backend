@@ -5,6 +5,9 @@ import { RutasModule } from '../rutas/rutas.module.js';
 import { ClientesModule } from '../clientes/clientes.module.js';
 import { TiposServicioModule } from '../tipos-servicio/tipos-servicio.module.js';
 import { UbicacionesModule } from '../ubicaciones/ubicaciones.module.js';
+import { RolesPersonalModule } from '../roles-personal/roles-personal.module.js';
+import { CuentasModule } from '../cuentas/cuentas.module.js';
+import { ProyectosModule } from '../proyectos/proyectos.module.js';
 import { MANIFIESTO_REPOSITORY } from './domain/repositories/manifiesto.repository.js';
 import { PrismaManifiestoRepository } from './infrastructure/prisma-manifiesto.repository.js';
 import { ManifiestosController } from './controllers/manifiestos.controller.js';
@@ -27,6 +30,9 @@ import {
     ClientesModule,
     TiposServicioModule,
     UbicacionesModule,
+    RolesPersonalModule,
+    CuentasModule,
+    ProyectosModule,
   ],
   controllers: [ManifiestosController],
   providers: [

@@ -368,6 +368,7 @@ export type PersonalWhereInput = {
   usuario?: Prisma.XOR<Prisma.UsuarioNullableScalarRelationFilter, Prisma.UsuarioWhereInput> | null
   inspecciones?: Prisma.InspeccionPreoperacionalListRelationFilter
   activosResponsables?: Prisma.ActivoListRelationFilter
+  roles?: Prisma.PersonalRolPersonalListRelationFilter
 }
 
 export type PersonalOrderByWithRelationInput = {
@@ -402,6 +403,7 @@ export type PersonalOrderByWithRelationInput = {
   usuario?: Prisma.UsuarioOrderByWithRelationInput
   inspecciones?: Prisma.InspeccionPreoperacionalOrderByRelationAggregateInput
   activosResponsables?: Prisma.ActivoOrderByRelationAggregateInput
+  roles?: Prisma.PersonalRolPersonalOrderByRelationAggregateInput
 }
 
 export type PersonalWhereUniqueInput = Prisma.AtLeast<{
@@ -439,6 +441,7 @@ export type PersonalWhereUniqueInput = Prisma.AtLeast<{
   usuario?: Prisma.XOR<Prisma.UsuarioNullableScalarRelationFilter, Prisma.UsuarioWhereInput> | null
   inspecciones?: Prisma.InspeccionPreoperacionalListRelationFilter
   activosResponsables?: Prisma.ActivoListRelationFilter
+  roles?: Prisma.PersonalRolPersonalListRelationFilter
 }, "id" | "publicId">
 
 export type PersonalOrderByWithAggregationInput = {
@@ -532,6 +535,7 @@ export type PersonalCreateInput = {
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateInput = {
@@ -566,6 +570,7 @@ export type PersonalUncheckedCreateInput = {
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUpdateInput = {
@@ -599,6 +604,7 @@ export type PersonalUpdateInput = {
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateInput = {
@@ -633,6 +639,7 @@ export type PersonalUncheckedUpdateInput = {
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalCreateManyInput = {
@@ -828,6 +835,20 @@ export type EnumTipoPersonalFieldUpdateOperationsInput = {
   set?: $Enums.TipoPersonal
 }
 
+export type PersonalCreateNestedOneWithoutRolesInput = {
+  create?: Prisma.XOR<Prisma.PersonalCreateWithoutRolesInput, Prisma.PersonalUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.PersonalCreateOrConnectWithoutRolesInput
+  connect?: Prisma.PersonalWhereUniqueInput
+}
+
+export type PersonalUpdateOneRequiredWithoutRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.PersonalCreateWithoutRolesInput, Prisma.PersonalUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.PersonalCreateOrConnectWithoutRolesInput
+  upsert?: Prisma.PersonalUpsertWithoutRolesInput
+  connect?: Prisma.PersonalWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PersonalUpdateToOneWithWhereWithoutRolesInput, Prisma.PersonalUpdateWithoutRolesInput>, Prisma.PersonalUncheckedUpdateWithoutRolesInput>
+}
+
 export type PersonalCreateNestedOneWithoutManifiestosConducidosInput = {
   create?: Prisma.XOR<Prisma.PersonalCreateWithoutManifiestosConducidosInput, Prisma.PersonalUncheckedCreateWithoutManifiestosConducidosInput>
   connectOrCreate?: Prisma.PersonalCreateOrConnectWithoutManifiestosConducidosInput
@@ -962,6 +983,7 @@ export type PersonalCreateWithoutActivosResponsablesInput = {
   turnos?: Prisma.TurnoSupervisorCreateNestedManyWithoutSupervisorInput
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutActivosResponsablesInput = {
@@ -995,6 +1017,7 @@ export type PersonalUncheckedCreateWithoutActivosResponsablesInput = {
   turnos?: Prisma.TurnoSupervisorUncheckedCreateNestedManyWithoutSupervisorInput
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutActivosResponsablesInput = {
@@ -1043,6 +1066,7 @@ export type PersonalUpdateWithoutActivosResponsablesInput = {
   turnos?: Prisma.TurnoSupervisorUpdateManyWithoutSupervisorNestedInput
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutActivosResponsablesInput = {
@@ -1076,6 +1100,157 @@ export type PersonalUncheckedUpdateWithoutActivosResponsablesInput = {
   turnos?: Prisma.TurnoSupervisorUncheckedUpdateManyWithoutSupervisorNestedInput
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
+}
+
+export type PersonalCreateWithoutRolesInput = {
+  publicId: string
+  tipoDocumento?: string
+  numeroDocumento: string
+  numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
+  nombres: string
+  apellidos: string
+  tipo?: $Enums.TipoPersonal
+  apelativo?: string | null
+  telefono?: string | null
+  licenciaConducir?: string | null
+  categoriaLicencia?: string | null
+  licenciaVencimiento?: Date | string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosConducidos?: Prisma.ManifiestoCreateNestedManyWithoutConductorInput
+  manifiestosSupervisados?: Prisma.ManifiestoCreateNestedManyWithoutSupervisorInput
+  tripulaciones?: Prisma.ManifiestoTripulanteCreateNestedManyWithoutPersonalInput
+  documentos?: Prisma.DocumentoPersonalCreateNestedManyWithoutPersonalInput
+  turnos?: Prisma.TurnoSupervisorCreateNestedManyWithoutSupervisorInput
+  usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
+  inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
+  activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+}
+
+export type PersonalUncheckedCreateWithoutRolesInput = {
+  id?: number
+  publicId: string
+  tipoDocumento?: string
+  numeroDocumento: string
+  numeroDocumentoNormalizado: string
+  primerNombre: string
+  segundoNombre?: string | null
+  primerApellido: string
+  segundoApellido?: string | null
+  nombres: string
+  apellidos: string
+  tipo?: $Enums.TipoPersonal
+  apelativo?: string | null
+  telefono?: string | null
+  licenciaConducir?: string | null
+  categoriaLicencia?: string | null
+  licenciaVencimiento?: Date | string | null
+  estadoActivo?: $Enums.EstadoActivo
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  manifiestosConducidos?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutConductorInput
+  manifiestosSupervisados?: Prisma.ManifiestoUncheckedCreateNestedManyWithoutSupervisorInput
+  tripulaciones?: Prisma.ManifiestoTripulanteUncheckedCreateNestedManyWithoutPersonalInput
+  documentos?: Prisma.DocumentoPersonalUncheckedCreateNestedManyWithoutPersonalInput
+  turnos?: Prisma.TurnoSupervisorUncheckedCreateNestedManyWithoutSupervisorInput
+  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
+  activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+}
+
+export type PersonalCreateOrConnectWithoutRolesInput = {
+  where: Prisma.PersonalWhereUniqueInput
+  create: Prisma.XOR<Prisma.PersonalCreateWithoutRolesInput, Prisma.PersonalUncheckedCreateWithoutRolesInput>
+}
+
+export type PersonalUpsertWithoutRolesInput = {
+  update: Prisma.XOR<Prisma.PersonalUpdateWithoutRolesInput, Prisma.PersonalUncheckedUpdateWithoutRolesInput>
+  create: Prisma.XOR<Prisma.PersonalCreateWithoutRolesInput, Prisma.PersonalUncheckedCreateWithoutRolesInput>
+  where?: Prisma.PersonalWhereInput
+}
+
+export type PersonalUpdateToOneWithWhereWithoutRolesInput = {
+  where?: Prisma.PersonalWhereInput
+  data: Prisma.XOR<Prisma.PersonalUpdateWithoutRolesInput, Prisma.PersonalUncheckedUpdateWithoutRolesInput>
+}
+
+export type PersonalUpdateWithoutRolesInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
+  numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
+  numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nombres?: Prisma.StringFieldUpdateOperationsInput | string
+  apellidos?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
+  apelativo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenciaConducir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaLicencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenciaVencimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestosConducidos?: Prisma.ManifiestoUpdateManyWithoutConductorNestedInput
+  manifiestosSupervisados?: Prisma.ManifiestoUpdateManyWithoutSupervisorNestedInput
+  tripulaciones?: Prisma.ManifiestoTripulanteUpdateManyWithoutPersonalNestedInput
+  documentos?: Prisma.DocumentoPersonalUpdateManyWithoutPersonalNestedInput
+  turnos?: Prisma.TurnoSupervisorUpdateManyWithoutSupervisorNestedInput
+  usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
+  activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+}
+
+export type PersonalUncheckedUpdateWithoutRolesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoDocumento?: Prisma.StringFieldUpdateOperationsInput | string
+  numeroDocumento?: Prisma.StringFieldUpdateOperationsInput | string
+  numeroDocumentoNormalizado?: Prisma.StringFieldUpdateOperationsInput | string
+  primerNombre?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoNombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primerApellido?: Prisma.StringFieldUpdateOperationsInput | string
+  segundoApellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nombres?: Prisma.StringFieldUpdateOperationsInput | string
+  apellidos?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoPersonalFieldUpdateOperationsInput | $Enums.TipoPersonal
+  apelativo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenciaConducir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoriaLicencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenciaVencimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  estadoActivo?: Prisma.EnumEstadoActivoFieldUpdateOperationsInput | $Enums.EstadoActivo
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manifiestosConducidos?: Prisma.ManifiestoUncheckedUpdateManyWithoutConductorNestedInput
+  manifiestosSupervisados?: Prisma.ManifiestoUncheckedUpdateManyWithoutSupervisorNestedInput
+  tripulaciones?: Prisma.ManifiestoTripulanteUncheckedUpdateManyWithoutPersonalNestedInput
+  documentos?: Prisma.DocumentoPersonalUncheckedUpdateManyWithoutPersonalNestedInput
+  turnos?: Prisma.TurnoSupervisorUncheckedUpdateManyWithoutSupervisorNestedInput
+  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
+  activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
 export type PersonalCreateWithoutManifiestosConducidosInput = {
@@ -1108,6 +1283,7 @@ export type PersonalCreateWithoutManifiestosConducidosInput = {
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutManifiestosConducidosInput = {
@@ -1141,6 +1317,7 @@ export type PersonalUncheckedCreateWithoutManifiestosConducidosInput = {
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutManifiestosConducidosInput = {
@@ -1178,6 +1355,7 @@ export type PersonalCreateWithoutManifiestosSupervisadosInput = {
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutManifiestosSupervisadosInput = {
@@ -1211,6 +1389,7 @@ export type PersonalUncheckedCreateWithoutManifiestosSupervisadosInput = {
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutManifiestosSupervisadosInput = {
@@ -1259,6 +1438,7 @@ export type PersonalUpdateWithoutManifiestosConducidosInput = {
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutManifiestosConducidosInput = {
@@ -1292,6 +1472,7 @@ export type PersonalUncheckedUpdateWithoutManifiestosConducidosInput = {
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUpsertWithoutManifiestosSupervisadosInput = {
@@ -1335,6 +1516,7 @@ export type PersonalUpdateWithoutManifiestosSupervisadosInput = {
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutManifiestosSupervisadosInput = {
@@ -1368,6 +1550,7 @@ export type PersonalUncheckedUpdateWithoutManifiestosSupervisadosInput = {
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalCreateWithoutTripulacionesInput = {
@@ -1400,6 +1583,7 @@ export type PersonalCreateWithoutTripulacionesInput = {
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutTripulacionesInput = {
@@ -1433,6 +1617,7 @@ export type PersonalUncheckedCreateWithoutTripulacionesInput = {
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutTripulacionesInput = {
@@ -1481,6 +1666,7 @@ export type PersonalUpdateWithoutTripulacionesInput = {
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutTripulacionesInput = {
@@ -1514,6 +1700,7 @@ export type PersonalUncheckedUpdateWithoutTripulacionesInput = {
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalCreateWithoutDocumentosInput = {
@@ -1546,6 +1733,7 @@ export type PersonalCreateWithoutDocumentosInput = {
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutDocumentosInput = {
@@ -1579,6 +1767,7 @@ export type PersonalUncheckedCreateWithoutDocumentosInput = {
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutDocumentosInput = {
@@ -1627,6 +1816,7 @@ export type PersonalUpdateWithoutDocumentosInput = {
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutDocumentosInput = {
@@ -1660,6 +1850,7 @@ export type PersonalUncheckedUpdateWithoutDocumentosInput = {
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalCreateWithoutInspeccionesInput = {
@@ -1692,6 +1883,7 @@ export type PersonalCreateWithoutInspeccionesInput = {
   turnos?: Prisma.TurnoSupervisorCreateNestedManyWithoutSupervisorInput
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutInspeccionesInput = {
@@ -1725,6 +1917,7 @@ export type PersonalUncheckedCreateWithoutInspeccionesInput = {
   turnos?: Prisma.TurnoSupervisorUncheckedCreateNestedManyWithoutSupervisorInput
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutInspeccionesInput = {
@@ -1773,6 +1966,7 @@ export type PersonalUpdateWithoutInspeccionesInput = {
   turnos?: Prisma.TurnoSupervisorUpdateManyWithoutSupervisorNestedInput
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutInspeccionesInput = {
@@ -1806,6 +2000,7 @@ export type PersonalUncheckedUpdateWithoutInspeccionesInput = {
   turnos?: Prisma.TurnoSupervisorUncheckedUpdateManyWithoutSupervisorNestedInput
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalCreateWithoutTurnosInput = {
@@ -1838,6 +2033,7 @@ export type PersonalCreateWithoutTurnosInput = {
   usuario?: Prisma.UsuarioCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutTurnosInput = {
@@ -1871,6 +2067,7 @@ export type PersonalUncheckedCreateWithoutTurnosInput = {
   usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutPersonalInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutTurnosInput = {
@@ -1919,6 +2116,7 @@ export type PersonalUpdateWithoutTurnosInput = {
   usuario?: Prisma.UsuarioUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutTurnosInput = {
@@ -1952,6 +2150,7 @@ export type PersonalUncheckedUpdateWithoutTurnosInput = {
   usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutPersonalNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalCreateWithoutUsuarioInput = {
@@ -1984,6 +2183,7 @@ export type PersonalCreateWithoutUsuarioInput = {
   turnos?: Prisma.TurnoSupervisorCreateNestedManyWithoutSupervisorInput
   inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalUncheckedCreateWithoutUsuarioInput = {
@@ -2017,6 +2217,7 @@ export type PersonalUncheckedCreateWithoutUsuarioInput = {
   turnos?: Prisma.TurnoSupervisorUncheckedCreateNestedManyWithoutSupervisorInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutConductorInput
   activosResponsables?: Prisma.ActivoUncheckedCreateNestedManyWithoutResponsableInput
+  roles?: Prisma.PersonalRolPersonalUncheckedCreateNestedManyWithoutPersonalInput
 }
 
 export type PersonalCreateOrConnectWithoutUsuarioInput = {
@@ -2065,6 +2266,7 @@ export type PersonalUpdateWithoutUsuarioInput = {
   turnos?: Prisma.TurnoSupervisorUpdateManyWithoutSupervisorNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUpdateManyWithoutPersonalNestedInput
 }
 
 export type PersonalUncheckedUpdateWithoutUsuarioInput = {
@@ -2098,6 +2300,7 @@ export type PersonalUncheckedUpdateWithoutUsuarioInput = {
   turnos?: Prisma.TurnoSupervisorUncheckedUpdateManyWithoutSupervisorNestedInput
   inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutConductorNestedInput
   activosResponsables?: Prisma.ActivoUncheckedUpdateManyWithoutResponsableNestedInput
+  roles?: Prisma.PersonalRolPersonalUncheckedUpdateManyWithoutPersonalNestedInput
 }
 
 
@@ -2113,6 +2316,7 @@ export type PersonalCountOutputType = {
   turnos: number
   inspecciones: number
   activosResponsables: number
+  roles: number
 }
 
 export type PersonalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2123,6 +2327,7 @@ export type PersonalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   turnos?: boolean | PersonalCountOutputTypeCountTurnosArgs
   inspecciones?: boolean | PersonalCountOutputTypeCountInspeccionesArgs
   activosResponsables?: boolean | PersonalCountOutputTypeCountActivosResponsablesArgs
+  roles?: boolean | PersonalCountOutputTypeCountRolesArgs
 }
 
 /**
@@ -2184,6 +2389,13 @@ export type PersonalCountOutputTypeCountActivosResponsablesArgs<ExtArgs extends 
   where?: Prisma.ActivoWhereInput
 }
 
+/**
+ * PersonalCountOutputType without action
+ */
+export type PersonalCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PersonalRolPersonalWhereInput
+}
+
 
 export type PersonalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2217,6 +2429,7 @@ export type PersonalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   usuario?: boolean | Prisma.Personal$usuarioArgs<ExtArgs>
   inspecciones?: boolean | Prisma.Personal$inspeccionesArgs<ExtArgs>
   activosResponsables?: boolean | Prisma.Personal$activosResponsablesArgs<ExtArgs>
+  roles?: boolean | Prisma.Personal$rolesArgs<ExtArgs>
   _count?: boolean | Prisma.PersonalCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["personal"]>
 
@@ -2308,6 +2521,7 @@ export type PersonalInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   usuario?: boolean | Prisma.Personal$usuarioArgs<ExtArgs>
   inspecciones?: boolean | Prisma.Personal$inspeccionesArgs<ExtArgs>
   activosResponsables?: boolean | Prisma.Personal$activosResponsablesArgs<ExtArgs>
+  roles?: boolean | Prisma.Personal$rolesArgs<ExtArgs>
   _count?: boolean | Prisma.PersonalCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PersonalIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2324,6 +2538,7 @@ export type $PersonalPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     usuario: Prisma.$UsuarioPayload<ExtArgs> | null
     inspecciones: Prisma.$InspeccionPreoperacionalPayload<ExtArgs>[]
     activosResponsables: Prisma.$ActivoPayload<ExtArgs>[]
+    roles: Prisma.$PersonalRolPersonalPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2751,6 +2966,7 @@ export interface Prisma__PersonalClient<T, Null = never, ExtArgs extends runtime
   usuario<T extends Prisma.Personal$usuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Personal$usuarioArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   inspecciones<T extends Prisma.Personal$inspeccionesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Personal$inspeccionesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspeccionPreoperacionalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activosResponsables<T extends Prisma.Personal$activosResponsablesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Personal$activosResponsablesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roles<T extends Prisma.Personal$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Personal$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonalRolPersonalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3380,6 +3596,30 @@ export type Personal$activosResponsablesArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ActivoScalarFieldEnum | Prisma.ActivoScalarFieldEnum[]
+}
+
+/**
+ * Personal.roles
+ */
+export type Personal$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PersonalRolPersonal
+   */
+  select?: Prisma.PersonalRolPersonalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PersonalRolPersonal
+   */
+  omit?: Prisma.PersonalRolPersonalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PersonalRolPersonalInclude<ExtArgs> | null
+  where?: Prisma.PersonalRolPersonalWhereInput
+  orderBy?: Prisma.PersonalRolPersonalOrderByWithRelationInput | Prisma.PersonalRolPersonalOrderByWithRelationInput[]
+  cursor?: Prisma.PersonalRolPersonalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PersonalRolPersonalScalarFieldEnum | Prisma.PersonalRolPersonalScalarFieldEnum[]
 }
 
 /**

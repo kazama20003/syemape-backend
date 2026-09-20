@@ -25,6 +25,23 @@ const SELECT = {
   nombres: true,
   apellidos: true,
   tipo: true,
+  roles: {
+    select: {
+      rolPersonal: {
+        select: {
+          id: true,
+          publicId: true,
+          codigo: true,
+          nombre: true,
+          descripcion: true,
+          puedeConducir: true,
+          puedeSupervisar: true,
+          estadoActivo: true,
+          estadoRegistro: true,
+        },
+      },
+    },
+  },
   apelativo: true,
   telefono: true,
   licenciaConducir: true,
@@ -34,10 +51,13 @@ const SELECT = {
   estadoRegistro: true,
 } as const;
 
-type FilaPersonal = PersonalProps;
+type FilaPersonal = Omit<PersonalProps, 'roles'> & {
+  roles: { rolPersonal: PersonalProps['roles'][number] }[];
+};
 
 function aProps(fila: FilaPersonal): PersonalProps {
-  return { ...fila };
+  const { roles, ...personal } = fila;
+  return { ...personal, roles: roles.map(({ rolPersonal }) => rolPersonal) };
 }
 
 @Injectable()
@@ -45,8 +65,11 @@ export class PrismaPersonalRepository implements PersonalRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findById(id: number): Promise<PersonalProps | null> {
-    const row = await this.prisma.personal.findUnique({ where: { id }, select: SELECT });
-    return row ? aProps(row as FilaPersonal) : null;
+    const row = await this.prisma.personal.findUnique({
+      where: { id },
+      select: SELECT,
+    });
+    return row ? aProps(row as unknown as FilaPersonal) : null;
   }
 
   async findByPublicId(publicId: string): Promise<PersonalProps | null> {
@@ -54,17 +77,20 @@ export class PrismaPersonalRepository implements PersonalRepository {
       where: { publicId },
       select: SELECT,
     });
-    return row ? aProps(row as FilaPersonal) : null;
+    return row ? aProps(row as unknown as FilaPersonal) : null;
   }
 
   async findByDocumentoActivo(
     numeroDocumentoNormalizado: string,
   ): Promise<PersonalProps | null> {
     const row = await this.prisma.personal.findFirst({
-      where: { numeroDocumentoNormalizado, estadoRegistro: EstadoRegistro.ACTIVO },
+      where: {
+        numeroDocumentoNormalizado,
+        estadoRegistro: EstadoRegistro.ACTIVO,
+      },
       select: SELECT,
     });
-    return row ? aProps(row as FilaPersonal) : null;
+    return row ? aProps(row as unknown as FilaPersonal) : null;
   }
 
   async crear(data: CrearPersonalData): Promise<PersonalProps> {
@@ -81,6 +107,9 @@ export class PrismaPersonalRepository implements PersonalRepository {
         nombres: data.nombres,
         apellidos: data.apellidos,
         tipo: data.tipo,
+        roles: {
+          create: data.rolesIds.map((rolPersonalId) => ({ rolPersonalId })),
+        },
         apelativo: data.apelativo,
         telefono: data.telefono,
         licenciaConducir: data.licenciaConducir,
@@ -98,7 +127,7 @@ export class PrismaPersonalRepository implements PersonalRepository {
       usuario: data.usuarioCreacion,
       datos: row,
     });
-    return aProps(row as FilaPersonal);
+    return aProps(row as unknown as FilaPersonal);
   }
 
   async actualizar(
@@ -118,6 +147,15 @@ export class PrismaPersonalRepository implements PersonalRepository {
         nombres: data.nombres,
         apellidos: data.apellidos,
         tipo: data.tipo,
+        roles:
+          data.rolesIds === undefined
+            ? undefined
+            : {
+                deleteMany: {},
+                create: data.rolesIds.map((rolPersonalId) => ({
+                  rolPersonalId,
+                })),
+              },
         apelativo: data.apelativo,
         telefono: data.telefono,
         licenciaConducir: data.licenciaConducir,
@@ -137,10 +175,13 @@ export class PrismaPersonalRepository implements PersonalRepository {
       usuario: data.usuarioModificacion,
       datos: row,
     });
-    return aProps(row as FilaPersonal);
+    return aProps(row as unknown as FilaPersonal);
   }
 
-  async anular(id: number, usuarioModificacion: string): Promise<PersonalProps> {
+  async anular(
+    id: number,
+    usuarioModificacion: string,
+  ): Promise<PersonalProps> {
     const row = await this.prisma.personal.update({
       where: { id },
       data: {
@@ -158,7 +199,7 @@ export class PrismaPersonalRepository implements PersonalRepository {
       usuario: usuarioModificacion,
       datos: row,
     });
-    return aProps(row as FilaPersonal);
+    return aProps(row as unknown as FilaPersonal);
   }
 
   async buscar(
@@ -170,8 +211,18 @@ export class PrismaPersonalRepository implements PersonalRepository {
       ...(filtros.texto
         ? {
             OR: [
-              { nombres: { contains: filtros.texto, mode: 'insensitive' as const } },
-              { apellidos: { contains: filtros.texto, mode: 'insensitive' as const } },
+              {
+                nombres: {
+                  contains: filtros.texto,
+                  mode: 'insensitive' as const,
+                },
+              },
+              {
+                apellidos: {
+                  contains: filtros.texto,
+                  mode: 'insensitive' as const,
+                },
+              },
               {
                 numeroDocumento: {
                   contains: filtros.texto,
@@ -192,6 +243,6 @@ export class PrismaPersonalRepository implements PersonalRepository {
       }),
       this.prisma.personal.count({ where }),
     ]);
-    return { datos: (rows as FilaPersonal[]).map(aProps), total };
+    return { datos: (rows as unknown as FilaPersonal[]).map(aProps), total };
   }
 }

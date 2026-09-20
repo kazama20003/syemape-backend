@@ -266,6 +266,29 @@ model TipoVehiculo {
   @@map("tipo_vehiculo")
 }
 
+// Rol operativo administrable del personal. No participa en la autorizacion
+// JWT, que continua usando el enum RolUsuario.
+model RolPersonal {
+  id              Int     @id @default(autoincrement())
+  publicId        String  @unique @map("public_id") @db.Uuid
+  codigo          String  @unique
+  nombre          String
+  descripcion     String?
+  puedeConducir   Boolean @default(false) @map("puede_conducir")
+  puedeSupervisar Boolean @default(false) @map("puede_supervisar")
+
+  estadoActivo        EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro      EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion       DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion     String         @map("usuario_creacion")
+  fechaModificacion   DateTime?      @map("fecha_modificacion")
+  usuarioModificacion String?        @map("usuario_modificacion")
+
+  asignaciones PersonalRolPersonal[]
+
+  @@map("rol_personal")
+}
+
 // ------------------------------- MAESTROS -------------------------------
 
 // Maestro corporativo de recursos fisicos de MAPE. Una unidad es un detalle
@@ -332,6 +355,8 @@ model Unidad {
   materialesPeligrosos String?      @map("materiales_peligrosos")
   // Cuenta/proyecto y cliente asociado al vehiculo.
   cuenta               String?
+  cuentaId             Int?         @map("cuenta_id")
+  proyectoId           Int?         @map("proyecto_id")
   clienteAsociado      String?      @map("cliente_asociado")
   // Capacidad de carga en toneladas.
   capacidadCarga       Decimal?     @map("capacidad_carga") @db.Decimal(10, 2)
@@ -367,9 +392,59 @@ model Unidad {
   asignacionesGps         AsignacionGpsUnidad[]
   lecturasKilometraje     LecturaKilometrajeUnidad[]
   activo                   Activo                      @relation(fields: [activoId], references: [id])
+  cuentaCatalogo           Cuenta?                     @relation("UnidadCuenta", fields: [cuentaId], references: [id])
+  proyectoCatalogo         Proyecto?                   @relation("UnidadProyecto", fields: [proyectoId], references: [id])
 
   @@index([placaNormalizada])
+  @@index([cuentaId])
+  @@index([proyectoId])
   @@map("unidad")
+}
+
+// Cuenta comercial administrable. Se anula logicamente cuando deja de usarse.
+model Cuenta {
+  id                   Int            @id @default(autoincrement())
+  publicId             String         @unique @map("public_id") @db.Uuid
+  codigo               String         @unique
+  nombre               String
+  descripcion          String?
+  estadoActivo         EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro       EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion        DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion      String         @map("usuario_creacion")
+  fechaModificacion    DateTime?      @map("fecha_modificacion")
+  usuarioModificacion  String?        @map("usuario_modificacion")
+
+  proyectos Proyecto[]
+  unidades  Unidad[]   @relation("UnidadCuenta")
+  manifiestos Manifiesto[] @relation("ManifiestoCuenta")
+
+  @@index([nombre])
+  @@map("cuenta")
+}
+
+// Proyecto administrable, siempre asociado a una cuenta.
+model Proyecto {
+  id                   Int            @id @default(autoincrement())
+  publicId             String         @unique @map("public_id") @db.Uuid
+  cuentaId             Int            @map("cuenta_id")
+  codigo               String
+  nombre               String
+  descripcion          String?
+  estadoActivo         EstadoActivo   @default(ACTIVO) @map("estado_activo")
+  estadoRegistro       EstadoRegistro @default(ACTIVO) @map("estado_registro")
+  fechaCreacion        DateTime       @default(now()) @map("fecha_creacion")
+  usuarioCreacion      String         @map("usuario_creacion")
+  fechaModificacion    DateTime?      @map("fecha_modificacion")
+  usuarioModificacion  String?        @map("usuario_modificacion")
+
+  cuenta Cuenta @relation(fields: [cuentaId], references: [id])
+  unidades Unidad[] @relation("UnidadProyecto")
+  manifiestos Manifiesto[] @relation("ManifiestoProyecto")
+
+  @@unique([cuentaId, codigo])
+  @@index([nombre])
+  @@map("proyecto")
 }
 
 // Personal = conductores, tripulacion y supervisores. Identidad: documento.
@@ -408,9 +483,24 @@ model Personal {
   usuario                 Usuario?
   inspecciones            InspeccionPreoperacional[]
   activosResponsables     Activo[]                    @relation("ResponsableActivo")
+  roles                   PersonalRolPersonal[]
 
   @@index([numeroDocumentoNormalizado])
   @@map("personal")
+}
+
+// Asignacion de roles operativos a una persona. Una persona puede cumplir mas
+// de un rol y el TipoPersonal se conserva como clasificacion heredada.
+model PersonalRolPersonal {
+  personalId    Int @map("personal_id")
+  rolPersonalId Int @map("rol_personal_id")
+
+  personal    Personal    @relation(fields: [personalId], references: [id], onDelete: Cascade)
+  rolPersonal RolPersonal @relation(fields: [rolPersonalId], references: [id], onDelete: Restrict)
+
+  @@id([personalId, rolPersonalId])
+  @@index([rolPersonalId])
+  @@map("personal_rol_personal")
 }
 
 model AsignacionGpsUnidad {
@@ -508,6 +598,8 @@ model Manifiesto {
   clienteId          Int?              @map("cliente_id")
   // Nombre del cliente tal como se escribio (si no hay catalogo).
   clienteTexto       String?           @map("cliente_texto")
+  cuentaId           Int?              @map("cuenta_id")
+  proyectoId         Int?              @map("proyecto_id")
   estadoCarga        EstadoCarga?      @map("estado_carga")
   combustible        NivelCombustible? @default(POR_REGISTRAR)
   viaticos           Viaticos?         @default(POR_REGISTRAR)
@@ -541,6 +633,8 @@ model Manifiesto {
   conductor        Personal                   @relation("ConductorManifiesto", fields: [conductorId], references: [id])
   supervisor       Personal?                  @relation("SupervisorManifiesto", fields: [supervisorId], references: [id])
   cliente          Cliente?                   @relation(fields: [clienteId], references: [id])
+  cuenta           Cuenta?                    @relation("ManifiestoCuenta", fields: [cuentaId], references: [id])
+  proyecto         Proyecto?                  @relation("ManifiestoProyecto", fields: [proyectoId], references: [id])
   tipoServicio     TipoServicio?              @relation(fields: [tipoServicioId], references: [id])
   ruta             Ruta?                      @relation(fields: [rutaId], references: [id])
   ubicacionOrigen  Ubicacion?                 @relation("UbicacionOrigen", fields: [ubicacionOrigenId], references: [id])
@@ -554,6 +648,8 @@ model Manifiesto {
   @@index([unidadId])
   @@index([conductorId])
   @@index([clienteId])
+  @@index([cuentaId])
+  @@index([proyectoId])
   @@index([estado])
   @@map("manifiesto")
 }

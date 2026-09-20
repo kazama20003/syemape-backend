@@ -27,6 +27,11 @@ import {
   exigirDocumento,
   normalizarDocumento,
 } from '../domain/value-objects/documento.vo.js';
+import {
+  ROL_PERSONAL_REPOSITORY,
+  type RolPersonalProps,
+  type RolPersonalRepository,
+} from '../../roles-personal/domain/repositories/rol-personal.repository.js';
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
@@ -40,7 +45,6 @@ function throwEstadoActivoInvalido(valor: unknown): never {
   );
 }
 
-
 export class RegistrarPersonalDto {
   tipoDocumento?: string;
   numeroDocumento: string;
@@ -49,6 +53,7 @@ export class RegistrarPersonalDto {
   primerApellido: string;
   segundoApellido?: string;
   tipo?: string;
+  rolesIds?: number[];
   apelativo?: string;
   telefono?: string;
   licenciaConducir?: string;
@@ -64,6 +69,7 @@ export class ActualizarPersonalDto {
   primerApellido?: string;
   segundoApellido?: string;
   tipo?: string;
+  rolesIds?: number[];
   apelativo?: string;
   telefono?: string;
   licenciaConducir?: string;
@@ -104,19 +110,51 @@ function resolverTipo(valor: unknown, porDefecto: TipoPersonal): TipoPersonal {
   return valor;
 }
 
+function idsRoles(valor: unknown): number[] {
+  if (!Array.isArray(valor) || !valor.length) {
+    throw new DomainValidationError(
+      'Debe asignar al menos un rol de personal.',
+      'rolesIds',
+      'REQUERIDO',
+      valor ?? null,
+    );
+  }
+  const ids = valor.map((id) => (typeof id === 'number' ? id : Number(id)));
+  if (
+    ids.some((id) => !Number.isInteger(id) || id <= 0) ||
+    new Set(ids).size !== ids.length
+  ) {
+    throw new DomainValidationError(
+      'Los rolesIds deben ser ids unicos y validos.',
+      'rolesIds',
+      'INVALIDO',
+      valor,
+    );
+  }
+  return ids;
+}
+
 @Injectable()
 export class RegistrarPersonalUseCase {
   constructor(
     @Inject(PERSONAL_REPOSITORY) private readonly personal: PersonalRepository,
+    @Inject(ROL_PERSONAL_REPOSITORY)
+    private readonly roles: RolPersonalRepository,
   ) {}
 
-  async execute(dto: RegistrarPersonalDto, actor: string): Promise<PersonalProps> {
+  async execute(
+    dto: RegistrarPersonalDto,
+    actor: string,
+  ): Promise<PersonalProps> {
     const documento = exigirDocumento(dto.numeroDocumento);
     const primerNombre = exigirTexto(dto.primerNombre, 'primerNombre');
-    const segundoNombre = aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null;
+    const segundoNombre =
+      aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null;
     const primerApellido = exigirTexto(dto.primerApellido, 'primerApellido');
-    const segundoApellido = aTextoOpcional(dto.segundoApellido)?.toUpperCase() ?? null;
+    const segundoApellido =
+      aTextoOpcional(dto.segundoApellido)?.toUpperCase() ?? null;
     const tipo = resolverTipo(dto.tipo, TipoPersonal.CONDUCTOR);
+    const rolesIds = await this.resolverRoles(dto.rolesIds, tipo);
 
     const existente = await this.personal.findByDocumentoActivo(documento);
     if (existente) {
@@ -139,6 +177,7 @@ export class RegistrarPersonalUseCase {
       nombres: unirNombre(primerNombre, segundoNombre),
       apellidos: unirNombre(primerApellido, segundoApellido),
       tipo,
+      rolesIds,
       apelativo: aTextoOpcional(dto.apelativo),
       telefono: aTextoOpcional(dto.telefono),
       licenciaConducir: aTextoOpcional(dto.licenciaConducir),
@@ -146,6 +185,27 @@ export class RegistrarPersonalUseCase {
       licenciaVencimiento: aFechaOpcional(dto.licenciaVencimiento),
       usuarioCreacion: actor,
     });
+  }
+
+  private async resolverRoles(
+    valor: unknown,
+    tipo: TipoPersonal,
+  ): Promise<number[]> {
+    if (valor === undefined) {
+      const rolLegado = await this.roles.findByCodigo(tipo);
+      if (
+        rolLegado?.estadoRegistro === EstadoRegistro.ACTIVO &&
+        rolLegado.estadoActivo === 'ACTIVO'
+      )
+        return [rolLegado.id];
+      throw new DomainValidationError(
+        'No existe un rol operativo activo para el tipo de personal.',
+        'tipo',
+        'PERSONAL_NO_HABILITADO',
+        tipo,
+      );
+    }
+    return validarRoles(this.roles, idsRoles(valor));
   }
 }
 
@@ -204,9 +264,15 @@ export class ObtenerPersonalUseCase {
 export class ActualizarPersonalUseCase {
   constructor(
     @Inject(PERSONAL_REPOSITORY) private readonly personal: PersonalRepository,
+    @Inject(ROL_PERSONAL_REPOSITORY)
+    private readonly roles: RolPersonalRepository,
   ) {}
 
-  async execute(id: number, dto: ActualizarPersonalDto, actor: string): Promise<PersonalProps> {
+  async execute(
+    id: number,
+    dto: ActualizarPersonalDto,
+    actor: string,
+  ): Promise<PersonalProps> {
     const persona = await this.personal.findById(id);
     if (!persona) {
       throw new RecursoNoEncontradoError(
@@ -241,7 +307,7 @@ export class ActualizarPersonalUseCase {
     const segundoNombre =
       dto.segundoNombre === undefined
         ? persona.segundoNombre
-        : aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null;
+        : (aTextoOpcional(dto.segundoNombre)?.toUpperCase() ?? null);
     const primerApellido =
       dto.primerApellido === undefined
         ? persona.primerApellido
@@ -249,7 +315,7 @@ export class ActualizarPersonalUseCase {
     const segundoApellido =
       dto.segundoApellido === undefined
         ? persona.segundoApellido
-        : aTextoOpcional(dto.segundoApellido)?.toUpperCase() ?? null;
+        : (aTextoOpcional(dto.segundoApellido)?.toUpperCase() ?? null);
     const actualizarNombre =
       dto.primerNombre !== undefined ||
       dto.segundoNombre !== undefined ||
@@ -264,12 +330,26 @@ export class ActualizarPersonalUseCase {
       numeroDocumento,
       numeroDocumentoNormalizado,
       primerNombre: dto.primerNombre === undefined ? undefined : primerNombre,
-      segundoNombre: dto.segundoNombre === undefined ? undefined : segundoNombre,
-      primerApellido: dto.primerApellido === undefined ? undefined : primerApellido,
-      segundoApellido: dto.segundoApellido === undefined ? undefined : segundoApellido,
-      nombres: actualizarNombre ? unirNombre(primerNombre, segundoNombre) : undefined,
-      apellidos: actualizarNombre ? unirNombre(primerApellido, segundoApellido) : undefined,
-      tipo: dto.tipo !== undefined ? resolverTipo(dto.tipo, persona.tipo) : undefined,
+      segundoNombre:
+        dto.segundoNombre === undefined ? undefined : segundoNombre,
+      primerApellido:
+        dto.primerApellido === undefined ? undefined : primerApellido,
+      segundoApellido:
+        dto.segundoApellido === undefined ? undefined : segundoApellido,
+      nombres: actualizarNombre
+        ? unirNombre(primerNombre, segundoNombre)
+        : undefined,
+      apellidos: actualizarNombre
+        ? unirNombre(primerApellido, segundoApellido)
+        : undefined,
+      tipo:
+        dto.tipo !== undefined
+          ? resolverTipo(dto.tipo, persona.tipo)
+          : undefined,
+      rolesIds:
+        dto.rolesIds === undefined
+          ? undefined
+          : await validarRoles(this.roles, idsRoles(dto.rolesIds)),
       apelativo:
         dto.apelativo !== undefined ? aTextoOpcional(dto.apelativo) : undefined,
       telefono:
@@ -295,6 +375,22 @@ export class ActualizarPersonalUseCase {
       usuarioModificacion: actor,
     });
   }
+}
+
+async function validarRoles(
+  roles: RolPersonalRepository,
+  ids: number[],
+): Promise<number[]> {
+  const encontrados: RolPersonalProps[] = await roles.findActivosByIds(ids);
+  if (encontrados.length !== ids.length) {
+    throw new DomainValidationError(
+      'Uno o mas roles de personal no existen o no estan activos.',
+      'rolesIds',
+      'PERSONAL_NO_HABILITADO',
+      ids,
+    );
+  }
+  return ids;
 }
 
 @Injectable()

@@ -22,6 +22,18 @@ import {
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
+const CATEGORIAS_VEHICULARES = new Set([
+  'N1',
+  'N2',
+  'N3',
+  'M1',
+  'M2',
+  'M3',
+  'O1',
+  'O2',
+  'O3',
+  'O4',
+]);
 const USUARIO_SISTEMA = 'sistema';
 
 export class RegistrarTipoVehiculoDto {
@@ -78,6 +90,19 @@ function throwEstadoActivoInvalido(valor: unknown): never {
   );
 }
 
+function aCategoriaSugerida(valor: unknown): string | null {
+  const categoria = aTextoOpcional(valor)?.toUpperCase() ?? null;
+  if (categoria !== null && !CATEGORIAS_VEHICULARES.has(categoria)) {
+    throw new DomainValidationError(
+      'La categoria vehicular sugerida no es valida.',
+      'categoriaSugerida',
+      'INVALIDO',
+      valor,
+    );
+  }
+  return categoria;
+}
+
 // Deriva un codigo estable a partir del nombre (MAYUSCULAS con guion bajo).
 function codigoDesde(nombre: string): string {
   return nombre
@@ -97,7 +122,9 @@ export class RegistrarTipoVehiculoUseCase {
 
   async execute(dto: RegistrarTipoVehiculoDto): Promise<TipoVehiculoProps> {
     const nombre = exigirTexto(dto.nombre, 'nombre');
-    const codigo = (aTextoOpcional(dto.codigo) ?? codigoDesde(nombre)).toUpperCase();
+    const codigo = (
+      aTextoOpcional(dto.codigo) ?? codigoDesde(nombre)
+    ).toUpperCase();
 
     const existente = await this.tipos.findByCodigo(codigo);
     if (existente) {
@@ -114,7 +141,7 @@ export class RegistrarTipoVehiculoUseCase {
       nombre,
       descripcion: aTextoOpcional(dto.descripcion),
       claseSugerida: aClaseSugerida(dto.claseSugerida),
-      categoriaSugerida: aTextoOpcional(dto.categoriaSugerida)?.toUpperCase() ?? null,
+      categoriaSugerida: aCategoriaSugerida(dto.categoriaSugerida),
       usuarioCreacion: USUARIO_SISTEMA,
     });
   }
@@ -189,14 +216,21 @@ export class ActualizarTipoVehiculoUseCase {
       );
     }
     return this.tipos.actualizar(id, {
-      nombre: dto.nombre !== undefined ? exigirTexto(dto.nombre, 'nombre') : undefined,
+      nombre:
+        dto.nombre !== undefined
+          ? exigirTexto(dto.nombre, 'nombre')
+          : undefined,
       descripcion:
-        dto.descripcion !== undefined ? aTextoOpcional(dto.descripcion) : undefined,
+        dto.descripcion !== undefined
+          ? aTextoOpcional(dto.descripcion)
+          : undefined,
       claseSugerida:
-        dto.claseSugerida !== undefined ? aClaseSugerida(dto.claseSugerida) : undefined,
+        dto.claseSugerida !== undefined
+          ? aClaseSugerida(dto.claseSugerida)
+          : undefined,
       categoriaSugerida:
         dto.categoriaSugerida !== undefined
-          ? aTextoOpcional(dto.categoriaSugerida)?.toUpperCase() ?? null
+          ? aCategoriaSugerida(dto.categoriaSugerida)
           : undefined,
       estadoActivo:
         dto.estadoActivo === undefined

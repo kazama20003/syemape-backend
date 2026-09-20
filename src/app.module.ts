@@ -14,6 +14,9 @@ import { SeguimientoModule } from './seguimiento/seguimiento.module.js';
 import { IncidenciasModule } from './incidencias/incidencias.module.js';
 import { DocumentosModule } from './documentos/documentos.module.js';
 import { ActivosModule } from './activos/activos.module.js';
+import { RolesPersonalModule } from './roles-personal/roles-personal.module.js';
+import { CuentasModule } from './cuentas/cuentas.module.js';
+import { ProyectosModule } from './proyectos/proyectos.module.js';
 
 @Module({
   imports: [
@@ -32,6 +35,9 @@ import { ActivosModule } from './activos/activos.module.js';
     IncidenciasModule,
     DocumentosModule,
     ActivosModule,
+    RolesPersonalModule,
+    CuentasModule,
+    ProyectosModule,
   ],
 })
 export class AppModule {}

@@ -38,6 +38,11 @@ export type TipoServicio = Prisma.TipoServicioModel
  */
 export type TipoVehiculo = Prisma.TipoVehiculoModel
 /**
+ * Model RolPersonal
+ * 
+ */
+export type RolPersonal = Prisma.RolPersonalModel
+/**
  * Model Activo
  * 
  */
@@ -48,10 +53,25 @@ export type Activo = Prisma.ActivoModel
  */
 export type Unidad = Prisma.UnidadModel
 /**
+ * Model Cuenta
+ * 
+ */
+export type Cuenta = Prisma.CuentaModel
+/**
+ * Model Proyecto
+ * 
+ */
+export type Proyecto = Prisma.ProyectoModel
+/**
  * Model Personal
  * 
  */
 export type Personal = Prisma.PersonalModel
+/**
+ * Model PersonalRolPersonal
+ * 
+ */
+export type PersonalRolPersonal = Prisma.PersonalRolPersonalModel
 /**
  * Model AsignacionGpsUnidad
  * 

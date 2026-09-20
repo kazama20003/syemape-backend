@@ -401,9 +401,13 @@ export const ModelName = {
   Ubicacion: 'Ubicacion',
   TipoServicio: 'TipoServicio',
   TipoVehiculo: 'TipoVehiculo',
+  RolPersonal: 'RolPersonal',
   Activo: 'Activo',
   Unidad: 'Unidad',
+  Cuenta: 'Cuenta',
+  Proyecto: 'Proyecto',
   Personal: 'Personal',
+  PersonalRolPersonal: 'PersonalRolPersonal',
   AsignacionGpsUnidad: 'AsignacionGpsUnidad',
   LecturaKilometrajeUnidad: 'LecturaKilometrajeUnidad',
   Ruta: 'Ruta',
@@ -437,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "cliente" | "ubicacion" | "tipoServicio" | "tipoVehiculo" | "activo" | "unidad" | "personal" | "asignacionGpsUnidad" | "lecturaKilometrajeUnidad" | "ruta" | "manifiesto" | "manifiestoCarga" | "manifiestoTripulante" | "historialEvento" | "rutaPunto" | "seguimientoManifiesto" | "incidencia" | "evidenciaIncidencia" | "documentoUnidad" | "documentoPersonal" | "inspeccionPreoperacional" | "inspeccionItem" | "turnoSupervisor" | "usuario" | "alerta"
+    modelProps: "cliente" | "ubicacion" | "tipoServicio" | "tipoVehiculo" | "rolPersonal" | "activo" | "unidad" | "cuenta" | "proyecto" | "personal" | "personalRolPersonal" | "asignacionGpsUnidad" | "lecturaKilometrajeUnidad" | "ruta" | "manifiesto" | "manifiestoCarga" | "manifiestoTripulante" | "historialEvento" | "rutaPunto" | "seguimientoManifiesto" | "incidencia" | "evidenciaIncidencia" | "documentoUnidad" | "documentoPersonal" | "inspeccionPreoperacional" | "inspeccionItem" | "turnoSupervisor" | "usuario" | "alerta"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -737,6 +741,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RolPersonal: {
+      payload: Prisma.$RolPersonalPayload<ExtArgs>
+      fields: Prisma.RolPersonalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RolPersonalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RolPersonalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>
+        }
+        findFirst: {
+          args: Prisma.RolPersonalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RolPersonalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>
+        }
+        findMany: {
+          args: Prisma.RolPersonalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>[]
+        }
+        create: {
+          args: Prisma.RolPersonalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>
+        }
+        createMany: {
+          args: Prisma.RolPersonalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RolPersonalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>[]
+        }
+        delete: {
+          args: Prisma.RolPersonalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>
+        }
+        update: {
+          args: Prisma.RolPersonalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>
+        }
+        deleteMany: {
+          args: Prisma.RolPersonalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RolPersonalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RolPersonalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>[]
+        }
+        upsert: {
+          args: Prisma.RolPersonalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolPersonalPayload>
+        }
+        aggregate: {
+          args: Prisma.RolPersonalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRolPersonal>
+        }
+        groupBy: {
+          args: Prisma.RolPersonalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RolPersonalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RolPersonalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RolPersonalCountAggregateOutputType> | number
+        }
+      }
+    }
     Activo: {
       payload: Prisma.$ActivoPayload<ExtArgs>
       fields: Prisma.ActivoFieldRefs
@@ -885,6 +963,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Cuenta: {
+      payload: Prisma.$CuentaPayload<ExtArgs>
+      fields: Prisma.CuentaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CuentaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CuentaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>
+        }
+        findFirst: {
+          args: Prisma.CuentaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CuentaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>
+        }
+        findMany: {
+          args: Prisma.CuentaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>[]
+        }
+        create: {
+          args: Prisma.CuentaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>
+        }
+        createMany: {
+          args: Prisma.CuentaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CuentaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>[]
+        }
+        delete: {
+          args: Prisma.CuentaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>
+        }
+        update: {
+          args: Prisma.CuentaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>
+        }
+        deleteMany: {
+          args: Prisma.CuentaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CuentaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CuentaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>[]
+        }
+        upsert: {
+          args: Prisma.CuentaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuentaPayload>
+        }
+        aggregate: {
+          args: Prisma.CuentaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCuenta>
+        }
+        groupBy: {
+          args: Prisma.CuentaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CuentaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CuentaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CuentaCountAggregateOutputType> | number
+        }
+      }
+    }
+    Proyecto: {
+      payload: Prisma.$ProyectoPayload<ExtArgs>
+      fields: Prisma.ProyectoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProyectoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProyectoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>
+        }
+        findFirst: {
+          args: Prisma.ProyectoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProyectoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>
+        }
+        findMany: {
+          args: Prisma.ProyectoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>[]
+        }
+        create: {
+          args: Prisma.ProyectoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>
+        }
+        createMany: {
+          args: Prisma.ProyectoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProyectoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>[]
+        }
+        delete: {
+          args: Prisma.ProyectoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>
+        }
+        update: {
+          args: Prisma.ProyectoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProyectoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProyectoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProyectoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProyectoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProyectoPayload>
+        }
+        aggregate: {
+          args: Prisma.ProyectoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProyecto>
+        }
+        groupBy: {
+          args: Prisma.ProyectoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProyectoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProyectoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProyectoCountAggregateOutputType> | number
+        }
+      }
+    }
     Personal: {
       payload: Prisma.$PersonalPayload<ExtArgs>
       fields: Prisma.PersonalFieldRefs
@@ -956,6 +1182,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PersonalCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PersonalCountAggregateOutputType> | number
+        }
+      }
+    }
+    PersonalRolPersonal: {
+      payload: Prisma.$PersonalRolPersonalPayload<ExtArgs>
+      fields: Prisma.PersonalRolPersonalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PersonalRolPersonalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PersonalRolPersonalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>
+        }
+        findFirst: {
+          args: Prisma.PersonalRolPersonalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PersonalRolPersonalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>
+        }
+        findMany: {
+          args: Prisma.PersonalRolPersonalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>[]
+        }
+        create: {
+          args: Prisma.PersonalRolPersonalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>
+        }
+        createMany: {
+          args: Prisma.PersonalRolPersonalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PersonalRolPersonalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>[]
+        }
+        delete: {
+          args: Prisma.PersonalRolPersonalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>
+        }
+        update: {
+          args: Prisma.PersonalRolPersonalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>
+        }
+        deleteMany: {
+          args: Prisma.PersonalRolPersonalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PersonalRolPersonalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PersonalRolPersonalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>[]
+        }
+        upsert: {
+          args: Prisma.PersonalRolPersonalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PersonalRolPersonalPayload>
+        }
+        aggregate: {
+          args: Prisma.PersonalRolPersonalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePersonalRolPersonal>
+        }
+        groupBy: {
+          args: Prisma.PersonalRolPersonalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PersonalRolPersonalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PersonalRolPersonalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PersonalRolPersonalCountAggregateOutputType> | number
         }
       }
     }
@@ -2412,6 +2712,25 @@ export const TipoVehiculoScalarFieldEnum = {
 export type TipoVehiculoScalarFieldEnum = (typeof TipoVehiculoScalarFieldEnum)[keyof typeof TipoVehiculoScalarFieldEnum]
 
 
+export const RolPersonalScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  puedeConducir: 'puedeConducir',
+  puedeSupervisar: 'puedeSupervisar',
+  estadoActivo: 'estadoActivo',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type RolPersonalScalarFieldEnum = (typeof RolPersonalScalarFieldEnum)[keyof typeof RolPersonalScalarFieldEnum]
+
+
 export const ActivoScalarFieldEnum = {
   id: 'id',
   publicId: 'publicId',
@@ -2459,6 +2778,8 @@ export const UnidadScalarFieldEnum = {
   mtcVigencia: 'mtcVigencia',
   materialesPeligrosos: 'materialesPeligrosos',
   cuenta: 'cuenta',
+  cuentaId: 'cuentaId',
+  proyectoId: 'proyectoId',
   clienteAsociado: 'clienteAsociado',
   capacidadCarga: 'capacidadCarga',
   pesoBrutoVehicular: 'pesoBrutoVehicular',
@@ -2485,6 +2806,41 @@ export const UnidadScalarFieldEnum = {
 } as const
 
 export type UnidadScalarFieldEnum = (typeof UnidadScalarFieldEnum)[keyof typeof UnidadScalarFieldEnum]
+
+
+export const CuentaScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  estadoActivo: 'estadoActivo',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type CuentaScalarFieldEnum = (typeof CuentaScalarFieldEnum)[keyof typeof CuentaScalarFieldEnum]
+
+
+export const ProyectoScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  cuentaId: 'cuentaId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  estadoActivo: 'estadoActivo',
+  estadoRegistro: 'estadoRegistro',
+  fechaCreacion: 'fechaCreacion',
+  usuarioCreacion: 'usuarioCreacion',
+  fechaModificacion: 'fechaModificacion',
+  usuarioModificacion: 'usuarioModificacion'
+} as const
+
+export type ProyectoScalarFieldEnum = (typeof ProyectoScalarFieldEnum)[keyof typeof ProyectoScalarFieldEnum]
 
 
 export const PersonalScalarFieldEnum = {
@@ -2514,6 +2870,14 @@ export const PersonalScalarFieldEnum = {
 } as const
 
 export type PersonalScalarFieldEnum = (typeof PersonalScalarFieldEnum)[keyof typeof PersonalScalarFieldEnum]
+
+
+export const PersonalRolPersonalScalarFieldEnum = {
+  personalId: 'personalId',
+  rolPersonalId: 'rolPersonalId'
+} as const
+
+export type PersonalRolPersonalScalarFieldEnum = (typeof PersonalRolPersonalScalarFieldEnum)[keyof typeof PersonalRolPersonalScalarFieldEnum]
 
 
 export const AsignacionGpsUnidadScalarFieldEnum = {
@@ -2585,6 +2949,8 @@ export const ManifiestoScalarFieldEnum = {
   tipoServicioId: 'tipoServicioId',
   clienteId: 'clienteId',
   clienteTexto: 'clienteTexto',
+  cuentaId: 'cuentaId',
+  proyectoId: 'proyectoId',
   estadoCarga: 'estadoCarga',
   combustible: 'combustible',
   viaticos: 'viaticos',
@@ -3015,6 +3381,13 @@ export type ListEnumClaseUnidadFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'TipoActivo'
  */
 export type EnumTipoActivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoActivo'>
@@ -3179,13 +3552,6 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3483,9 +3849,13 @@ export type GlobalOmitConfig = {
   ubicacion?: Prisma.UbicacionOmit
   tipoServicio?: Prisma.TipoServicioOmit
   tipoVehiculo?: Prisma.TipoVehiculoOmit
+  rolPersonal?: Prisma.RolPersonalOmit
   activo?: Prisma.ActivoOmit
   unidad?: Prisma.UnidadOmit
+  cuenta?: Prisma.CuentaOmit
+  proyecto?: Prisma.ProyectoOmit
   personal?: Prisma.PersonalOmit
+  personalRolPersonal?: Prisma.PersonalRolPersonalOmit
   asignacionGpsUnidad?: Prisma.AsignacionGpsUnidadOmit
   lecturaKilometrajeUnidad?: Prisma.LecturaKilometrajeUnidadOmit
   ruta?: Prisma.RutaOmit

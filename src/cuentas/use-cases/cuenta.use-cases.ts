@@ -1,0 +1,17 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { aEnteroPositivo, aTextoOpcional } from '../../shared/dto/parseo.js';
+import { construirPaginacion } from '../../shared/dto/respuesta.dto.js';
+import { esEstadoActivo } from '../../shared/enums/estado-activo.enum.js';
+import { EstadoRegistro } from '../../shared/enums/estado-registro.enum.js';
+import { DomainValidationError, RecursoNoEncontradoError } from '../../shared/errors/domain-validation.error.js';
+import { CUENTA_REPOSITORY, type CuentaRepository } from '../domain/repositories/cuenta.repository.js';
+
+const actor = 'sistema';
+const texto = (valor: unknown, campo: string) => { const resultado = aTextoOpcional(valor); if (!resultado) throw new DomainValidationError(`El campo "${campo}" es obligatorio.`, campo, 'REQUERIDO'); return resultado; };
+export class RegistrarCuentaDto { codigo: string; nombre: string; descripcion?: string; }
+export class ActualizarCuentaDto { nombre?: string; descripcion?: string | null; estadoActivo?: string; }
+@Injectable() export class RegistrarCuentaUseCase { constructor(@Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository) {} async execute(dto: RegistrarCuentaDto) { const codigo = texto(dto.codigo, 'codigo').toUpperCase(); if (await this.cuentas.findByCodigo(codigo)) throw new DomainValidationError('Ya existe una cuenta con ese código.', 'codigo', 'DUPLICADO'); return this.cuentas.crear({ codigo, nombre: texto(dto.nombre, 'nombre'), descripcion: aTextoOpcional(dto.descripcion), usuarioCreacion: actor }); } }
+@Injectable() export class ListarCuentasUseCase { constructor(@Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository) {} async execute(q: { texto?: string; estadoRegistro?: string; page?: string; pageSize?: string }) { const page = aEnteroPositivo(q.page, 1); const pageSize = Math.min(200, aEnteroPositivo(q.pageSize, 50)); const { datos, total } = await this.cuentas.buscar({ texto: aTextoOpcional(q.texto) ?? undefined, estadoRegistro: q.estadoRegistro === 'TODOS' ? undefined : EstadoRegistro.ACTIVO, page, pageSize }); return { datos, paginacion: construirPaginacion(page, pageSize, total) }; } }
+@Injectable() export class ObtenerCuentaUseCase { constructor(@Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository) {} async execute(id: number) { const cuenta = await this.cuentas.findById(id); if (!cuenta) throw new RecursoNoEncontradoError('La cuenta indicada no existe.', 'cuenta', id); return cuenta; } }
+@Injectable() export class ActualizarCuentaUseCase { constructor(@Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository) {} async execute(id: number, dto: ActualizarCuentaDto) { await new ObtenerCuentaUseCase(this.cuentas).execute(id); if (dto.estadoActivo !== undefined && !esEstadoActivo(dto.estadoActivo)) throw new DomainValidationError('El estadoActivo no es válido.', 'estadoActivo', 'INVALIDO'); return this.cuentas.actualizar(id, { nombre: dto.nombre === undefined ? undefined : texto(dto.nombre, 'nombre'), descripcion: dto.descripcion === undefined ? undefined : aTextoOpcional(dto.descripcion), estadoActivo: dto.estadoActivo as never, usuarioModificacion: actor }); } }
+@Injectable() export class AnularCuentaUseCase { constructor(@Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository) {} async execute(id: number) { await new ObtenerCuentaUseCase(this.cuentas).execute(id); return this.cuentas.anular(id, actor); } }

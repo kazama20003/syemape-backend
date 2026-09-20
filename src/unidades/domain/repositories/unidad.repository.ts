@@ -25,6 +25,8 @@ export interface UnidadProps {
   mtcVigencia: Date | null;
   materialesPeligrosos: string | null;
   cuenta: string | null;
+  cuentaId: number | null;
+  proyectoId: number | null;
   clienteAsociado: string | null;
   capacidadCarga: number | null;
   pesoBrutoVehicular: number | null;
@@ -64,6 +66,8 @@ export interface CrearUnidadData {
   mtcVigencia: Date | null;
   materialesPeligrosos: string | null;
   cuenta: string | null;
+  cuentaId: number | null;
+  proyectoId: number | null;
   clienteAsociado: string | null;
   capacidadCarga: number | null;
   pesoBrutoVehicular: number | null;
@@ -102,6 +106,8 @@ export interface ActualizarUnidadData {
   mtcVigencia?: Date | null;
   materialesPeligrosos?: string | null;
   cuenta?: string | null;
+  cuentaId?: number | null;
+  proyectoId?: number | null;
   clienteAsociado?: string | null;
   capacidadCarga?: number | null;
   pesoBrutoVehicular?: number | null;

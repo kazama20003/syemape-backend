@@ -32,6 +32,8 @@ export type ManifiestoAvgAggregateOutputType = {
   ubicacionDestinoId: number | null
   tipoServicioId: number | null
   clienteId: number | null
+  cuentaId: number | null
+  proyectoId: number | null
   unidadId: number | null
   segundaUnidadId: number | null
   conductorId: number | null
@@ -45,6 +47,8 @@ export type ManifiestoSumAggregateOutputType = {
   ubicacionDestinoId: number | null
   tipoServicioId: number | null
   clienteId: number | null
+  cuentaId: number | null
+  proyectoId: number | null
   unidadId: number | null
   segundaUnidadId: number | null
   conductorId: number | null
@@ -67,6 +71,8 @@ export type ManifiestoMinAggregateOutputType = {
   tipoServicioId: number | null
   clienteId: number | null
   clienteTexto: string | null
+  cuentaId: number | null
+  proyectoId: number | null
   estadoCarga: $Enums.EstadoCarga | null
   combustible: $Enums.NivelCombustible | null
   viaticos: $Enums.Viaticos | null
@@ -103,6 +109,8 @@ export type ManifiestoMaxAggregateOutputType = {
   tipoServicioId: number | null
   clienteId: number | null
   clienteTexto: string | null
+  cuentaId: number | null
+  proyectoId: number | null
   estadoCarga: $Enums.EstadoCarga | null
   combustible: $Enums.NivelCombustible | null
   viaticos: $Enums.Viaticos | null
@@ -139,6 +147,8 @@ export type ManifiestoCountAggregateOutputType = {
   tipoServicioId: number
   clienteId: number
   clienteTexto: number
+  cuentaId: number
+  proyectoId: number
   estadoCarga: number
   combustible: number
   viaticos: number
@@ -168,6 +178,8 @@ export type ManifiestoAvgAggregateInputType = {
   ubicacionDestinoId?: true
   tipoServicioId?: true
   clienteId?: true
+  cuentaId?: true
+  proyectoId?: true
   unidadId?: true
   segundaUnidadId?: true
   conductorId?: true
@@ -181,6 +193,8 @@ export type ManifiestoSumAggregateInputType = {
   ubicacionDestinoId?: true
   tipoServicioId?: true
   clienteId?: true
+  cuentaId?: true
+  proyectoId?: true
   unidadId?: true
   segundaUnidadId?: true
   conductorId?: true
@@ -203,6 +217,8 @@ export type ManifiestoMinAggregateInputType = {
   tipoServicioId?: true
   clienteId?: true
   clienteTexto?: true
+  cuentaId?: true
+  proyectoId?: true
   estadoCarga?: true
   combustible?: true
   viaticos?: true
@@ -239,6 +255,8 @@ export type ManifiestoMaxAggregateInputType = {
   tipoServicioId?: true
   clienteId?: true
   clienteTexto?: true
+  cuentaId?: true
+  proyectoId?: true
   estadoCarga?: true
   combustible?: true
   viaticos?: true
@@ -275,6 +293,8 @@ export type ManifiestoCountAggregateInputType = {
   tipoServicioId?: true
   clienteId?: true
   clienteTexto?: true
+  cuentaId?: true
+  proyectoId?: true
   estadoCarga?: true
   combustible?: true
   viaticos?: true
@@ -398,6 +418,8 @@ export type ManifiestoGroupByOutputType = {
   tipoServicioId: number | null
   clienteId: number | null
   clienteTexto: string | null
+  cuentaId: number | null
+  proyectoId: number | null
   estadoCarga: $Enums.EstadoCarga | null
   combustible: $Enums.NivelCombustible | null
   viaticos: $Enums.Viaticos | null
@@ -457,6 +479,8 @@ export type ManifiestoWhereInput = {
   tipoServicioId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   clienteId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   clienteTexto?: Prisma.StringNullableFilter<"Manifiesto"> | string | null
+  cuentaId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
+  proyectoId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   estadoCarga?: Prisma.EnumEstadoCargaNullableFilter<"Manifiesto"> | $Enums.EstadoCarga | null
   combustible?: Prisma.EnumNivelCombustibleNullableFilter<"Manifiesto"> | $Enums.NivelCombustible | null
   viaticos?: Prisma.EnumViaticosNullableFilter<"Manifiesto"> | $Enums.Viaticos | null
@@ -481,6 +505,8 @@ export type ManifiestoWhereInput = {
   conductor?: Prisma.XOR<Prisma.PersonalScalarRelationFilter, Prisma.PersonalWhereInput>
   supervisor?: Prisma.XOR<Prisma.PersonalNullableScalarRelationFilter, Prisma.PersonalWhereInput> | null
   cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
+  cuenta?: Prisma.XOR<Prisma.CuentaNullableScalarRelationFilter, Prisma.CuentaWhereInput> | null
+  proyecto?: Prisma.XOR<Prisma.ProyectoNullableScalarRelationFilter, Prisma.ProyectoWhereInput> | null
   tipoServicio?: Prisma.XOR<Prisma.TipoServicioNullableScalarRelationFilter, Prisma.TipoServicioWhereInput> | null
   ruta?: Prisma.XOR<Prisma.RutaNullableScalarRelationFilter, Prisma.RutaWhereInput> | null
   ubicacionOrigen?: Prisma.XOR<Prisma.UbicacionNullableScalarRelationFilter, Prisma.UbicacionWhereInput> | null
@@ -507,6 +533,8 @@ export type ManifiestoOrderByWithRelationInput = {
   tipoServicioId?: Prisma.SortOrderInput | Prisma.SortOrder
   clienteId?: Prisma.SortOrderInput | Prisma.SortOrder
   clienteTexto?: Prisma.SortOrderInput | Prisma.SortOrder
+  cuentaId?: Prisma.SortOrderInput | Prisma.SortOrder
+  proyectoId?: Prisma.SortOrderInput | Prisma.SortOrder
   estadoCarga?: Prisma.SortOrderInput | Prisma.SortOrder
   combustible?: Prisma.SortOrderInput | Prisma.SortOrder
   viaticos?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -531,6 +559,8 @@ export type ManifiestoOrderByWithRelationInput = {
   conductor?: Prisma.PersonalOrderByWithRelationInput
   supervisor?: Prisma.PersonalOrderByWithRelationInput
   cliente?: Prisma.ClienteOrderByWithRelationInput
+  cuenta?: Prisma.CuentaOrderByWithRelationInput
+  proyecto?: Prisma.ProyectoOrderByWithRelationInput
   tipoServicio?: Prisma.TipoServicioOrderByWithRelationInput
   ruta?: Prisma.RutaOrderByWithRelationInput
   ubicacionOrigen?: Prisma.UbicacionOrderByWithRelationInput
@@ -560,6 +590,8 @@ export type ManifiestoWhereUniqueInput = Prisma.AtLeast<{
   tipoServicioId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   clienteId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   clienteTexto?: Prisma.StringNullableFilter<"Manifiesto"> | string | null
+  cuentaId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
+  proyectoId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   estadoCarga?: Prisma.EnumEstadoCargaNullableFilter<"Manifiesto"> | $Enums.EstadoCarga | null
   combustible?: Prisma.EnumNivelCombustibleNullableFilter<"Manifiesto"> | $Enums.NivelCombustible | null
   viaticos?: Prisma.EnumViaticosNullableFilter<"Manifiesto"> | $Enums.Viaticos | null
@@ -584,6 +616,8 @@ export type ManifiestoWhereUniqueInput = Prisma.AtLeast<{
   conductor?: Prisma.XOR<Prisma.PersonalScalarRelationFilter, Prisma.PersonalWhereInput>
   supervisor?: Prisma.XOR<Prisma.PersonalNullableScalarRelationFilter, Prisma.PersonalWhereInput> | null
   cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
+  cuenta?: Prisma.XOR<Prisma.CuentaNullableScalarRelationFilter, Prisma.CuentaWhereInput> | null
+  proyecto?: Prisma.XOR<Prisma.ProyectoNullableScalarRelationFilter, Prisma.ProyectoWhereInput> | null
   tipoServicio?: Prisma.XOR<Prisma.TipoServicioNullableScalarRelationFilter, Prisma.TipoServicioWhereInput> | null
   ruta?: Prisma.XOR<Prisma.RutaNullableScalarRelationFilter, Prisma.RutaWhereInput> | null
   ubicacionOrigen?: Prisma.XOR<Prisma.UbicacionNullableScalarRelationFilter, Prisma.UbicacionWhereInput> | null
@@ -610,6 +644,8 @@ export type ManifiestoOrderByWithAggregationInput = {
   tipoServicioId?: Prisma.SortOrderInput | Prisma.SortOrder
   clienteId?: Prisma.SortOrderInput | Prisma.SortOrder
   clienteTexto?: Prisma.SortOrderInput | Prisma.SortOrder
+  cuentaId?: Prisma.SortOrderInput | Prisma.SortOrder
+  proyectoId?: Prisma.SortOrderInput | Prisma.SortOrder
   estadoCarga?: Prisma.SortOrderInput | Prisma.SortOrder
   combustible?: Prisma.SortOrderInput | Prisma.SortOrder
   viaticos?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -654,6 +690,8 @@ export type ManifiestoScalarWhereWithAggregatesInput = {
   tipoServicioId?: Prisma.IntNullableWithAggregatesFilter<"Manifiesto"> | number | null
   clienteId?: Prisma.IntNullableWithAggregatesFilter<"Manifiesto"> | number | null
   clienteTexto?: Prisma.StringNullableWithAggregatesFilter<"Manifiesto"> | string | null
+  cuentaId?: Prisma.IntNullableWithAggregatesFilter<"Manifiesto"> | number | null
+  proyectoId?: Prisma.IntNullableWithAggregatesFilter<"Manifiesto"> | number | null
   estadoCarga?: Prisma.EnumEstadoCargaNullableWithAggregatesFilter<"Manifiesto"> | $Enums.EstadoCarga | null
   combustible?: Prisma.EnumNivelCombustibleNullableWithAggregatesFilter<"Manifiesto"> | $Enums.NivelCombustible | null
   viaticos?: Prisma.EnumViaticosNullableWithAggregatesFilter<"Manifiesto"> | $Enums.Viaticos | null
@@ -704,6 +742,8 @@ export type ManifiestoCreateInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -730,6 +770,8 @@ export type ManifiestoUncheckedCreateInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -785,6 +827,8 @@ export type ManifiestoUpdateInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -811,6 +855,8 @@ export type ManifiestoUncheckedUpdateInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -852,6 +898,8 @@ export type ManifiestoCreateManyInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -914,6 +962,8 @@ export type ManifiestoUncheckedUpdateManyInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -960,6 +1010,8 @@ export type ManifiestoCountOrderByAggregateInput = {
   tipoServicioId?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   clienteTexto?: Prisma.SortOrder
+  cuentaId?: Prisma.SortOrder
+  proyectoId?: Prisma.SortOrder
   estadoCarga?: Prisma.SortOrder
   combustible?: Prisma.SortOrder
   viaticos?: Prisma.SortOrder
@@ -987,6 +1039,8 @@ export type ManifiestoAvgOrderByAggregateInput = {
   ubicacionDestinoId?: Prisma.SortOrder
   tipoServicioId?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
+  cuentaId?: Prisma.SortOrder
+  proyectoId?: Prisma.SortOrder
   unidadId?: Prisma.SortOrder
   segundaUnidadId?: Prisma.SortOrder
   conductorId?: Prisma.SortOrder
@@ -1009,6 +1063,8 @@ export type ManifiestoMaxOrderByAggregateInput = {
   tipoServicioId?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   clienteTexto?: Prisma.SortOrder
+  cuentaId?: Prisma.SortOrder
+  proyectoId?: Prisma.SortOrder
   estadoCarga?: Prisma.SortOrder
   combustible?: Prisma.SortOrder
   viaticos?: Prisma.SortOrder
@@ -1045,6 +1101,8 @@ export type ManifiestoMinOrderByAggregateInput = {
   tipoServicioId?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   clienteTexto?: Prisma.SortOrder
+  cuentaId?: Prisma.SortOrder
+  proyectoId?: Prisma.SortOrder
   estadoCarga?: Prisma.SortOrder
   combustible?: Prisma.SortOrder
   viaticos?: Prisma.SortOrder
@@ -1072,6 +1130,8 @@ export type ManifiestoSumOrderByAggregateInput = {
   ubicacionDestinoId?: Prisma.SortOrder
   tipoServicioId?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
+  cuentaId?: Prisma.SortOrder
+  proyectoId?: Prisma.SortOrder
   unidadId?: Prisma.SortOrder
   segundaUnidadId?: Prisma.SortOrder
   conductorId?: Prisma.SortOrder
@@ -1341,6 +1401,90 @@ export type ManifiestoUncheckedUpdateManyWithoutSegundaUnidadNestedInput = {
   deleteMany?: Prisma.ManifiestoScalarWhereInput | Prisma.ManifiestoScalarWhereInput[]
 }
 
+export type ManifiestoCreateNestedManyWithoutCuentaInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutCuentaInput, Prisma.ManifiestoUncheckedCreateWithoutCuentaInput> | Prisma.ManifiestoCreateWithoutCuentaInput[] | Prisma.ManifiestoUncheckedCreateWithoutCuentaInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutCuentaInput | Prisma.ManifiestoCreateOrConnectWithoutCuentaInput[]
+  createMany?: Prisma.ManifiestoCreateManyCuentaInputEnvelope
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+}
+
+export type ManifiestoUncheckedCreateNestedManyWithoutCuentaInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutCuentaInput, Prisma.ManifiestoUncheckedCreateWithoutCuentaInput> | Prisma.ManifiestoCreateWithoutCuentaInput[] | Prisma.ManifiestoUncheckedCreateWithoutCuentaInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutCuentaInput | Prisma.ManifiestoCreateOrConnectWithoutCuentaInput[]
+  createMany?: Prisma.ManifiestoCreateManyCuentaInputEnvelope
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+}
+
+export type ManifiestoUpdateManyWithoutCuentaNestedInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutCuentaInput, Prisma.ManifiestoUncheckedCreateWithoutCuentaInput> | Prisma.ManifiestoCreateWithoutCuentaInput[] | Prisma.ManifiestoUncheckedCreateWithoutCuentaInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutCuentaInput | Prisma.ManifiestoCreateOrConnectWithoutCuentaInput[]
+  upsert?: Prisma.ManifiestoUpsertWithWhereUniqueWithoutCuentaInput | Prisma.ManifiestoUpsertWithWhereUniqueWithoutCuentaInput[]
+  createMany?: Prisma.ManifiestoCreateManyCuentaInputEnvelope
+  set?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  disconnect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  delete?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  update?: Prisma.ManifiestoUpdateWithWhereUniqueWithoutCuentaInput | Prisma.ManifiestoUpdateWithWhereUniqueWithoutCuentaInput[]
+  updateMany?: Prisma.ManifiestoUpdateManyWithWhereWithoutCuentaInput | Prisma.ManifiestoUpdateManyWithWhereWithoutCuentaInput[]
+  deleteMany?: Prisma.ManifiestoScalarWhereInput | Prisma.ManifiestoScalarWhereInput[]
+}
+
+export type ManifiestoUncheckedUpdateManyWithoutCuentaNestedInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutCuentaInput, Prisma.ManifiestoUncheckedCreateWithoutCuentaInput> | Prisma.ManifiestoCreateWithoutCuentaInput[] | Prisma.ManifiestoUncheckedCreateWithoutCuentaInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutCuentaInput | Prisma.ManifiestoCreateOrConnectWithoutCuentaInput[]
+  upsert?: Prisma.ManifiestoUpsertWithWhereUniqueWithoutCuentaInput | Prisma.ManifiestoUpsertWithWhereUniqueWithoutCuentaInput[]
+  createMany?: Prisma.ManifiestoCreateManyCuentaInputEnvelope
+  set?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  disconnect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  delete?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  update?: Prisma.ManifiestoUpdateWithWhereUniqueWithoutCuentaInput | Prisma.ManifiestoUpdateWithWhereUniqueWithoutCuentaInput[]
+  updateMany?: Prisma.ManifiestoUpdateManyWithWhereWithoutCuentaInput | Prisma.ManifiestoUpdateManyWithWhereWithoutCuentaInput[]
+  deleteMany?: Prisma.ManifiestoScalarWhereInput | Prisma.ManifiestoScalarWhereInput[]
+}
+
+export type ManifiestoCreateNestedManyWithoutProyectoInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutProyectoInput, Prisma.ManifiestoUncheckedCreateWithoutProyectoInput> | Prisma.ManifiestoCreateWithoutProyectoInput[] | Prisma.ManifiestoUncheckedCreateWithoutProyectoInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutProyectoInput | Prisma.ManifiestoCreateOrConnectWithoutProyectoInput[]
+  createMany?: Prisma.ManifiestoCreateManyProyectoInputEnvelope
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+}
+
+export type ManifiestoUncheckedCreateNestedManyWithoutProyectoInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutProyectoInput, Prisma.ManifiestoUncheckedCreateWithoutProyectoInput> | Prisma.ManifiestoCreateWithoutProyectoInput[] | Prisma.ManifiestoUncheckedCreateWithoutProyectoInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutProyectoInput | Prisma.ManifiestoCreateOrConnectWithoutProyectoInput[]
+  createMany?: Prisma.ManifiestoCreateManyProyectoInputEnvelope
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+}
+
+export type ManifiestoUpdateManyWithoutProyectoNestedInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutProyectoInput, Prisma.ManifiestoUncheckedCreateWithoutProyectoInput> | Prisma.ManifiestoCreateWithoutProyectoInput[] | Prisma.ManifiestoUncheckedCreateWithoutProyectoInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutProyectoInput | Prisma.ManifiestoCreateOrConnectWithoutProyectoInput[]
+  upsert?: Prisma.ManifiestoUpsertWithWhereUniqueWithoutProyectoInput | Prisma.ManifiestoUpsertWithWhereUniqueWithoutProyectoInput[]
+  createMany?: Prisma.ManifiestoCreateManyProyectoInputEnvelope
+  set?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  disconnect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  delete?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  update?: Prisma.ManifiestoUpdateWithWhereUniqueWithoutProyectoInput | Prisma.ManifiestoUpdateWithWhereUniqueWithoutProyectoInput[]
+  updateMany?: Prisma.ManifiestoUpdateManyWithWhereWithoutProyectoInput | Prisma.ManifiestoUpdateManyWithWhereWithoutProyectoInput[]
+  deleteMany?: Prisma.ManifiestoScalarWhereInput | Prisma.ManifiestoScalarWhereInput[]
+}
+
+export type ManifiestoUncheckedUpdateManyWithoutProyectoNestedInput = {
+  create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutProyectoInput, Prisma.ManifiestoUncheckedCreateWithoutProyectoInput> | Prisma.ManifiestoCreateWithoutProyectoInput[] | Prisma.ManifiestoUncheckedCreateWithoutProyectoInput[]
+  connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutProyectoInput | Prisma.ManifiestoCreateOrConnectWithoutProyectoInput[]
+  upsert?: Prisma.ManifiestoUpsertWithWhereUniqueWithoutProyectoInput | Prisma.ManifiestoUpsertWithWhereUniqueWithoutProyectoInput[]
+  createMany?: Prisma.ManifiestoCreateManyProyectoInputEnvelope
+  set?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  disconnect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  delete?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  connect?: Prisma.ManifiestoWhereUniqueInput | Prisma.ManifiestoWhereUniqueInput[]
+  update?: Prisma.ManifiestoUpdateWithWhereUniqueWithoutProyectoInput | Prisma.ManifiestoUpdateWithWhereUniqueWithoutProyectoInput[]
+  updateMany?: Prisma.ManifiestoUpdateManyWithWhereWithoutProyectoInput | Prisma.ManifiestoUpdateManyWithWhereWithoutProyectoInput[]
+  deleteMany?: Prisma.ManifiestoScalarWhereInput | Prisma.ManifiestoScalarWhereInput[]
+}
+
 export type ManifiestoCreateNestedManyWithoutConductorInput = {
   create?: Prisma.XOR<Prisma.ManifiestoCreateWithoutConductorInput, Prisma.ManifiestoUncheckedCreateWithoutConductorInput> | Prisma.ManifiestoCreateWithoutConductorInput[] | Prisma.ManifiestoUncheckedCreateWithoutConductorInput[]
   connectOrCreate?: Prisma.ManifiestoCreateOrConnectWithoutConductorInput | Prisma.ManifiestoCreateOrConnectWithoutConductorInput[]
@@ -1587,6 +1731,8 @@ export type ManifiestoCreateWithoutClienteInput = {
   segundaUnidad?: Prisma.UnidadCreateNestedOneWithoutManifiestosSegundaUnidadInput
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -1612,6 +1758,8 @@ export type ManifiestoUncheckedCreateWithoutClienteInput = {
   ubicacionDestinoId?: number | null
   tipoServicioId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -1682,6 +1830,8 @@ export type ManifiestoScalarWhereInput = {
   tipoServicioId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   clienteId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   clienteTexto?: Prisma.StringNullableFilter<"Manifiesto"> | string | null
+  cuentaId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
+  proyectoId?: Prisma.IntNullableFilter<"Manifiesto"> | number | null
   estadoCarga?: Prisma.EnumEstadoCargaNullableFilter<"Manifiesto"> | $Enums.EstadoCarga | null
   combustible?: Prisma.EnumNivelCombustibleNullableFilter<"Manifiesto"> | $Enums.NivelCombustible | null
   viaticos?: Prisma.EnumViaticosNullableFilter<"Manifiesto"> | $Enums.Viaticos | null
@@ -1732,6 +1882,8 @@ export type ManifiestoCreateWithoutUbicacionOrigenInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutManifiestosDestinoInput
@@ -1756,6 +1908,8 @@ export type ManifiestoUncheckedCreateWithoutUbicacionOrigenInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -1821,6 +1975,8 @@ export type ManifiestoCreateWithoutUbicacionDestinoInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -1845,6 +2001,8 @@ export type ManifiestoUncheckedCreateWithoutUbicacionDestinoInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -1942,6 +2100,8 @@ export type ManifiestoCreateWithoutTipoServicioInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
   ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutManifiestosDestinoInput
@@ -1966,6 +2126,8 @@ export type ManifiestoUncheckedCreateWithoutTipoServicioInput = {
   ubicacionDestinoId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2046,6 +2208,8 @@ export type ManifiestoCreateWithoutUnidadInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2072,6 +2236,8 @@ export type ManifiestoUncheckedCreateWithoutUnidadInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2135,6 +2301,8 @@ export type ManifiestoCreateWithoutSegundaUnidadInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2161,6 +2329,8 @@ export type ManifiestoUncheckedCreateWithoutSegundaUnidadInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2228,6 +2398,224 @@ export type ManifiestoUpdateManyWithWhereWithoutSegundaUnidadInput = {
   data: Prisma.XOR<Prisma.ManifiestoUpdateManyMutationInput, Prisma.ManifiestoUncheckedUpdateManyWithoutSegundaUnidadInput>
 }
 
+export type ManifiestoCreateWithoutCuentaInput = {
+  publicId: string
+  numero: string
+  estado?: $Enums.EstadoManifiesto
+  estadoSeguimiento?: $Enums.EstadoSeguimiento
+  fechaServicio: Date | string
+  horaServicio?: string | null
+  origen: string
+  destino: string
+  clienteTexto?: string | null
+  estadoCarga?: $Enums.EstadoCarga | null
+  combustible?: $Enums.NivelCombustible | null
+  viaticos?: $Enums.Viaticos | null
+  segundaPlaca?: string | null
+  base?: string | null
+  puestoControl?: string | null
+  fechaLlegadaEstimada?: Date | string | null
+  fechaCierre?: Date | string | null
+  observaciones?: string | null
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  unidad: Prisma.UnidadCreateNestedOneWithoutManifiestosInput
+  segundaUnidad?: Prisma.UnidadCreateNestedOneWithoutManifiestosSegundaUnidadInput
+  conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
+  supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
+  cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
+  tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
+  ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
+  ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
+  ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutManifiestosDestinoInput
+  cargas?: Prisma.ManifiestoCargaCreateNestedManyWithoutManifiestoInput
+  tripulantes?: Prisma.ManifiestoTripulanteCreateNestedManyWithoutManifiestoInput
+  seguimientos?: Prisma.SeguimientoManifiestoCreateNestedManyWithoutManifiestoInput
+  incidencias?: Prisma.IncidenciaCreateNestedManyWithoutManifiestoInput
+  inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutManifiestoInput
+}
+
+export type ManifiestoUncheckedCreateWithoutCuentaInput = {
+  id?: number
+  publicId: string
+  numero: string
+  estado?: $Enums.EstadoManifiesto
+  estadoSeguimiento?: $Enums.EstadoSeguimiento
+  fechaServicio: Date | string
+  horaServicio?: string | null
+  origen: string
+  destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
+  tipoServicioId?: number | null
+  clienteId?: number | null
+  clienteTexto?: string | null
+  proyectoId?: number | null
+  estadoCarga?: $Enums.EstadoCarga | null
+  combustible?: $Enums.NivelCombustible | null
+  viaticos?: $Enums.Viaticos | null
+  unidadId: number
+  segundaUnidadId?: number | null
+  segundaPlaca?: string | null
+  conductorId: number
+  rutaId?: number | null
+  supervisorId?: number | null
+  base?: string | null
+  puestoControl?: string | null
+  fechaLlegadaEstimada?: Date | string | null
+  fechaCierre?: Date | string | null
+  observaciones?: string | null
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  cargas?: Prisma.ManifiestoCargaUncheckedCreateNestedManyWithoutManifiestoInput
+  tripulantes?: Prisma.ManifiestoTripulanteUncheckedCreateNestedManyWithoutManifiestoInput
+  seguimientos?: Prisma.SeguimientoManifiestoUncheckedCreateNestedManyWithoutManifiestoInput
+  incidencias?: Prisma.IncidenciaUncheckedCreateNestedManyWithoutManifiestoInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutManifiestoInput
+}
+
+export type ManifiestoCreateOrConnectWithoutCuentaInput = {
+  where: Prisma.ManifiestoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ManifiestoCreateWithoutCuentaInput, Prisma.ManifiestoUncheckedCreateWithoutCuentaInput>
+}
+
+export type ManifiestoCreateManyCuentaInputEnvelope = {
+  data: Prisma.ManifiestoCreateManyCuentaInput | Prisma.ManifiestoCreateManyCuentaInput[]
+  skipDuplicates?: boolean
+}
+
+export type ManifiestoUpsertWithWhereUniqueWithoutCuentaInput = {
+  where: Prisma.ManifiestoWhereUniqueInput
+  update: Prisma.XOR<Prisma.ManifiestoUpdateWithoutCuentaInput, Prisma.ManifiestoUncheckedUpdateWithoutCuentaInput>
+  create: Prisma.XOR<Prisma.ManifiestoCreateWithoutCuentaInput, Prisma.ManifiestoUncheckedCreateWithoutCuentaInput>
+}
+
+export type ManifiestoUpdateWithWhereUniqueWithoutCuentaInput = {
+  where: Prisma.ManifiestoWhereUniqueInput
+  data: Prisma.XOR<Prisma.ManifiestoUpdateWithoutCuentaInput, Prisma.ManifiestoUncheckedUpdateWithoutCuentaInput>
+}
+
+export type ManifiestoUpdateManyWithWhereWithoutCuentaInput = {
+  where: Prisma.ManifiestoScalarWhereInput
+  data: Prisma.XOR<Prisma.ManifiestoUpdateManyMutationInput, Prisma.ManifiestoUncheckedUpdateManyWithoutCuentaInput>
+}
+
+export type ManifiestoCreateWithoutProyectoInput = {
+  publicId: string
+  numero: string
+  estado?: $Enums.EstadoManifiesto
+  estadoSeguimiento?: $Enums.EstadoSeguimiento
+  fechaServicio: Date | string
+  horaServicio?: string | null
+  origen: string
+  destino: string
+  clienteTexto?: string | null
+  estadoCarga?: $Enums.EstadoCarga | null
+  combustible?: $Enums.NivelCombustible | null
+  viaticos?: $Enums.Viaticos | null
+  segundaPlaca?: string | null
+  base?: string | null
+  puestoControl?: string | null
+  fechaLlegadaEstimada?: Date | string | null
+  fechaCierre?: Date | string | null
+  observaciones?: string | null
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  unidad: Prisma.UnidadCreateNestedOneWithoutManifiestosInput
+  segundaUnidad?: Prisma.UnidadCreateNestedOneWithoutManifiestosSegundaUnidadInput
+  conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
+  supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
+  cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
+  ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
+  ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
+  ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutManifiestosDestinoInput
+  cargas?: Prisma.ManifiestoCargaCreateNestedManyWithoutManifiestoInput
+  tripulantes?: Prisma.ManifiestoTripulanteCreateNestedManyWithoutManifiestoInput
+  seguimientos?: Prisma.SeguimientoManifiestoCreateNestedManyWithoutManifiestoInput
+  incidencias?: Prisma.IncidenciaCreateNestedManyWithoutManifiestoInput
+  inspecciones?: Prisma.InspeccionPreoperacionalCreateNestedManyWithoutManifiestoInput
+}
+
+export type ManifiestoUncheckedCreateWithoutProyectoInput = {
+  id?: number
+  publicId: string
+  numero: string
+  estado?: $Enums.EstadoManifiesto
+  estadoSeguimiento?: $Enums.EstadoSeguimiento
+  fechaServicio: Date | string
+  horaServicio?: string | null
+  origen: string
+  destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
+  tipoServicioId?: number | null
+  clienteId?: number | null
+  clienteTexto?: string | null
+  cuentaId?: number | null
+  estadoCarga?: $Enums.EstadoCarga | null
+  combustible?: $Enums.NivelCombustible | null
+  viaticos?: $Enums.Viaticos | null
+  unidadId: number
+  segundaUnidadId?: number | null
+  segundaPlaca?: string | null
+  conductorId: number
+  rutaId?: number | null
+  supervisorId?: number | null
+  base?: string | null
+  puestoControl?: string | null
+  fechaLlegadaEstimada?: Date | string | null
+  fechaCierre?: Date | string | null
+  observaciones?: string | null
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+  cargas?: Prisma.ManifiestoCargaUncheckedCreateNestedManyWithoutManifiestoInput
+  tripulantes?: Prisma.ManifiestoTripulanteUncheckedCreateNestedManyWithoutManifiestoInput
+  seguimientos?: Prisma.SeguimientoManifiestoUncheckedCreateNestedManyWithoutManifiestoInput
+  incidencias?: Prisma.IncidenciaUncheckedCreateNestedManyWithoutManifiestoInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedCreateNestedManyWithoutManifiestoInput
+}
+
+export type ManifiestoCreateOrConnectWithoutProyectoInput = {
+  where: Prisma.ManifiestoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ManifiestoCreateWithoutProyectoInput, Prisma.ManifiestoUncheckedCreateWithoutProyectoInput>
+}
+
+export type ManifiestoCreateManyProyectoInputEnvelope = {
+  data: Prisma.ManifiestoCreateManyProyectoInput | Prisma.ManifiestoCreateManyProyectoInput[]
+  skipDuplicates?: boolean
+}
+
+export type ManifiestoUpsertWithWhereUniqueWithoutProyectoInput = {
+  where: Prisma.ManifiestoWhereUniqueInput
+  update: Prisma.XOR<Prisma.ManifiestoUpdateWithoutProyectoInput, Prisma.ManifiestoUncheckedUpdateWithoutProyectoInput>
+  create: Prisma.XOR<Prisma.ManifiestoCreateWithoutProyectoInput, Prisma.ManifiestoUncheckedCreateWithoutProyectoInput>
+}
+
+export type ManifiestoUpdateWithWhereUniqueWithoutProyectoInput = {
+  where: Prisma.ManifiestoWhereUniqueInput
+  data: Prisma.XOR<Prisma.ManifiestoUpdateWithoutProyectoInput, Prisma.ManifiestoUncheckedUpdateWithoutProyectoInput>
+}
+
+export type ManifiestoUpdateManyWithWhereWithoutProyectoInput = {
+  where: Prisma.ManifiestoScalarWhereInput
+  data: Prisma.XOR<Prisma.ManifiestoUpdateManyMutationInput, Prisma.ManifiestoUncheckedUpdateManyWithoutProyectoInput>
+}
+
 export type ManifiestoCreateWithoutConductorInput = {
   publicId: string
   numero: string
@@ -2256,6 +2644,8 @@ export type ManifiestoCreateWithoutConductorInput = {
   segundaUnidad?: Prisma.UnidadCreateNestedOneWithoutManifiestosSegundaUnidadInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2282,6 +2672,8 @@ export type ManifiestoUncheckedCreateWithoutConductorInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2345,6 +2737,8 @@ export type ManifiestoCreateWithoutSupervisorInput = {
   segundaUnidad?: Prisma.UnidadCreateNestedOneWithoutManifiestosSegundaUnidadInput
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2371,6 +2765,8 @@ export type ManifiestoUncheckedCreateWithoutSupervisorInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2467,6 +2863,8 @@ export type ManifiestoCreateWithoutRutaInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
   ubicacionDestino?: Prisma.UbicacionCreateNestedOneWithoutManifiestosDestinoInput
@@ -2492,6 +2890,8 @@ export type ManifiestoUncheckedCreateWithoutRutaInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2572,6 +2972,8 @@ export type ManifiestoCreateWithoutCargasInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2597,6 +2999,8 @@ export type ManifiestoUncheckedCreateWithoutCargasInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2667,6 +3071,8 @@ export type ManifiestoUpdateWithoutCargasInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -2692,6 +3098,8 @@ export type ManifiestoUncheckedUpdateWithoutCargasInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -2746,6 +3154,8 @@ export type ManifiestoCreateWithoutTripulantesInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2771,6 +3181,8 @@ export type ManifiestoUncheckedCreateWithoutTripulantesInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -2841,6 +3253,8 @@ export type ManifiestoUpdateWithoutTripulantesInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -2866,6 +3280,8 @@ export type ManifiestoUncheckedUpdateWithoutTripulantesInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -2920,6 +3336,8 @@ export type ManifiestoCreateWithoutSeguimientosInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -2945,6 +3363,8 @@ export type ManifiestoUncheckedCreateWithoutSeguimientosInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3015,6 +3435,8 @@ export type ManifiestoUpdateWithoutSeguimientosInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -3040,6 +3462,8 @@ export type ManifiestoUncheckedUpdateWithoutSeguimientosInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3094,6 +3518,8 @@ export type ManifiestoCreateWithoutIncidenciasInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -3119,6 +3545,8 @@ export type ManifiestoUncheckedCreateWithoutIncidenciasInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3189,6 +3617,8 @@ export type ManifiestoUpdateWithoutIncidenciasInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -3214,6 +3644,8 @@ export type ManifiestoUncheckedUpdateWithoutIncidenciasInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3268,6 +3700,8 @@ export type ManifiestoCreateWithoutInspeccionesInput = {
   conductor: Prisma.PersonalCreateNestedOneWithoutManifiestosConducidosInput
   supervisor?: Prisma.PersonalCreateNestedOneWithoutManifiestosSupervisadosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutManifiestosInput
+  cuenta?: Prisma.CuentaCreateNestedOneWithoutManifiestosInput
+  proyecto?: Prisma.ProyectoCreateNestedOneWithoutManifiestosInput
   tipoServicio?: Prisma.TipoServicioCreateNestedOneWithoutManifiestosInput
   ruta?: Prisma.RutaCreateNestedOneWithoutManifiestosInput
   ubicacionOrigen?: Prisma.UbicacionCreateNestedOneWithoutManifiestosOrigenInput
@@ -3293,6 +3727,8 @@ export type ManifiestoUncheckedCreateWithoutInspeccionesInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3363,6 +3799,8 @@ export type ManifiestoUpdateWithoutInspeccionesInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -3388,6 +3826,8 @@ export type ManifiestoUncheckedUpdateWithoutInspeccionesInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3427,6 +3867,8 @@ export type ManifiestoCreateManyClienteInput = {
   ubicacionDestinoId?: number | null
   tipoServicioId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3476,6 +3918,8 @@ export type ManifiestoUpdateWithoutClienteInput = {
   segundaUnidad?: Prisma.UnidadUpdateOneWithoutManifiestosSegundaUnidadNestedInput
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -3501,6 +3945,8 @@ export type ManifiestoUncheckedUpdateWithoutClienteInput = {
   ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3541,6 +3987,8 @@ export type ManifiestoUncheckedUpdateManyWithoutClienteInput = {
   ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3576,6 +4024,8 @@ export type ManifiestoCreateManyUbicacionOrigenInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3611,6 +4061,8 @@ export type ManifiestoCreateManyUbicacionDestinoInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3661,6 +4113,8 @@ export type ManifiestoUpdateWithoutUbicacionOrigenInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutManifiestosDestinoNestedInput
@@ -3685,6 +4139,8 @@ export type ManifiestoUncheckedUpdateWithoutUbicacionOrigenInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3725,6 +4181,8 @@ export type ManifiestoUncheckedUpdateManyWithoutUbicacionOrigenInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3775,6 +4233,8 @@ export type ManifiestoUpdateWithoutUbicacionDestinoInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -3799,6 +4259,8 @@ export type ManifiestoUncheckedUpdateWithoutUbicacionDestinoInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3839,6 +4301,8 @@ export type ManifiestoUncheckedUpdateManyWithoutUbicacionDestinoInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3874,6 +4338,8 @@ export type ManifiestoCreateManyTipoServicioInput = {
   ubicacionDestinoId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -3924,6 +4390,8 @@ export type ManifiestoUpdateWithoutTipoServicioInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
   ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutManifiestosDestinoNestedInput
@@ -3948,6 +4416,8 @@ export type ManifiestoUncheckedUpdateWithoutTipoServicioInput = {
   ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -3988,6 +4458,8 @@ export type ManifiestoUncheckedUpdateManyWithoutTipoServicioInput = {
   ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4024,6 +4496,8 @@ export type ManifiestoCreateManyUnidadInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -4059,6 +4533,8 @@ export type ManifiestoCreateManySegundaUnidadInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -4107,6 +4583,8 @@ export type ManifiestoUpdateWithoutUnidadInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -4133,6 +4611,8 @@ export type ManifiestoUncheckedUpdateWithoutUnidadInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4173,6 +4653,8 @@ export type ManifiestoUncheckedUpdateManyWithoutUnidadInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4221,6 +4703,8 @@ export type ManifiestoUpdateWithoutSegundaUnidadInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -4247,6 +4731,8 @@ export type ManifiestoUncheckedUpdateWithoutSegundaUnidadInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4287,10 +4773,326 @@ export type ManifiestoUncheckedUpdateManyWithoutSegundaUnidadInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
   unidadId?: Prisma.IntFieldUpdateOperationsInput | number
+  segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conductorId?: Prisma.IntFieldUpdateOperationsInput | number
+  rutaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  supervisorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  base?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  puestoControl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fechaLlegadaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fechaCierre?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ManifiestoCreateManyCuentaInput = {
+  id?: number
+  publicId: string
+  numero: string
+  estado?: $Enums.EstadoManifiesto
+  estadoSeguimiento?: $Enums.EstadoSeguimiento
+  fechaServicio: Date | string
+  horaServicio?: string | null
+  origen: string
+  destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
+  tipoServicioId?: number | null
+  clienteId?: number | null
+  clienteTexto?: string | null
+  proyectoId?: number | null
+  estadoCarga?: $Enums.EstadoCarga | null
+  combustible?: $Enums.NivelCombustible | null
+  viaticos?: $Enums.Viaticos | null
+  unidadId: number
+  segundaUnidadId?: number | null
+  segundaPlaca?: string | null
+  conductorId: number
+  rutaId?: number | null
+  supervisorId?: number | null
+  base?: string | null
+  puestoControl?: string | null
+  fechaLlegadaEstimada?: Date | string | null
+  fechaCierre?: Date | string | null
+  observaciones?: string | null
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+}
+
+export type ManifiestoUpdateWithoutCuentaInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.EnumEstadoManifiestoFieldUpdateOperationsInput | $Enums.EstadoManifiesto
+  estadoSeguimiento?: Prisma.EnumEstadoSeguimientoFieldUpdateOperationsInput | $Enums.EstadoSeguimiento
+  fechaServicio?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  horaServicio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
+  combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
+  viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
+  segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  base?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  puestoControl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fechaLlegadaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fechaCierre?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unidad?: Prisma.UnidadUpdateOneRequiredWithoutManifiestosNestedInput
+  segundaUnidad?: Prisma.UnidadUpdateOneWithoutManifiestosSegundaUnidadNestedInput
+  conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
+  supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
+  cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
+  tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
+  ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
+  ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
+  ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutManifiestosDestinoNestedInput
+  cargas?: Prisma.ManifiestoCargaUpdateManyWithoutManifiestoNestedInput
+  tripulantes?: Prisma.ManifiestoTripulanteUpdateManyWithoutManifiestoNestedInput
+  seguimientos?: Prisma.SeguimientoManifiestoUpdateManyWithoutManifiestoNestedInput
+  incidencias?: Prisma.IncidenciaUpdateManyWithoutManifiestoNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutManifiestoNestedInput
+}
+
+export type ManifiestoUncheckedUpdateWithoutCuentaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.EnumEstadoManifiestoFieldUpdateOperationsInput | $Enums.EstadoManifiesto
+  estadoSeguimiento?: Prisma.EnumEstadoSeguimientoFieldUpdateOperationsInput | $Enums.EstadoSeguimiento
+  fechaServicio?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  horaServicio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
+  combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
+  viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
+  unidadId?: Prisma.IntFieldUpdateOperationsInput | number
+  segundaUnidadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conductorId?: Prisma.IntFieldUpdateOperationsInput | number
+  rutaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  supervisorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  base?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  puestoControl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fechaLlegadaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fechaCierre?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cargas?: Prisma.ManifiestoCargaUncheckedUpdateManyWithoutManifiestoNestedInput
+  tripulantes?: Prisma.ManifiestoTripulanteUncheckedUpdateManyWithoutManifiestoNestedInput
+  seguimientos?: Prisma.SeguimientoManifiestoUncheckedUpdateManyWithoutManifiestoNestedInput
+  incidencias?: Prisma.IncidenciaUncheckedUpdateManyWithoutManifiestoNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutManifiestoNestedInput
+}
+
+export type ManifiestoUncheckedUpdateManyWithoutCuentaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.EnumEstadoManifiestoFieldUpdateOperationsInput | $Enums.EstadoManifiesto
+  estadoSeguimiento?: Prisma.EnumEstadoSeguimientoFieldUpdateOperationsInput | $Enums.EstadoSeguimiento
+  fechaServicio?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  horaServicio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
+  combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
+  viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
+  unidadId?: Prisma.IntFieldUpdateOperationsInput | number
+  segundaUnidadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conductorId?: Prisma.IntFieldUpdateOperationsInput | number
+  rutaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  supervisorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  base?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  puestoControl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fechaLlegadaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fechaCierre?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ManifiestoCreateManyProyectoInput = {
+  id?: number
+  publicId: string
+  numero: string
+  estado?: $Enums.EstadoManifiesto
+  estadoSeguimiento?: $Enums.EstadoSeguimiento
+  fechaServicio: Date | string
+  horaServicio?: string | null
+  origen: string
+  destino: string
+  ubicacionOrigenId?: number | null
+  ubicacionDestinoId?: number | null
+  tipoServicioId?: number | null
+  clienteId?: number | null
+  clienteTexto?: string | null
+  cuentaId?: number | null
+  estadoCarga?: $Enums.EstadoCarga | null
+  combustible?: $Enums.NivelCombustible | null
+  viaticos?: $Enums.Viaticos | null
+  unidadId: number
+  segundaUnidadId?: number | null
+  segundaPlaca?: string | null
+  conductorId: number
+  rutaId?: number | null
+  supervisorId?: number | null
+  base?: string | null
+  puestoControl?: string | null
+  fechaLlegadaEstimada?: Date | string | null
+  fechaCierre?: Date | string | null
+  observaciones?: string | null
+  estadoRegistro?: $Enums.EstadoRegistro
+  fechaCreacion?: Date | string
+  usuarioCreacion: string
+  fechaModificacion?: Date | string | null
+  usuarioModificacion?: string | null
+}
+
+export type ManifiestoUpdateWithoutProyectoInput = {
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.EnumEstadoManifiestoFieldUpdateOperationsInput | $Enums.EstadoManifiesto
+  estadoSeguimiento?: Prisma.EnumEstadoSeguimientoFieldUpdateOperationsInput | $Enums.EstadoSeguimiento
+  fechaServicio?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  horaServicio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
+  combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
+  viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
+  segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  base?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  puestoControl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fechaLlegadaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fechaCierre?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unidad?: Prisma.UnidadUpdateOneRequiredWithoutManifiestosNestedInput
+  segundaUnidad?: Prisma.UnidadUpdateOneWithoutManifiestosSegundaUnidadNestedInput
+  conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
+  supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
+  cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
+  ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
+  ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
+  ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutManifiestosDestinoNestedInput
+  cargas?: Prisma.ManifiestoCargaUpdateManyWithoutManifiestoNestedInput
+  tripulantes?: Prisma.ManifiestoTripulanteUpdateManyWithoutManifiestoNestedInput
+  seguimientos?: Prisma.SeguimientoManifiestoUpdateManyWithoutManifiestoNestedInput
+  incidencias?: Prisma.IncidenciaUpdateManyWithoutManifiestoNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUpdateManyWithoutManifiestoNestedInput
+}
+
+export type ManifiestoUncheckedUpdateWithoutProyectoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.EnumEstadoManifiestoFieldUpdateOperationsInput | $Enums.EstadoManifiesto
+  estadoSeguimiento?: Prisma.EnumEstadoSeguimientoFieldUpdateOperationsInput | $Enums.EstadoSeguimiento
+  fechaServicio?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  horaServicio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
+  combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
+  viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
+  unidadId?: Prisma.IntFieldUpdateOperationsInput | number
+  segundaUnidadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conductorId?: Prisma.IntFieldUpdateOperationsInput | number
+  rutaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  supervisorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  base?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  puestoControl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fechaLlegadaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fechaCierre?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estadoRegistro?: Prisma.EnumEstadoRegistroFieldUpdateOperationsInput | $Enums.EstadoRegistro
+  fechaCreacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuarioCreacion?: Prisma.StringFieldUpdateOperationsInput | string
+  fechaModificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuarioModificacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cargas?: Prisma.ManifiestoCargaUncheckedUpdateManyWithoutManifiestoNestedInput
+  tripulantes?: Prisma.ManifiestoTripulanteUncheckedUpdateManyWithoutManifiestoNestedInput
+  seguimientos?: Prisma.SeguimientoManifiestoUncheckedUpdateManyWithoutManifiestoNestedInput
+  incidencias?: Prisma.IncidenciaUncheckedUpdateManyWithoutManifiestoNestedInput
+  inspecciones?: Prisma.InspeccionPreoperacionalUncheckedUpdateManyWithoutManifiestoNestedInput
+}
+
+export type ManifiestoUncheckedUpdateManyWithoutProyectoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.EnumEstadoManifiestoFieldUpdateOperationsInput | $Enums.EstadoManifiesto
+  estadoSeguimiento?: Prisma.EnumEstadoSeguimientoFieldUpdateOperationsInput | $Enums.EstadoSeguimiento
+  fechaServicio?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  horaServicio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  origen?: Prisma.StringFieldUpdateOperationsInput | string
+  destino?: Prisma.StringFieldUpdateOperationsInput | string
+  ubicacionOrigenId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ubicacionDestinoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
+  combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
+  viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
+  unidadId?: Prisma.IntFieldUpdateOperationsInput | number
+  segundaUnidadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   segundaPlaca?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   conductorId?: Prisma.IntFieldUpdateOperationsInput | number
   rutaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4322,6 +5124,8 @@ export type ManifiestoCreateManyConductorInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -4357,6 +5161,8 @@ export type ManifiestoCreateManySupervisorInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -4405,6 +5211,8 @@ export type ManifiestoUpdateWithoutConductorInput = {
   segundaUnidad?: Prisma.UnidadUpdateOneWithoutManifiestosSegundaUnidadNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -4431,6 +5239,8 @@ export type ManifiestoUncheckedUpdateWithoutConductorInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4471,6 +5281,8 @@ export type ManifiestoUncheckedUpdateManyWithoutConductorInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4519,6 +5331,8 @@ export type ManifiestoUpdateWithoutSupervisorInput = {
   segundaUnidad?: Prisma.UnidadUpdateOneWithoutManifiestosSegundaUnidadNestedInput
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ruta?: Prisma.RutaUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
@@ -4545,6 +5359,8 @@ export type ManifiestoUncheckedUpdateWithoutSupervisorInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4585,6 +5401,8 @@ export type ManifiestoUncheckedUpdateManyWithoutSupervisorInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4620,6 +5438,8 @@ export type ManifiestoCreateManyRutaInput = {
   tipoServicioId?: number | null
   clienteId?: number | null
   clienteTexto?: string | null
+  cuentaId?: number | null
+  proyectoId?: number | null
   estadoCarga?: $Enums.EstadoCarga | null
   combustible?: $Enums.NivelCombustible | null
   viaticos?: $Enums.Viaticos | null
@@ -4669,6 +5489,8 @@ export type ManifiestoUpdateWithoutRutaInput = {
   conductor?: Prisma.PersonalUpdateOneRequiredWithoutManifiestosConducidosNestedInput
   supervisor?: Prisma.PersonalUpdateOneWithoutManifiestosSupervisadosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutManifiestosNestedInput
+  cuenta?: Prisma.CuentaUpdateOneWithoutManifiestosNestedInput
+  proyecto?: Prisma.ProyectoUpdateOneWithoutManifiestosNestedInput
   tipoServicio?: Prisma.TipoServicioUpdateOneWithoutManifiestosNestedInput
   ubicacionOrigen?: Prisma.UbicacionUpdateOneWithoutManifiestosOrigenNestedInput
   ubicacionDestino?: Prisma.UbicacionUpdateOneWithoutManifiestosDestinoNestedInput
@@ -4694,6 +5516,8 @@ export type ManifiestoUncheckedUpdateWithoutRutaInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4734,6 +5558,8 @@ export type ManifiestoUncheckedUpdateManyWithoutRutaInput = {
   tipoServicioId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   clienteTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuentaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  proyectoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estadoCarga?: Prisma.NullableEnumEstadoCargaFieldUpdateOperationsInput | $Enums.EstadoCarga | null
   combustible?: Prisma.NullableEnumNivelCombustibleFieldUpdateOperationsInput | $Enums.NivelCombustible | null
   viaticos?: Prisma.NullableEnumViaticosFieldUpdateOperationsInput | $Enums.Viaticos | null
@@ -4836,6 +5662,8 @@ export type ManifiestoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   tipoServicioId?: boolean
   clienteId?: boolean
   clienteTexto?: boolean
+  cuentaId?: boolean
+  proyectoId?: boolean
   estadoCarga?: boolean
   combustible?: boolean
   viaticos?: boolean
@@ -4860,6 +5688,8 @@ export type ManifiestoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   conductor?: boolean | Prisma.PersonalDefaultArgs<ExtArgs>
   supervisor?: boolean | Prisma.Manifiesto$supervisorArgs<ExtArgs>
   cliente?: boolean | Prisma.Manifiesto$clienteArgs<ExtArgs>
+  cuenta?: boolean | Prisma.Manifiesto$cuentaArgs<ExtArgs>
+  proyecto?: boolean | Prisma.Manifiesto$proyectoArgs<ExtArgs>
   tipoServicio?: boolean | Prisma.Manifiesto$tipoServicioArgs<ExtArgs>
   ruta?: boolean | Prisma.Manifiesto$rutaArgs<ExtArgs>
   ubicacionOrigen?: boolean | Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>
@@ -4887,6 +5717,8 @@ export type ManifiestoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   tipoServicioId?: boolean
   clienteId?: boolean
   clienteTexto?: boolean
+  cuentaId?: boolean
+  proyectoId?: boolean
   estadoCarga?: boolean
   combustible?: boolean
   viaticos?: boolean
@@ -4911,6 +5743,8 @@ export type ManifiestoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   conductor?: boolean | Prisma.PersonalDefaultArgs<ExtArgs>
   supervisor?: boolean | Prisma.Manifiesto$supervisorArgs<ExtArgs>
   cliente?: boolean | Prisma.Manifiesto$clienteArgs<ExtArgs>
+  cuenta?: boolean | Prisma.Manifiesto$cuentaArgs<ExtArgs>
+  proyecto?: boolean | Prisma.Manifiesto$proyectoArgs<ExtArgs>
   tipoServicio?: boolean | Prisma.Manifiesto$tipoServicioArgs<ExtArgs>
   ruta?: boolean | Prisma.Manifiesto$rutaArgs<ExtArgs>
   ubicacionOrigen?: boolean | Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>
@@ -4932,6 +5766,8 @@ export type ManifiestoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   tipoServicioId?: boolean
   clienteId?: boolean
   clienteTexto?: boolean
+  cuentaId?: boolean
+  proyectoId?: boolean
   estadoCarga?: boolean
   combustible?: boolean
   viaticos?: boolean
@@ -4956,6 +5792,8 @@ export type ManifiestoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   conductor?: boolean | Prisma.PersonalDefaultArgs<ExtArgs>
   supervisor?: boolean | Prisma.Manifiesto$supervisorArgs<ExtArgs>
   cliente?: boolean | Prisma.Manifiesto$clienteArgs<ExtArgs>
+  cuenta?: boolean | Prisma.Manifiesto$cuentaArgs<ExtArgs>
+  proyecto?: boolean | Prisma.Manifiesto$proyectoArgs<ExtArgs>
   tipoServicio?: boolean | Prisma.Manifiesto$tipoServicioArgs<ExtArgs>
   ruta?: boolean | Prisma.Manifiesto$rutaArgs<ExtArgs>
   ubicacionOrigen?: boolean | Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>
@@ -4977,6 +5815,8 @@ export type ManifiestoSelectScalar = {
   tipoServicioId?: boolean
   clienteId?: boolean
   clienteTexto?: boolean
+  cuentaId?: boolean
+  proyectoId?: boolean
   estadoCarga?: boolean
   combustible?: boolean
   viaticos?: boolean
@@ -4998,13 +5838,15 @@ export type ManifiestoSelectScalar = {
   usuarioModificacion?: boolean
 }
 
-export type ManifiestoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "numero" | "estado" | "estadoSeguimiento" | "fechaServicio" | "horaServicio" | "origen" | "destino" | "ubicacionOrigenId" | "ubicacionDestinoId" | "tipoServicioId" | "clienteId" | "clienteTexto" | "estadoCarga" | "combustible" | "viaticos" | "unidadId" | "segundaUnidadId" | "segundaPlaca" | "conductorId" | "rutaId" | "supervisorId" | "base" | "puestoControl" | "fechaLlegadaEstimada" | "fechaCierre" | "observaciones" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["manifiesto"]>
+export type ManifiestoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "numero" | "estado" | "estadoSeguimiento" | "fechaServicio" | "horaServicio" | "origen" | "destino" | "ubicacionOrigenId" | "ubicacionDestinoId" | "tipoServicioId" | "clienteId" | "clienteTexto" | "cuentaId" | "proyectoId" | "estadoCarga" | "combustible" | "viaticos" | "unidadId" | "segundaUnidadId" | "segundaPlaca" | "conductorId" | "rutaId" | "supervisorId" | "base" | "puestoControl" | "fechaLlegadaEstimada" | "fechaCierre" | "observaciones" | "estadoRegistro" | "fechaCreacion" | "usuarioCreacion" | "fechaModificacion" | "usuarioModificacion", ExtArgs["result"]["manifiesto"]>
 export type ManifiestoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   unidad?: boolean | Prisma.UnidadDefaultArgs<ExtArgs>
   segundaUnidad?: boolean | Prisma.Manifiesto$segundaUnidadArgs<ExtArgs>
   conductor?: boolean | Prisma.PersonalDefaultArgs<ExtArgs>
   supervisor?: boolean | Prisma.Manifiesto$supervisorArgs<ExtArgs>
   cliente?: boolean | Prisma.Manifiesto$clienteArgs<ExtArgs>
+  cuenta?: boolean | Prisma.Manifiesto$cuentaArgs<ExtArgs>
+  proyecto?: boolean | Prisma.Manifiesto$proyectoArgs<ExtArgs>
   tipoServicio?: boolean | Prisma.Manifiesto$tipoServicioArgs<ExtArgs>
   ruta?: boolean | Prisma.Manifiesto$rutaArgs<ExtArgs>
   ubicacionOrigen?: boolean | Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>
@@ -5022,6 +5864,8 @@ export type ManifiestoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.E
   conductor?: boolean | Prisma.PersonalDefaultArgs<ExtArgs>
   supervisor?: boolean | Prisma.Manifiesto$supervisorArgs<ExtArgs>
   cliente?: boolean | Prisma.Manifiesto$clienteArgs<ExtArgs>
+  cuenta?: boolean | Prisma.Manifiesto$cuentaArgs<ExtArgs>
+  proyecto?: boolean | Prisma.Manifiesto$proyectoArgs<ExtArgs>
   tipoServicio?: boolean | Prisma.Manifiesto$tipoServicioArgs<ExtArgs>
   ruta?: boolean | Prisma.Manifiesto$rutaArgs<ExtArgs>
   ubicacionOrigen?: boolean | Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>
@@ -5033,6 +5877,8 @@ export type ManifiestoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   conductor?: boolean | Prisma.PersonalDefaultArgs<ExtArgs>
   supervisor?: boolean | Prisma.Manifiesto$supervisorArgs<ExtArgs>
   cliente?: boolean | Prisma.Manifiesto$clienteArgs<ExtArgs>
+  cuenta?: boolean | Prisma.Manifiesto$cuentaArgs<ExtArgs>
+  proyecto?: boolean | Prisma.Manifiesto$proyectoArgs<ExtArgs>
   tipoServicio?: boolean | Prisma.Manifiesto$tipoServicioArgs<ExtArgs>
   ruta?: boolean | Prisma.Manifiesto$rutaArgs<ExtArgs>
   ubicacionOrigen?: boolean | Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>
@@ -5047,6 +5893,8 @@ export type $ManifiestoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     conductor: Prisma.$PersonalPayload<ExtArgs>
     supervisor: Prisma.$PersonalPayload<ExtArgs> | null
     cliente: Prisma.$ClientePayload<ExtArgs> | null
+    cuenta: Prisma.$CuentaPayload<ExtArgs> | null
+    proyecto: Prisma.$ProyectoPayload<ExtArgs> | null
     tipoServicio: Prisma.$TipoServicioPayload<ExtArgs> | null
     ruta: Prisma.$RutaPayload<ExtArgs> | null
     ubicacionOrigen: Prisma.$UbicacionPayload<ExtArgs> | null
@@ -5072,6 +5920,8 @@ export type $ManifiestoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     tipoServicioId: number | null
     clienteId: number | null
     clienteTexto: string | null
+    cuentaId: number | null
+    proyectoId: number | null
     estadoCarga: $Enums.EstadoCarga | null
     combustible: $Enums.NivelCombustible | null
     viaticos: $Enums.Viaticos | null
@@ -5490,6 +6340,8 @@ export interface Prisma__ManifiestoClient<T, Null = never, ExtArgs extends runti
   conductor<T extends Prisma.PersonalDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PersonalDefaultArgs<ExtArgs>>): Prisma.Prisma__PersonalClient<runtime.Types.Result.GetResult<Prisma.$PersonalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   supervisor<T extends Prisma.Manifiesto$supervisorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$supervisorArgs<ExtArgs>>): Prisma.Prisma__PersonalClient<runtime.Types.Result.GetResult<Prisma.$PersonalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   cliente<T extends Prisma.Manifiesto$clienteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$clienteArgs<ExtArgs>>): Prisma.Prisma__ClienteClient<runtime.Types.Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  cuenta<T extends Prisma.Manifiesto$cuentaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$cuentaArgs<ExtArgs>>): Prisma.Prisma__CuentaClient<runtime.Types.Result.GetResult<Prisma.$CuentaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  proyecto<T extends Prisma.Manifiesto$proyectoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$proyectoArgs<ExtArgs>>): Prisma.Prisma__ProyectoClient<runtime.Types.Result.GetResult<Prisma.$ProyectoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tipoServicio<T extends Prisma.Manifiesto$tipoServicioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$tipoServicioArgs<ExtArgs>>): Prisma.Prisma__TipoServicioClient<runtime.Types.Result.GetResult<Prisma.$TipoServicioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ruta<T extends Prisma.Manifiesto$rutaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$rutaArgs<ExtArgs>>): Prisma.Prisma__RutaClient<runtime.Types.Result.GetResult<Prisma.$RutaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ubicacionOrigen<T extends Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manifiesto$ubicacionOrigenArgs<ExtArgs>>): Prisma.Prisma__UbicacionClient<runtime.Types.Result.GetResult<Prisma.$UbicacionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -5542,6 +6394,8 @@ export interface ManifiestoFieldRefs {
   readonly tipoServicioId: Prisma.FieldRef<"Manifiesto", 'Int'>
   readonly clienteId: Prisma.FieldRef<"Manifiesto", 'Int'>
   readonly clienteTexto: Prisma.FieldRef<"Manifiesto", 'String'>
+  readonly cuentaId: Prisma.FieldRef<"Manifiesto", 'Int'>
+  readonly proyectoId: Prisma.FieldRef<"Manifiesto", 'Int'>
   readonly estadoCarga: Prisma.FieldRef<"Manifiesto", 'EstadoCarga'>
   readonly combustible: Prisma.FieldRef<"Manifiesto", 'NivelCombustible'>
   readonly viaticos: Prisma.FieldRef<"Manifiesto", 'Viaticos'>
@@ -6016,6 +6870,44 @@ export type Manifiesto$clienteArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.ClienteInclude<ExtArgs> | null
   where?: Prisma.ClienteWhereInput
+}
+
+/**
+ * Manifiesto.cuenta
+ */
+export type Manifiesto$cuentaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cuenta
+   */
+  select?: Prisma.CuentaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cuenta
+   */
+  omit?: Prisma.CuentaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CuentaInclude<ExtArgs> | null
+  where?: Prisma.CuentaWhereInput
+}
+
+/**
+ * Manifiesto.proyecto
+ */
+export type Manifiesto$proyectoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Proyecto
+   */
+  select?: Prisma.ProyectoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Proyecto
+   */
+  omit?: Prisma.ProyectoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProyectoInclude<ExtArgs> | null
+  where?: Prisma.ProyectoWhereInput
 }
 
 /**

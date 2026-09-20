@@ -740,10 +740,6 @@ export type RutaPuntoUncheckedUpdateManyWithoutRutaNestedInput = {
   deleteMany?: Prisma.RutaPuntoScalarWhereInput | Prisma.RutaPuntoScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type RutaPuntoCreateNestedOneWithoutSeguimientosInput = {
   create?: Prisma.XOR<Prisma.RutaPuntoCreateWithoutSeguimientosInput, Prisma.RutaPuntoUncheckedCreateWithoutSeguimientosInput>
   connectOrCreate?: Prisma.RutaPuntoCreateOrConnectWithoutSeguimientosInput

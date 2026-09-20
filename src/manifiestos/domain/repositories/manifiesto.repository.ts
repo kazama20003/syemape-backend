@@ -39,6 +39,8 @@ export interface ResumenCliente {
   publicId: string;
   razonSocial: string;
 }
+export interface ResumenCuenta { id: number; publicId: string; codigo: string; nombre: string; }
+export interface ResumenProyecto extends ResumenCuenta { cuentaId: number; }
 
 export interface ResumenTipoServicio {
   id: number;
@@ -86,6 +88,8 @@ export interface ManifiestoProps {
   tipoServicio: ResumenTipoServicio | null;
   cliente: ResumenCliente | null;
   clienteTexto: string | null;
+  cuenta: ResumenCuenta | null;
+  proyecto: ResumenProyecto | null;
   estadoCarga: EstadoCarga | null;
   combustible: NivelCombustible | null;
   viaticos: Viaticos | null;
@@ -129,6 +133,8 @@ export interface CrearManifiestoData {
   tipoServicioId: number | null;
   clienteId: number | null;
   clienteTexto: string | null;
+  cuentaId: number | null;
+  proyectoId: number | null;
   estadoCarga: EstadoCarga | null;
   combustible: NivelCombustible | null;
   viaticos: Viaticos | null;

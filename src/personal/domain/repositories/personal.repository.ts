@@ -1,6 +1,7 @@
 import { EstadoRegistro } from '../../../shared/enums/estado-registro.enum.js';
 import { EstadoActivo } from '../../../shared/enums/estado-activo.enum.js';
 import { TipoPersonal } from '../value-objects/tipo-personal.enum.js';
+import { RolPersonalProps } from '../../../roles-personal/domain/repositories/rol-personal.repository.js';
 
 export const PERSONAL_REPOSITORY = Symbol('PERSONAL_REPOSITORY');
 
@@ -16,6 +17,7 @@ export interface PersonalProps {
   nombres: string;
   apellidos: string;
   tipo: TipoPersonal;
+  roles: RolPersonalProps[];
   apelativo: string | null;
   telefono: string | null;
   licenciaConducir: string | null;
@@ -36,6 +38,7 @@ export interface CrearPersonalData {
   nombres: string;
   apellidos: string;
   tipo: TipoPersonal;
+  rolesIds: number[];
   apelativo: string | null;
   telefono: string | null;
   licenciaConducir: string | null;
@@ -55,6 +58,7 @@ export interface ActualizarPersonalData {
   nombres?: string;
   apellidos?: string;
   tipo?: TipoPersonal;
+  rolesIds?: number[];
   apelativo?: string | null;
   telefono?: string | null;
   licenciaConducir?: string | null;

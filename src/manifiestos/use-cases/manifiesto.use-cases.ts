@@ -43,6 +43,8 @@ import {
   UBICACION_REPOSITORY,
   type UbicacionRepository,
 } from '../../ubicaciones/domain/repositories/ubicacion.repository.js';
+import { CUENTA_REPOSITORY, type CuentaRepository } from '../../cuentas/domain/repositories/cuenta.repository.js';
+import { PROYECTO_REPOSITORY, type ProyectoRepository } from '../../proyectos/domain/repositories/proyecto.repository.js';
 import {
   MANIFIESTO_REPOSITORY,
   type CrearCargaData,
@@ -67,6 +69,25 @@ import {
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
+
+function tieneCapacidad(
+  persona: {
+    roles: {
+      puedeConducir: boolean;
+      puedeSupervisar: boolean;
+      estadoActivo: string;
+      estadoRegistro: EstadoRegistro;
+    }[];
+  },
+  capacidad: 'puedeConducir' | 'puedeSupervisar',
+): boolean {
+  return persona.roles.some(
+    (rol) =>
+      rol.estadoRegistro === EstadoRegistro.ACTIVO &&
+      rol.estadoActivo === 'ACTIVO' &&
+      rol[capacidad],
+  );
+}
 
 export class CargaDto {
   descripcion: string;
@@ -94,6 +115,8 @@ export class RegistrarManifiestoDto {
   tipoServicioId?: number;
   clienteId?: number;
   clienteTexto?: string;
+  cuentaId?: number;
+  proyectoId?: number;
   estadoCarga?: string;
   combustible?: string;
   viaticos?: string;
@@ -147,7 +170,13 @@ function exigirEnteroPositivo(valor: unknown, campo: string): number {
 function idOpcional(valor: unknown, campo: string): number | null {
   if (valor === undefined || valor === null || valor === '') return null;
   const numero = typeof valor === 'number' ? valor : Number(valor);
-  if (!Number.isInteger(numero) || numero <= 0) throw new DomainValidationError(`El campo "${campo}" debe ser un id valido.`, campo, 'INVALIDO', valor);
+  if (!Number.isInteger(numero) || numero <= 0)
+    throw new DomainValidationError(
+      `El campo "${campo}" debe ser un id valido.`,
+      campo,
+      'INVALIDO',
+      valor,
+    );
   return numero;
 }
 
@@ -164,13 +193,20 @@ export class RegistrarManifiestoUseCase {
     private readonly tiposServicio: TipoServicioRepository,
     @Inject(UBICACION_REPOSITORY)
     private readonly ubicaciones: UbicacionRepository,
+    @Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository,
+    @Inject(PROYECTO_REPOSITORY) private readonly proyectos: ProyectoRepository,
   ) {}
 
-  async execute(dto: RegistrarManifiestoDto, actor: string): Promise<ManifiestoProps> {
+  async execute(
+    dto: RegistrarManifiestoDto,
+    actor: string,
+  ): Promise<ManifiestoProps> {
     const unidadId = exigirEnteroPositivo(dto.unidadId, 'unidadId');
     const conductorId = exigirEnteroPositivo(dto.conductorId, 'conductorId');
-    const origen = exigirTexto(dto.origen, 'origen');
-    const destino = exigirTexto(dto.destino, 'destino');
+    let origen: string;
+    let destino: string;
+    let ubicacionOrigenId: number;
+    let ubicacionDestinoId: number;
 
     const fechaServicio = aFechaOpcional(dto.fechaServicio);
     if (!fechaServicio) {
@@ -185,9 +221,16 @@ export class RegistrarManifiestoUseCase {
     // Unidad principal: activa y operativa.
     const unidad = await this.unidades.findById(unidadId);
     if (!unidad || unidad.estadoRegistro !== EstadoRegistro.ACTIVO) {
-      throw new RecursoNoEncontradoError('La unidad indicada no existe.', 'unidad', unidadId);
+      throw new RecursoNoEncontradoError(
+        'La unidad indicada no existe.',
+        'unidad',
+        unidadId,
+      );
     }
-    if (unidad.estadoActivo !== 'ACTIVO' || unidad.estadoUnidad !== EstadoUnidad.OPERATIVA) {
+    if (
+      unidad.estadoActivo !== 'ACTIVO' ||
+      unidad.estadoUnidad !== EstadoUnidad.OPERATIVA
+    ) {
       throw new DomainValidationError(
         `La unidad "${unidad.placa}" no esta operativa (estado ${unidad.estadoUnidad}).`,
         'unidadId',
@@ -205,14 +248,27 @@ export class RegistrarManifiestoUseCase {
         conductorId,
       );
     }
-    // Un supervisor tambien puede conducir la unidad.
-    const puedeConducir = new Set([TipoPersonal.CONDUCTOR, TipoPersonal.SUPERVISOR]);
-    if (conductor.estadoActivo !== 'ACTIVO' || !puedeConducir.has(conductor.tipo)) throw new DomainValidationError('El conductor debe estar activo y ser CONDUCTOR o SUPERVISOR.', 'conductorId', 'PERSONAL_NO_HABILITADO', conductorId);
+    if (
+      conductor.estadoActivo !== 'ACTIVO' ||
+      !tieneCapacidad(conductor, 'puedeConducir')
+    )
+      throw new DomainValidationError(
+        'El conductor debe estar activo y tener un rol con capacidad para conducir.',
+        'conductorId',
+        'PERSONAL_NO_HABILITADO',
+        conductorId,
+      );
 
     // Referencias opcionales.
     const segundaUnidadId = idOpcional(dto.segundaUnidadId, 'segundaUnidadId');
     if (segundaUnidadId !== null) {
-      if (segundaUnidadId === unidadId) throw new DomainValidationError('La segunda unidad debe ser diferente de la unidad principal.', 'segundaUnidadId', 'DUPLICADO', segundaUnidadId);
+      if (segundaUnidadId === unidadId)
+        throw new DomainValidationError(
+          'La segunda unidad debe ser diferente de la unidad principal.',
+          'segundaUnidadId',
+          'DUPLICADO',
+          segundaUnidadId,
+        );
       const su = await this.unidades.findById(segundaUnidadId);
       if (!su || su.estadoRegistro !== EstadoRegistro.ACTIVO) {
         throw new RecursoNoEncontradoError(
@@ -221,7 +277,16 @@ export class RegistrarManifiestoUseCase {
           segundaUnidadId,
         );
       }
-      if (su.estadoActivo !== 'ACTIVO' || su.estadoUnidad !== EstadoUnidad.OPERATIVA) throw new DomainValidationError('La segunda unidad debe estar activa y operativa.', 'segundaUnidadId', 'UNIDAD_NO_OPERATIVA', segundaUnidadId);
+      if (
+        su.estadoActivo !== 'ACTIVO' ||
+        su.estadoUnidad !== EstadoUnidad.OPERATIVA
+      )
+        throw new DomainValidationError(
+          'La segunda unidad debe estar activa y operativa.',
+          'segundaUnidadId',
+          'UNIDAD_NO_OPERATIVA',
+          segundaUnidadId,
+        );
     }
 
     const supervisorId = idOpcional(dto.supervisorId, 'supervisorId');
@@ -234,21 +299,75 @@ export class RegistrarManifiestoUseCase {
           supervisorId,
         );
       }
-      if (sup.estadoActivo !== 'ACTIVO' || sup.tipo !== TipoPersonal.SUPERVISOR) throw new DomainValidationError('El supervisor debe estar activo y ser de tipo SUPERVISOR.', 'supervisorId', 'PERSONAL_NO_HABILITADO', supervisorId);
+      if (
+        sup.estadoActivo !== 'ACTIVO' ||
+        !tieneCapacidad(sup, 'puedeSupervisar')
+      )
+        throw new DomainValidationError(
+          'El supervisor debe estar activo y tener un rol con capacidad para supervisar.',
+          'supervisorId',
+          'PERSONAL_NO_HABILITADO',
+          supervisorId,
+        );
     }
 
     const rutaId = idOpcional(dto.rutaId, 'rutaId');
     if (rutaId !== null) {
       const ruta = await this.rutas.findById(rutaId);
-      if (!ruta || ruta.estadoRegistro !== EstadoRegistro.ACTIVO) {
-        throw new RecursoNoEncontradoError('La ruta indicada no existe.', 'ruta', rutaId);
+      if (
+        !ruta ||
+        ruta.estadoRegistro !== EstadoRegistro.ACTIVO ||
+        ruta.estadoActivo !== 'ACTIVO'
+      ) {
+        throw new RecursoNoEncontradoError(
+          'La ruta indicada no existe.',
+          'ruta',
+          rutaId,
+        );
       }
+      if (ruta.ubicacionOrigenId === null || ruta.ubicacionDestinoId === null) {
+        throw new DomainValidationError(
+          'La ruta indicada no tiene ubicaciones de origen y destino configuradas.',
+          'rutaId',
+          'RUTA_INCOMPLETA',
+          rutaId,
+        );
+      }
+      origen = ruta.origen;
+      destino = ruta.destino;
+      ubicacionOrigenId = ruta.ubicacionOrigenId;
+      ubicacionDestinoId = ruta.ubicacionDestinoId;
+    } else {
+      const origenId = idOpcional(dto.ubicacionOrigenId, 'ubicacionOrigenId');
+      const destinoId = idOpcional(
+        dto.ubicacionDestinoId,
+        'ubicacionDestinoId',
+      );
+      if (origenId === null || destinoId === null) {
+        throw new DomainValidationError(
+          'El origen y destino deben seleccionarse del catalogo de ubicaciones.',
+          'ubicacionOrigenId',
+          'REQUERIDO',
+        );
+      }
+      const [ubicacionOrigen, ubicacionDestino] = await Promise.all([
+        this.exigirUbicacion(origenId),
+        this.exigirUbicacion(destinoId),
+      ]);
+      origen = ubicacionOrigen.nombre;
+      destino = ubicacionDestino.nombre;
+      ubicacionOrigenId = origenId;
+      ubicacionDestinoId = destinoId;
     }
 
     const clienteId = idOpcional(dto.clienteId, 'clienteId');
     if (clienteId !== null) {
       const cliente = await this.clientes.findById(clienteId);
-      if (!cliente || cliente.estadoRegistro !== EstadoRegistro.ACTIVO) {
+      if (
+        !cliente ||
+        cliente.estadoRegistro !== EstadoRegistro.ACTIVO ||
+        cliente.estadoActivo !== 'ACTIVO'
+      ) {
         throw new RecursoNoEncontradoError(
           'El cliente indicado no existe.',
           'cliente',
@@ -260,7 +379,11 @@ export class RegistrarManifiestoUseCase {
     const tipoServicioId = idOpcional(dto.tipoServicioId, 'tipoServicioId');
     if (tipoServicioId !== null) {
       const tipo = await this.tiposServicio.findById(tipoServicioId);
-      if (!tipo || tipo.estadoRegistro !== EstadoRegistro.ACTIVO) {
+      if (
+        !tipo ||
+        tipo.estadoRegistro !== EstadoRegistro.ACTIVO ||
+        tipo.estadoActivo !== 'ACTIVO'
+      ) {
         throw new RecursoNoEncontradoError(
           'El tipo de servicio indicado no existe.',
           'tipoServicio',
@@ -269,19 +392,20 @@ export class RegistrarManifiestoUseCase {
       }
     }
 
-    const ubicacionOrigenId = idOpcional(dto.ubicacionOrigenId, 'ubicacionOrigenId');
-    if (ubicacionOrigenId !== null) {
-      await this.exigirUbicacion(ubicacionOrigenId);
-    }
-    const ubicacionDestinoId = idOpcional(dto.ubicacionDestinoId, 'ubicacionDestinoId');
-    if (ubicacionDestinoId !== null) {
-      await this.exigirUbicacion(ubicacionDestinoId);
-    }
+    const cuentaId = idOpcional(dto.cuentaId, 'cuentaId');
+    const proyectoId = idOpcional(dto.proyectoId, 'proyectoId');
+    const cuenta = cuentaId === null ? null : await this.cuentas.findById(cuentaId);
+    if (cuentaId !== null && (!cuenta || cuenta.estadoRegistro !== EstadoRegistro.ACTIVO || cuenta.estadoActivo !== 'ACTIVO')) throw new RecursoNoEncontradoError('La cuenta indicada no existe o está inactiva.', 'cuentaId', cuentaId);
+    const proyecto = proyectoId === null ? null : await this.proyectos.findById(proyectoId);
+    if (proyectoId !== null && (!proyecto || proyecto.estadoRegistro !== EstadoRegistro.ACTIVO || proyecto.estadoActivo !== 'ACTIVO' || (cuentaId !== null && proyecto.cuentaId !== cuentaId))) throw new RecursoNoEncontradoError('El proyecto indicado no existe, está inactivo o no pertenece a la cuenta.', 'proyectoId', proyectoId);
 
     // Disponibilidad: la unidad, el acople y el conductor no pueden estar en
     // otro manifiesto vigente (BORRADOR/EMITIDO/EN_RUTA). Solo un manifiesto
     // CERRADO o ANULADO libera el recurso.
-    const unidadIds = [unidadId, ...(segundaUnidadId !== null ? [segundaUnidadId] : [])];
+    const unidadIds = [
+      unidadId,
+      ...(segundaUnidadId !== null ? [segundaUnidadId] : []),
+    ];
     const ocupados = await this.manifiestos.buscarActivosPorRecursos({
       unidadIds,
       conductorId,
@@ -297,7 +421,8 @@ export class RegistrarManifiestoUseCase {
       }
       if (
         segundaUnidadId !== null &&
-        (m.unidadId === segundaUnidadId || m.segundaUnidadId === segundaUnidadId)
+        (m.unidadId === segundaUnidadId ||
+          m.segundaUnidadId === segundaUnidadId)
       ) {
         throw new DomainValidationError(
           `La segunda unidad ya está asignada al manifiesto ${m.numero} (${m.estado}).`,
@@ -336,7 +461,12 @@ export class RegistrarManifiestoUseCase {
       tipoServicioId,
       clienteId,
       clienteTexto: aTextoOpcional(dto.clienteTexto),
-      estadoCarga: this.enumOpcional(dto.estadoCarga, esEstadoCarga) as EstadoCarga | null,
+      cuentaId: cuentaId ?? proyecto?.cuentaId ?? null,
+      proyectoId,
+      estadoCarga: this.enumOpcional(
+        dto.estadoCarga,
+        esEstadoCarga,
+      ) as EstadoCarga | null,
       combustible: this.enumOpcional(
         dto.combustible,
         esNivelCombustible,
@@ -348,8 +478,11 @@ export class RegistrarManifiestoUseCase {
       conductorId,
       rutaId,
       supervisorId,
-      base: aTextoOpcional(dto.base),
-      puestoControl: aTextoOpcional(dto.puestoControl),
+      base: await this.normalizarUbicacion(dto.base, 'base'),
+      puestoControl: await this.normalizarUbicacion(
+        dto.puestoControl,
+        'puestoControl',
+      ),
       fechaLlegadaEstimada: aFechaOpcional(dto.fechaLlegadaEstimada),
       observaciones: aTextoOpcional(dto.observaciones),
       cargas,
@@ -358,18 +491,55 @@ export class RegistrarManifiestoUseCase {
     });
   }
 
-  private async exigirUbicacion(id: number): Promise<void> {
+  private async exigirUbicacion(id: number) {
     const ubic = await this.ubicaciones.findById(id);
-    if (!ubic || ubic.estadoRegistro !== EstadoRegistro.ACTIVO) {
+    if (
+      !ubic ||
+      ubic.estadoRegistro !== EstadoRegistro.ACTIVO ||
+      ubic.estadoActivo !== 'ACTIVO'
+    ) {
       throw new RecursoNoEncontradoError(
         'La ubicacion indicada no existe.',
         'ubicacion',
         id,
       );
     }
+    return ubic;
   }
 
-  private enumOpcional<T>(valor: unknown, guard: (v: unknown) => v is T): T | null {
+  private async normalizarUbicacion(
+    valor: unknown,
+    campo: string,
+  ): Promise<string | null> {
+    const nombre = aTextoOpcional(valor);
+    if (!nombre) return null;
+    const { datos } = await this.ubicaciones.buscar({
+      texto: nombre,
+      estadoRegistro: EstadoRegistro.ACTIVO,
+      page: 1,
+      pageSize: 200,
+    });
+    const ubicacion = datos.find(
+      (item) =>
+        item.estadoActivo === 'ACTIVO' &&
+        item.nombre.localeCompare(nombre, 'es', { sensitivity: 'accent' }) ===
+          0,
+    );
+    if (!ubicacion) {
+      throw new DomainValidationError(
+        `La ${campo} debe seleccionarse del catalogo de ubicaciones activas.`,
+        campo,
+        'INVALIDO',
+        valor,
+      );
+    }
+    return ubicacion.nombre;
+  }
+
+  private enumOpcional<T>(
+    valor: unknown,
+    guard: (v: unknown) => v is T,
+  ): T | null {
     if (valor === undefined || valor === null || valor === '') return null;
     if (!guard(valor)) {
       throw new DomainValidationError(
@@ -404,7 +574,10 @@ export class RegistrarManifiestoUseCase {
     const vistos = new Set<number>();
     const resultado: { personalId: number; rol: TipoPersonal }[] = [];
     for (const item of lista) {
-      const personalId = exigirEnteroPositivo(item.personalId, 'tripulantes.personalId');
+      const personalId = exigirEnteroPositivo(
+        item.personalId,
+        'tripulantes.personalId',
+      );
       if (personalId === conductorId || personalId === supervisorId) {
         throw new DomainValidationError(
           'El conductor o supervisor no pueden figurar tambien como tripulantes.',
@@ -430,7 +603,17 @@ export class RegistrarManifiestoUseCase {
         );
       }
       const rol = esTipoPersonal(item.rol) ? item.rol : TipoPersonal.COPILOTO;
-      if (persona.estadoActivo !== 'ACTIVO' || persona.tipo !== rol || ![TipoPersonal.COPILOTO, TipoPersonal.ESCOLTA].includes(rol)) throw new DomainValidationError('El tripulante debe estar activo y su tipo debe ser compatible con el rol.', 'tripulantes', 'PERSONAL_NO_HABILITADO', personalId);
+      if (
+        persona.estadoActivo !== 'ACTIVO' ||
+        persona.tipo !== rol ||
+        ![TipoPersonal.COPILOTO, TipoPersonal.ESCOLTA].includes(rol)
+      )
+        throw new DomainValidationError(
+          'El tripulante debe estar activo y su tipo debe ser compatible con el rol.',
+          'tripulantes',
+          'PERSONAL_NO_HABILITADO',
+          personalId,
+        );
       vistos.add(personalId);
       resultado.push({ personalId, rol });
     }
@@ -518,7 +701,8 @@ export class CambiarEstadoManifiestoUseCase {
 
   async execute(
     id: number,
-    dto: CambiarEstadoManifiestoDto, actor: string,
+    dto: CambiarEstadoManifiestoDto,
+    actor: string,
   ): Promise<ManifiestoProps> {
     const manifiesto = await this.manifiestos.findById(id);
     if (!manifiesto) {
@@ -544,10 +728,13 @@ export class CambiarEstadoManifiestoUseCase {
         dto.estado,
       );
     }
-    if (dto.estado !== EstadoManifiesto.ANULADO) await this.exigirRecursosOperativos(manifiesto);
+    if (dto.estado !== EstadoManifiesto.ANULADO)
+      await this.exigirRecursosOperativos(manifiesto);
 
     const fechaCierre =
-      dto.estado === EstadoManifiesto.CERRADO ? new Date() : manifiesto.fechaCierre;
+      dto.estado === EstadoManifiesto.CERRADO
+        ? new Date()
+        : manifiesto.fechaCierre;
 
     return this.manifiestos.cambiarEstado(id, {
       estado: dto.estado,
@@ -556,15 +743,72 @@ export class CambiarEstadoManifiestoUseCase {
     });
   }
 
-  private async exigirRecursosOperativos(manifiesto: ManifiestoProps): Promise<void> {
-    const [unidad, segundaUnidad, conductor, supervisor] = await Promise.all([this.unidades.findById(manifiesto.unidad.id), manifiesto.segundaUnidad ? this.unidades.findById(manifiesto.segundaUnidad.id) : null, this.personal.findById(manifiesto.conductor.id), manifiesto.supervisor ? this.personal.findById(manifiesto.supervisor.id) : null]);
-    const unidadValida = (u: Awaited<ReturnType<UnidadRepository['findById']>> | null) => u && u.estadoRegistro === EstadoRegistro.ACTIVO && u.estadoActivo === 'ACTIVO' && u.estadoUnidad === EstadoUnidad.OPERATIVA;
-    if (!unidadValida(unidad) || (manifiesto.segundaUnidad !== null && !unidadValida(segundaUnidad))) throw new DomainValidationError('Las unidades del manifiesto deben estar activas y operativas.', 'unidadId', 'UNIDAD_NO_OPERATIVA');
-    if (!conductor || conductor.estadoRegistro !== EstadoRegistro.ACTIVO || conductor.estadoActivo !== 'ACTIVO' || (conductor.tipo !== TipoPersonal.CONDUCTOR && conductor.tipo !== TipoPersonal.SUPERVISOR)) throw new DomainValidationError('El conductor del manifiesto no esta habilitado.', 'conductorId', 'PERSONAL_NO_HABILITADO');
-    if (manifiesto.supervisor && (!supervisor || supervisor.estadoRegistro !== EstadoRegistro.ACTIVO || supervisor.estadoActivo !== 'ACTIVO' || supervisor.tipo !== TipoPersonal.SUPERVISOR)) throw new DomainValidationError('El supervisor del manifiesto no esta habilitado.', 'supervisorId', 'PERSONAL_NO_HABILITADO');
+  private async exigirRecursosOperativos(
+    manifiesto: ManifiestoProps,
+  ): Promise<void> {
+    const [unidad, segundaUnidad, conductor, supervisor] = await Promise.all([
+      this.unidades.findById(manifiesto.unidad.id),
+      manifiesto.segundaUnidad
+        ? this.unidades.findById(manifiesto.segundaUnidad.id)
+        : null,
+      this.personal.findById(manifiesto.conductor.id),
+      manifiesto.supervisor
+        ? this.personal.findById(manifiesto.supervisor.id)
+        : null,
+    ]);
+    const unidadValida = (
+      u: Awaited<ReturnType<UnidadRepository['findById']>> | null,
+    ) =>
+      u &&
+      u.estadoRegistro === EstadoRegistro.ACTIVO &&
+      u.estadoActivo === 'ACTIVO' &&
+      u.estadoUnidad === EstadoUnidad.OPERATIVA;
+    if (
+      !unidadValida(unidad) ||
+      (manifiesto.segundaUnidad !== null && !unidadValida(segundaUnidad))
+    )
+      throw new DomainValidationError(
+        'Las unidades del manifiesto deben estar activas y operativas.',
+        'unidadId',
+        'UNIDAD_NO_OPERATIVA',
+      );
+    if (
+      !conductor ||
+      conductor.estadoRegistro !== EstadoRegistro.ACTIVO ||
+      conductor.estadoActivo !== 'ACTIVO' ||
+      !tieneCapacidad(conductor, 'puedeConducir')
+    )
+      throw new DomainValidationError(
+        'El conductor del manifiesto no esta habilitado.',
+        'conductorId',
+        'PERSONAL_NO_HABILITADO',
+      );
+    if (
+      manifiesto.supervisor &&
+      (!supervisor ||
+        supervisor.estadoRegistro !== EstadoRegistro.ACTIVO ||
+        supervisor.estadoActivo !== 'ACTIVO' ||
+        !tieneCapacidad(supervisor, 'puedeSupervisar'))
+    )
+      throw new DomainValidationError(
+        'El supervisor del manifiesto no esta habilitado.',
+        'supervisorId',
+        'PERSONAL_NO_HABILITADO',
+      );
     for (const tripulante of manifiesto.tripulantes) {
       const persona = await this.personal.findById(tripulante.personal.id);
-      if (!persona || persona.estadoRegistro !== EstadoRegistro.ACTIVO || persona.estadoActivo !== 'ACTIVO' || persona.tipo !== tripulante.rol || ![TipoPersonal.COPILOTO, TipoPersonal.ESCOLTA].includes(tripulante.rol)) throw new DomainValidationError('Un tripulante del manifiesto no esta habilitado.', 'tripulantes', 'PERSONAL_NO_HABILITADO');
+      if (
+        !persona ||
+        persona.estadoRegistro !== EstadoRegistro.ACTIVO ||
+        persona.estadoActivo !== 'ACTIVO' ||
+        persona.tipo !== tripulante.rol ||
+        ![TipoPersonal.COPILOTO, TipoPersonal.ESCOLTA].includes(tripulante.rol)
+      )
+        throw new DomainValidationError(
+          'Un tripulante del manifiesto no esta habilitado.',
+          'tripulantes',
+          'PERSONAL_NO_HABILITADO',
+        );
     }
   }
 }

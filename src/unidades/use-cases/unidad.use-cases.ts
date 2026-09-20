@@ -33,6 +33,12 @@ import {
   normalizarPlaca,
 } from '../domain/value-objects/placa.vo.js';
 import { CloudinaryService } from '../infrastructure/cloudinary.service.js';
+import {
+  TIPO_VEHICULO_REPOSITORY,
+  type TipoVehiculoRepository,
+} from '../../tipos-vehiculo/domain/repositories/tipo-vehiculo.repository.js';
+import { CUENTA_REPOSITORY, type CuentaRepository } from '../../cuentas/domain/repositories/cuenta.repository.js';
+import { PROYECTO_REPOSITORY, type ProyectoRepository } from '../../proyectos/domain/repositories/proyecto.repository.js';
 
 const PAGE_SIZE_POR_DEFECTO = 50;
 const PAGE_SIZE_MAXIMO = 200;
@@ -61,23 +67,45 @@ function throwEstadoActivoInvalido(valor: unknown): never {
   );
 }
 
-function numeroNoNegativo(valor: unknown, campo: string, entero = false): number | null {
+function numeroNoNegativo(
+  valor: unknown,
+  campo: string,
+  entero = false,
+): number | null {
   if (valor === undefined || valor === null || valor === '') return null;
   const numero = aNumeroOpcional(valor);
-  if (numero === null || numero < 0 || (entero && !Number.isInteger(numero))) throw new DomainValidationError(`El campo "${campo}" debe ser ${entero ? 'un entero' : 'un numero'} no negativo.`, campo, 'INVALIDO', valor);
+  if (numero === null || numero < 0 || (entero && !Number.isInteger(numero)))
+    throw new DomainValidationError(
+      `El campo "${campo}" debe ser ${entero ? 'un entero' : 'un numero'} no negativo.`,
+      campo,
+      'INVALIDO',
+      valor,
+    );
   return numero;
 }
 
 function anioRazonable(valor: unknown, campo: string): number | null {
   const anio = numeroNoNegativo(valor, campo, true);
-  if (anio !== null && (anio < 1900 || anio > new Date().getFullYear() + 1)) throw new DomainValidationError(`El campo "${campo}" debe estar entre 1900 y el proximo año.`, campo, 'INVALIDO', valor);
+  if (anio !== null && (anio < 1900 || anio > new Date().getFullYear() + 1))
+    throw new DomainValidationError(
+      `El campo "${campo}" debe estar entre 1900 y el proximo año.`,
+      campo,
+      'INVALIDO',
+      valor,
+    );
   return anio;
 }
 
 function fechaValida(valor: unknown, campo: string): Date | null {
   if (valor === undefined || valor === null || valor === '') return null;
   const fecha = aFechaOpcional(valor);
-  if (!fecha) throw new DomainValidationError(`El campo "${campo}" contiene una fecha invalida.`, campo, 'INVALIDO', valor);
+  if (!fecha)
+    throw new DomainValidationError(
+      `El campo "${campo}" contiene una fecha invalida.`,
+      campo,
+      'INVALIDO',
+      valor,
+    );
   return fecha;
 }
 
@@ -98,6 +126,8 @@ export class RegistrarUnidadDto {
   mtcVigencia?: string;
   materialesPeligrosos?: string;
   cuenta?: string;
+  cuentaId?: number;
+  proyectoId?: number;
   clienteAsociado?: string;
   capacidadCarga?: number;
   pesoBrutoVehicular?: number;
@@ -134,6 +164,8 @@ export class ActualizarUnidadDto {
   mtcVigencia?: string;
   materialesPeligrosos?: string;
   cuenta?: string;
+  cuentaId?: number | null;
+  proyectoId?: number | null;
   clienteAsociado?: string;
   capacidadCarga?: number;
   pesoBrutoVehicular?: number;
@@ -209,11 +241,15 @@ function camposComunes(
       anioRazonable(dto.anioFabricacion, 'anioFabricacion'),
     ),
     color: val('color', () => aTextoOpcional(dto.color)),
-    numeroEjes: val('numeroEjes', () => numeroNoNegativo(dto.numeroEjes, 'numeroEjes', true)),
+    numeroEjes: val('numeroEjes', () =>
+      numeroNoNegativo(dto.numeroEjes, 'numeroEjes', true),
+    ),
     numeroMotor: val('numeroMotor', () => aTextoOpcional(dto.numeroMotor)),
     numeroVin: val('numeroVin', () => aTextoOpcional(dto.numeroVin)),
     registroMtc: val('registroMtc', () => aTextoOpcional(dto.registroMtc)),
-    mtcVigencia: val('mtcVigencia', () => fechaValida(dto.mtcVigencia, 'mtcVigencia')),
+    mtcVigencia: val('mtcVigencia', () =>
+      fechaValida(dto.mtcVigencia, 'mtcVigencia'),
+    ),
     materialesPeligrosos: val('materialesPeligrosos', () =>
       aTextoOpcional(dto.materialesPeligrosos),
     ),
@@ -247,13 +283,23 @@ function camposComunes(
       fechaValida(dto.ultimoMantenimientoFecha, 'ultimoMantenimientoFecha'),
     ),
     ultimoMantenimientoKilometraje: val('ultimoMantenimientoKilometraje', () =>
-      numeroNoNegativo(dto.ultimoMantenimientoKilometraje, 'ultimoMantenimientoKilometraje', true),
+      numeroNoNegativo(
+        dto.ultimoMantenimientoKilometraje,
+        'ultimoMantenimientoKilometraje',
+        true,
+      ),
     ),
     proximoMantenimientoFecha: val('proximoMantenimientoFecha', () =>
       fechaValida(dto.proximoMantenimientoFecha, 'proximoMantenimientoFecha'),
     ),
-    proximoMantenimientoKilometraje: val('proximoMantenimientoKilometraje', () =>
-      numeroNoNegativo(dto.proximoMantenimientoKilometraje, 'proximoMantenimientoKilometraje', true),
+    proximoMantenimientoKilometraje: val(
+      'proximoMantenimientoKilometraje',
+      () =>
+        numeroNoNegativo(
+          dto.proximoMantenimientoKilometraje,
+          'proximoMantenimientoKilometraje',
+          true,
+        ),
     ),
     mantenimientoObservacion: val('mantenimientoObservacion', () =>
       aTextoOpcional(dto.mantenimientoObservacion),
@@ -262,26 +308,63 @@ function camposComunes(
   };
 }
 
-function validarMantenimiento(data: Pick<UnidadProps, 'kilometraje' | 'ultimoMantenimientoFecha' | 'ultimoMantenimientoKilometraje' | 'proximoMantenimientoFecha' | 'proximoMantenimientoKilometraje'>): void {
-  if (data.ultimoMantenimientoFecha && data.proximoMantenimientoFecha && data.ultimoMantenimientoFecha > data.proximoMantenimientoFecha) throw new DomainValidationError('El proximo mantenimiento no puede ser anterior al ultimo.', 'proximoMantenimientoFecha', 'ORDEN_INVALIDO');
-  const minimo = Math.max(data.kilometraje ?? 0, data.ultimoMantenimientoKilometraje ?? 0);
-  if (data.proximoMantenimientoKilometraje !== null && data.proximoMantenimientoKilometraje < minimo) throw new DomainValidationError('El proximo kilometraje de mantenimiento no puede ser menor al kilometraje actual o ultimo mantenimiento.', 'proximoMantenimientoKilometraje', 'MENOR_AL_ACTUAL');
+function validarMantenimiento(
+  data: Pick<
+    UnidadProps,
+    | 'kilometraje'
+    | 'ultimoMantenimientoFecha'
+    | 'ultimoMantenimientoKilometraje'
+    | 'proximoMantenimientoFecha'
+    | 'proximoMantenimientoKilometraje'
+  >,
+): void {
+  if (
+    data.ultimoMantenimientoFecha &&
+    data.proximoMantenimientoFecha &&
+    data.ultimoMantenimientoFecha > data.proximoMantenimientoFecha
+  )
+    throw new DomainValidationError(
+      'El proximo mantenimiento no puede ser anterior al ultimo.',
+      'proximoMantenimientoFecha',
+      'ORDEN_INVALIDO',
+    );
+  const minimo = Math.max(
+    data.kilometraje ?? 0,
+    data.ultimoMantenimientoKilometraje ?? 0,
+  );
+  if (
+    data.proximoMantenimientoKilometraje !== null &&
+    data.proximoMantenimientoKilometraje < minimo
+  )
+    throw new DomainValidationError(
+      'El proximo kilometraje de mantenimiento no puede ser menor al kilometraje actual o ultimo mantenimiento.',
+      'proximoMantenimientoKilometraje',
+      'MENOR_AL_ACTUAL',
+    );
 }
 
 @Injectable()
 export class RegistrarUnidadUseCase {
   constructor(
     @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+    @Inject(TIPO_VEHICULO_REPOSITORY)
+    private readonly tiposVehiculo: TipoVehiculoRepository,
+    @Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository,
+    @Inject(PROYECTO_REPOSITORY) private readonly proyectos: ProyectoRepository,
   ) {}
 
   async execute(dto: RegistrarUnidadDto, actor: string): Promise<UnidadProps> {
     const placa = exigirPlaca(dto.placa);
-    const clase = exigirClase(dto.clase);
+    const clasificacion = await this.resolverClasificacion(dto);
     const estadoUnidad = resolverEstado(
       dto.estadoUnidad,
       EstadoUnidad.OPERATIVA,
     );
-    const kilometrajeInicial = numeroNoNegativo(dto.kilometraje, 'kilometraje', true);
+    const kilometrajeInicial = numeroNoNegativo(
+      dto.kilometraje,
+      'kilometraje',
+      true,
+    );
 
     const existente = await this.unidades.findByPlacaActiva(placa);
     if (existente) {
@@ -293,17 +376,78 @@ export class RegistrarUnidadUseCase {
       );
     }
 
-    const comunes = camposComunes(dto, false) as Omit<CrearUnidadData, 'placa' | 'placaNormalizada' | 'clase' | 'estadoUnidad' | 'usuarioCreacion'>;
-    validarMantenimiento({ ...(comunes as UnidadProps), kilometraje: kilometrajeInicial });
+    const comunes = { ...(camposComunes(dto, false) as Omit<
+      CrearUnidadData,
+      | 'placa'
+      | 'placaNormalizada'
+      | 'clase'
+      | 'estadoUnidad'
+      | 'usuarioCreacion'
+    >), ...(await this.resolverAsignacion(dto)) };
+    validarMantenimiento({
+      ...(comunes as UnidadProps),
+      kilometraje: kilometrajeInicial,
+    });
     return this.unidades.crear({
       placa: dto.placa.trim(),
       placaNormalizada: placa,
-      clase,
       estadoUnidad,
       ...comunes,
+      ...clasificacion,
       kilometraje: kilometrajeInicial,
       usuarioCreacion: actor,
     });
+  }
+
+  async resolverAsignacion(dto: Pick<RegistrarUnidadDto | ActualizarUnidadDto, 'cuentaId' | 'proyectoId'>) {
+    const cuentaId = dto.cuentaId === undefined || dto.cuentaId === null ? null : Number(dto.cuentaId);
+    const proyectoId = dto.proyectoId === undefined || dto.proyectoId === null ? null : Number(dto.proyectoId);
+    if (cuentaId !== null && (!Number.isInteger(cuentaId) || cuentaId <= 0)) throw new DomainValidationError('La cuenta debe ser válida.', 'cuentaId', 'INVALIDO');
+    if (proyectoId !== null && (!Number.isInteger(proyectoId) || proyectoId <= 0)) throw new DomainValidationError('El proyecto debe ser válido.', 'proyectoId', 'INVALIDO');
+    if (cuentaId === null && proyectoId === null) return { cuentaId: null, proyectoId: null, cuenta: null };
+    const cuenta = cuentaId === null ? null : await this.cuentas.findById(cuentaId);
+    if (cuentaId !== null && (!cuenta || cuenta.estadoRegistro !== EstadoRegistro.ACTIVO || cuenta.estadoActivo !== 'ACTIVO')) throw new RecursoNoEncontradoError('La cuenta indicada no existe o está inactiva.', 'cuentaId', cuentaId);
+    const proyecto = proyectoId === null ? null : await this.proyectos.findById(proyectoId);
+    if (proyectoId !== null && (!proyecto || proyecto.estadoRegistro !== EstadoRegistro.ACTIVO || proyecto.estadoActivo !== 'ACTIVO' || (cuentaId !== null && proyecto.cuentaId !== cuentaId))) throw new RecursoNoEncontradoError('El proyecto indicado no existe, está inactivo o no pertenece a la cuenta.', 'proyectoId', proyectoId);
+    return { cuentaId: cuentaId ?? proyecto!.cuentaId, proyectoId, cuenta: proyecto?.nombre ?? cuenta!.nombre };
+  }
+
+  private async resolverClasificacion(
+    dto: Pick<
+      RegistrarUnidadDto | ActualizarUnidadDto,
+      'tipoVehiculo' | 'clase' | 'categoriaVehicular'
+    >,
+  ): Promise<{
+    tipoVehiculo: string | null;
+    clase: ClaseUnidad;
+    categoriaVehicular: string | null;
+  }> {
+    const codigo = aTextoOpcional(dto.tipoVehiculo)?.toUpperCase() ?? null;
+    if (!codigo) {
+      return {
+        tipoVehiculo: null,
+        clase: exigirClase(dto.clase),
+        categoriaVehicular:
+          aTextoOpcional(dto.categoriaVehicular)?.toUpperCase() ?? null,
+      };
+    }
+    const tipo = await this.tiposVehiculo.findByCodigo(codigo);
+    if (
+      !tipo ||
+      tipo.estadoRegistro !== EstadoRegistro.ACTIVO ||
+      tipo.estadoActivo !== 'ACTIVO'
+    ) {
+      throw new RecursoNoEncontradoError(
+        'El tipo de vehiculo indicado no existe o esta inactivo.',
+        'tipoVehiculo',
+        codigo,
+      );
+    }
+    return {
+      tipoVehiculo: tipo.codigo,
+      clase: tipo.claseSugerida ?? exigirClase(dto.clase),
+      categoriaVehicular: tipo.categoriaSugerida,
+    };
   }
 }
 
@@ -368,6 +512,10 @@ export class ObtenerUnidadUseCase {
 export class ActualizarUnidadUseCase {
   constructor(
     @Inject(UNIDAD_REPOSITORY) private readonly unidades: UnidadRepository,
+    @Inject(TIPO_VEHICULO_REPOSITORY)
+    private readonly tiposVehiculo: TipoVehiculoRepository,
+    @Inject(CUENTA_REPOSITORY) private readonly cuentas: CuentaRepository,
+    @Inject(PROYECTO_REPOSITORY) private readonly proyectos: ProyectoRepository,
   ) {}
 
   async execute(
@@ -400,10 +548,24 @@ export class ActualizarUnidadUseCase {
       }
     }
 
+    const modificarClasificacion =
+      dto.tipoVehiculo !== undefined ||
+      dto.clase !== undefined ||
+      dto.categoriaVehicular !== undefined;
+    const clasificacion = modificarClasificacion
+      ? await this.resolverClasificacion({
+          tipoVehiculo: dto.tipoVehiculo ?? unidad.tipoVehiculo ?? undefined,
+          clase: dto.clase ?? unidad.clase,
+          categoriaVehicular:
+            dto.categoriaVehicular ?? unidad.categoriaVehicular ?? undefined,
+        })
+      : undefined;
+    const modificarAsignacion = dto.cuentaId !== undefined || dto.proyectoId !== undefined;
+    const asignacion = modificarAsignacion ? await new RegistrarUnidadUseCase(this.unidades, this.tiposVehiculo, this.cuentas, this.proyectos).resolverAsignacion(dto) : undefined;
     const data: ActualizarUnidadData = {
       placa,
       placaNormalizada,
-      clase: dto.clase !== undefined ? exigirClase(dto.clase) : undefined,
+      clase: clasificacion?.clase,
       estadoUnidad:
         dto.estadoUnidad !== undefined
           ? resolverEstado(dto.estadoUnidad, unidad.estadoUnidad)
@@ -416,16 +578,69 @@ export class ActualizarUnidadUseCase {
             : throwEstadoActivoInvalido(dto.estadoActivo),
       usuarioModificacion: actor,
       ...camposComunes(dto, true),
+      ...asignacion,
+      ...(clasificacion
+        ? {
+            tipoVehiculo: clasificacion.tipoVehiculo,
+            categoriaVehicular: clasificacion.categoriaVehicular,
+          }
+        : {}),
     };
     validarMantenimiento({
       kilometraje: unidad.kilometraje,
-      ultimoMantenimientoFecha: data.ultimoMantenimientoFecha === undefined ? unidad.ultimoMantenimientoFecha : data.ultimoMantenimientoFecha,
-      ultimoMantenimientoKilometraje: data.ultimoMantenimientoKilometraje === undefined ? unidad.ultimoMantenimientoKilometraje : data.ultimoMantenimientoKilometraje,
-      proximoMantenimientoFecha: data.proximoMantenimientoFecha === undefined ? unidad.proximoMantenimientoFecha : data.proximoMantenimientoFecha,
-      proximoMantenimientoKilometraje: data.proximoMantenimientoKilometraje === undefined ? unidad.proximoMantenimientoKilometraje : data.proximoMantenimientoKilometraje,
+      ultimoMantenimientoFecha:
+        data.ultimoMantenimientoFecha === undefined
+          ? unidad.ultimoMantenimientoFecha
+          : data.ultimoMantenimientoFecha,
+      ultimoMantenimientoKilometraje:
+        data.ultimoMantenimientoKilometraje === undefined
+          ? unidad.ultimoMantenimientoKilometraje
+          : data.ultimoMantenimientoKilometraje,
+      proximoMantenimientoFecha:
+        data.proximoMantenimientoFecha === undefined
+          ? unidad.proximoMantenimientoFecha
+          : data.proximoMantenimientoFecha,
+      proximoMantenimientoKilometraje:
+        data.proximoMantenimientoKilometraje === undefined
+          ? unidad.proximoMantenimientoKilometraje
+          : data.proximoMantenimientoKilometraje,
     });
 
     return this.unidades.actualizar(id, data);
+  }
+
+  private async resolverClasificacion(
+    dto: Pick<
+      RegistrarUnidadDto | ActualizarUnidadDto,
+      'tipoVehiculo' | 'clase' | 'categoriaVehicular'
+    >,
+  ): Promise<{
+    tipoVehiculo: string | null;
+    clase: ClaseUnidad;
+    categoriaVehicular: string | null;
+  }> {
+    const codigo = aTextoOpcional(dto.tipoVehiculo)?.toUpperCase() ?? null;
+    if (!codigo) {
+      return {
+        tipoVehiculo: null,
+        clase: exigirClase(dto.clase),
+        categoriaVehicular:
+          aTextoOpcional(dto.categoriaVehicular)?.toUpperCase() ?? null,
+      };
+    }
+    const tipo = await this.tiposVehiculo.findByCodigo(codigo);
+    if (!tipo || tipo.estadoRegistro !== EstadoRegistro.ACTIVO) {
+      throw new RecursoNoEncontradoError(
+        'El tipo de vehiculo indicado no existe.',
+        'tipoVehiculo',
+        codigo,
+      );
+    }
+    return {
+      tipoVehiculo: tipo.codigo,
+      clase: tipo.claseSugerida ?? exigirClase(dto.clase),
+      categoriaVehicular: tipo.categoriaSugerida,
+    };
   }
 }
 
@@ -442,18 +657,31 @@ export class SubirFotosUnidadUseCase {
     actor: string,
   ): Promise<UnidadProps> {
     if (archivos.length === 0) {
-      throw new DomainValidationError('Seleccione al menos una imagen.', 'files');
+      throw new DomainValidationError(
+        'Seleccione al menos una imagen.',
+        'files',
+      );
     }
     if (archivos.some((archivo) => !archivo.mimetype.startsWith('image/'))) {
-      throw new DomainValidationError('Solo se permiten archivos de imagen.', 'files');
+      throw new DomainValidationError(
+        'Solo se permiten archivos de imagen.',
+        'files',
+      );
     }
 
     const unidad = await this.unidades.findById(id);
     if (!unidad) {
-      throw new RecursoNoEncontradoError('La unidad indicada no existe.', 'unidad', id);
+      throw new RecursoNoEncontradoError(
+        'La unidad indicada no existe.',
+        'unidad',
+        id,
+      );
     }
     if (unidad.fotos.length + archivos.length > 20) {
-      throw new DomainValidationError('Una unidad admite como maximo 20 fotos.', 'files');
+      throw new DomainValidationError(
+        'Una unidad admite como maximo 20 fotos.',
+        'files',
+      );
     }
 
     const fotos = await this.cloudinary.subirFotosUnidad(

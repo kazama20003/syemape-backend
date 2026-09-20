@@ -40,6 +40,8 @@ const SELECT = {
   mtcVigencia: true,
   materialesPeligrosos: true,
   cuenta: true,
+  cuentaId: true,
+  proyectoId: true,
   clienteAsociado: true,
   capacidadCarga: true,
   pesoBrutoVehicular: true,
@@ -80,6 +82,8 @@ interface FilaUnidad {
   mtcVigencia: Date | null;
   materialesPeligrosos: string | null;
   cuenta: string | null;
+  cuentaId: number | null;
+  proyectoId: number | null;
   clienteAsociado: string | null;
   capacidadCarga: { toNumber(): number } | null;
   pesoBrutoVehicular: { toNumber(): number } | null;
@@ -121,6 +125,8 @@ function aProps(fila: FilaUnidad): UnidadProps {
     mtcVigencia: fila.mtcVigencia,
     materialesPeligrosos: fila.materialesPeligrosos,
     cuenta: fila.cuenta,
+    cuentaId: fila.cuentaId,
+    proyectoId: fila.proyectoId,
     clienteAsociado: fila.clienteAsociado,
     capacidadCarga: fila.capacidadCarga?.toNumber() ?? null,
     pesoBrutoVehicular: fila.pesoBrutoVehicular?.toNumber() ?? null,
@@ -163,6 +169,8 @@ function datosEscritura(
     mtcVigencia: data.mtcVigencia,
     materialesPeligrosos: data.materialesPeligrosos,
     cuenta: data.cuenta,
+    cuentaId: data.cuentaId,
+    proyectoId: data.proyectoId,
     clienteAsociado: data.clienteAsociado,
     capacidadCarga: data.capacidadCarga,
     pesoBrutoVehicular: data.pesoBrutoVehicular,
