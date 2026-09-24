@@ -245,4 +245,23 @@ export class PrismaPersonalRepository implements PersonalRepository {
     ]);
     return { datos: (rows as unknown as FilaPersonal[]).map(aProps), total };
   }
+
+  async listarActivosParaSincronizacion(filtros: {
+    tipo?: TipoPersonal;
+    documento?: string;
+  }): Promise<PersonalProps[]> {
+    const rows = await this.prisma.personal.findMany({
+      where: {
+        estadoRegistro: EstadoRegistro.ACTIVO,
+        estadoActivo: 'ACTIVO',
+        tipo: filtros.tipo ?? undefined,
+        ...(filtros.documento
+          ? { numeroDocumentoNormalizado: filtros.documento }
+          : {}),
+      },
+      select: SELECT,
+      orderBy: [{ apellidos: 'asc' }, { nombres: 'asc' }],
+    });
+    return (rows as FilaPersonal[]).map(aProps);
+  }
 }

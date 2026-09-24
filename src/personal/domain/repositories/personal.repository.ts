@@ -88,4 +88,8 @@ export interface PersonalRepository {
   buscar(
     filtros: BuscarPersonalFiltros,
   ): Promise<{ datos: PersonalProps[]; total: number }>;
+  listarActivosParaSincronizacion(filtros: {
+    tipo?: TipoPersonal;
+    documento?: string;
+  }): Promise<PersonalProps[]>;
 }
