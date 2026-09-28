@@ -51,6 +51,7 @@ import {
   type ManifiestoProps,
   type ManifiestoRepository,
 } from '../domain/repositories/manifiesto.repository.js';
+import { ManifiestoPdfGenerator } from '../infrastructure/manifiesto-pdf.generator.js';
 import {
   EstadoManifiesto,
   esEstadoManifiesto,
@@ -687,6 +688,29 @@ export class ObtenerManifiestoUseCase {
       );
     }
     return manifiesto;
+  }
+}
+
+@Injectable()
+export class DescargarManifiestoPdfUseCase {
+  constructor(
+    @Inject(MANIFIESTO_REPOSITORY)
+    private readonly manifiestos: ManifiestoRepository,
+    private readonly pdf: ManifiestoPdfGenerator,
+  ) {}
+
+  // Obtiene el manifiesto y devuelve el documento en PDF listo para descargar.
+  async execute(id: number): Promise<{ nombreArchivo: string; contenido: Buffer }> {
+    const manifiesto = await this.manifiestos.findById(id);
+    if (!manifiesto) {
+      throw new RecursoNoEncontradoError(
+        'El manifiesto indicado no existe.',
+        'manifiesto',
+        id,
+      );
+    }
+    const contenido = await this.pdf.generar(manifiesto);
+    return { nombreArchivo: `${manifiesto.numero}.pdf`, contenido };
   }
 }
 

@@ -10,10 +10,12 @@ import { CuentasModule } from '../cuentas/cuentas.module.js';
 import { ProyectosModule } from '../proyectos/proyectos.module.js';
 import { MANIFIESTO_REPOSITORY } from './domain/repositories/manifiesto.repository.js';
 import { PrismaManifiestoRepository } from './infrastructure/prisma-manifiesto.repository.js';
+import { ManifiestoPdfGenerator } from './infrastructure/manifiesto-pdf.generator.js';
 import { ManifiestosController } from './controllers/manifiestos.controller.js';
 import {
   AnularManifiestoUseCase,
   CambiarEstadoManifiestoUseCase,
+  DescargarManifiestoPdfUseCase,
   ListarManifiestosUseCase,
   ObtenerManifiestoUseCase,
   RegistrarManifiestoUseCase,
@@ -37,9 +39,11 @@ import {
   controllers: [ManifiestosController],
   providers: [
     { provide: MANIFIESTO_REPOSITORY, useClass: PrismaManifiestoRepository },
+    ManifiestoPdfGenerator,
     RegistrarManifiestoUseCase,
     ListarManifiestosUseCase,
     ObtenerManifiestoUseCase,
+    DescargarManifiestoPdfUseCase,
     CambiarEstadoManifiestoUseCase,
     AnularManifiestoUseCase,
   ],

@@ -3,14 +3,16 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   Param,
   ParseIntPipe,
   Patch,
   Post,
   Query,
   Req,
+  Res,
 } from '@nestjs/common';
-import type { Request } from 'express';
+import type { Request, Response } from 'express';
 import type { RespuestaDto } from '../../shared/dto/respuesta.dto.js';
 import { RolUsuario } from '../../auth/domain/usuario.repository.js';
 import { Roles, type UsuarioJwt } from '../../auth/guards/jwt-auth.guard.js';
@@ -18,6 +20,7 @@ import {
   AnularManifiestoUseCase,
   CambiarEstadoManifiestoDto,
   CambiarEstadoManifiestoUseCase,
+  DescargarManifiestoPdfUseCase,
   ListarManifiestosUseCase,
   ObtenerManifiestoUseCase,
   RegistrarManifiestoDto,
@@ -36,6 +39,7 @@ export class ManifiestosController {
     private readonly registrar: RegistrarManifiestoUseCase,
     private readonly listar: ListarManifiestosUseCase,
     private readonly obtener: ObtenerManifiestoUseCase,
+    private readonly descargarPdf: DescargarManifiestoPdfUseCase,
     private readonly cambiarEstado: CambiarEstadoManifiestoUseCase,
     private readonly anular: AnularManifiestoUseCase,
   ) {}
@@ -65,6 +69,23 @@ export class ManifiestosController {
     @Param('id', ParseIntPipe) id: number,
   ): Promise<RespuestaDto<unknown>> {
     return { datos: await this.obtener.execute(id) };
+  }
+
+  // Descarga el manifiesto como documento PDF listo para imprimir.
+  @Roles(RolUsuario.ADMINISTRADOR, RolUsuario.OPERACIONES, RolUsuario.SUPERVISOR)
+  @Get(':id/pdf')
+  @Header('Content-Type', 'application/pdf')
+  async descargarManifiestoPdf(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    const { nombreArchivo, contenido } = await this.descargarPdf.execute(id);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${nombreArchivo}"`,
+    );
+    res.setHeader('Content-Length', contenido.length);
+    res.end(contenido);
   }
 
   @Roles(RolUsuario.ADMINISTRADOR, RolUsuario.OPERACIONES)
