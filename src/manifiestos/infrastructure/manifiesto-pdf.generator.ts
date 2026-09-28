@@ -305,6 +305,10 @@ export class ManifiestoPdfGenerator {
     const rango = doc.bufferedPageRange();
     for (let i = rango.start; i < rango.start + rango.count; i++) {
       doc.switchToPage(i);
+      // El pie va dentro del margen inferior; anulamos ese margen mientras
+      // escribimos para que PDFKit no genere una pagina nueva por desbordamiento.
+      const margenInferior = doc.page.margins.bottom;
+      doc.page.margins.bottom = 0;
       const y = doc.page.height - 30;
       doc
         .font('Helvetica')
@@ -322,6 +326,7 @@ export class ManifiestoPdfGenerator {
         y,
         { width: 200, align: 'right', lineBreak: false },
       );
+      doc.page.margins.bottom = margenInferior;
     }
   }
 
