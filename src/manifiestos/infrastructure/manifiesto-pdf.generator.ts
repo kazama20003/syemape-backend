@@ -111,7 +111,7 @@ export class ManifiestoPdfGenerator {
       .fillColor(COLOR.tinta)
       .font('Helvetica-Bold')
       .fontSize(20)
-      .text('SYEMAPE', MARGEN, top);
+      .text('S&E MAPE', MARGEN, top);
     doc
       .font('Helvetica')
       .fontSize(9)
