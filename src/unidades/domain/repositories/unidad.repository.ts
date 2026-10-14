@@ -117,6 +117,7 @@ export interface ActualizarUnidadData {
   tipoCarroceria?: string | null;
   numeroSerieCarroceria?: string | null;
   tipoCombustible?: string | null;
+  kilometraje?: number | null;
   ultimoMantenimientoFecha?: Date | null;
   ultimoMantenimientoKilometraje?: number | null;
   proximoMantenimientoFecha?: Date | null;
