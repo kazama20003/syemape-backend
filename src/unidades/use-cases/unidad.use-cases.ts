@@ -447,9 +447,17 @@ export class RegistrarUnidadUseCase {
         codigo,
       );
     }
+    if (!tipo.claseSugerida) {
+      throw new DomainValidationError(
+        'El tipo de vehículo no tiene una clase operativa configurada. Complétala en Tipos de vehículo.',
+        'tipoVehiculo',
+        'CONFIGURACION_INCOMPLETA',
+        codigo,
+      );
+    }
     return {
       tipoVehiculo: tipo.codigo,
-      clase: tipo.claseSugerida ?? exigirClase(dto.clase),
+      clase: tipo.claseSugerida,
       categoriaVehicular: tipo.categoriaSugerida,
     };
   }
@@ -640,9 +648,17 @@ export class ActualizarUnidadUseCase {
         codigo,
       );
     }
+    if (!tipo.claseSugerida) {
+      throw new DomainValidationError(
+        'El tipo de vehículo no tiene una clase operativa configurada. Complétala en Tipos de vehículo.',
+        'tipoVehiculo',
+        'CONFIGURACION_INCOMPLETA',
+        codigo,
+      );
+    }
     return {
       tipoVehiculo: tipo.codigo,
-      clase: tipo.claseSugerida ?? exigirClase(dto.clase),
+      clase: tipo.claseSugerida,
       categoriaVehicular: tipo.categoriaSugerida,
     };
   }

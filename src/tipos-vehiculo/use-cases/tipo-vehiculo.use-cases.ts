@@ -81,6 +81,19 @@ function aClaseSugerida(valor: unknown): ClaseUnidad | null {
   return clase;
 }
 
+function exigirClaseSugerida(valor: unknown): ClaseUnidad {
+  const clase = aClaseSugerida(valor);
+  if (!clase) {
+    throw new DomainValidationError(
+      'La clase operativa es obligatoria para usar este tipo en una unidad.',
+      'claseSugerida',
+      'REQUERIDO',
+      valor ?? null,
+    );
+  }
+  return clase;
+}
+
 function throwEstadoActivoInvalido(valor: unknown): never {
   throw new DomainValidationError(
     'El estadoActivo no es valido. Use ACTIVO o INACTIVO.',
@@ -140,7 +153,7 @@ export class RegistrarTipoVehiculoUseCase {
       codigo,
       nombre,
       descripcion: aTextoOpcional(dto.descripcion),
-      claseSugerida: aClaseSugerida(dto.claseSugerida),
+      claseSugerida: exigirClaseSugerida(dto.claseSugerida),
       categoriaSugerida: aCategoriaSugerida(dto.categoriaSugerida),
       usuarioCreacion: USUARIO_SISTEMA,
     });
@@ -226,7 +239,7 @@ export class ActualizarTipoVehiculoUseCase {
           : undefined,
       claseSugerida:
         dto.claseSugerida !== undefined
-          ? aClaseSugerida(dto.claseSugerida)
+          ? exigirClaseSugerida(dto.claseSugerida)
           : undefined,
       categoriaSugerida:
         dto.categoriaSugerida !== undefined
