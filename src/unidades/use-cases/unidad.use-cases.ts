@@ -175,6 +175,7 @@ export class ActualizarUnidadDto {
   tipoCarroceria?: string;
   numeroSerieCarroceria?: string;
   tipoCombustible?: string;
+  kilometraje?: number;
   ultimoMantenimientoFecha?: string;
   ultimoMantenimientoKilometraje?: number;
   proximoMantenimientoFecha?: string;
@@ -278,6 +279,9 @@ function camposComunes(
     ),
     tipoCombustible: val('tipoCombustible', () =>
       aTextoOpcional(dto.tipoCombustible),
+    ),
+    kilometraje: val('kilometraje', () =>
+      numeroNoNegativo(dto.kilometraje, 'kilometraje', true),
     ),
     ultimoMantenimientoFecha: val('ultimoMantenimientoFecha', () =>
       fechaValida(dto.ultimoMantenimientoFecha, 'ultimoMantenimientoFecha'),
@@ -587,7 +591,7 @@ export class ActualizarUnidadUseCase {
         : {}),
     };
     validarMantenimiento({
-      kilometraje: unidad.kilometraje,
+      kilometraje: data.kilometraje === undefined ? unidad.kilometraje : data.kilometraje,
       ultimoMantenimientoFecha:
         data.ultimoMantenimientoFecha === undefined
           ? unidad.ultimoMantenimientoFecha
