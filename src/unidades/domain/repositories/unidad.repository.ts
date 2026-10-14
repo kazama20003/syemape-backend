@@ -46,6 +46,8 @@ export interface UnidadProps {
   estadoUnidad: EstadoUnidad;
   estadoActivo: EstadoActivo;
   estadoRegistro: EstadoRegistro;
+  fechaCreacion: Date;
+  fechaModificacion: Date | null;
 }
 
 export interface CrearUnidadData {

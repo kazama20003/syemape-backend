@@ -14,6 +14,8 @@ export interface TipoVehiculoProps {
   categoriaSugerida: string | null;
   estadoActivo: EstadoActivo;
   estadoRegistro: EstadoRegistro;
+  fechaCreacion: Date;
+  fechaModificacion: Date | null;
 }
 
 export interface CrearTipoVehiculoData {

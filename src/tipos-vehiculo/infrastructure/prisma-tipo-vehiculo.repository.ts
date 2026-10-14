@@ -22,6 +22,8 @@ const SELECT = {
   categoriaSugerida: true,
   estadoActivo: true,
   estadoRegistro: true,
+  fechaCreacion: true,
+  fechaModificacion: true,
 } as const;
 
 type FilaTipoVehiculo = TipoVehiculoProps;
