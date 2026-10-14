@@ -12,6 +12,7 @@ export interface ActivoProps {
   codigo: string;
   nombre: string;
   tipo: TipoActivo;
+  unidad: { id: number } | null;
   subtipo: string | null;
   descripcion: string | null;
   estadoOperativo: EstadoOperativoActivo;
