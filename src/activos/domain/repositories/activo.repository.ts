@@ -23,6 +23,8 @@ export interface ActivoProps {
   responsableId: number | null;
   ubicacionHabitualId: number | null;
   estadoRegistro: EstadoRegistro;
+  fechaCreacion: Date;
+  fechaModificacion: Date | null;
 }
 
 export interface CrearActivoData {

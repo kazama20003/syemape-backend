@@ -61,6 +61,8 @@ const SELECT = {
   estadoUnidad: true,
   estadoActivo: true,
   estadoRegistro: true,
+  fechaCreacion: true,
+  fechaModificacion: true,
 } as const;
 
 interface FilaUnidad {
@@ -103,6 +105,8 @@ interface FilaUnidad {
   estadoUnidad: EstadoUnidad;
   estadoActivo: EstadoActivo;
   estadoRegistro: EstadoRegistro;
+  fechaCreacion: Date;
+  fechaModificacion: Date | null;
 }
 
 function aProps(fila: FilaUnidad): UnidadProps {
@@ -146,6 +150,8 @@ function aProps(fila: FilaUnidad): UnidadProps {
     estadoUnidad: fila.estadoUnidad,
     estadoActivo: fila.estadoActivo,
     estadoRegistro: fila.estadoRegistro,
+    fechaCreacion: fila.fechaCreacion,
+    fechaModificacion: fila.fechaModificacion,
   };
 }
 

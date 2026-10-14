@@ -29,6 +29,8 @@ const SELECT = {
   responsableId: true,
   ubicacionHabitualId: true,
   estadoRegistro: true,
+  fechaCreacion: true,
+  fechaModificacion: true,
 } as const;
 
 type FilaActivo = Omit<ActivoProps, 'valorAdquisicion'> & {
